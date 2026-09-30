@@ -38,7 +38,7 @@ python scripts/build.py
 python scripts/build.py --check
 ```
 
-程式會重新產生 `SKILL.md`、`catalog.json` 和 `manifest.json`。修改前請讀 [`CONTRIBUTING.md`](CONTRIBUTING.md)。`main` 的更新須經 PR、審核及自動檢查；維護者仍須審查語義、來源與安全性。GitHub 變更**不會自動改動**已發布的 HF 訓練樣本；將新版技能用於資料集前，需要另行審查、固定版本並重驗受影響樣本。
+程式會重新產生 `SKILL.md`、`catalog.json` 和 `manifest.json`。修改前請讀 [`CONTRIBUTING.md`](CONTRIBUTING.md)。外部貢獻經 PR、程式碼擁有人審核及自動檢查；維護者仍須審查語義、來源與安全性。GitHub 變更**不會自動改動**已發布的 HF 訓練樣本；將新版技能用於資料集前，需要另行審查、固定版本並重驗受影響樣本。
 
 ## 來源與界線
 
