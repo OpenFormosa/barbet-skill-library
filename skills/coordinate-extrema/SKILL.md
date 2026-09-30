@@ -1,0 +1,35 @@
+---
+name: "coordinate-extrema"
+version: "2"
+scope: "coding"
+description: "計算非空且座標皆為有限數值的地理紀錄中，經緯度的最小與最大值，回傳標準化的邊界結構。"
+authority_basis: "authored_task_contract"
+---
+
+## Use When
+
+輸入為非空集合，且每個紀錄的 'lat' 與 'long' 欄位均為有限數值，需提取地理邊界時。
+
+## Do Not Use When
+
+輸入集合為空，或任一紀錄的經緯度欄位缺失、非數值、或包含 NaN/Infinity 等非有限數值時。
+
+## Inputs
+
+一個包含多個紀錄的集合，每個紀錄需具備 'lat'（緯度）與 'long'（經度）欄位，且數值必須為有限實數。
+
+## Procedure
+
+1. 假設輸入已滿足非空且座標為有限數值的前提。2. 遍歷所有紀錄，分別追蹤 'lat' 與 'long' 的最小值與最大值。3. 將結果組合成外層為元組、內層為列表的結構：([min_lat, max_lat], [min_long, max_long])。4. 確保過程不修改原始輸入資料。
+
+## Output Contract
+
+回傳一個元組，格式為 ([min_lat, max_lat], [min_long, max_long])，其中內層元素為列表，數值為浮點數或整數。
+
+## Failure
+
+若輸入不符合前提條件（如空集合或無效數值），行為未定義或由呼叫者負責預先驗證，本程序不保證處理此類異常。
+
+## Validation
+
+檢查回傳結果是否為長度為2的元組，且每個元素為長度為2的列表；確認 min <= max 且所有數值均來自原始輸入。

@@ -1,0 +1,166 @@
+{
+  "dataset": "OpenFormosa/barbet-long-context-sft",
+  "example_verified_dataset_commit": "796bf243effd7136934e7ef75c5570f63c08a61d",
+  "import_policy": "GitHub edits require review and versioning before use in future HF data releases; no automatic live sync.",
+  "review_scope": "Accepted for the data pipeline with model and code review; not human-verified and not a measured Barbet skill benefit.",
+  "schema_version": "1",
+  "source_object_digests": {
+    "arithmetic-modeling": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "301b48bc073f1d893096047cec6931c27e254ae3c5b6cdb54eb722a217ae9350"
+    },
+    "bilingual-science-terms": {
+      "first_accepted_catalog": "s004",
+      "source_object_sha256": "1d1339ee734f67ae9a507a980fc68bc9cba3b00ef913cda3eca51c28a923efbd"
+    },
+    "character-position-index": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "ec6b0b23b2a498acd8090331a26f6df5e4f80302d374f5246c1679119c29a9db"
+    },
+    "clarify-missing-inputs": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "c8974e773bc8f5aa6f1cdb5a366b8afff177e973341e979e6090121675e936d1"
+    },
+    "code-contract-check": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "2c7aa0b8152832d89bcafb68e949602cf966cfaa19b430a8c67e0b8b6d10ab9b"
+    },
+    "code-contract-implementation": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "37000e77c0eda2bed986ee0047873b42f92cee0dd2b4e222cbf53a3b5241afaf"
+    },
+    "coordinate-extrema": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "b41a90964cd9244d8e675e66903e95a67515d61b322ea959e1aa0991f12fdd7e"
+    },
+    "correspondence-intent-preservation": {
+      "first_accepted_catalog": "s009",
+      "source_object_sha256": "c4bee8817b06f6750f2bf6cb76928790dc1eb5bbea41b5f6a95893ae78375582"
+    },
+    "described-enum-alignment": {
+      "first_accepted_catalog": "s003",
+      "source_object_sha256": "bfa22727e9ac5cd3515d3be6b845a7b68b5f032b70d4cee840dea51dffb90692"
+    },
+    "document-summary": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "f701d39e51ad17800b6a753a145a017f3c97bb12ecb403165da74f26854d7a3a"
+    },
+    "equal-allocation-rate-comparison": {
+      "first_accepted_catalog": "s023",
+      "source_object_sha256": "7069fcce3ddfaa99ce0679e478e4a8593839219888ab7bc9d6f06cb5d9e24993"
+    },
+    "equal-total-balance": {
+      "first_accepted_catalog": "s002",
+      "source_object_sha256": "98faebaa1d5d2d57b26f5fa950f6915be45a2ea0b63c3f9e2cfc1c1f32aa581f"
+    },
+    "geometric-sum-initial-recovery": {
+      "first_accepted_catalog": "s023",
+      "source_object_sha256": "b25af94c540e384ee6ee2801fe5888106ddaa9594d335f8d4e8e4801bede4454"
+    },
+    "grounded-evidence-answer": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "0dd19bb4a9bfbdc176bc61b786097ae7eae4a838adc862d7909ae661bd0bf9ef"
+    },
+    "historical-snapshot-scope": {
+      "first_accepted_catalog": "s068",
+      "source_object_sha256": "05da9f336d4697c4192698913d7b9daaa5806da862c7f3ce33bd0b4dd98d9f75"
+    },
+    "initial-action-planning": {
+      "first_accepted_catalog": "s003",
+      "source_object_sha256": "85d070bf43ff2611f883560daeba3ad32de10a605711f99f32d5deb24a7aaf73"
+    },
+    "interval-dynamic-programming": {
+      "first_accepted_catalog": "s018",
+      "source_object_sha256": "827a9287c37b7c82ac20a72022dd7bd958f5b7679b6791b3c9c5bbbb0377907e"
+    },
+    "leading-prefix-replacement": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "27ebf59d4ced00a229b9496e7a53863ba872da29ac80114a81ce81b822f81383"
+    },
+    "literal-string-boundaries-and-fields": {
+      "first_accepted_catalog": "s018",
+      "source_object_sha256": "3cca2fb20eedec262104fed40839501fbf391c4a7882b0c82a0f1a7b1377dffa"
+    },
+    "literal-typed-tool-arguments": {
+      "first_accepted_catalog": "s003",
+      "source_object_sha256": "2501f40c92d9c3bdba469f4f6e5895959e695a43f4a22d1055cd282ea60e9c6a"
+    },
+    "mean-normalization": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "2a3fb9efc1aab9882fabcd87c427a70c9f5d9e22787e6db5e60445b6e1f3b107"
+    },
+    "meaning-preserving-concision": {
+      "first_accepted_catalog": "s009",
+      "source_object_sha256": "50ec5a18cd926449af1bd584d89aed9f83ffb1a3f24492670791336ca9854f06"
+    },
+    "multi-skill-composition": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "b09cd0c2273733222b160ff33d90366b06b1d313b94e6fcdfb48188a238d88da"
+    },
+    "nearby-fact-disambiguation": {
+      "first_accepted_catalog": "s068",
+      "source_object_sha256": "44452529c7a5b79300b37d37d0503a254a47426af7386ecbcd8836dd457dc7f6"
+    },
+    "nested-field-projection": {
+      "first_accepted_catalog": "s018",
+      "source_object_sha256": "4ad95e8c346d311d587a89f9edc720bbf0b633ad6e859c778857ad0319c839af"
+    },
+    "ordered-prefix-expansion": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "6be5c41998b939f9725f164d20d95bd19cedd7d7bef0c7bb7132893a2a5e1c60"
+    },
+    "passage-fact-binding": {
+      "first_accepted_catalog": "s068",
+      "source_object_sha256": "6c9d912a295fb51dd9cb5823337379262008ce0921790303daabaff91a85198c"
+    },
+    "qualified-science-explanation": {
+      "first_accepted_catalog": "s004",
+      "source_object_sha256": "4d2da7da3de51d334d73cfb42509e2619df3a1f9ffcf00003fbf62ee219d3e26"
+    },
+    "remaining-equal-allocation": {
+      "first_accepted_catalog": "s002",
+      "source_object_sha256": "9a55b8d1bcdf84d77836b34e5feef54b013796e57b49d8c6ff0cced1c4cd5517"
+    },
+    "repeated-rate-total": {
+      "first_accepted_catalog": "s002",
+      "source_object_sha256": "680c608fca6a1935e80b634d4d9f890736fc2e785a20b26c514fee297d451186"
+    },
+    "sequence-inspection-and-reduction": {
+      "first_accepted_catalog": "s018",
+      "source_object_sha256": "0212b55fd06e6b4da13d45d6158c263194ea72b74d74f0d60d8f4c78de8eb725"
+    },
+    "stable-mapping-deduplication": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "278136fc7186c552547563a891a3d760df59a78642cdd0c8994d01af6b2aab0b"
+    },
+    "successive-relative-growth": {
+      "first_accepted_catalog": "s002",
+      "source_object_sha256": "57e77b8c116c0a61886a972403eec194f027b64a427b0d0c352f58b380394f98"
+    },
+    "taiwan-text-rewrite": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "385893931c5afd90236d50279dadaa0dcd10806bab397943b6dd4a72a261850d"
+    },
+    "tool-result-interpretation": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "9dbad1f3deba412b704fc6e8a4e3b2803c81b7533e942e8819edf3a289360178"
+    },
+    "tool-selection-and-arguments": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "21c811804f03d08e4ce430d164b5f69fef4c32b09412fbfb18a2cdbbba721fbe"
+    },
+    "unit-conversion": {
+      "first_accepted_catalog": "skill-prefill-v1",
+      "source_object_sha256": "f95593cd99b627272e9e940f7c299384269f4c932526d21f14cbdab7e159ac6a"
+    },
+    "unsupported-question-calibration": {
+      "first_accepted_catalog": "s068",
+      "source_object_sha256": "f5c8ab8c2a23636b1f644b89318a3d9906f1f392e0a294baf86d3289a1f0e638"
+    },
+    "weighted-aggregate-and-mean": {
+      "first_accepted_catalog": "s023",
+      "source_object_sha256": "3a1785be426c70b475e1e8ab2cd549add463c95dd8a375981331551eb8f63847"
+    }
+  },
+  "source_project": "Barbet skill-prefill-v1 accepted local catalogs"
+}
