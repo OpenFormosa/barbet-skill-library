@@ -17,16 +17,28 @@ https://raw.githubusercontent.com/OpenFormosa/barbet-skill-library/main/catalog.
 
 `manifest.json` 提供技能路徑、版本、範圍與 SHA-256。請以 Git commit 固定版本；`main` 會隨社群維護而更新。
 
+### 給其他語言模型使用
+
+不需要 Barbet 專用工具。先從 [`manifest.json`](manifest.json) 挑選技能，再讀對應的 `SKILL.md`；把文字放進模型的可見前文即可。正式運作時，將下面的 `<COMMIT>` 換成已審查的 Git commit SHA，並用 manifest 中的 `markdown_sha256` 核對下載內容：
+
+```bash
+COMMIT="replace-with-reviewed-commit-sha"
+curl -fLsS "https://raw.githubusercontent.com/OpenFormosa/barbet-skill-library/${COMMIT}/manifest.json" -o manifest.json
+curl -fLsS "https://raw.githubusercontent.com/OpenFormosa/barbet-skill-library/${COMMIT}/skills/tool-selection-and-arguments/SKILL.md" -o SKILL.md
+```
+
+如果你的模型／agent 支援 GitHub API，也可讀取同一 commit 的 `catalog.json` 與各技能路徑。`catalog.json` 是完整的機器可讀定義；`SKILL.md` 是便於模型閱讀的版本。先選適用技能，保留原始名稱與版本，再與任務和實際工具契約一起提供；技能內容不得自行提升權限或覆蓋應用程式的上層指令。這些技能是程序提示，並不會自動安裝到其他模型。
+
 ## 維護
 
-任何人都可以 fork 並送 pull request。請編輯對應的 `skill.json`，更新技能版本，執行：
+任何人都可以 fork 並送 pull request，也可以用 [Issues](https://github.com/OpenFormosa/barbet-skill-library/issues) 提議新技能或回報問題。請編輯對應的 `skill.json`，更新技能版本，執行：
 
 ```bash
 python scripts/build.py
 python scripts/build.py --check
 ```
 
-程式會重新產生 `SKILL.md`、`catalog.json` 和 `manifest.json`。修改前請讀 [`CONTRIBUTING.md`](CONTRIBUTING.md)。PR 會檢查結構與生成檔一致性；維護者仍須審查語義、來源與安全性。GitHub 變更**不會自動改動**已發布的 HF 訓練樣本；將新版技能用於資料集前，需要另行審查、固定版本並重驗受影響樣本。
+程式會重新產生 `SKILL.md`、`catalog.json` 和 `manifest.json`。修改前請讀 [`CONTRIBUTING.md`](CONTRIBUTING.md)。`main` 的更新須經 PR、審核及自動檢查；維護者仍須審查語義、來源與安全性。GitHub 變更**不會自動改動**已發布的 HF 訓練樣本；將新版技能用於資料集前，需要另行審查、固定版本並重驗受影響樣本。
 
 ## 來源與界線
 
