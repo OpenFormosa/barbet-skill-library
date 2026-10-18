@@ -1,16 +1,16 @@
 {
-  "catalog_sha256": "b6090e7efe3573734fa16779d840bd07a0e8655b617b2d07231399ad05bfdaa4",
+  "catalog_sha256": "241368f50e136279735d20f191cd9fae1121eb3c491b5f31a42331dd5decf4f9",
   "schema_version": "1",
   "scope_counts": {
-    "agent": 3,
-    "coding": 10,
-    "general": 11,
-    "math": 7,
+    "agent": 6,
+    "coding": 12,
+    "general": 20,
+    "math": 10,
     "reading": 4,
-    "science": 2,
-    "writing": 2
+    "science": 3,
+    "writing": 5
   },
-  "skill_count": 39,
+  "skill_count": 60,
   "skills": [
     {
       "json_path": "skills/arithmetic-modeling/skill.json",
@@ -20,6 +20,15 @@
       "name": "arithmetic-modeling",
       "scope": "general",
       "version": "2"
+    },
+    {
+      "json_path": "skills/artifact-operation-contract/skill.json",
+      "json_sha256": "8243f3bf0a117976d8c2293b41545ff9c2a48765c63e19e3277664cc9c16be71",
+      "markdown_path": "skills/artifact-operation-contract/SKILL.md",
+      "markdown_sha256": "db7f8514179de0bf4b133cb328fd971a0584e6383116389c0b57b77d295cb009",
+      "name": "artifact-operation-contract",
+      "scope": "agent",
+      "version": "1"
     },
     {
       "json_path": "skills/bilingual-science-terms/skill.json",
@@ -49,6 +58,15 @@
       "version": "2"
     },
     {
+      "json_path": "skills/classification-with-criteria/skill.json",
+      "json_sha256": "17679c747364aae9083062a283e44a1cc10280239535dff42da58809757a305c",
+      "markdown_path": "skills/classification-with-criteria/SKILL.md",
+      "markdown_sha256": "8860823c89f71890fbb089b69248f666a5e48e982dd234ae9b2def605ef2d454",
+      "name": "classification-with-criteria",
+      "scope": "general",
+      "version": "1"
+    },
+    {
       "json_path": "skills/code-contract-check/skill.json",
       "json_sha256": "cecf65eca534344ac8964619303f289a0ba832a3e7f9c22aa0019610db03805b",
       "markdown_path": "skills/code-contract-check/SKILL.md",
@@ -65,6 +83,60 @@
       "name": "code-contract-implementation",
       "scope": "general",
       "version": "3"
+    },
+    {
+      "json_path": "skills/code-task-framing/skill.json",
+      "json_sha256": "e4fced5f981fee1481fb9ebac1a943b289374c80b583f01210f4f745bf915c95",
+      "markdown_path": "skills/code-task-framing/SKILL.md",
+      "markdown_sha256": "71a968bb27498d945a3d801529baf3a90e3e524f020fa75bd342eddd6c3045ca",
+      "name": "code-task-framing",
+      "scope": "coding",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/comparison-by-dimensions/skill.json",
+      "json_sha256": "60044228b5170a46ba22c75f59226babc1f6d4fd7ee3a2a1c29444b01044bcd0",
+      "markdown_path": "skills/comparison-by-dimensions/SKILL.md",
+      "markdown_sha256": "9bd1561b15077ce6ac860adc59693f32bbe21bda767c9286185cc5aaaec14abf",
+      "name": "comparison-by-dimensions",
+      "scope": "general",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/concept-explanation/skill.json",
+      "json_sha256": "244ad696a3c6b7c6b723b3b1b4fecaabc884e4834a49be124914d87b49cc63a3",
+      "markdown_path": "skills/concept-explanation/SKILL.md",
+      "markdown_sha256": "34320fa89e053c26f035b25a18fa770743702f6872bb0d9b2b739031c8000514",
+      "name": "concept-explanation",
+      "scope": "general",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/constrained-creative-writing/skill.json",
+      "json_sha256": "66176a2a1b1d1994c57a1463e51ed1d7e7ea0a8588aeefbb44bb45214a8e9a42",
+      "markdown_path": "skills/constrained-creative-writing/SKILL.md",
+      "markdown_sha256": "1890a0a46f2db4bd4dea2c33f138b55a0f93549fc7a51ebb58148f677b745eca",
+      "name": "constrained-creative-writing",
+      "scope": "writing",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/constrained-sample-generation/skill.json",
+      "json_sha256": "f41d605db232a7b7b5dbdc8cd1eddd0e0aca665d4053b5231c6013aabf47125c",
+      "markdown_path": "skills/constrained-sample-generation/SKILL.md",
+      "markdown_sha256": "6813df056159720f1db47e590e4a19f02a29589f90db359a42073508fb502d1f",
+      "name": "constrained-sample-generation",
+      "scope": "general",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/conversation-reference-resolution/skill.json",
+      "json_sha256": "dd6bb5f70e57c4556359af37a6a0690288797a6122e16fd6de39006a5e4a3fba",
+      "markdown_path": "skills/conversation-reference-resolution/SKILL.md",
+      "markdown_sha256": "31e9f86539006fafb6272c75bdcf22fcadfe3b5bd5f22ee24620238586ececd5",
+      "name": "conversation-reference-resolution",
+      "scope": "general",
+      "version": "1"
     },
     {
       "json_path": "skills/coordinate-extrema/skill.json",
@@ -91,6 +163,15 @@
       "markdown_sha256": "e4360355fe0868437d0a51b440a8a2589e34d8bf8164b9fe9f70c60573d472c5",
       "name": "described-enum-alignment",
       "scope": "agent",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/descriptive-statistics/skill.json",
+      "json_sha256": "55d10b9d87db052a32e3995c4fa4d288047804fd4a4a1e780d5eeffb184c1059",
+      "markdown_path": "skills/descriptive-statistics/SKILL.md",
+      "markdown_sha256": "572c0713eb383c90b25b1c395877a8717423a19610d355a96f6aa9c4bf1da6da",
+      "name": "descriptive-statistics",
+      "scope": "math",
       "version": "1"
     },
     {
@@ -121,6 +202,24 @@
       "version": "1"
     },
     {
+      "json_path": "skills/external-state-grounding/skill.json",
+      "json_sha256": "1dd667c265ee5a9a9d02a30c5817736fe852436637339afb49ba8264aedebdff",
+      "markdown_path": "skills/external-state-grounding/SKILL.md",
+      "markdown_sha256": "6b3f4fff485ca3bb3cdd780df45ba518cb33682fffaf47173ccb118131e470bc",
+      "name": "external-state-grounding",
+      "scope": "agent",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/factual-question-resolution/skill.json",
+      "json_sha256": "9246a5310863caca196a9d8a6ac2852551d252985a0a3d723ce2322623dfecfe",
+      "markdown_path": "skills/factual-question-resolution/SKILL.md",
+      "markdown_sha256": "e28f0b85b962f79a3126bfefa787f8f7027c754bc3a7636aa59e99bb3095328c",
+      "name": "factual-question-resolution",
+      "scope": "general",
+      "version": "1"
+    },
+    {
       "json_path": "skills/geometric-sum-initial-recovery/skill.json",
       "json_sha256": "0b2952e4a450f310009806175e80309fc08d86b987d88404f411b92354df6bd4",
       "markdown_path": "skills/geometric-sum-initial-recovery/SKILL.md",
@@ -145,6 +244,15 @@
       "markdown_sha256": "5da149833cfc86acfce8bd947e3917559d855f3d3ee466d2032a7af551d0dfce",
       "name": "historical-snapshot-scope",
       "scope": "reading",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/hypothesis-and-evidence/skill.json",
+      "json_sha256": "dab3af1251c051b2311f133164bc3d6149c39a681231255af4b677c6f898c46d",
+      "markdown_path": "skills/hypothesis-and-evidence/SKILL.md",
+      "markdown_sha256": "a44feeafd597b15c76a5e0bbf684cc0ca19191c927af7b388610259b17d77cd3",
+      "name": "hypothesis-and-evidence",
+      "scope": "science",
       "version": "1"
     },
     {
@@ -238,6 +346,24 @@
       "version": "2"
     },
     {
+      "json_path": "skills/numeric-expression-evaluation/skill.json",
+      "json_sha256": "5bbf4c247d29352be4b1a12487b7f776571f87dc2c9725def3c25bc59c2596c0",
+      "markdown_path": "skills/numeric-expression-evaluation/SKILL.md",
+      "markdown_sha256": "4caa10ca8deacce89a33c0837c5e64af57ac0529a2cfed5f55266af3b863cb1d",
+      "name": "numeric-expression-evaluation",
+      "scope": "math",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/option-generation/skill.json",
+      "json_sha256": "2830ea36be7d27a8a6669b7698f7c519e4ab3cb003ef8fb42a840d8938ea66b0",
+      "markdown_path": "skills/option-generation/SKILL.md",
+      "markdown_sha256": "8de3e714758658bfcdb91df4d70430ad913d119e00cb1618387b49ccd91e5c16",
+      "name": "option-generation",
+      "scope": "general",
+      "version": "1"
+    },
+    {
       "json_path": "skills/ordered-prefix-expansion/skill.json",
       "json_sha256": "07f214b6cdf4d82baa1d02f44635ff185963c7aae9d1eded29c5c8401aa0ea7c",
       "markdown_path": "skills/ordered-prefix-expansion/SKILL.md",
@@ -247,12 +373,30 @@
       "version": "4"
     },
     {
+      "json_path": "skills/ordered-top-k/skill.json",
+      "json_sha256": "ce36c332778cf2847947f3d308281b4927ee86cca53fc4db46efdcbdf1ef5fa7",
+      "markdown_path": "skills/ordered-top-k/SKILL.md",
+      "markdown_sha256": "f1f5ef4a45705e7dcbd47a251cb3b3ec59efde3e9954ca95ce40dfa00868c25d",
+      "name": "ordered-top-k",
+      "scope": "math",
+      "version": "1"
+    },
+    {
       "json_path": "skills/passage-fact-binding/skill.json",
       "json_sha256": "04c9a93b86f8bfe1856680f537736917ad7013897b7f6a4f498364b5029dd28b",
       "markdown_path": "skills/passage-fact-binding/SKILL.md",
       "markdown_sha256": "2b7ad54e95815bd4f9f79200526e7012950e0ece054e1dc34f5c1dbd0ab8fbe4",
       "name": "passage-fact-binding",
       "scope": "reading",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/practical-guidance/skill.json",
+      "json_sha256": "147cf3eb1a174e3f0dca97f5a955dda6634862636d3f9a9aa59e77a3d38282ee",
+      "markdown_path": "skills/practical-guidance/SKILL.md",
+      "markdown_sha256": "421503d9aa202c16d1ab7a94dae41dd55e848103310ff32fb13b2575a05be8bf",
+      "name": "practical-guidance",
+      "scope": "general",
       "version": "1"
     },
     {
@@ -301,6 +445,15 @@
       "version": "3"
     },
     {
+      "json_path": "skills/string-property-analysis/skill.json",
+      "json_sha256": "b96df9425921cc1080598222e93db91255da56ce235abe8528759052b715ee84",
+      "markdown_path": "skills/string-property-analysis/SKILL.md",
+      "markdown_sha256": "07bfcc6b30708e9a95e03f7554a65d6a1d6e8c0eadc4b780bc0b59ecda1b1dff",
+      "name": "string-property-analysis",
+      "scope": "coding",
+      "version": "1"
+    },
+    {
       "json_path": "skills/successive-relative-growth/skill.json",
       "json_sha256": "59494566931ec019f66dbab1dc80db3dbd86b137c51f141735c1fe5a498865e3",
       "markdown_path": "skills/successive-relative-growth/SKILL.md",
@@ -317,6 +470,24 @@
       "name": "taiwan-text-rewrite",
       "scope": "general",
       "version": "2"
+    },
+    {
+      "json_path": "skills/text-transformation/skill.json",
+      "json_sha256": "688ef506c09fb0ab524375d908b0ed3a177cb856285ec4139a1b014be44867f4",
+      "markdown_path": "skills/text-transformation/SKILL.md",
+      "markdown_sha256": "d7909bfd5a8e108c52c048b402361c4eb75914f311e15e97de39abb7df444b50",
+      "name": "text-transformation",
+      "scope": "writing",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/tool-capability-triage/skill.json",
+      "json_sha256": "6135c9ca399544f2d76cdb3f662676ac2a2a2f94db7780f9b6beb4f8b0825857",
+      "markdown_path": "skills/tool-capability-triage/SKILL.md",
+      "markdown_sha256": "c139ba73f72efa9077c5cd59e5c26fb928ecce47102e40fff6afb3df96215a32",
+      "name": "tool-capability-triage",
+      "scope": "agent",
+      "version": "1"
     },
     {
       "json_path": "skills/tool-result-interpretation/skill.json",
@@ -337,6 +508,15 @@
       "version": "3"
     },
     {
+      "json_path": "skills/translation-alignment/skill.json",
+      "json_sha256": "b351e6c4edf74b5e425ae0b2d4608f861bc88b59c349234d8fdc407bd627c8e1",
+      "markdown_path": "skills/translation-alignment/SKILL.md",
+      "markdown_sha256": "90382df9976441cbb5c984217d528c283d269d28735bb54b922709099932f95f",
+      "name": "translation-alignment",
+      "scope": "writing",
+      "version": "1"
+    },
+    {
       "json_path": "skills/unit-conversion/skill.json",
       "json_sha256": "4f50085a7fedc7d5583e95b889f2a82570180110f6fc5ae45251cb6cb9ae4b25",
       "markdown_path": "skills/unit-conversion/SKILL.md",
@@ -352,6 +532,15 @@
       "markdown_sha256": "64da7b093ac27b23d433317ef69c86da862a0375990710ff455766a60a4a8efb",
       "name": "unsupported-question-calibration",
       "scope": "reading",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/validation-scope-check/skill.json",
+      "json_sha256": "e57c885037145acddb73c7624afbc367b5189cb49aba854b32282d78e92a7ca1",
+      "markdown_path": "skills/validation-scope-check/SKILL.md",
+      "markdown_sha256": "86b1bc79280fa1cd19fdd8bead27038eb9a2cf1bfdd4fe015c3d77c506152a3b",
+      "name": "validation-scope-check",
+      "scope": "general",
       "version": "1"
     },
     {

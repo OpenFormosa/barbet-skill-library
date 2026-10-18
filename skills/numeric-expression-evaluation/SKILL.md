@@ -1,0 +1,35 @@
+---
+name: "numeric-expression-evaluation"
+version: "1"
+scope: "math"
+description: "解析明示數式及運算規則，保留精確中間量並檢查定義域。"
+authority_basis: "authored_task_contract"
+---
+
+## Use When
+
+要求計算數式、方程或具有明確數學運算的數值問題。
+
+## Do Not Use When
+
+缺關係的數字羅列、需要未知即時資料，或單純解釋數學概念。
+
+## Inputs
+
+數式、變數條件、單位及精度規則。
+
+## Procedure
+
+1. 確認括號、運算子、符號與隱含乘法；有多種解析時不要靜默選擇。2. 按優先序與定義域計算，分清整數除法、實數及複數。3. 優先保留分數或精確量，最後才按要求四捨五入。4. 用代回、量級或另一等價表示檢查結果。
+
+## Output Contract
+
+只按原要求提供結果或必要步驟；不要強制展開隱藏推理。
+
+## Failure
+
+除以零、無定義或缺變數值時指出具體問題，不杜撰值。
+
+## Validation
+
+符號、括號、單位及精度正確，代回與原條件相容。
