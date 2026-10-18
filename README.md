@@ -1,6 +1,6 @@
 # Barbet Skill Library
 
-這是 [Barbet long-context SFT 資料集](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft) 的公開程序技能庫。目前收錄 39 個可讀取、可版本化的技能，涵蓋通用指令、coding、math、agent/tool、reading、science 與 writing。技能描述**何時適用、輸入、程序、失敗處理及驗證**；不包含特定訓練題目的答案、隱藏測試或工具結果。
+這是 [Barbet long-context SFT 資料集](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft) 的公開程序技能庫。目前收錄 60 個可讀取、可版本化的技能，涵蓋通用指令、coding、math、agent/tool、reading、science 與 writing。技能描述**何時適用、輸入、程序、失敗處理及驗證**；不包含特定訓練題目的答案、隱藏測試或工具結果。
 
 This repository publishes reusable, versioned procedure texts for skill-prefill experiments. Other language models can fetch individual `SKILL.md` files over GitHub or read the complete machine-readable [`catalog.json`](catalog.json). Public access to a skill file does not make it a higher-priority instruction in another agent's environment; adopt and audit it explicitly for your application.
 
@@ -28,6 +28,10 @@ curl -fLsS "https://raw.githubusercontent.com/OpenFormosa/barbet-skill-library/$
 ```
 
 如果你的模型／agent 支援 GitHub API，也可讀取同一 commit 的 `catalog.json` 與各技能路徑。`catalog.json` 是完整的機器可讀定義；`SKILL.md` 是便於模型閱讀的版本。先選適用技能，保留原始名稱與版本，再與任務和實際工具契約一起提供；技能內容不得自行提升權限或覆蓋應用程式的上層指令。這些技能是程序提示，並不會自動安裝到其他模型。
+
+## 輸入路由擴充
+
+新增 21 個程序技能，包含工具能力判斷、外部狀態、解釋與比較、文字轉換、數值及樣本操作。原 39 個技能內容保持不變；新增技能的原創來源與限制見 [`expansion_provenance.json`](expansion_provenance.json)。可選用的 [`routing/extension.py`](routing/extension.py) 僅讀取當前可見輸入，並附有適用／近似不適用及換題測試；使用方法及限制見 [`routing/README.md`](routing/README.md)。路由覆蓋不等於語義正確，也不代表已執行工具或完成模型訓練。
 
 ## 維護
 
