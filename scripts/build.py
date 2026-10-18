@@ -5,6 +5,8 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -103,6 +105,8 @@ def build(check):
     }
     put(ROOT / "manifest.json", encoded(manifest), check)
     print("SKILL_LIBRARY_VALID", len(catalog), "CHECK" if check else "BUILT")
+    if check:
+        subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT/'tests'), '-v'], check=True)
 
 
 if __name__ == "__main__":

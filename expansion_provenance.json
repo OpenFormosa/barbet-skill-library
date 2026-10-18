@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "base_library_commit": "cd70106c8deca20446b16f1dceb1e1bb555f946a",
+  "new_skills": 21,
+  "authorship": "Original procedure texts and synthetic software fixtures authored by the assistant for a user-authorized library expansion.",
+  "rights": "New original text and code offered under this repository's Apache-2.0 license. Original dataset rights are not changed.",
+  "design_evidence": "Input-only local task categories informed reusable procedure boundaries. No source prompts, reference answers, tool observations, hidden tests or dataset payloads are included.",
+  "validation": "Generated-file checks and authored positive/negative routing fixtures. Static review only; no trained-model or independent human-verification claim.",
+  "legacy_skills_modified": false,
+  "dataset_publication": false,
+  "model_training": false
+}
