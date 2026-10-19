@@ -11,3 +11,5 @@
 `skill.json` 是編輯來源；`SKILL.md` 是給模型與讀者使用的生成檔。PR 不應只修改生成檔。檢查通過不代表內容正確；維護者需審查技能邊界與來源。此 repo 的變更不會自動更新 HF 訓練資料。
 
 Contributions to the authored skill library are offered under the repository's Apache-2.0 license. Do not submit material that you cannot authorize for that use.
+
+針對 Barbet 1B 的技能與資料修訂，請參考 [1B 技能與公開解法指引](docs/student-1b-guidance.md)。
