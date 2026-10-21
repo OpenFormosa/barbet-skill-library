@@ -31,7 +31,9 @@ curl -fLsS "https://raw.githubusercontent.com/OpenFormosa/barbet-skill-library/$
 
 ## 輸入路由擴充
 
-新增 21 個程序技能，包含工具能力判斷、外部狀態、解釋與比較、文字轉換、數值及樣本操作。原 39 個技能內容保持不變；新增技能的原創來源與限制見 [`expansion_provenance.json`](expansion_provenance.json)。可選用的 [`routing/extension.py`](routing/extension.py) 僅讀取當前可見輸入，並附有適用／近似不適用及換題測試；使用方法及限制見 [`routing/README.md`](routing/README.md)。路由覆蓋不等於語義正確，也不代表已執行工具或完成模型訓練。
+由原 39 個技能擴充至 60 個，新增工具能力判斷、外部狀態、解釋與比較、文字轉換、數值及樣本操作等程序；擴充來源與限制見 [`expansion_provenance.json`](expansion_provenance.json)，各技能目前版本以 manifest 為準。可選用的 [`routing/extension.py`](routing/extension.py) 僅讀取當前可見輸入，並附有適用／近似不適用及換題測試；使用方法及限制見 [`routing/README.md`](routing/README.md)。路由覆蓋不等於語義正確，也不代表已執行工具或完成模型訓練。
+
+事實回答修訂更新了 `factual-question-resolution` v2、`concept-explanation` v2 與 `grounded-evidence-answer` v4，並提供具體屬性查詢的窄路由，供應用程式放在寬鬆概念規則之前。適用例、來源／閉卷資料改造與已知題保留的驗證方式見 [`docs/factual-calibration.md`](docs/factual-calibration.md)。這些更新須另行固定版本與測量模型效果。
 
 ## 維護
 

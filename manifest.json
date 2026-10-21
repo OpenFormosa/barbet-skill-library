@@ -1,5 +1,5 @@
 {
-  "catalog_sha256": "241368f50e136279735d20f191cd9fae1121eb3c491b5f31a42331dd5decf4f9",
+  "catalog_sha256": "910131e8ec7ac4c7c3aa4b7cf27ca1cf16cfc730f7066639c049cf83c85dcf20",
   "schema_version": "1",
   "scope_counts": {
     "agent": 6,
@@ -104,12 +104,12 @@
     },
     {
       "json_path": "skills/concept-explanation/skill.json",
-      "json_sha256": "244ad696a3c6b7c6b723b3b1b4fecaabc884e4834a49be124914d87b49cc63a3",
+      "json_sha256": "42d7f653b61e03b654f4ef5bb994a2a7ef32fc88c0925bc9a04030383d082f70",
       "markdown_path": "skills/concept-explanation/SKILL.md",
-      "markdown_sha256": "34320fa89e053c26f035b25a18fa770743702f6872bb0d9b2b739031c8000514",
+      "markdown_sha256": "83fc90c647e5f52baa2fb82f40aac33b4ea43aa5a058d995000ac125b48ce1ce",
       "name": "concept-explanation",
       "scope": "general",
-      "version": "1"
+      "version": "2"
     },
     {
       "json_path": "skills/constrained-creative-writing/skill.json",
@@ -212,12 +212,12 @@
     },
     {
       "json_path": "skills/factual-question-resolution/skill.json",
-      "json_sha256": "9246a5310863caca196a9d8a6ac2852551d252985a0a3d723ce2322623dfecfe",
+      "json_sha256": "ff6cab694faf88281a8b20e096686a3856d67c44edcf631efc99df28398bdc44",
       "markdown_path": "skills/factual-question-resolution/SKILL.md",
-      "markdown_sha256": "e28f0b85b962f79a3126bfefa787f8f7027c754bc3a7636aa59e99bb3095328c",
+      "markdown_sha256": "ac8378f8347fd40a443d639c4a14c11a3b70ae8e8d6098dc68b77e43acb439a6",
       "name": "factual-question-resolution",
       "scope": "general",
-      "version": "1"
+      "version": "2"
     },
     {
       "json_path": "skills/geometric-sum-initial-recovery/skill.json",
@@ -230,12 +230,12 @@
     },
     {
       "json_path": "skills/grounded-evidence-answer/skill.json",
-      "json_sha256": "4efefc443c4a438626a361bb1f283f0a589a9712ebb64bd2aecdba20fea06ec7",
+      "json_sha256": "582fbf1ec951d4730ab22d3d296b8db6c04168c5938e57efc83592171bbd1c2e",
       "markdown_path": "skills/grounded-evidence-answer/SKILL.md",
-      "markdown_sha256": "7155ce71c8b30e792acb321b623292d31df42009fe62b6c65f27e17cf76bda05",
+      "markdown_sha256": "01bbc891195acaa053b1c07430a25e6f999191c3ec9727877073dc99ff89106b",
       "name": "grounded-evidence-answer",
       "scope": "general",
-      "version": "3"
+      "version": "4"
     },
     {
       "json_path": "skills/historical-snapshot-scope/skill.json",
