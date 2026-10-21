@@ -6,12 +6,12 @@ Selection is applicability evidence, not proof of correct answers or execution.
 English/Traditional Chinese lexical coverage is deliberately incomplete.
 """
 import re
-VERSION = 'causal-procedure-extension/1'
+VERSION = 'causal-procedure-extension/2'
 
 def has(pattern, text):
     return bool(re.search(pattern, text, re.I))
 
-def select(model_input):
+def _request(model_input):
     if not isinstance(model_input, dict) or set(model_input) != {'messages', 'tools'}:
         raise ValueError('Only causal messages and tools are accepted')
     messages, tools = model_input['messages'], model_input['tools']
@@ -27,6 +27,54 @@ def select(model_input):
         return None
     if any('[BARBET_SKILL_CONTEXT_V1]' in m['content'] for m in messages if m['role']=='system'):
         return None
+    return messages, tools, text
+
+
+def select_factual_property(model_input):
+    """Narrow hook before a broad concept fallback, after specific task routes.
+
+    Recognizes single-clause property questions, not arbitrary named entities.
+    Abstains on tools, documents, quotations, operations and live-state wording.
+    It must not replace an application's source/code/translation/math router.
+    """
+    request = _request(model_input)
+    if request is None:
+        return None
+    messages, tools, text = request
+    if any(has(r'參考資料|閱讀資料|資料表|根據以下|\b(?:according to|passage|document|source text)\b', message['content'])
+           for message in messages):
+        return None
+    if tools or has(r'[\n\r:：;；"\'“”「」`]|根據|依據|參考資料|閱讀資料|資料表|段落|文件|翻譯|改寫|摘要|計算|求解|比較|程式|演算法|而且|以及|目前|現在|最新|今天|即時|此刻|\b(?:current|currently|latest|today|now|live|translate|rewrite|summarize|calculate|compute|solve|compare|code|function|program|given|following|and|why|explain)\b', text):
+        return None
+    # Entity digits are labels, not arithmetic operands. No answer values occur
+    # in these rules; changing a target or its source must not change selection.
+    attribute = r'(?:建築高度|高度|海拔高度|海拔|樓層數|樓層|軌距|全長|所在地|地址|面積|首都|幣別|貨幣名稱|開通年份|啟用年份|成立年份|出生日期)'
+    entity = r'[^，,。.!?？;；\n]{1,80}'
+    question = text.rstrip('？?。.! ').strip()
+    chinese = (
+        rf'(?:請問[，, ]*)?(?:什麼是|何謂){entity}的{attribute}',
+        rf'(?:請問[，, ]*)?{entity}的{attribute}(?:是多少|是什麼|為多少|為何|是多少公尺|是幾公尺|是幾米|有幾層|在哪裡)',
+        rf'(?:請問[，, ]*)?{entity}的{attribute}(?:是|為)[+-]?\d+(?:\.\d+)?(?:公尺|公分|公釐|米|層|年|公里|平方公里)?嗎',
+        rf'(?:請說明|說明|請告訴我|告訴我){entity}的{attribute}',
+        rf'(?:請問[，, ]*)?{entity}(?:有幾層|多高|位於哪裡)',
+    )
+    english = (
+        r'(?:please tell me )?what (?:is|was) (?:the )?(?:height|elevation|altitude|gauge|length|area|location|capital|currency|opening year|founding year) of .{1,80}',
+        r'how (?:tall|high|long) (?:is|was|are|were) .{1,80}',
+        r'how many (?:floors|storeys|stories) (?:does|did) .{1,80} have',
+    )
+    if any(re.fullmatch(pattern, question, re.I) for pattern in chinese + english):
+        return {'skill': 'factual-question-resolution',
+                'rule': 'explicit_entity_property_question',
+                'input_turn': len(messages) - 1}
+    return None
+
+
+def select(model_input):
+    request = _request(model_input)
+    if request is None:
+        return None
+    messages, tools, text = request
     def pick(name, rule):
         return {'skill': name, 'rule': rule, 'input_turn': len(messages)-1}
     if tools:
@@ -82,6 +130,9 @@ def select(model_input):
         return pick('external-state-grounding','requested_external_lookup_or_action')
     if has(r'\b(find|get|check|list|show)\b',text) and has(r'\b(email|address|contact|profile|url|website|domain|api|account|asset|flight|restaurant|hotel|ticket|stock|schedule|reservation|password|balance|user|id)\b',text):
         return pick('external-state-grounding','external_entity_lookup')
+    property_query = select_factual_property(model_input)
+    if property_query is not None:
+        return property_query
     if has(r'\b(?:propose|formulate|generate|develop|suggest|give|create)\b.{0,55}\b(?:hypothesis|hypotheses|explanation)\b|\bhypothesize\b|^predict\b|提出假說',text):
         return pick('hypothesis-and-evidence','explicit_hypothesis_or_prediction')
     if has(r'\b(compare|comparison|difference|different from|differs? from|versus|vs\.?|pros and cons|advantages and disadvantages|similarities)\b|比較|差異|優缺點',text):
@@ -90,7 +141,7 @@ def select(model_input):
         return pick('practical-guidance','explicit_goal_or_method')
     if has(r'\b(example|examples|ideas|recommend|suggest\w*|list|antonyms|synonyms|name (?:some|three|five)|what are some|give (?:me )?\w+ (?:examples|ways|reasons|benefits|activities))\b|列出|舉例|推薦|點子',text):
         return pick('option-generation','explicit_options_or_examples')
-    if has(r'\b(explain|describe|concept|definition|define|history|origin|importance|significance|relationship|why|how (?:do|does|is|are|did|can))\b|解釋|原理|為什麼|歷史',text):
+    if has(r'\b(explain|describe|concept|definition|define|history|origin|importance|significance|relationship|why|how (?:do|does|is|are|did|can))\b|解釋|原理|為什麼|歷史|什麼是|何謂',text):
         return pick('concept-explanation','explicit_explanation_or_mechanism')
     if has(r'(?:^|[.!]\s+|,\s*)(?:what|who|when|where|which|is|are|was|were|does|do|can|could|would|will|how many|how much|how long|how important)\b|\b(tell me (?:about|what|who)|give .+ definition)\b|^(?:誰|何時|哪裡|什麼|多少|是否)',text):
         return pick('factual-question-resolution','explicit_factual_question')
