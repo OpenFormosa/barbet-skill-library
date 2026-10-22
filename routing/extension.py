@@ -1,12 +1,13 @@
 """Optional deterministic *candidate* routing from causal inputs only.
 
-Call after an application's more specific, reviewed router returns no skill.
+Call after specific application routes; narrow priority hooks documented in
+README.md can precede broad topic fallbacks.
 No targets, dataset IDs, source labels, scores, or future messages are accepted.
 Selection is applicability evidence, not proof of correct answers or execution.
 English/Traditional Chinese lexical coverage is deliberately incomplete.
 """
 import re
-VERSION = 'causal-procedure-extension/2'
+VERSION = 'causal-procedure-extension/3'
 
 def has(pattern, text):
     return bool(re.search(pattern, text, re.I))
@@ -28,6 +29,39 @@ def _request(model_input):
     if any('[BARBET_SKILL_CONTEXT_V1]' in m['content'] for m in messages if m['role']=='system'):
         return None
     return messages, tools, text
+
+
+def select_verbatim_excerpt(model_input):
+    """Narrow priority hook for positional copying from a supplied passage.
+
+    Read the instruction before the visible source boundary. Vocabulary in the
+    passage must not turn a copying task into math, advice or creative writing.
+    Tools, other requested operations and unsupported layouts stay with caller.
+    """
+    request = _request(model_input)
+    if request is None:
+        return None
+    messages, tools, text = request
+    if tools:
+        return None
+    boundary = re.search(
+        r'\n\s*(?:附文|下文|原文|Source text|Passage)[^\n]{0,160}[:：]\s*\n',
+        text, re.I)
+    if boundary is None or not text[boundary.end():].strip():
+        return None
+    instruction = text[:boundary.start()].strip()
+    if has(r'翻譯|改寫|摘要|計算|求解|比較|創作|撰寫|證明|除錯|統計|字數|(?:並|再|然後)寫|\b(?:translate|rewrite|paraphrase|summarize|calculate|compute|solve|compare|compose|write|prove|debug|count)\b', instruction):
+        return None
+    chinese = (re.match(r'(?:請(?:閱讀|讀取)(?:以下)?(?:附文|下文|原文)[，,：:。 ]*)?(?:請)?(?:逐字(?:摘錄|複製)|(?:摘錄|複製)(?:原文|原句))', instruction)
+               and has(r'第[一二三四五六七八九十0-9]+句|最後(?:一)?句', instruction))
+    english = (re.match(r'(?:please\s+)?(?:copy|quote|extract|reproduce)\b', instruction, re.I)
+               and has(r'\b(?:first|last|second|third|\d+(?:st|nd|rd|th))\s+sentence\b', instruction)
+               and has(r'\b(?:verbatim|exactly|unchanged)\b', instruction))
+    if not (chinese or english):
+        return None
+    return {'skill': 'grounded-evidence-answer',
+            'rule': 'explicit_verbatim_sentence_from_supplied_text',
+            'input_turn': len(messages) - 1}
 
 
 def select_factual_property(model_input):
@@ -75,6 +109,9 @@ def select(model_input):
     if request is None:
         return None
     messages, tools, text = request
+    excerpt = select_verbatim_excerpt(model_input)
+    if excerpt is not None:
+        return excerpt
     def pick(name, rule):
         return {'skill': name, 'rule': rule, 'input_turn': len(messages)-1}
     if tools:
