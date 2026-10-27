@@ -50,6 +50,14 @@ def main():
     domains = defaultdict(list)
     for row in scores:
         domains[row['domain']].append(row)
+    raw_rows = {(r['id'], r['seed']): r for path in sorted((HERE / 'work/runs/final/test/mini' / chosen).glob('*.jsonl'))
+                for r in map(json.loads, path.read_text().splitlines())}
+    def final_channel_failure(values, parse_key):
+        failed = [r for r in values if not r[parse_key]]
+        return {'unparseable_attempts': len(failed),
+            'unclosed_thinking': sum(raw_rows[r['id'], r['seed']]['trace'][-1]['unclosed_thinking'] for r in failed),
+            'length_stopped': sum(raw_rows[r['id'], r['seed']]['trace'][-1]['finish_reason'] == 'length' for r in failed),
+            'nonempty_final_but_wrong_format': sum(bool(raw_rows[r['id'], r['seed']]['trace'][-1]['final']) for r in failed)}
     diagnostics = {'unit_notice': 'Attempt counts include three seeds; unique-question statistics explicitly average/group seeds. No hidden label or final failure was fed back into policy selection.',
         'reading': {'attempts': len(domains['drcd']),
             'support_visible': sum(r['support_visible'] for r in domains['drcd']),
@@ -58,6 +66,7 @@ def main():
             'limitation': 'Strict normalized EM penalizes aliases, omitted units and extra spans as well as semantic errors. F1 is partial overlap, not a human correctness judgment.'},
         'math': {'attempts': len(domains['gsm8k']),
             'unparseable_final': sum(not r['numeric_parseable'] for r in domains['gsm8k']),
+            'final_channel_failure': final_channel_failure(domains['gsm8k'], 'numeric_parseable'),
             'parseable_but_wrong': sum(r['numeric_parseable'] and not r['correct'] for r in domains['gsm8k']),
             'limitation': 'A parseable number does not validate the word-problem model.'},
         'code': {'attempts': len(domains['mbpp']),
@@ -70,13 +79,17 @@ def main():
             'wrong_fields': dict(Counter(k for r in domains['tools'] for k in r['wrong_arguments'])),
             'limitation': 'Single-call synthetic family holdout, not full multi-step agent reliability.'}}
     mc = defaultdict(list)
+    mc_valid = defaultdict(list)
     for row in domains['tmmluplus']:
         mc[row['id']].append(row['correct'])
+        mc_valid[row['id']].append(row['letter_parseable'])
     diagnostics['knowledge'] = {'unique_questions': len(mc),
         'attempts': len(domains['tmmluplus']),
         'unparseable_final': sum(not r['letter_parseable'] for r in domains['tmmluplus']),
         'valid_letter_but_wrong': sum(r['letter_parseable'] and not r['correct'] for r in domains['tmmluplus']),
+        'final_channel_failure': final_channel_failure(domains['tmmluplus'], 'letter_parseable'),
         'all_three_wrong': sum(not any(v) for v in mc.values()),
+        'all_three_wrong_with_valid_letter_each_time': sum(not any(v) and all(mc_valid[k]) for k,v in mc.items()),
         'some_but_not_all_correct': sum(any(v) and not all(v) for v in mc.values()),
         'all_three_correct': sum(all(v) for v in mc.values()),
         'limitation': 'Any-correct across seeds is only a diagnostic oracle, not a deployable selection rule.'}
