@@ -1,7 +1,802 @@
 {
-  "status": "initial_dev_launch",
-  "engineering": "52 core/routing/execution tests; no model score yet",
-  "model_evidence": null,
-  "planned_first_wave": "12 MiniCPM policies and Qwen bare, all on dev only",
-  "test": "sealed; no generation before final selection"
+  "status": "round_1_launch",
+  "test_status": "sealed",
+  "dev_initial": [
+    {
+      "model": "mini",
+      "policy": "bare",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 11,
+          "accuracy": 0.34375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 19,
+          "accuracy": 0.2835820895522388
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 18,
+          "accuracy": 0.5625
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 1,
+          "accuracy": 0.03125
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 18,
+          "accuracy": 0.5625
+        }
+      },
+      "primary_macro": 0.375,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 826.374358974359,
+        "output_tokens": 1403.0666666666666,
+        "generation_seconds_amortized": 0.33498805669637827,
+        "retrieval_seconds": 0.0143475914421754,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 20,
+      "length_stopped_calls": 20,
+      "qa_support_visible_rate": 0.25
+    },
+    {
+      "model": "mini",
+      "policy": "evidence",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 4,
+          "accuracy": 0.125
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 21,
+          "accuracy": 0.31343283582089554
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 2,
+          "accuracy": 0.0625
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 8,
+          "accuracy": 0.25
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 24,
+          "accuracy": 0.75
+        }
+      },
+      "primary_macro": 0.296875,
+      "cost": {
+        "calls": 1.5743589743589743,
+        "prompt_tokens": 1596.2307692307693,
+        "output_tokens": 2619.923076923077,
+        "generation_seconds_amortized": 1.091777496230908,
+        "retrieval_seconds": 0.004617497802544863,
+        "execution_seconds": 0.03743438384471796
+      },
+      "unclosed_thinking_calls": 37,
+      "length_stopped_calls": 38,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "execute",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 3,
+          "accuracy": 0.09375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 21,
+          "accuracy": 0.31343283582089554
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 3,
+          "accuracy": 0.09375
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 12,
+          "accuracy": 0.375
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 19,
+          "accuracy": 0.59375
+        }
+      },
+      "primary_macro": 0.2890625,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 585.425641025641,
+        "output_tokens": 1442.1589743589743,
+        "generation_seconds_amortized": 0.30043962278809305,
+        "retrieval_seconds": 0.003977262324247605,
+        "execution_seconds": 0.01746095917545832
+      },
+      "unclosed_thinking_calls": 21,
+      "length_stopped_calls": 21,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "fast",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 11,
+          "accuracy": 0.34375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 17,
+          "accuracy": 0.2537313432835821
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 8,
+          "accuracy": 0.25
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 1,
+          "accuracy": 0.03125
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 18,
+          "accuracy": 0.5625
+        }
+      },
+      "primary_macro": 0.296875,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 828.0461538461539,
+        "output_tokens": 98.63589743589743,
+        "generation_seconds_amortized": 0.1407352806856999,
+        "retrieval_seconds": 0.013711010167996088,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 0,
+      "length_stopped_calls": 1,
+      "qa_support_visible_rate": 0.25
+    },
+    {
+      "model": "mini",
+      "policy": "long",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 11,
+          "accuracy": 0.34375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 21,
+          "accuracy": 0.31343283582089554
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 15,
+          "accuracy": 0.46875
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 0,
+          "accuracy": 0.0
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 23,
+          "accuracy": 0.71875
+        }
+      },
+      "primary_macro": 0.3828125,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 826.374358974359,
+        "output_tokens": 2309.14358974359,
+        "generation_seconds_amortized": 1.4839966439665893,
+        "retrieval_seconds": 0.014316065800495636,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 7,
+      "length_stopped_calls": 7,
+      "qa_support_visible_rate": 0.25
+    },
+    {
+      "model": "mini",
+      "policy": "program_only",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 3,
+          "accuracy": 0.09375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 23,
+          "accuracy": 0.34328358208955223
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 23,
+          "accuracy": 0.71875
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 9,
+          "accuracy": 0.28125
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 17,
+          "accuracy": 0.53125
+        }
+      },
+      "primary_macro": 0.40625,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 585.425641025641,
+        "output_tokens": 1593.123076923077,
+        "generation_seconds_amortized": 0.3142835849370712,
+        "retrieval_seconds": 0.006114476919174194,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 29,
+      "length_stopped_calls": 30,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "rag",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 11,
+          "accuracy": 0.34375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 19,
+          "accuracy": 0.2835820895522388
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 18,
+          "accuracy": 0.5625
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 5,
+          "accuracy": 0.15625
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 18,
+          "accuracy": 0.5625
+        }
+      },
+      "primary_macro": 0.40625,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 494.91282051282053,
+        "output_tokens": 1337.123076923077,
+        "generation_seconds_amortized": 0.29063374736370184,
+        "retrieval_seconds": 0.005988958974679311,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 22,
+      "length_stopped_calls": 22,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "rag_skill",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 3,
+          "accuracy": 0.09375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 22,
+          "accuracy": 0.3283582089552239
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 23,
+          "accuracy": 0.71875
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 9,
+          "accuracy": 0.28125
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 19,
+          "accuracy": 0.59375
+        }
+      },
+      "primary_macro": 0.421875,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 564.5846153846154,
+        "output_tokens": 1423.6923076923076,
+        "generation_seconds_amortized": 0.3105684082668561,
+        "retrieval_seconds": 0.004572198062370985,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 24,
+      "length_stopped_calls": 24,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "repair",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 3,
+          "accuracy": 0.09375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 20,
+          "accuracy": 0.29850746268656714
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 1,
+          "accuracy": 0.03125
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 6,
+          "accuracy": 0.1875
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 21,
+          "accuracy": 0.65625
+        }
+      },
+      "primary_macro": 0.2421875,
+      "cost": {
+        "calls": 1.4205128205128206,
+        "prompt_tokens": 1354.8615384615384,
+        "output_tokens": 2477.1897435897436,
+        "generation_seconds_amortized": 0.8616762419732718,
+        "retrieval_seconds": 0.005465118395976531,
+        "execution_seconds": 0.03834821440470524
+      },
+      "unclosed_thinking_calls": 38,
+      "length_stopped_calls": 38,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "self_revise",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 1,
+          "accuracy": 0.03125
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 24,
+          "accuracy": 0.3582089552238806
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 23,
+          "accuracy": 0.71875
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 3,
+          "accuracy": 0.09375
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 20,
+          "accuracy": 0.625
+        }
+      },
+      "primary_macro": 0.3671875,
+      "cost": {
+        "calls": 3.0,
+        "prompt_tokens": 3422.3641025641027,
+        "output_tokens": 4796.656410256411,
+        "generation_seconds_amortized": 1.2770180062987866,
+        "retrieval_seconds": 0.00598161274041885,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 76,
+      "length_stopped_calls": 90,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "skill",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 3,
+          "accuracy": 0.09375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 27,
+          "accuracy": 0.40298507462686567
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 20,
+          "accuracy": 0.625
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 1,
+          "accuracy": 0.03125
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 15,
+          "accuracy": 0.46875
+        }
+      },
+      "primary_macro": 0.3046875,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 884.4769230769231,
+        "output_tokens": 1548.0871794871796,
+        "generation_seconds_amortized": 0.4360553783101913,
+        "retrieval_seconds": 0.014164670766928258,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 32,
+      "length_stopped_calls": 32,
+      "qa_support_visible_rate": 0.21875
+    },
+    {
+      "model": "mini",
+      "policy": "state",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 3,
+          "accuracy": 0.09375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 20,
+          "accuracy": 0.29850746268656714
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 1,
+          "accuracy": 0.03125
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 6,
+          "accuracy": 0.1875
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 25,
+          "accuracy": 0.78125
+        }
+      },
+      "primary_macro": 0.2734375,
+      "cost": {
+        "calls": 1.4102564102564104,
+        "prompt_tokens": 1267.2717948717948,
+        "output_tokens": 2454.020512820513,
+        "generation_seconds_amortized": 1.0324291399847239,
+        "retrieval_seconds": 0.005771989623705546,
+        "execution_seconds": 0.034930855073989964
+      },
+      "unclosed_thinking_calls": 38,
+      "length_stopped_calls": 39,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "qwen",
+      "policy": "bare",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 32,
+          "accuracy": 1.0
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 51,
+          "accuracy": 0.7611940298507462
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 23,
+          "accuracy": 0.71875
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 4,
+          "accuracy": 0.125
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 26,
+          "accuracy": 0.8125
+        }
+      },
+      "primary_macro": 0.6640625,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 836.0051282051282,
+        "output_tokens": 1738.3589743589744,
+        "generation_seconds_amortized": 1.2979389778696573,
+        "retrieval_seconds": 0.01629542221243565,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 26,
+      "length_stopped_calls": 28,
+      "qa_support_visible_rate": 0.34375
+    }
+  ],
+  "validation_initial_available": [
+    {
+      "model": "mini",
+      "policy": "bare",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 29,
+          "accuracy": 0.6041666666666666
+        },
+        "tools": {
+          "n": 48,
+          "correct": 47,
+          "accuracy": 0.9791666666666666
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 24,
+          "accuracy": 0.5
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 1,
+          "accuracy": 0.020833333333333332
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 20,
+          "accuracy": 0.29850746268656714
+        }
+      },
+      "primary_macro": 0.5260416666666666,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 920.057915057915,
+        "output_tokens": 1569.3204633204634,
+        "generation_seconds_amortized": 0.33989570832102917,
+        "retrieval_seconds": 0.015584052169990356,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 37,
+      "length_stopped_calls": 36,
+      "qa_support_visible_rate": 0.1875
+    },
+    {
+      "model": "mini",
+      "policy": "fast",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 27,
+          "accuracy": 0.5625
+        },
+        "tools": {
+          "n": 48,
+          "correct": 47,
+          "accuracy": 0.9791666666666666
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 13,
+          "accuracy": 0.2708333333333333
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 1,
+          "accuracy": 0.020833333333333332
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 16,
+          "accuracy": 0.23880597014925373
+        }
+      },
+      "primary_macro": 0.4583333333333333,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 921.4710424710424,
+        "output_tokens": 164.3938223938224,
+        "generation_seconds_amortized": 0.20547197287377245,
+        "retrieval_seconds": 0.016887750045097932,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 0,
+      "length_stopped_calls": 2,
+      "qa_support_visible_rate": 0.1875
+    },
+    {
+      "model": "mini",
+      "policy": "rag_skill",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 23,
+          "accuracy": 0.4791666666666667
+        },
+        "tools": {
+          "n": 48,
+          "correct": 23,
+          "accuracy": 0.4791666666666667
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 34,
+          "accuracy": 0.7083333333333334
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 11,
+          "accuracy": 0.22916666666666666
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 20,
+          "accuracy": 0.29850746268656714
+        }
+      },
+      "primary_macro": 0.47395833333333337,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 615.969111969112,
+        "output_tokens": 1441.5675675675675,
+        "generation_seconds_amortized": 0.35836770332285334,
+        "retrieval_seconds": 0.006796197771565794,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 36,
+      "length_stopped_calls": 36,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "skill",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 26,
+          "accuracy": 0.5416666666666666
+        },
+        "tools": {
+          "n": 48,
+          "correct": 24,
+          "accuracy": 0.5
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 32,
+          "accuracy": 0.6666666666666666
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 0,
+          "accuracy": 0.0
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 24,
+          "accuracy": 0.3582089552238806
+        }
+      },
+      "primary_macro": 0.4270833333333333,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 970.7953667953668,
+        "output_tokens": 1654.2664092664093,
+        "generation_seconds_amortized": 0.29937303238853985,
+        "retrieval_seconds": 0.017122732655191975,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 39,
+      "length_stopped_calls": 38,
+      "qa_support_visible_rate": 0.1875
+    }
+  ],
+  "decisions": [
+    {
+      "round": 0,
+      "stage": "initial dev complete; four initial validation arms complete",
+      "decision": "No initial policy demonstrated a valid all-domain promotion. RAG raises source visibility, but full skill hurts tools; program JSON execution fails on missing answer binding. State repair improves coding on dev. Self-revision increases output tokens and lowers primary macro.",
+      "initial_dev_macro": {
+        "bare": 37.5,
+        "rag_skill": 42.1875,
+        "self_revise": 36.71875
+      },
+      "validation_macro": {
+        "bare": 52.6041666667,
+        "rag_skill": 47.3958333333
+      },
+      "statistics": "development observations only; final CIs pending"
+    },
+    {
+      "round": 1,
+      "stage": "prelaunch",
+      "candidates": [
+        "routed",
+        "stdout"
+      ],
+      "hypothesis": "Contract routing preserves bare native tools while retaining skill/RAG and executable coding feedback; a one-number Python stdout interface removes the failed dual JSON/variable contract for arithmetic.",
+      "selection_rule": "same preregistered validation promotion gate; no final-test access",
+      "warning": "Routed combines dev-selected components; stdout is its single math-interface intervention. Neither is proven yet."
+    }
+  ],
+  "final_results": null
 }

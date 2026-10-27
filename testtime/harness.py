@@ -29,6 +29,9 @@ class Policy:
     output_tokens: int = 4096
     top_k: int = 4
     continuation_input_tokens: int = 32768
+    program_format: str = 'json'
+    tool_format: str = 'native'
+    literal_answer: bool = False
     # Optional follow-up candidates remain explicit and contract-based.
     contract_overrides: dict = field(default_factory=dict)
 
@@ -86,9 +89,9 @@ class Episode:
     def render(self, messages):
         # Native tools use a non-thinking channel in every policy/model, so an
         # unfinished thought is never treated as a function invocation.
-        thinking = self.policy.thinking and self.request.output_contract != 'tool_call'
+        thinking = self.policy.thinking and (self.request.output_contract != 'tool_call' or self.policy.tool_format == 'json')
         prompt = self.tokenizer.apply_chat_template(messages,
-            tools=self.request.tools or None, tokenize=False,
+            tools=(self.request.tools or None) if self.policy.tool_format == 'native' else None, tokenize=False,
             add_generation_prompt=True, enable_thinking=thinking)
         return prompt, self.tokenizer.encode(prompt, add_special_tokens=False), thinking
 
@@ -97,13 +100,30 @@ class Episode:
         system = 'Follow the user task and requested output format.'
         if p.skill:
             system += '\n\nOptional procedure:\n' + self.cards[req.output_contract]['text']
-        if p.program and req.output_contract == 'number':
+        if req.output_contract == 'tool_call' and p.tool_format == 'json':
+            system += ('\nReturn exactly one JSON object {"name":"registered function name",'
+                '"arguments":{...}}. Bind each requested value to the corresponding field; '
+                'do not derive a value from another field when the user supplied it. Preserve literal strings. '
+                'Do not call any real service; this is the requested function-call representation. '
+                'Registered tools:\n' + json.dumps(req.tools, ensure_ascii=False))
+        if p.literal_answer and req.output_contract == 'short_answer':
+            system += ('\n答案必須照抄來源中的連續原文字串，保留人名、地名、否定與單位，'
+                '不要翻譯或換成同義詞。只抽出問題所問的部分，不加「答案：」或解釋。')
+        if p.program and req.output_contract == 'number' and p.program_format == 'json':
             system += ('\nSolve by translating the quantities and relations into Python. '
                 'Return exactly a JSON object with two fields: "code" (Python source that '
                 'sets answer to the final numeric result) and "answer" (your claimed numerical '
                 'answer as a string). Use meaningful variables; calculate rather than hard-code '
                 'a guessed result. No input(), files, network or external packages. '
                 'This JSON replaces the #### final format for this execution interface.')
+        if p.program and req.output_contract == 'number' and p.program_format == 'python_stdout':
+            if not p.execute:
+                raise ValueError('Python stdout interface requires execution')
+            system += ('\nTranslate the question into Python calculations with meaningful variables. '
+                'Return only complete Python code. Print the final numerical answer once, without '
+                'a label or explanation. Do not use input(). The host will execute the code. '
+                'This code-output interface replaces the #### answer format. '
+                'Execution checks arithmetic, not whether the equations match the question.')
         if p.execute and req.output_contract == 'python':
             # All code arms share the same execution environment declaration.
             pass
@@ -162,7 +182,7 @@ class Episode:
     def accept(self, raw, *, prompt_tokens, output_tokens, finish_reason,
                batch_seconds, batch_size, terminal_strings):
         req, p = self.request, self.policy
-        thinking = p.thinking and req.output_contract != 'tool_call'
+        thinking = p.thinking and (req.output_contract != 'tool_call' or p.tool_format == 'json')
         final, unclosed, implicit = extract_final(raw, thinking, terminal_strings=terminal_strings)
         call = {'call': len(self.trace) + 1, 'stage': self.stage, 'raw': raw, 'final': final,
             'unclosed_thinking': unclosed, 'implicit_tool_final': implicit,
@@ -210,19 +230,25 @@ class Episode:
                 self.feedback = 'Tool syntax/schema failed: ' + '; '.join(errors)
         elif p.program and req.output_contract == 'number':
             try:
-                value = json_body(final)
-                if not isinstance(value, dict) or set(value) != {'code', 'answer'} or not isinstance(value['code'], str):
-                    raise ValueError('expected exactly code (string) and answer')
-                self.prediction = str(value['answer'])
-                call['claimed_answer'] = self.prediction
-                call['program'] = value['code']
-                if p.execute:
-                    receipt = run_python(value['code'], want_answer=True)
+                if p.program_format == 'python_stdout':
+                    code = python_body(final)
+                    call['program'] = code
+                    receipt = run_python(code, want_answer=False)
+                    numeric = receipt.get('stdout', '').strip()
+                    if receipt['passed'] and not re.fullmatch(r'[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?(?:/[-+]?\d+)?', numeric):
+                        receipt.update(passed=False, status='numeric_output_missing',
+                            error='Print exactly one final numerical result without labels or intermediate values.')
+                    if receipt['passed']:
+                        receipt.update(answer=numeric, status='executed_numeric_stdout')
                     call['execution'] = receipt
                     self.state.record_execution(receipt)
-                    self.prediction = str(receipt['answer']) if receipt['passed'] else None
+                    self.prediction = numeric if receipt['passed'] else None
                     if not receipt['passed']:
                         self.feedback = 'Python computation failed: ' + receipt.get('error', receipt['status'])
+                    # Process the same bounded repair decision below; never use
+                    # a guessed model answer when actual execution failed.
+                else:
+                    self._accept_json_program(final, call)
             except (ValueError, TypeError, KeyError) as exc:
                 self.prediction = None
                 if p.execute:
@@ -260,6 +286,22 @@ class Episode:
         else:
             self.messages += [{'role': 'assistant', 'content': final or raw},
                               {'role': 'user', 'content': followup}]
+
+    def _accept_json_program(self, final, call):
+        p = self.policy
+        value = json_body(final)
+        if not isinstance(value, dict) or set(value) != {'code', 'answer'} or not isinstance(value['code'], str):
+            raise ValueError('expected exactly code (string) and answer')
+        self.prediction = str(value['answer'])
+        call['claimed_answer'] = self.prediction
+        call['program'] = value['code']
+        if p.execute:
+            receipt = run_python(value['code'], want_answer=True)
+            call['execution'] = receipt
+            self.state.record_execution(receipt)
+            self.prediction = str(receipt['answer']) if receipt['passed'] else None
+            if not receipt['passed']:
+                self.feedback = 'Python computation failed: ' + receipt.get('error', receipt['status'])
 
     def result(self):
         if not self.done:

@@ -1,18 +1,89 @@
 {
   "schema_version": 1,
-  "phase": "initial 12 policies, before model output inspection",
+  "phase": "initial 12 plus first failure-driven round (13–14)",
   "policies": {
     "bare": {},
-    "skill": {"skill": true},
-    "rag": {"retrieval": true},
-    "rag_skill": {"retrieval": true, "skill": true},
-    "program_only": {"retrieval": true, "skill": true, "program": true},
-    "execute": {"retrieval": true, "skill": true, "program": true, "execute": true},
-    "repair": {"retrieval": true, "skill": true, "program": true, "execute": true, "repair": 2},
-    "state": {"retrieval": true, "skill": true, "program": true, "execute": true, "repair": 2, "compact": true},
-    "evidence": {"retrieval": true, "skill": true, "program": true, "execute": true, "repair": 2, "compact": true, "evidence": true},
-    "self_revise": {"retrieval": true, "skill": true, "self_revise": 2},
-    "long": {"output_tokens": 16384},
-    "fast": {"thinking": false}
+    "skill": {
+      "skill": true
+    },
+    "rag": {
+      "retrieval": true
+    },
+    "rag_skill": {
+      "retrieval": true,
+      "skill": true
+    },
+    "program_only": {
+      "retrieval": true,
+      "skill": true,
+      "program": true
+    },
+    "execute": {
+      "retrieval": true,
+      "skill": true,
+      "program": true,
+      "execute": true
+    },
+    "repair": {
+      "retrieval": true,
+      "skill": true,
+      "program": true,
+      "execute": true,
+      "repair": 2
+    },
+    "state": {
+      "retrieval": true,
+      "skill": true,
+      "program": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true
+    },
+    "evidence": {
+      "retrieval": true,
+      "skill": true,
+      "program": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "evidence": true
+    },
+    "self_revise": {
+      "retrieval": true,
+      "skill": true,
+      "self_revise": 2
+    },
+    "long": {
+      "output_tokens": 16384
+    },
+    "fast": {
+      "thinking": false
+    },
+    "routed": {
+      "retrieval": true,
+      "skill": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        }
+      }
+    },
+    "stdout": {
+      "retrieval": true,
+      "skill": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        }
+      },
+      "program": true,
+      "program_format": "python_stdout"
+    }
   }
 }
