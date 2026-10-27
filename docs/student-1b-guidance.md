@@ -29,3 +29,5 @@ Barbet 資料建置維持單一混合 SFT。新樣本包含 1,000,000–1,048,57
 數學用獨立計算、程式在已核准隔離環境測試、工具動作檢查 schema 和依賴、文件回答核對支持句與限定範圍。模型審稿保留真實 verdict；未通過者保持待修，不能只增加字數就宣稱品質提高。同一 Qwen 的作者與審稿回合不是人類驗證，也不證明 1B 學生能完成任務。
 
 這份文件是資料與技能修訂指引。正式採用新的技能 catalog、recipe 或 renderer 時，先建立版本化提案、驗證來源與輸出契約，再固定新版本。GitHub 內容更新不會自動變更既有 HF 資料。
+
+後續的 [skill-aware-sft-v1 提案](skill-aware-sft-v1.html) 根據 v26 的固定評測與公開候選資料，提出與實際 harness 一致的技能使用、RAG、語義對比及回饋修復視圖；[機器可讀規格](configs/skill-aware-sft-v1.json) 標記為尚未採用、尚未訓練。這份提案不變更上述 canonical 1M 樣本、單一混合 SFT、來源切分與既有 release 契約。短 learner views 需要另立 export／recipe 版本，不能當成已符合 canonical 長度的新資料。
