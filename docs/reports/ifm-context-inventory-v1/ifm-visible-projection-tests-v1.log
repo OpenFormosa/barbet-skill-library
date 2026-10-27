@@ -1,0 +1,7 @@
+test_prior_observation_changes_complete_input (tests.test_ifm_visible_projection.IFMProjectionTests.test_prior_observation_changes_complete_input) ... ok
+test_reasoning_variants_do_not_change_visible_candidate (tests.test_ifm_visible_projection.IFMProjectionTests.test_reasoning_variants_do_not_change_visible_candidate) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK

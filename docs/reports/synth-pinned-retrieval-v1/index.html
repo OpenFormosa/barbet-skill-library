@@ -1,0 +1,54 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>SYNTH 全文檢索來源診斷</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>SYNTH 全文證據首次試驗</h1><p>四個固定來源檔案共 622,115 列。依問題雜湊預先抽出 16 題，實際取得 24 篇 Wikipedia 文章的固定修訂 HTML，保留數學 alt text、上下標與完整文字區塊，再只用問題做 lexical retrieval。沒有把答案當查詢，也沒有把來源 reasoning 欄位塞入記憶。</p><p>首次診斷結果：6 ACCEPT、5 REVISE、5 REJECT，四個校準控制均通過。10 個未通過問題整體隔離，沒有重跑。這是小規模來源診斷，不是資料集錯誤率或模型效能；目前接受訓練筆數仍為零。</p><p>缺陷有兩類。第一類是檢索漏掉必要背景：獎勵實驗的 1938 年、TEM 的部分數值確實出現在完整文章，但沒有進入被選出的段落。第二類是答案另加背景或推論：例如未提供的 5.6 百萬人口數字、超出文件的持續療效，以及法律程序或幾何比例的疑點。詞彙覆蓋率只能協助診斷，不能替代語義或計算檢查；審核器判詞本身也可能出錯。</p><p>因此沒有把這個來源整批納入。新增的 harness 檢索元件會去除查詢贅詞、合併連續完整段落、帶入相鄰證據，並以真實 tokenizer 計算完整 memory envelope。超長區塊明確省略，不截斷否定句或數學式；來源次序與來源 ID 保留。四個回歸測試通過；後續新題診斷如下，沒有受控能力提升證據，也不改寫這 16 題的首次判定。</p><p>RAG 類來源的 additional_seed_url 常是一份換行分隔的多篇文件清單，本次的一至兩篇文章解析範圍不涵蓋它。因此本次 16 題均為 memorization，不應冒稱已測 RAG 子集。</p><p><a href="https://huggingface.co/datasets/PleIAs/SYNTH/tree/0d6813a2966662c39f22f0b9af28a0c1c9f7a437">固定 SYNTH 來源</a> README 自報 79,648,272 筆，取代先前未核實的 6,800 萬概數；實際下載範圍仍只有四檔。文章文字使用條件參照 <a href="https://en.wikipedia.org/wiki/Wikipedia:Copyrights">Wikipedia 著作權說明</a>；合成答案與文章記憶的授權分別記錄，尚未完成逐篇額外來源標示檢查的試驗資料不發布。</p><p>後續已對 12 個從未審核的新問題完成首次診斷：7 ACCEPT、5 REVISE。沿用最初固定的 24 篇文章，排除全部 16 個舊問題，沒有重跑負例；5 個新負例整題隔離。審核仍發現 s/p 軌域與 subshell 混淆、幾何證明方法混用，以及把文件中的法律提案誇大成已生效規則。這些是來源答案缺陷，單純增加 context 不能保證消除。</p><p>對原 16 題只做離線詞彙覆蓋檢查：中位數從 45.43% 到 54.06%，但記憶 token 中位數亦從 4,794.5 增為 11,559.5。新舊抽查題目、預算與篩選不同，不能把 6/16 到 7/12 當成受控的能力或效率增益。所有試驗接受訓練筆數仍為零。</p><pre>{
+  &quot;updated_at&quot;: &quot;2026-10-27T15:28:55.178589+00:00&quot;,
+  &quot;samples&quot;: 16,
+  &quot;articles&quot;: 24,
+  &quot;first_audit_counts&quot;: {
+    &quot;ACCEPT&quot;: 6,
+    &quot;REJECT&quot;: 5,
+    &quot;REVISE&quot;: 5
+  },
+  &quot;held_query_count&quot;: 10,
+  &quot;accepted_training_episodes&quot;: 0,
+  &quot;first_reviews_replayed&quot;: false,
+  &quot;coverage_is_not_entailment&quot;: true,
+  &quot;question_only_retrieval&quot;: true,
+  &quot;candidate_pool&quot;: &quot;one or two source-linked articles per question; not global Wikipedia search&quot;,
+  &quot;selection_policy&quot;: {
+    &quot;driver_sha256&quot;: &quot;b8016db8fddf2427c68ea418ef698be6900d15178bd8d454fc81f14832c4c989&quot;,
+    &quot;adapter_sha256&quot;: &quot;c71ab3682343256530639347627db7f24e25012b4bb38439bf7700841a5690cd&quot;,
+    &quot;source_lock_sha256&quot;: &quot;145593e41740ab970530ddd35c17d7e890e40b851719b6f039210ac0547ea5f9&quot;,
+    &quot;counts&quot;: {
+      &quot;raw_rows&quot;: 622115,
+      &quot;english_memory_or_rag&quot;: 454526,
+      &quot;held:nonarticle_or_ambiguous_seed_url&quot;: 6630,
+      &quot;held:seed_license_outside_pilot&quot;: 3364
+    },
+    &quot;sample_count&quot;: 16,
+    &quot;cohorts&quot;: {
+      &quot;memorization/one_article&quot;: 8,
+      &quot;memorization/two_articles&quot;: 8
+    },
+    &quot;selection&quot;: &quot;Lowest deterministic query-hash ranks, at most eight per exercise/article-count cohort across four actual source files; no answer overlap, perplexity or reviewer feedback used.&quot;,
+    &quot;answer_version_selection&quot;: &quot;Diagnostic source sample only; not accepted standard answers or PPL winners.&quot;,
+    &quot;source_linked_candidate_pool_disclosed&quot;: true,
+    &quot;accepted_training_episodes&quot;: 0,
+    &quot;weights_trained&quot;: false,
+    &quot;source_programs_executed&quot;: false,
+    &quot;source_card_reported_samples&quot;: 79648272,
+    &quot;source_card_count_is_not_locally_verified&quot;: true
+  },
+  &quot;first_audit_sha256&quot;: &quot;c06af1e8dd2704e165ee6466f48b351171007d5268e37198ac5926a9ec3cce7b&quot;,
+  &quot;retrieval_diagnostics_sha256&quot;: &quot;0ad7997c0a94d5f58fe5a8551b4bc6e6b562dfe27d822ec7129c4ec39d9802b7&quot;,
+  &quot;all_input_and_output_budgets_checked&quot;: true,
+  &quot;new_neighbor_retriever_semantically_evaluated&quot;: true,
+  &quot;weights_trained&quot;: false,
+  &quot;goal_complete&quot;: false,
+  &quot;new_cases_first_audit_counts&quot;: {
+    &quot;ACCEPT&quot;: 7,
+    &quot;REVISE&quot;: 5
+  },
+  &quot;new_cases_first_audit_sha256&quot;: &quot;638853f7b59ceb87e20959d1b783edb9dde86adcd4b99634517ec8427c81e019&quot;,
+  &quot;new_cases_sample_count&quot;: 12,
+  &quot;new_cases_all_16_prior_queries_excluded&quot;: true,
+  &quot;controlled_improvement_demonstrated&quot;: false
+}</pre></html>

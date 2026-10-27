@@ -1,0 +1,44 @@
+{
+  "version": "known-source-tool-contract-holds-v1",
+  "scope": "Exact normalized function metadata fingerprint only. A name match by itself never excludes a tool. Hold unresolved source schema contradictions; do not infer or rewrite a working interface.",
+  "holds": [
+    {
+      "id": "sms77-balance-with-token-address-parameters",
+      "function_sha256": "da8d5735a92361e16055aa6998ef85c869c35da385e873d626fa17f9f46ef6ae",
+      "function": {
+        "description": "Retrieves the account balance for the given API key using the Sms77.io API through RapidAPI.",
+        "name": "get_balance",
+        "parameters": {
+          "properties": {
+            "address": {
+              "default": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+              "description": "The address for which to retrieve the token balance.",
+              "type": "string"
+            },
+            "token": {
+              "default": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+              "description": "The token for which the balance is to be retrieved.",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "type": "object"
+        }
+      },
+      "reason": "Function description says Sms77 SMS account balance; parameter descriptions/defaults describe an address/token balance interface. First source contract is unresolved. The primary SMS balance endpoint documents no extra query parameters beyond authentication.",
+      "first_record_id": "548247339940e2d1de681abf7cee262f0772c711ca7ca206da739567b60c04df",
+      "first_query_hash": "29c2babb2c3ccf81ea71a78cca059ebd9273710a7fda31ac597ed2430a715e9a",
+      "source_refs": {
+        "repo": "IFM/TxT360-3efforts",
+        "revision": "bfc4a082d11967cd7810fe0b773be87bf54fb32e",
+        "file": "agent/high-00006-of-00026.parquet",
+        "file_sha256": "2cb4a13b41d6eb9218f6e878ecf02af33c7f45f1f7896fa02d2b008f4c0b1230",
+        "row_index": 511
+      },
+      "primary_docs": "https://docs.seven.io/en/rest-api/endpoints/account",
+      "primary_auth_docs": "https://docs.seven.io/en/rest-api/authentication",
+      "source_program_executed": false,
+      "first_disposition_preserved": "REVISE"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "counts": {
+    "raw_rows": 9009244,
+    "projected_rows": 9008721,
+    "multi_user_turn_rows": 1439474,
+    "multi_assistant_turn_rows": 2824711,
+    "tool_observation_rows": 2150649,
+    "declared_tool_schema_rows": 3242291,
+    "final_tool_call_rows": 2280385,
+    "reference_solution_marker_rows": 458647,
+    "unprojectable": 523
+  },
+  "category_counts": {
+    "agent": {
+      "raw_rows": 2339188,
+      "projected_rows": 2339122,
+      "multi_user_turn_rows": 1102789,
+      "multi_assistant_turn_rows": 1629008,
+      "tool_observation_rows": 1291631,
+      "declared_tool_schema_rows": 2219527,
+      "final_tool_call_rows": 1257621,
+      "reference_solution_marker_rows": 1,
+      "unprojectable": 66
+    },
+    "chat": {
+      "raw_rows": 712490,
+      "projected_rows": 712033,
+      "multi_user_turn_rows": 0,
+      "multi_assistant_turn_rows": 0,
+      "tool_observation_rows": 0,
+      "declared_tool_schema_rows": 0,
+      "final_tool_call_rows": 0,
+      "reference_solution_marker_rows": 0,
+      "unprojectable": 457
+    },
+    "code": {
+      "raw_rows": 1865716,
+      "projected_rows": 1865716,
+      "multi_user_turn_rows": 0,
+      "multi_assistant_turn_rows": 859018,
+      "tool_observation_rows": 859018,
+      "declared_tool_schema_rows": 1022764,
+      "final_tool_call_rows": 1022764,
+      "reference_solution_marker_rows": 10
+    },
+    "instructions-with-constraints": {
+      "raw_rows": 875098,
+      "projected_rows": 875098,
+      "multi_user_turn_rows": 0,
+      "multi_assistant_turn_rows": 0,
+      "tool_observation_rows": 0,
+      "declared_tool_schema_rows": 0,
+      "final_tool_call_rows": 0,
+      "reference_solution_marker_rows": 0
+    },
+    "math-dialogue": {
+      "raw_rows": 146887,
+      "projected_rows": 146887,
+      "multi_user_turn_rows": 34846,
+      "multi_assistant_turn_rows": 34846,
+      "tool_observation_rows": 0,
+      "declared_tool_schema_rows": 0,
+      "final_tool_call_rows": 0,
+      "reference_solution_marker_rows": 0
+    },
+    "math": {
+      "raw_rows": 356955,
+      "projected_rows": 356955,
+      "multi_user_turn_rows": 0,
+      "multi_assistant_turn_rows": 0,
+      "tool_observation_rows": 0,
+      "declared_tool_schema_rows": 0,
+      "final_tool_call_rows": 0,
+      "reference_solution_marker_rows": 0
+    },
+    "stem": {
+      "raw_rows": 2254274,
+      "projected_rows": 2254274,
+      "multi_user_turn_rows": 0,
+      "multi_assistant_turn_rows": 0,
+      "tool_observation_rows": 0,
+      "declared_tool_schema_rows": 0,
+      "final_tool_call_rows": 0,
+      "reference_solution_marker_rows": 0
+    },
+    "teacher-as-assistant": {
+      "raw_rows": 458636,
+      "projected_rows": 458636,
+      "multi_user_turn_rows": 301839,
+      "multi_assistant_turn_rows": 301839,
+      "tool_observation_rows": 0,
+      "declared_tool_schema_rows": 0,
+      "final_tool_call_rows": 0,
+      "reference_solution_marker_rows": 458636
+    }
+  },
+  "distinct_normalized_first_queries": 4293696,
+  "distinct_complete_source_final_inputs": 7206775,
+  "category_unique_counts": {
+    "agent": {
+      "distinct_first_queries": 419156,
+      "distinct_final_inputs": 1912448,
+      "distinct_source_answer_pairs": 1955574
+    },
+    "chat": {
+      "distinct_first_queries": 481734,
+      "distinct_final_inputs": 515257,
+      "distinct_source_answer_pairs": 675790
+    },
+    "code": {
+      "distinct_first_queries": 940389,
+      "distinct_final_inputs": 1811139,
+      "distinct_source_answer_pairs": 1864961
+    },
+    "instructions-with-constraints": {
+      "distinct_first_queries": 635418,
+      "distinct_final_inputs": 658476,
+      "distinct_source_answer_pairs": 872737
+    },
+    "math": {
+      "distinct_first_queries": 329331,
+      "distinct_final_inputs": 334439,
+      "distinct_source_answer_pairs": 356882
+    },
+    "math-dialogue": {
+      "distinct_first_queries": 109885,
+      "distinct_final_inputs": 144725,
+      "distinct_source_answer_pairs": 145389
+    },
+    "stem": {
+      "distinct_first_queries": 1223355,
+      "distinct_final_inputs": 1373229,
+      "distinct_source_answer_pairs": 2217341
+    },
+    "teacher-as-assistant": {
+      "distinct_first_queries": 156392,
+      "distinct_final_inputs": 458636,
+      "distinct_source_answer_pairs": 458636
+    }
+  },
+  "accepted_training_rows": 0,
+  "scope": "Downloaded eight-category source only, excluding safety and self-identity. Source effort variants and multi-turn prefixes are not independently accepted episodes. Before prior-source dedup, provenance/grounding/schema checks, first diagnosis, native v26 PPL and export gates.",
+  "updated_at": "2026-10-27T15:28:55.178589+00:00",
+  "goal_complete": false,
+  "first_audit_counts": {
+    "ACCEPT": 33,
+    "HOLD": 9,
+    "REJECT": 1,
+    "REVISE": 11
+  },
+  "first_audit_sha256": "42bf6d0a7fe9961dcf28eacf676859b4a17487c77c9ed40bdfd86cf330abb5d8",
+  "first_audit_samples": 54,
+  "held_first_queries": 21,
+  "first_audit_by_domain": {
+    "coding": {
+      "ACCEPT": 11,
+      "REVISE": 6,
+      "REJECT": 1
+    },
+    "math": {
+      "ACCEPT": 8,
+      "HOLD": 9,
+      "REVISE": 1
+    },
+    "tool_use": {
+      "ACCEPT": 14,
+      "REVISE": 4
+    }
+  },
+  "first_reviews_replayed": false
+}

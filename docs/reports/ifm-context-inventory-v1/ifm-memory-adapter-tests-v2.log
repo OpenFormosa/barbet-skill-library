@@ -1,0 +1,11 @@
+test_author_is_not_an_authentication_parameter (tests.test_ifm_memory_adapter.IFMAdapterTests.test_author_is_not_an_authentication_parameter) ... ok
+test_fabricated_credentials_are_held (tests.test_ifm_memory_adapter.IFMAdapterTests.test_fabricated_credentials_are_held) ... ok
+test_gold_reference_in_input_cannot_become_memory (tests.test_ifm_memory_adapter.IFMAdapterTests.test_gold_reference_in_input_cannot_become_memory) ... ok
+test_observations_remain_chronological_and_unsupervised (tests.test_ifm_memory_adapter.IFMAdapterTests.test_observations_remain_chronological_and_unsupervised) ... ok
+test_undeclared_argument_is_not_tolerated_by_schema_default (tests.test_ifm_memory_adapter.IFMAdapterTests.test_undeclared_argument_is_not_tolerated_by_schema_default) ... ok
+test_valid_handoff_does_not_invent_observation (tests.test_ifm_memory_adapter.IFMAdapterTests.test_valid_handoff_does_not_invent_observation) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.073s
+
+OK

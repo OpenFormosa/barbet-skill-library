@@ -1,0 +1,171 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM 上下文來源盤點</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM 三種 effort 不等於三倍獨立資料</h1><p>八個實際下載類別、152 檔共 9,009,244 列。排除獨立 think 欄位後，有 4,293,696 個不同正規化首題；不同完整最後輸入為 7,206,775 個，含先前助手與工具觀察差異，不能直接當成獨立問題數。523 列不符合本次可見訊息投影規格。這些只是來源盤點，接受訓練筆數為零。</p><p>agent 有 419,156 個不同首題，code 940,389，math 329,331。首先針對這三類建立完整任務記憶、skill prefill、原始工具 schema 與觀察的轉換；缺少憑證卻填入 your_api_key_here、輸入藏有標準答案、未宣告參數、無法解析的 Python、需要未提供圖片等情況先隔離。程式不會在主機執行。其他五個類別尚未納入，不以擴大閉卷百科問答補足數量。</p><p>來源未提供逐列原始資料集歸屬，因此不杜撰這項來源資訊；依實際 IFM 修訂與列位置追溯。首次語義診斷已完成，尚待完整範圍檢查、版本去重與 v26 比較。不同工具結果或先前對話不能混在同一個 PPL 比較組。</p><p>首次 54 題診斷已完成：33 ACCEPT、11 REVISE、1 REJECT、9 HOLD；21 個未通過問題整體隔離。工具 14/18、程式 11/18、數學 8/18 通過，數學另有 9 題因審核輸出未完成而 HOLD，不把它們算成答案錯誤。這是範圍診斷，不是全來源正確率；接受訓練筆數仍為零。</p><p>人工檢查發現來源的 SMS 帳戶餘額函式混入 token/address 參數。回查既有公開資料後，23 筆精確符合這份規格，連同同題視圖共 33 筆正在整題隔離。另以自寫的問題定義計算驗證 median pyramid 反例：N=3、底列 [3,2,1,4,5] 的頂端為 2，否定來源「必為 N」的推論；沒有執行來源程式。部分審核器會把合法第一步工具交接當成未完成，不能把所有判詞都當成事實，但首次未通過仍保留隔離。</p><pre>{
+  &quot;counts&quot;: {
+    &quot;raw_rows&quot;: 9009244,
+    &quot;projected_rows&quot;: 9008721,
+    &quot;multi_user_turn_rows&quot;: 1439474,
+    &quot;multi_assistant_turn_rows&quot;: 2824711,
+    &quot;tool_observation_rows&quot;: 2150649,
+    &quot;declared_tool_schema_rows&quot;: 3242291,
+    &quot;final_tool_call_rows&quot;: 2280385,
+    &quot;reference_solution_marker_rows&quot;: 458647,
+    &quot;unprojectable&quot;: 523
+  },
+  &quot;category_counts&quot;: {
+    &quot;agent&quot;: {
+      &quot;raw_rows&quot;: 2339188,
+      &quot;projected_rows&quot;: 2339122,
+      &quot;multi_user_turn_rows&quot;: 1102789,
+      &quot;multi_assistant_turn_rows&quot;: 1629008,
+      &quot;tool_observation_rows&quot;: 1291631,
+      &quot;declared_tool_schema_rows&quot;: 2219527,
+      &quot;final_tool_call_rows&quot;: 1257621,
+      &quot;reference_solution_marker_rows&quot;: 1,
+      &quot;unprojectable&quot;: 66
+    },
+    &quot;chat&quot;: {
+      &quot;raw_rows&quot;: 712490,
+      &quot;projected_rows&quot;: 712033,
+      &quot;multi_user_turn_rows&quot;: 0,
+      &quot;multi_assistant_turn_rows&quot;: 0,
+      &quot;tool_observation_rows&quot;: 0,
+      &quot;declared_tool_schema_rows&quot;: 0,
+      &quot;final_tool_call_rows&quot;: 0,
+      &quot;reference_solution_marker_rows&quot;: 0,
+      &quot;unprojectable&quot;: 457
+    },
+    &quot;code&quot;: {
+      &quot;raw_rows&quot;: 1865716,
+      &quot;projected_rows&quot;: 1865716,
+      &quot;multi_user_turn_rows&quot;: 0,
+      &quot;multi_assistant_turn_rows&quot;: 859018,
+      &quot;tool_observation_rows&quot;: 859018,
+      &quot;declared_tool_schema_rows&quot;: 1022764,
+      &quot;final_tool_call_rows&quot;: 1022764,
+      &quot;reference_solution_marker_rows&quot;: 10
+    },
+    &quot;instructions-with-constraints&quot;: {
+      &quot;raw_rows&quot;: 875098,
+      &quot;projected_rows&quot;: 875098,
+      &quot;multi_user_turn_rows&quot;: 0,
+      &quot;multi_assistant_turn_rows&quot;: 0,
+      &quot;tool_observation_rows&quot;: 0,
+      &quot;declared_tool_schema_rows&quot;: 0,
+      &quot;final_tool_call_rows&quot;: 0,
+      &quot;reference_solution_marker_rows&quot;: 0
+    },
+    &quot;math-dialogue&quot;: {
+      &quot;raw_rows&quot;: 146887,
+      &quot;projected_rows&quot;: 146887,
+      &quot;multi_user_turn_rows&quot;: 34846,
+      &quot;multi_assistant_turn_rows&quot;: 34846,
+      &quot;tool_observation_rows&quot;: 0,
+      &quot;declared_tool_schema_rows&quot;: 0,
+      &quot;final_tool_call_rows&quot;: 0,
+      &quot;reference_solution_marker_rows&quot;: 0
+    },
+    &quot;math&quot;: {
+      &quot;raw_rows&quot;: 356955,
+      &quot;projected_rows&quot;: 356955,
+      &quot;multi_user_turn_rows&quot;: 0,
+      &quot;multi_assistant_turn_rows&quot;: 0,
+      &quot;tool_observation_rows&quot;: 0,
+      &quot;declared_tool_schema_rows&quot;: 0,
+      &quot;final_tool_call_rows&quot;: 0,
+      &quot;reference_solution_marker_rows&quot;: 0
+    },
+    &quot;stem&quot;: {
+      &quot;raw_rows&quot;: 2254274,
+      &quot;projected_rows&quot;: 2254274,
+      &quot;multi_user_turn_rows&quot;: 0,
+      &quot;multi_assistant_turn_rows&quot;: 0,
+      &quot;tool_observation_rows&quot;: 0,
+      &quot;declared_tool_schema_rows&quot;: 0,
+      &quot;final_tool_call_rows&quot;: 0,
+      &quot;reference_solution_marker_rows&quot;: 0
+    },
+    &quot;teacher-as-assistant&quot;: {
+      &quot;raw_rows&quot;: 458636,
+      &quot;projected_rows&quot;: 458636,
+      &quot;multi_user_turn_rows&quot;: 301839,
+      &quot;multi_assistant_turn_rows&quot;: 301839,
+      &quot;tool_observation_rows&quot;: 0,
+      &quot;declared_tool_schema_rows&quot;: 0,
+      &quot;final_tool_call_rows&quot;: 0,
+      &quot;reference_solution_marker_rows&quot;: 458636
+    }
+  },
+  &quot;distinct_normalized_first_queries&quot;: 4293696,
+  &quot;distinct_complete_source_final_inputs&quot;: 7206775,
+  &quot;category_unique_counts&quot;: {
+    &quot;agent&quot;: {
+      &quot;distinct_first_queries&quot;: 419156,
+      &quot;distinct_final_inputs&quot;: 1912448,
+      &quot;distinct_source_answer_pairs&quot;: 1955574
+    },
+    &quot;chat&quot;: {
+      &quot;distinct_first_queries&quot;: 481734,
+      &quot;distinct_final_inputs&quot;: 515257,
+      &quot;distinct_source_answer_pairs&quot;: 675790
+    },
+    &quot;code&quot;: {
+      &quot;distinct_first_queries&quot;: 940389,
+      &quot;distinct_final_inputs&quot;: 1811139,
+      &quot;distinct_source_answer_pairs&quot;: 1864961
+    },
+    &quot;instructions-with-constraints&quot;: {
+      &quot;distinct_first_queries&quot;: 635418,
+      &quot;distinct_final_inputs&quot;: 658476,
+      &quot;distinct_source_answer_pairs&quot;: 872737
+    },
+    &quot;math&quot;: {
+      &quot;distinct_first_queries&quot;: 329331,
+      &quot;distinct_final_inputs&quot;: 334439,
+      &quot;distinct_source_answer_pairs&quot;: 356882
+    },
+    &quot;math-dialogue&quot;: {
+      &quot;distinct_first_queries&quot;: 109885,
+      &quot;distinct_final_inputs&quot;: 144725,
+      &quot;distinct_source_answer_pairs&quot;: 145389
+    },
+    &quot;stem&quot;: {
+      &quot;distinct_first_queries&quot;: 1223355,
+      &quot;distinct_final_inputs&quot;: 1373229,
+      &quot;distinct_source_answer_pairs&quot;: 2217341
+    },
+    &quot;teacher-as-assistant&quot;: {
+      &quot;distinct_first_queries&quot;: 156392,
+      &quot;distinct_final_inputs&quot;: 458636,
+      &quot;distinct_source_answer_pairs&quot;: 458636
+    }
+  },
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;scope&quot;: &quot;Downloaded eight-category source only, excluding safety and self-identity. Source effort variants and multi-turn prefixes are not independently accepted episodes. Before prior-source dedup, provenance/grounding/schema checks, first diagnosis, native v26 PPL and export gates.&quot;,
+  &quot;updated_at&quot;: &quot;2026-10-27T15:28:55.178589+00:00&quot;,
+  &quot;goal_complete&quot;: false,
+  &quot;first_audit_counts&quot;: {
+    &quot;ACCEPT&quot;: 33,
+    &quot;HOLD&quot;: 9,
+    &quot;REJECT&quot;: 1,
+    &quot;REVISE&quot;: 11
+  },
+  &quot;first_audit_sha256&quot;: &quot;42bf6d0a7fe9961dcf28eacf676859b4a17487c77c9ed40bdfd86cf330abb5d8&quot;,
+  &quot;first_audit_samples&quot;: 54,
+  &quot;held_first_queries&quot;: 21,
+  &quot;first_audit_by_domain&quot;: {
+    &quot;coding&quot;: {
+      &quot;ACCEPT&quot;: 11,
+      &quot;REVISE&quot;: 6,
+      &quot;REJECT&quot;: 1
+    },
+    &quot;math&quot;: {
+      &quot;ACCEPT&quot;: 8,
+      &quot;HOLD&quot;: 9,
+      &quot;REVISE&quot;: 1
+    },
+    &quot;tool_use&quot;: {
+      &quot;ACCEPT&quot;: 14,
+      &quot;REVISE&quot;: 4
+    }
+  },
+  &quot;first_reviews_replayed&quot;: false
+}</pre></html>

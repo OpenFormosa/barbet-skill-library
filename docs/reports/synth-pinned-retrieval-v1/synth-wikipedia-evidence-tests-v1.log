@@ -1,0 +1,9 @@
+test_markup_cannot_execute_or_import_scripts (tests.test_synth_wikipedia_memory.WikipediaEvidenceTests.test_markup_cannot_execute_or_import_scripts) ... ok
+test_math_and_subscript_are_not_silently_removed (tests.test_synth_wikipedia_memory.WikipediaEvidenceTests.test_math_and_subscript_are_not_silently_removed) ... ok
+test_missing_math_representation_is_held (tests.test_synth_wikipedia_memory.WikipediaEvidenceTests.test_missing_math_representation_is_held) ... ok
+test_source_article_allowlist (tests.test_synth_wikipedia_memory.WikipediaEvidenceTests.test_source_article_allowlist) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK

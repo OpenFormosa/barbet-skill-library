@@ -1,0 +1,54 @@
+{
+  "updated_at": "2026-10-27T15:28:55.178589+00:00",
+  "samples": 16,
+  "articles": 24,
+  "first_audit_counts": {
+    "ACCEPT": 6,
+    "REJECT": 5,
+    "REVISE": 5
+  },
+  "held_query_count": 10,
+  "accepted_training_episodes": 0,
+  "first_reviews_replayed": false,
+  "coverage_is_not_entailment": true,
+  "question_only_retrieval": true,
+  "candidate_pool": "one or two source-linked articles per question; not global Wikipedia search",
+  "selection_policy": {
+    "driver_sha256": "b8016db8fddf2427c68ea418ef698be6900d15178bd8d454fc81f14832c4c989",
+    "adapter_sha256": "c71ab3682343256530639347627db7f24e25012b4bb38439bf7700841a5690cd",
+    "source_lock_sha256": "145593e41740ab970530ddd35c17d7e890e40b851719b6f039210ac0547ea5f9",
+    "counts": {
+      "raw_rows": 622115,
+      "english_memory_or_rag": 454526,
+      "held:nonarticle_or_ambiguous_seed_url": 6630,
+      "held:seed_license_outside_pilot": 3364
+    },
+    "sample_count": 16,
+    "cohorts": {
+      "memorization/one_article": 8,
+      "memorization/two_articles": 8
+    },
+    "selection": "Lowest deterministic query-hash ranks, at most eight per exercise/article-count cohort across four actual source files; no answer overlap, perplexity or reviewer feedback used.",
+    "answer_version_selection": "Diagnostic source sample only; not accepted standard answers or PPL winners.",
+    "source_linked_candidate_pool_disclosed": true,
+    "accepted_training_episodes": 0,
+    "weights_trained": false,
+    "source_programs_executed": false,
+    "source_card_reported_samples": 79648272,
+    "source_card_count_is_not_locally_verified": true
+  },
+  "first_audit_sha256": "c06af1e8dd2704e165ee6466f48b351171007d5268e37198ac5926a9ec3cce7b",
+  "retrieval_diagnostics_sha256": "0ad7997c0a94d5f58fe5a8551b4bc6e6b562dfe27d822ec7129c4ec39d9802b7",
+  "all_input_and_output_budgets_checked": true,
+  "new_neighbor_retriever_semantically_evaluated": true,
+  "weights_trained": false,
+  "goal_complete": false,
+  "new_cases_first_audit_counts": {
+    "ACCEPT": 7,
+    "REVISE": 5
+  },
+  "new_cases_first_audit_sha256": "638853f7b59ceb87e20959d1b783edb9dde86adcd4b99634517ec8427c81e019",
+  "new_cases_sample_count": 12,
+  "new_cases_all_16_prior_queries_excluded": true,
+  "controlled_improvement_demonstrated": false
+}

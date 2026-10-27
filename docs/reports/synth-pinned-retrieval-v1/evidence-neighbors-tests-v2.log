@@ -1,0 +1,9 @@
+test_full_memory_fit_preserves_formula_and_actual_budget (tests.test_evidence_retrieval.EvidenceRetrievalTests.test_full_memory_fit_preserves_formula_and_actual_budget) ... ok
+test_neighbor_keeps_dated_antecedent_and_negation (tests.test_evidence_retrieval.EvidenceRetrievalTests.test_neighbor_keeps_dated_antecedent_and_negation) ... ok
+test_over_budget_paragraph_is_not_chopped (tests.test_evidence_retrieval.EvidenceRetrievalTests.test_over_budget_paragraph_is_not_chopped) ... ok
+test_question_filler_does_not_displace_relevant_fact (tests.test_evidence_retrieval.EvidenceRetrievalTests.test_question_filler_does_not_displace_relevant_fact) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK
