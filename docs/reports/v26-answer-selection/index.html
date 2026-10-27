@@ -1,24 +1,42 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>v26 答案選擇</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>v26 答案 PPL 選擇：實作與候選規模</h1><p>一千萬筆合格新軌跡的目標維持進行。來源順序的第二批發佈方案已停止；尚未發布 PPL 重選版本。</p><p>固定 checkpoint 67131067ff1825179d5e38e91d499159669e9c66；完整因果輸入、答案 token + EOS 計分，prompt 與觀察不計 loss。正確性與品質篩選先行。</p><ul><li>distinct_answers：3,496,073</li><li>input_groups：2,897,850</li><li>competing_groups：479,012</li><li>answers_to_score：1,077,235</li></ul><p>批次 padding 比較未通過預設容差，已保留原始失敗。正式規格固定逐筆、FlashAttention 與序列對齊的 vocabulary projection。三個控制案例重複結果一致，與同一路徑的原生 loss 最大誤差 2.4912e-8。此處固定數值設定，沒有宣稱已分別量化每項設定的影響。</p><p>沒有模型訓練或效能提升結論。每題只有一個候選時不需要競爭性 PPL 排名；多答案群組須全部取得可比較的有效分數，否則 hold。</p><details><summary>實測 JSON</summary><pre>{
-  &quot;phase&quot;: &quot;V26_SCORER_VALIDATED_CANDIDATE_INDEX_READY&quot;,
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>v26 答案選擇</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>v26 答案 PPL：完整候選評分完成</h1><p>一千萬筆新軌跡目標持續進行。479,466 組競爭答案、1,078,143 個答案已完成固定 v26 的條件 PPL 評分，評分失敗為零。目前正在重建並檢查發布資料，尚未把候選數當作合格筆數。</p><p>補查 231,472 筆舊流程僅因同題去重而略過的原始列，恢復 103,988 個合格候選。不同工具或不同外部條件不冒充同一輸入比較；前綴視圖與衝突觀察另外隔離。</p><p>原有 1,077,235 筆數值在來源文字、模型與評分協定完全相同時沿用，新增 908 個競爭答案均實際推論。原始資料庫與數值不改寫。分數只計答案 token 與 EOS，完整因果上下文保留。</p><p>來源與正確性規則先於 PPL；PPL 較低不保證正確。沒有權重訓練，也沒有宣稱已提升模型效能。原始 padding 校準失敗保留，正式逐筆路徑與同路徑 loss 最大差為 2.4912e-8。</p><details><summary>實測 JSON</summary><pre>{
+  &quot;phase&quot;: &quot;ALL_EXTENDED_COMPETING_ANSWERS_SCORED_RELEASE_FINALIZING&quot;,
   &quot;target_accepted_episodes&quot;: 10000000,
   &quot;goal_complete&quot;: false,
   &quot;candidate_index&quot;: {
     &quot;counts&quot;: {
-      &quot;seen&quot;: 3588557,
-      &quot;eligible&quot;: 3574234,
+      &quot;seen&quot;: 3692545,
+      &quot;eligible&quot;: 3678222,
       &quot;excluded:first_semantic_hold&quot;: 6890,
       &quot;excluded:unreviewed_search&quot;: 5944,
       &quot;excluded:supplemental_prior_job_hold&quot;: 3,
       &quot;excluded:reserved_literal_tool_delimiter&quot;: 6,
       &quot;excluded:undeclared_function_parameter&quot;: 1480
     },
-    &quot;distinct_answers&quot;: 3496073,
-    &quot;input_groups&quot;: 2897850,
-    &quot;competing_groups&quot;: 479012,
-    &quot;answers_to_score&quot;: 1077235,
+    &quot;distinct_answers&quot;: 3600061,
+    &quot;input_groups&quot;: 3001384,
+    &quot;competing_groups&quot;: 479466,
+    &quot;answers_to_score&quot;: 1078143,
+    &quot;additional_distinct_answers&quot;: 103988,
     &quot;status&quot;: &quot;INDEXED_NOT_YET_PPL_SELECTED&quot;,
     &quot;all_score_inputs_are_eligible_only&quot;: true,
-    &quot;no_model_training&quot;: true
+    &quot;no_model_training&quot;: true,
+    &quot;raw_overlap_recovery&quot;: {
+      &quot;seen_query_overlap&quot;: 231472,
+      &quot;new_eligible_answer_variant&quot;: 103988,
+      &quot;held:typed_argument_mismatch&quot;: 2584,
+      &quot;held:unknown_tool_or_arguments&quot;: 614,
+      &quot;held:undeclared_function_parameter&quot;: 3399,
+      &quot;held:tool_name&quot;: 4787,
+      &quot;held:arguments_json&quot;: 794,
+      &quot;held:native_parameter_name&quot;: 66,
+      &quot;held:no_terminal_assistant_target&quot;: 19,
+      &quot;held:unresolved_schema_ref&quot;: 1,
+      &quot;already_indexed_same_answer&quot;: 115217,
+      &quot;held:reserved_literal_tool_delimiter&quot;: 1,
+      &quot;held:prior_wave_or_held_query&quot;: 2
+    },
+    &quot;extension_binding_sha256&quot;: &quot;20e41e52ec5ee0e85d28004101daf9e6fb81519060a0bfa06de12e4b4616a22b&quot;,
+    &quot;numerical_scores_can_be_reused_only_for_unchanged_original_candidates&quot;: true
   },
   &quot;calibration&quot;: {
     &quot;policy_sha256&quot;: &quot;32868728af4a484921394f2a3e363fb109c5a7621a43620fe5ec54b3b5e6bc8a&quot;,
@@ -82,5 +100,24 @@
     ],
     &quot;scope&quot;: &quot;Exact unbatched FlashAttention inference scores, same BF16 vocabulary projection shapes as published loss. Multi-sequence padding is not used. Short-fixture throughput is not a corpus ETA.&quot;
   },
-  &quot;published_minimum_ppl_selected_release&quot;: false
+  &quot;published_minimum_ppl_selected_release&quot;: false,
+  &quot;episode_identity&quot;: {
+    &quot;counts&quot;: {
+      &quot;same_task_different_observation_conditions&quot;: 1696,
+      &quot;strict_dialogue_prefix_view&quot;: 257917
+    },
+    &quot;distinct_candidate_answers&quot;: 3600061,
+    &quot;ambiguous_static_task_inputs&quot;: 577,
+    &quot;all_original_candidates_covered&quot;: true,
+    &quot;status&quot;: &quot;COMPLETE&quot;,
+    &quot;original_scores_not_rewritten&quot;: true
+  },
+  &quot;scores&quot;: {
+    &quot;competing_groups&quot;: 479466,
+    &quot;answers_scored&quot;: 1078143,
+    &quot;reused_unchanged_original_scores&quot;: 1077235,
+    &quot;new_inference_scores&quot;: 908,
+    &quot;failed_groups&quot;: 0
+  },
+  &quot;updated_at&quot;: &quot;2026-10-27T10:59:21.465187+00:00&quot;
 }</pre></details></html>

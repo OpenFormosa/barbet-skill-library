@@ -1,24 +1,42 @@
 {
-  "phase": "V26_SCORER_VALIDATED_CANDIDATE_INDEX_READY",
+  "phase": "ALL_EXTENDED_COMPETING_ANSWERS_SCORED_RELEASE_FINALIZING",
   "target_accepted_episodes": 10000000,
   "goal_complete": false,
   "candidate_index": {
     "counts": {
-      "seen": 3588557,
-      "eligible": 3574234,
+      "seen": 3692545,
+      "eligible": 3678222,
       "excluded:first_semantic_hold": 6890,
       "excluded:unreviewed_search": 5944,
       "excluded:supplemental_prior_job_hold": 3,
       "excluded:reserved_literal_tool_delimiter": 6,
       "excluded:undeclared_function_parameter": 1480
     },
-    "distinct_answers": 3496073,
-    "input_groups": 2897850,
-    "competing_groups": 479012,
-    "answers_to_score": 1077235,
+    "distinct_answers": 3600061,
+    "input_groups": 3001384,
+    "competing_groups": 479466,
+    "answers_to_score": 1078143,
+    "additional_distinct_answers": 103988,
     "status": "INDEXED_NOT_YET_PPL_SELECTED",
     "all_score_inputs_are_eligible_only": true,
-    "no_model_training": true
+    "no_model_training": true,
+    "raw_overlap_recovery": {
+      "seen_query_overlap": 231472,
+      "new_eligible_answer_variant": 103988,
+      "held:typed_argument_mismatch": 2584,
+      "held:unknown_tool_or_arguments": 614,
+      "held:undeclared_function_parameter": 3399,
+      "held:tool_name": 4787,
+      "held:arguments_json": 794,
+      "held:native_parameter_name": 66,
+      "held:no_terminal_assistant_target": 19,
+      "held:unresolved_schema_ref": 1,
+      "already_indexed_same_answer": 115217,
+      "held:reserved_literal_tool_delimiter": 1,
+      "held:prior_wave_or_held_query": 2
+    },
+    "extension_binding_sha256": "20e41e52ec5ee0e85d28004101daf9e6fb81519060a0bfa06de12e4b4616a22b",
+    "numerical_scores_can_be_reused_only_for_unchanged_original_candidates": true
   },
   "calibration": {
     "policy_sha256": "32868728af4a484921394f2a3e363fb109c5a7621a43620fe5ec54b3b5e6bc8a",
@@ -82,5 +100,24 @@
     ],
     "scope": "Exact unbatched FlashAttention inference scores, same BF16 vocabulary projection shapes as published loss. Multi-sequence padding is not used. Short-fixture throughput is not a corpus ETA."
   },
-  "published_minimum_ppl_selected_release": false
+  "published_minimum_ppl_selected_release": false,
+  "episode_identity": {
+    "counts": {
+      "same_task_different_observation_conditions": 1696,
+      "strict_dialogue_prefix_view": 257917
+    },
+    "distinct_candidate_answers": 3600061,
+    "ambiguous_static_task_inputs": 577,
+    "all_original_candidates_covered": true,
+    "status": "COMPLETE",
+    "original_scores_not_rewritten": true
+  },
+  "scores": {
+    "competing_groups": 479466,
+    "answers_scored": 1078143,
+    "reused_unchanged_original_scores": 1077235,
+    "new_inference_scores": 908,
+    "failed_groups": 0
+  },
+  "updated_at": "2026-10-27T10:59:21.465187+00:00"
 }

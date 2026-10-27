@@ -8,6 +8,13 @@ from scripts import finalize_v26_answer_selection as finalizer
 
 
 class FinalizationTests(unittest.TestCase):
+    def test_missing_premise_hold_keeps_separate_document_grounded_condition(self):
+        rows=[{'source':'Open-Orca/OpenOrca','query_hash':'same-question','record_id':'bare'},
+              {'source':'hotpotqa/hotpot_qa','query_hash':'same-question','record_id':'with-document'},
+              {'source':'Open-Orca/OpenOrca','query_hash':'different-question','record_id':'other'}]
+        with patch.object(finalizer,'EXTRA_SOURCE_QUERY_HOLDS',{('Open-Orca/OpenOrca','same-question')}):
+            self.assertEqual([r['record_id'] for r in finalizer.eligible_source_conditions(rows)],['with-document','other'])
+
     def test_different_literal_tool_ids_are_not_identical_condition_bytes(self):
         a={'messages':[{'role':'user','content':'same question'},{'role':'tool','content':'same result','tool_call_id':'source_a','name':'lookup'}],'tools':[]}
         b=json.loads(json.dumps(a));b['messages'][1]['tool_call_id']='source_b'

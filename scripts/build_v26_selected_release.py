@@ -18,11 +18,13 @@ WAVE='wave-0003'
 
 
 def compile_all(workers):
+    if (STATE/'SUPERSEDED.json').exists():raise ValueError('selected release was superseded before compilation')
     if not (STATE/'dedup-summary.json').exists():raise ValueError('PPL selection incomplete')
     base.STATE=STATE;base.OUT=OUT;base.compile_all(workers,False)
 
 
 def prepare_audit():
+    if (STATE/'SUPERSEDED.json').exists():raise ValueError('selected release was superseded before review')
     if not (STATE/'dedup-summary.json').exists():raise ValueError('PPL selection incomplete')
     path=STATE/'normalized/pilot-selected-winners.jsonl';path.parent.mkdir(exist_ok=True)
     if path.exists():return
@@ -58,6 +60,7 @@ def package_init():
 
 
 def package_all(workers):
+    if (STATE/'SUPERSEDED.json').exists():raise ValueError('selected release was superseded before packaging')
     if not (STATE/'compile-summary.json').exists():raise ValueError('compiled data incomplete')
     paths=sorted((STATE/'compiled').glob('[0-9]*.json'))
     if len(paths)!=json.loads((STATE/'dedup-summary.json').read_text())['shards']:raise ValueError('missing compiled shard')

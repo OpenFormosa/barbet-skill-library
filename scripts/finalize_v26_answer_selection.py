@@ -14,6 +14,14 @@ from barbet_inference.memory import canonical
 
 STATE=base.WORK/'reports/memory-harness-v2-v26-selected'
 OUT=base.WORK/'exports/memory-harness-v2-v26-selected'
+EXTRA_SOURCE_QUERY_HOLDS=set()
+EXTRA_SOURCE_QUERY_HOLD_RECEIPT=None
+
+
+def eligible_source_conditions(pointers):
+    # A missing-premise condition in one source must not invalidate a separate
+    # document-grounded condition merely because its short question is equal.
+    return [p for p in pointers if (p['source'],p['query_hash']) not in EXTRA_SOURCE_QUERY_HOLDS]
 
 
 def merge_decisions(db):
@@ -93,6 +101,9 @@ def main():
     for n,g in enumerate(db.execute('SELECT * FROM candidates.groups ORDER BY input_hash'),1):
         pointers=list(db.execute('SELECT c.* FROM candidates.candidates c WHERE input_hash=? AND NOT EXISTS(SELECT 1 FROM identity.holds h WHERE h.candidate_identity=c.candidate_identity) ORDER BY candidate_identity',(g['input_hash'],)))
         counts['excluded_prefix_or_ambiguous_answers']+=g['candidates']-len(pointers)
+        eligible=eligible_source_conditions(pointers)
+        counts['excluded_source_premise_answers']+=len(pointers)-len(eligible)
+        pointers=eligible
         if not pointers:counts['held_no_complete_unambiguous_answer']+=1;continue
         root=find('input:'+g['input_hash'])
         if root in conflicts:counts['held_frozen_fold_bridge']+=1;continue
@@ -133,7 +144,8 @@ def main():
     base.save(STATE/'dedup-summary.json',dict(counts))
     base.save(STATE/'selection-policy.json',{'version':'v26-minimum-answer-ppl-cumulative-0003','same_actual_condition_bytes_required':True,
         'all_frozen_folds_preserved':True,'cross_split_component_bridges_held':len(conflicts),'all_first_negative_holds_preserved':True,
-        'target_new_episodes':10000000,'goal_complete':False,'public_ppl_selected_data_not_yet_published':True})
+        'target_new_episodes':10000000,'goal_complete':False,'public_ppl_selected_data_not_yet_published':True,
+        'additional_source_premise_hold_receipt_sha256':base.file_sha(EXTRA_SOURCE_QUERY_HOLD_RECEIPT) if EXTRA_SOURCE_QUERY_HOLD_RECEIPT else None})
     db.close();print(json.dumps(dict(counts)),flush=True)
 
 
