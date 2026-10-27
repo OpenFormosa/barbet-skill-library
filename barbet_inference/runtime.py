@@ -50,6 +50,8 @@ def validate_request(value):
             raise ValueError(name + ' must be a list of strings')
     if len(set(req.document_ids)) != len(req.document_ids):
         raise ValueError('duplicate document id in request')
+    if req.output_contract != 'python' and (req.public_tests or req.setup):
+        raise ValueError('public_tests and setup are supported only for the python contract')
     if not isinstance(req.tools, list):
         raise ValueError('tools must be a list')
     names = []
@@ -248,7 +250,7 @@ def validation_summary(episode):
                 'errors': last['schema_errors'], 'semantic_correctness': 'unknown'}
     if 'execution' in last:
         receipt = last['execution']
-        checks = bool(episode.request.public_tests)
+        checks = episode.request.output_contract == 'python' and bool(episode.request.public_tests)
         status = ('public_tests_passed' if checks else 'execution_succeeded') if receipt['passed'] else 'execution_failed'
         return {'status': status, 'passed': receipt['passed'], 'receipt': receipt,
                 'semantic_correctness': 'unknown'}

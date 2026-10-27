@@ -74,6 +74,7 @@ barbet-infer run --family mini \
 請求只接受 `id`、`prompt`、`output_contract`、`tools`、`document_ids`、
 `public_tests`、`setup`。`gold`、`answer`、`hidden_tests` 等未知欄位會被拒絕。
 公開測試及 setup 由呼叫端提供；隱藏答案與測試不應放進推論請求。
+`public_tests` 與 `setup` 只接受於 `python` 契約，避免把未執行的檢查當成通過。
 
 文件包含 `id`、`text`、`source` 及可選的 `title`。閱讀請求未指定
 `document_ids` 時會搜尋本次提供的全部文件；若指定，則只使用指定候選包。
