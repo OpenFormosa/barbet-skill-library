@@ -170,7 +170,11 @@ def normalize(workers,pilot=False):
 
 
 def dedup():
+    if not (STATE/'normalize-summary.json').exists():raise ValueError('normalization is incomplete')
+    if (STATE/'dedup-summary.json').exists():raise ValueError('deduplication is already frozen')
     paths=[p for p in sorted((STATE/'normalized').glob('[0-9]*.jsonl')) if not p.name.endswith('.excluded.jsonl')]
+    jobs=json.loads((STATE/'normalize-jobs.json').read_text())
+    if len(paths)!=len(jobs):raise ValueError('missing normalized source shards')
     parent={}
     def find(x):
         parent.setdefault(x,x);root=x
