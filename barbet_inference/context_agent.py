@@ -11,7 +11,7 @@ import json
 from .backends import Generation
 from .library import SkillLibrary
 from .memory import MemoryItem, MemoryStore, Verification, compose_memory_prompt, canonical
-from .sft import SYSTEM, portable_messages, prepare_tools
+from .sft import SYSTEM, RESERVED, portable_messages, prepare_tools
 from testtime.native_calls import extract_final, strict_json
 
 
@@ -51,12 +51,15 @@ class ContextAgent:
         if set(self.handlers) - set(self.validators):
             raise ValueError('handler without declared tool schema')
         self.memory = MemoryStore(memory)
+        self.memory_turn = 0
         self.output_tokens, self.max_steps = output_tokens, max_steps
         self.max_refinements, self.top_k = max_refinements, top_k
         self.memory_placement = memory_placement
 
     def _tokens(self, messages):
         native = [{k:v for k,v in m.items() if k != 'loss'} for m in portable_messages(messages,self.tools)]
+        if any(RESERVED.search(m['content']) for m in native):
+            raise ValueError('reserved native delimiter in live content; supply a quoted safe representation')
         ids = self.backend.tokenizer.apply_chat_template(native, tools=[], tokenize=True,
             add_generation_prompt=True, enable_thinking=False)
         if hasattr(ids, 'get'):
@@ -73,12 +76,14 @@ class ContextAgent:
         skill_ids = self.skills or (['tool-selection-and-arguments','external-state-grounding']
                                    if self.tools else ['grounded-evidence-answer'])
         skill_text, skill_refs = self.library.render(skill_ids)
-        selected = self.memory.retrieve(question,turn=0,top_k=self.top_k)
+        base_turn = self.memory_turn
+        selected = self.memory.retrieve(question,turn=base_turn,top_k=self.top_k)
         messages = [{'role':'system','content':SYSTEM+'\n\nAPPLICABLE SKILLS:\n'+skill_text},
-                    {'role':'user','content':compose_memory_prompt(question,selected,turn=0,placement=self.memory_placement)}]
+                    {'role':'user','content':compose_memory_prompt(question,selected,turn=base_turn,placement=self.memory_placement)}]
         trace, seen_candidates, seen_ids = [], set(), set()
         refinements = 0
         def result(status, **extra):
+            self.memory_turn = max(self.memory_turn,base_turn+len(messages))
             return {'status':status,'trace':trace,'messages':messages,'skills':skill_refs,
                     'memory_ids':[m.id for m in selected],**extra}
         for step in range(self.max_steps):
@@ -104,6 +109,8 @@ class ContextAgent:
                     if not isinstance(call,dict):
                         return result('invalid_tool_action')
                     fn=call.get('function',call)
+                    if not isinstance(fn,dict):
+                        return result('invalid_tool_action')
                     name,args=fn.get('name'),fn.get('arguments')
                     if name not in self.validators or not isinstance(args,dict):
                         return result('invalid_tool_action')
@@ -114,6 +121,8 @@ class ContextAgent:
                         return result('invalid_call_identity')
                     seen_ids.add(cid)
                     normalized.append({'id':cid,'type':'function','function':{'name':name,'arguments':args}})
+                if RESERVED.search(canonical(normalized)):
+                    return result('unsupported_native_literal')
                 messages.append({'role':'assistant','content':prose,'tool_calls':normalized})
                 if any(c['function']['name'] not in self.handlers for c in normalized):
                     return result('awaiting_tool_execution',tool_calls=normalized)
@@ -128,10 +137,12 @@ class ContextAgent:
                         # Do not expose an arbitrary exception message containing
                         # credentials; the callback may return a deliberate public
                         # error object when detailed diagnostics are appropriate.
-                        content=canonical({'error':type(exc).__name__,'completed':False})
+                        content=canonical({'error':type(exc).__name__,'completion_status':'unknown'})
                     messages.append({'role':'tool','name':fn['name'],'tool_call_id':call['id'],'content':content})
-                    self.memory.add(MemoryItem('observation:'+call['id'],content,
-                        'registered_callback:'+fn['name'],len(messages)-1,'tool_observation','actual_callback_result'))
+                    self.memory_turn=base_turn+len(messages)-1
+                    remembered=canonical({'call':fn,'observation':content})
+                    self.memory.add(MemoryItem(f'observation:{base_turn}:'+call['id'],remembered,
+                        'registered_callback:'+fn['name'],self.memory_turn,'tool_observation','actual_callback_result'))
                 continue
             candidate_sha=hashlib.sha256(text.encode()).hexdigest()
             if candidate_sha in seen_candidates:

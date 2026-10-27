@@ -40,6 +40,23 @@ class SkillLibrary:
             raise ValueError('unknown skill: ' + str(name))
         return dict(self._skills[name])
 
+    def search(self, query, *, top_k=3):
+        """Input-only lexical retrieval; scores are not relevance probabilities."""
+        from testtime.retrieval import Document, LexicalIndex
+        if not isinstance(query,str) or not query.strip() or type(top_k) is not int or top_k<1:
+            raise ValueError('nonempty query and positive top_k required')
+        aliases={'coding':'code python function program implementation tests debugging',
+                 'agent':'tools function calling arguments action observation workflow',
+                 'math':'math arithmetic numbers quantities rates units calculation',
+                 'reading':'documents reading evidence retrieval sources passages memory',
+                 'science':'science experiment hypothesis evidence explanation',
+                 'writing':'writing text translation summarization revision'}
+        docs=[Document(name, ' '.join(str(value[k]) for k in ('description','use_when','procedure'))+
+                       ' '+aliases.get(value.get('scope'),''),value['source_sha256'],name.replace('-',' '))
+              for name,value in self._skills.items()]
+        return [{**self.get(d.id),'retrieval_score':score,'selection_basis':'query_only_lexical'}
+                for d,score in LexicalIndex(docs).search(query,top_k)]
+
     def render(self, names):
         parts, provenance = [], []
         for name in dict.fromkeys(names):

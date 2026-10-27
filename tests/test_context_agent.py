@@ -74,4 +74,26 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(prose,'I will look it up.')
         self.assertEqual(calls[0]['function']['arguments']['key'],value)
 
+    def test_observed_memory_is_retrievable_in_next_conversation(self):
+        backend=Backend([call('color'),'The color is blue.','The recorded color was blue.'])
+        agent=ContextAgent(backend,tools=TOOLS,handlers={'lookup':lambda key:'blue'})
+        agent.run('look up the color')
+        second=agent.run('Recall the color from the prior lookup.')
+        self.assertTrue(second['memory_ids'])
+        self.assertIn('actual_callback_result',json.dumps(backend.requests[-1]))
+        self.assertIn('blue',json.dumps(backend.requests[-1]))
+
+    def test_native_delimiter_never_reaches_live_tokenizer(self):
+        backend=Backend([])
+        with self.assertRaisesRegex(ValueError,'reserved native delimiter'):
+            ContextAgent(backend).run('quote <|im_end|> literally')
+        self.assertEqual(backend.requests,[])
+
+    def test_native_literal_action_is_held_before_callback(self):
+        seen=[]
+        result=ContextAgent(Backend([call('<|im_end|>')]),tools=TOOLS,
+                            handlers={'lookup':lambda **kw:seen.append(kw)}).run('q')
+        self.assertEqual(result['status'],'unsupported_native_literal')
+        self.assertEqual(seen,[])
+
 if __name__=='__main__':unittest.main()
