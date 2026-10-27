@@ -61,6 +61,9 @@ def main():
     db=sqlite3.connect(STATE/'selection.sqlite');db.row_factory=sqlite3.Row
     if db.execute("SELECT name FROM sqlite_master WHERE name='decisions'").fetchone():raise ValueError('partial finalization exists; inspect rather than overwrite')
     db.execute('ATTACH DATABASE ? AS candidates',(str(SCORE/'candidates.sqlite'),))
+    identity=json.loads((SCORE/'episode-identity-v1/summary.json').read_text())
+    if identity['status']!='COMPLETE' or not identity['all_original_candidates_covered']:raise ValueError('episode identity guard incomplete')
+    db.execute('ATTACH DATABASE ? AS identity',(str(SCORE/'episode-identity-v1/identity.sqlite'),))
     merge_decisions(db)
     parent={}
     def find(x):
@@ -88,7 +91,9 @@ def main():
     (STATE/'selected').mkdir(exist_ok=True)
     # Group ordering is stable and independent of model score or fold.
     for n,g in enumerate(db.execute('SELECT * FROM candidates.groups ORDER BY input_hash'),1):
-        pointers=list(db.execute('SELECT * FROM candidates.candidates WHERE input_hash=? ORDER BY candidate_identity',(g['input_hash'],)))
+        pointers=list(db.execute('SELECT c.* FROM candidates.candidates c WHERE input_hash=? AND NOT EXISTS(SELECT 1 FROM identity.holds h WHERE h.candidate_identity=c.candidate_identity) ORDER BY candidate_identity',(g['input_hash'],)))
+        counts['excluded_prefix_or_ambiguous_answers']+=g['candidates']-len(pointers)
+        if not pointers:counts['held_no_complete_unambiguous_answer']+=1;continue
         root=find('input:'+g['input_hash'])
         if root in conflicts:counts['held_frozen_fold_bridge']+=1;continue
         decision=None
@@ -97,7 +102,9 @@ def main():
             if decision['status']!='selected':counts['held_incomplete_score_group']+=1;continue
             conditions={strict_condition(load_candidate(p,files)) for p in pointers}
             if len(conditions)!=1:counts['held_actual_condition_bytes_differ']+=1;continue
-            pointer=next(p for p in pointers if p['candidate_identity']==decision['winner'])
+            eligible_scores=[json.loads(db.execute('SELECT score_json FROM scores WHERE candidate_identity=?',(p['candidate_identity'],)).fetchone()[0]) for p in pointers]
+            best=select_minimum_ppl(eligible_scores)
+            pointer=next(p for p in pointers if p['candidate_identity']==best['candidate_identity'])
         else:pointer=pointers[0]
         row=load_candidate(pointer,files)
         if row['record_id'] in selected:raise ValueError('duplicate selected record identity')
@@ -107,7 +114,7 @@ def main():
             row['family_id']=base.sha(root);row['split']='validation' if int(row['family_id'][:12],16)%100<2 else 'train'
         if decision:
             score=json.loads(db.execute('SELECT score_json FROM scores WHERE candidate_identity=?',(pointer['candidate_identity'],)).fetchone()[0])
-            row['source_refs']['answer_selection']={'method':'minimum_v26_conditional_answer_ppl','competitors':g['candidates'],
+            row['source_refs']['answer_selection']={'method':'minimum_v26_conditional_answer_ppl','competitors':len(pointers),'original_candidate_count':g['candidates'],
                 'input_hash':g['input_hash'],'protocol_sha256':score['protocol_sha256'],'mean_nll':score['mean_nll'],
                 'ppl':score['ppl'],'answer_tokens':score['answer_tokens'],'scoring_text_sha256':score['text_sha256'],
                 'model_revision':'67131067ff1825179d5e38e91d499159669e9c66','not_a_correctness_proof':True}
