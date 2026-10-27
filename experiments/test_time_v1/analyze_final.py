@@ -73,6 +73,9 @@ def main():
     for row in domains['tmmluplus']:
         mc[row['id']].append(row['correct'])
     diagnostics['knowledge'] = {'unique_questions': len(mc),
+        'attempts': len(domains['tmmluplus']),
+        'unparseable_final': sum(not r['letter_parseable'] for r in domains['tmmluplus']),
+        'valid_letter_but_wrong': sum(r['letter_parseable'] and not r['correct'] for r in domains['tmmluplus']),
         'all_three_wrong': sum(not any(v) for v in mc.values()),
         'some_but_not_all_correct': sum(any(v) and not all(v) for v in mc.values()),
         'all_three_correct': sum(all(v) for v in mc.values()),
