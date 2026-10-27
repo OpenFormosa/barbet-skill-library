@@ -94,7 +94,9 @@ def main():
         out+=table(jobs,[('GPU',lambda r:r['gpu']),('模型／設定',lambda r:r['model']+'/'+r['policy']),('seed',lambda r:r['seed']),('狀態',lambda r:r['status']),('啟動 UTC',lambda r:r.get('started_utc','—')),('結束 UTC',lambda r:r.get('finished_utc','—')),('log',lambda r:r.get('log','—'))])+'</details>'
     if comparisons:out+='<details><summary>所有配對 CI、每領域差距及驗收判定</summary>'+detail(comparisons)+'</details>'
     out+='<h2 id="search">開發搜尋與驗證</h2><section><h3>所有已完成開發候選</h3>'+runs(result.get('dev',[]))+cost_plot(result.get('dev',[]))+'</section><details><summary>單 seed 驗證，包含未通過的候選</summary>'+runs(result.get('validation',[]))+'</details><section><h3>三 seed 確認</h3>'+runs(result.get('validation_confirm',[]))+'</section><details open><summary>決策與停止原因</summary>'+detail(result.get('decisions',[]))+detail(result.get('stopping'))+'</details>'
-    out+='<h2 id="context">上下文長度、來源與位置</h2><section>'+context_panel(result.get('context'))+'</section><h2 id="failures">哪些能力仍不足</h2><section>'+detail(result.get('diagnostics','最終失敗分類尚未完成；開發觀察不冒充封存測試結論。'))+'</section>'
+    out+='<h2 id="context">上下文長度、來源與位置</h2><section>'+context_panel(result.get('context'))+'</section><h2 id="failures">哪些能力仍不足</h2><section>'+detail(result.get('diagnostics') or '最終失敗分類尚未完成；開發觀察不冒充封存測試結論。')+'</section>'
+    if result.get('code_budget'):
+        out+='<details><summary>程式：同一條軌跡在 1／2／3 次呼叫上限的結果與成本</summary>'+detail(result['code_budget'])+'</details>'
     out+='<h2 id="goal">完整 Goal 與可重現性</h2><details><summary>事先固定的目標、假設、比較、數量、預算與驗收門檻</summary>'+detail(goal)+'</details>'
     for name in ['amendments','policies','data_audit','model_integrity','data_environment']:
         p=HERE/(name+'.json')
