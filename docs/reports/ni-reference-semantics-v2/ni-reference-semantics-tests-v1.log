@@ -1,0 +1,9 @@
+test_background_examples_do_not_supply_missing_target_facts (tests.test_ni_reference_semantics.ReferenceSemanticsTest.test_background_examples_do_not_supply_missing_target_facts) ... ok
+test_complete_decomposition_or_paraphrase_versions_still_rank (tests.test_ni_reference_semantics.ReferenceSemanticsTest.test_complete_decomposition_or_paraphrase_versions_still_rank) ... ok
+test_official_ni_train_is_not_original_benchmark_split_proof (tests.test_ni_reference_semantics.ReferenceSemanticsTest.test_official_ni_train_is_not_original_benchmark_split_proof) ... ok
+test_required_entities_are_not_answer_versions (tests.test_ni_reference_semantics.ReferenceSemanticsTest.test_required_entities_are_not_answer_versions) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

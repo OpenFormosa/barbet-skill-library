@@ -1,0 +1,18 @@
+{
+  "version": "ni-reference-semantics-and-grounded-scope-v1",
+  "rule": "Multiple output strings are not automatically answer versions. Only explicitly reviewed task contracts may treat them as alternatives. Jointly required items, unresolved reference contracts and bare factual tasks remain held.",
+  "complete_alternative_task_ids": [1, 23, 24, 26, 60, 74, 75, 111, 1217, 1290, 1368, 1609, 168, 184, 275, 277, 278, 388, 389, 405, 413, 460, 461, 469, 565, 568, 668, 820, 821, 899, 900, 927, 928],
+  "additional_complete_alternative_files": ["task672_amazon_and_yelp_summarization_dataset_summarization.json"],
+  "joint_or_unresolved_reference_task_ids": [2, 28, 192, 390, 1518],
+  "joint_reference_reason": "Quoref contains separately stored required entity names; TORQUE and LIMIT require all events/entities but store individual items. DROP includes conflicting numeric alternatives and multi-span contracts. Hotpot supporting facts can be individual incomplete support sentences conditioned on a supplied answer. Entire cohorts are held pending source-specific complete-answer reconstruction and fresh quality gates; never select one item as the whole answer.",
+  "bare_fact_task_ids": [1293, 1359, 1360, 1431, 1564, 1565, 1656, 344],
+  "bare_fact_files": ["task672_nummersense.json"],
+  "bare_fact_reason": "Inspected contracts require factual trivia, missing-table HybridQA, clinical domain facts or numeric world facts, with no supporting evidence supplied for the target question. Different-input worked examples do not supply missing target facts. Exclude this cohort until actual query-only retrieval supplies evidence.",
+  "intentional_wrong_target_task_ids": [347],
+  "benchmark_source_name_markers": ["_mmmlu_", "_bigbench_", "_arc_", "_hellaswag_", "_xquad_", "_enhanced_wsc_", "_mwsc_", "_prost_", "_svamp_"],
+  "benchmark_scope_reason": "Conservative source-family exclusion for known benchmark batteries whose original train/evaluation provenance is not established by an NI training-task designation. This is additional to the existing local exact/13-gram overlap screen, not a claim of universal benchmark decontamination.",
+  "all_first_negative_reviews_remain_held": true,
+  "no_source_answers_rewritten_or_negative_reviews_replayed": true,
+  "whole_reference_lists_never_concatenated_without_a_source_specific_contract": true,
+  "retained_candidate_scores_and_inputs_unchanged": true
+}

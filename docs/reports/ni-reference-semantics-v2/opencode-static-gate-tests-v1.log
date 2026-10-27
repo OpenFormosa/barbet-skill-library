@@ -1,0 +1,8 @@
+test_every_python_block_is_inspected (tests.test_opencode_static_gate.StaticGateTest.test_every_python_block_is_inspected) ... ok
+test_incomplete_or_invalid_blocks_remain_held (tests.test_opencode_static_gate.StaticGateTest.test_incomplete_or_invalid_blocks_remain_held) ... ok
+test_source_statements_are_never_executed (tests.test_opencode_static_gate.StaticGateTest.test_source_statements_are_never_executed) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
