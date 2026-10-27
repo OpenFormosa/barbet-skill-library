@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-10-27T01:46:28.074661+00:00",
-  "status": "development_validation",
-  "test_status": "unopened",
+  "generated_utc": "2026-10-27T01:48:43.841518+00:00",
+  "status": "final_evaluation",
+  "test_status": "selection sealed",
   "decisions": [
     {
       "round": 0,
@@ -92,7 +92,171 @@
       ]
     }
   ],
-  "final_selection": null,
+  "final_selection": {
+    "created_utc": "2026-10-27T01:46:28.347300+00:00",
+    "git_sha": "f0edfe2ebad6069b11324d6197a6fd2f2942af73",
+    "runtime_hashes": {
+      "testtime/__init__.py": "82425d5e05c7e98ff3d1300ec90811384ee36ca8c9b0f5bc0574cb74ceeb41c0",
+      "testtime/_worker.py": "05fce1c8bbbf596079853c1f6efdb454d1a8692450794f4cca76ef0d0ac0a04b",
+      "testtime/contracts.py": "0d2a46917d15568215ab6273b09299827169447b07d1bff01d81ac69639565ad",
+      "testtime/execution.py": "dd8ff4354219615d8ad99331c789d3c415fb151592091e41e516f66b97ddab33",
+      "testtime/harness.py": "c455d062d24cd878bc848e957dd21c8fd8d5eccca7a23d9df7059952ddb9dc0a",
+      "testtime/native_calls.py": "b5ff5aa3f7e30fd925456724ae183e165d980a6695f3fd764e9c4aab673184b0",
+      "testtime/retrieval.py": "158f37d1afa067e96fce9cc6583b5784ba5e361c20443b1894fad7bce712c21f",
+      "testtime/state.py": "4c1aaf2ead225a3c3329f76305d468d39c6c795e584953ca1fd34c8ae39c2cb6",
+      "testtime/cards.json": "69aa80bac30780e62da5bea5c45f1ba5b39f05cdf2e545558a57d8ddd0673ff2",
+      "experiments/test_time_v1/run.py": "0936c3126c1e74e8d5491da4499c0df6dbaa1191d3b817048a13fb9e4ad45d67",
+      "experiments/test_time_v1/models.json": "38682dcffd5668f3efd3511ad2c16453b09b2b799fa0227ede657b963d1fff78",
+      "experiments/test_time_v1/model_integrity.json": "80008c1537346c440a5acfba94d7509f800c7beaa73f97b608581711c6a683c7"
+    },
+    "scorer_sha256": "2efa66852a98bc23856b07c5fcb0234f9bba83b4d4cfcdf0f103b83d66b2b989",
+    "comparison_script_sha256": "b4a000fbe6193a94ea6d8eb31dd09c6f53eafd4ea6ed51681f00ee3ca4e3c90b",
+    "goal_sha256": "18d6e482f2e44cb32e8ef724914d809ae15ba67d2d39af1b9c608ca3009fc8c0",
+    "input_sha256": "96bfee8d596d0b53bf90b05c5e57c3c4ab6b24db5fb45339686998677578612f",
+    "label_sha256": "a0512f3dadb410b744ec8489e961cb13d4615cb6ad56ea144915b447165587c2",
+    "corpus_sha256": "62332076c17f3a06d92b9c385ae8aa48614e6cf2bf51b65584dae08d3f5a9b66",
+    "policies": {
+      "bare": {},
+      "long": {
+        "output_tokens": 16384
+      },
+      "literal": {
+        "retrieval": true,
+        "skill": true,
+        "execute": true,
+        "repair": 2,
+        "compact": true,
+        "contract_overrides": {
+          "tool_call": {
+            "skill": false
+          },
+          "short_answer": {
+            "literal_answer": true
+          }
+        }
+      },
+      "no_card": {
+        "retrieval": true,
+        "skill": false,
+        "execute": true,
+        "repair": 2,
+        "compact": true,
+        "contract_overrides": {
+          "tool_call": {
+            "skill": false
+          },
+          "short_answer": {
+            "literal_answer": true
+          }
+        }
+      },
+      "no_rag": {
+        "retrieval": false,
+        "skill": true,
+        "execute": true,
+        "repair": 2,
+        "compact": true,
+        "contract_overrides": {
+          "tool_call": {
+            "skill": false
+          },
+          "short_answer": {
+            "literal_answer": true
+          }
+        },
+        "knowledge_retrieval": false
+      },
+      "no_feedback": {
+        "retrieval": true,
+        "skill": true,
+        "execute": false,
+        "repair": 0,
+        "compact": true,
+        "contract_overrides": {
+          "tool_call": {
+            "skill": false
+          },
+          "short_answer": {
+            "literal_answer": true
+          }
+        }
+      },
+      "self_review": {
+        "retrieval": true,
+        "skill": true,
+        "execute": false,
+        "repair": 0,
+        "compact": true,
+        "contract_overrides": {
+          "tool_call": {
+            "skill": false
+          },
+          "short_answer": {
+            "literal_answer": true
+          }
+        },
+        "self_revise": 2
+      }
+    },
+    "comparisons": [
+      [
+        "mini",
+        "bare"
+      ],
+      [
+        "mini",
+        "long"
+      ],
+      [
+        "mini",
+        "literal"
+      ],
+      [
+        "mini",
+        "no_card"
+      ],
+      [
+        "mini",
+        "no_rag"
+      ],
+      [
+        "mini",
+        "no_feedback"
+      ],
+      [
+        "mini",
+        "self_review"
+      ],
+      [
+        "qwen",
+        "bare"
+      ],
+      [
+        "qwen",
+        "long"
+      ],
+      [
+        "qwen",
+        "literal"
+      ]
+    ],
+    "seeds": [
+      20261027,
+      20261028,
+      20261029
+    ],
+    "serving": {
+      "batch_size": 128,
+      "max_seqs": 128,
+      "max_model_len": 49152,
+      "eager": true
+    },
+    "selection_reason": "18 searched policies exhausted. Three-seed validation promotes routed then literal; focus and knowledge fail the unchanged promotion gate. Final policies and controls cannot be selected or edited using the test.",
+    "policy_file_sha256": "5f8a689f508a4e014e683b55db389c06d5221dce7b7803437fc5814133c052be",
+    "stopping_rule": "Stop after the declared 18-policy search budget or three meaningfully different rounds without a promoted validation improvement. State budget-limited or local stopping as appropriate; do not assert no possible further progress.",
+    "validation_summary_sha256": "e361a43eacbde701559c6fdc16f713eff891fa2abc32b3a351f8bb23e7c1596a",
+    "no_post_test_policy_selection": true
+  },
   "comparisons": null,
   "diagnostics": null,
   "engineering": {
@@ -906,6 +1070,432 @@
       }
     }
   },
+  "job_chain": [
+    {
+      "model": "mini",
+      "policy": "bare",
+      "seed": 20261027,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 7
+    },
+    {
+      "model": "mini",
+      "policy": "bare",
+      "seed": 20261028,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 3
+    },
+    {
+      "model": "mini",
+      "policy": "bare",
+      "seed": 20261029,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 4
+    },
+    {
+      "model": "mini",
+      "policy": "long",
+      "seed": 20261027,
+      "weight": 7.199999999999999,
+      "status": "running",
+      "gpu": 3,
+      "started_utc": "2026-10-27T01:46:28.481493+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "long",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-long-20261027.log"
+    },
+    {
+      "model": "mini",
+      "policy": "long",
+      "seed": 20261028,
+      "weight": 7.199999999999999,
+      "status": "running",
+      "gpu": 4,
+      "started_utc": "2026-10-27T01:46:28.483026+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "long",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-long-20261028.log"
+    },
+    {
+      "model": "mini",
+      "policy": "long",
+      "seed": 20261029,
+      "weight": 7.199999999999999,
+      "status": "running",
+      "gpu": 5,
+      "started_utc": "2026-10-27T01:46:28.484718+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "long",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-long-20261029.log"
+    },
+    {
+      "model": "mini",
+      "policy": "literal",
+      "seed": 20261027,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 0
+    },
+    {
+      "model": "mini",
+      "policy": "literal",
+      "seed": 20261028,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 1
+    },
+    {
+      "model": "mini",
+      "policy": "literal",
+      "seed": 20261029,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 2
+    },
+    {
+      "model": "mini",
+      "policy": "no_card",
+      "seed": 20261027,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 5
+    },
+    {
+      "model": "mini",
+      "policy": "no_card",
+      "seed": 20261028,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 7
+    },
+    {
+      "model": "mini",
+      "policy": "no_card",
+      "seed": 20261029,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 6
+    },
+    {
+      "model": "mini",
+      "policy": "no_rag",
+      "seed": 20261027,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 1
+    },
+    {
+      "model": "mini",
+      "policy": "no_rag",
+      "seed": 20261028,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 2
+    },
+    {
+      "model": "mini",
+      "policy": "no_rag",
+      "seed": 20261029,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 5
+    },
+    {
+      "model": "mini",
+      "policy": "no_feedback",
+      "seed": 20261027,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 3
+    },
+    {
+      "model": "mini",
+      "policy": "no_feedback",
+      "seed": 20261028,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 4
+    },
+    {
+      "model": "mini",
+      "policy": "no_feedback",
+      "seed": 20261029,
+      "weight": 3.0,
+      "status": "pending",
+      "gpu": 0
+    },
+    {
+      "model": "mini",
+      "policy": "self_review",
+      "seed": 20261027,
+      "weight": 3.9000000000000004,
+      "status": "pending",
+      "gpu": 5
+    },
+    {
+      "model": "mini",
+      "policy": "self_review",
+      "seed": 20261028,
+      "weight": 3.9000000000000004,
+      "status": "pending",
+      "gpu": 5
+    },
+    {
+      "model": "mini",
+      "policy": "self_review",
+      "seed": 20261029,
+      "weight": 3.9000000000000004,
+      "status": "pending",
+      "gpu": 6
+    },
+    {
+      "model": "qwen",
+      "policy": "bare",
+      "seed": 20261027,
+      "weight": 6.0,
+      "status": "running",
+      "gpu": 6,
+      "started_utc": "2026-10-27T01:46:28.486029+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "bare",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-bare-20261027.log"
+    },
+    {
+      "model": "qwen",
+      "policy": "bare",
+      "seed": 20261028,
+      "weight": 6.0,
+      "status": "running",
+      "gpu": 7,
+      "started_utc": "2026-10-27T01:46:28.486590+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "bare",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-bare-20261028.log"
+    },
+    {
+      "model": "qwen",
+      "policy": "bare",
+      "seed": 20261029,
+      "weight": 6.0,
+      "status": "pending",
+      "gpu": 6
+    },
+    {
+      "model": "qwen",
+      "policy": "long",
+      "seed": 20261027,
+      "weight": 14.399999999999999,
+      "status": "running",
+      "gpu": 0,
+      "started_utc": "2026-10-27T01:46:28.476470+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "long",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-long-20261027.log"
+    },
+    {
+      "model": "qwen",
+      "policy": "long",
+      "seed": 20261028,
+      "weight": 14.399999999999999,
+      "status": "running",
+      "gpu": 1,
+      "started_utc": "2026-10-27T01:46:28.477895+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "long",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-long-20261028.log"
+    },
+    {
+      "model": "qwen",
+      "policy": "long",
+      "seed": 20261029,
+      "weight": 14.399999999999999,
+      "status": "running",
+      "gpu": 2,
+      "started_utc": "2026-10-27T01:46:28.479762+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "long",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-long-20261029.log"
+    },
+    {
+      "model": "qwen",
+      "policy": "literal",
+      "seed": 20261027,
+      "weight": 6.0,
+      "status": "pending",
+      "gpu": 7
+    },
+    {
+      "model": "qwen",
+      "policy": "literal",
+      "seed": 20261028,
+      "weight": 6.0,
+      "status": "pending",
+      "gpu": 3
+    },
+    {
+      "model": "qwen",
+      "policy": "literal",
+      "seed": 20261029,
+      "weight": 6.0,
+      "status": "pending",
+      "gpu": 4
+    }
+  ],
   "dev": [
     {
       "model": "mini",
