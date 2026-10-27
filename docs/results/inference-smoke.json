@@ -1,0 +1,393 @@
+{
+  "created_utc": "2026-10-27T03:27:38.340060+00:00",
+  "scope": "Application integration smoke checks on authored examples, not a benchmark or a claim of semantic correctness. Raw model outputs are retained below, including imperfect wording.",
+  "unit_tests": 80,
+  "skill_definitions": 64,
+  "compact_cards": 9,
+  "wheel_install": "Passed outside the source checkout: bundled skills, CLI, policy and actual isolated worker.",
+  "tokenizer_extra": "Passed in an isolated environment without torch or vllm; real local template preparation and real HTTP inference.",
+  "frozen_experiment_runtime_unchanged": true,
+  "fixtures_sha256": {
+    "examples/inference/documents.jsonl": "714bb985e2d1898f4c547a5f7858856d3fbeb32bb8b1bec772ea7d25696154fd",
+    "examples/inference/policy.json": "9c1214aba00111140436e1aeece2ff71b97cfe56e56b6d9501f3c55014df2d74",
+    "examples/inference/requests.jsonl": "29c34e0ff55eaaea2d1294c7ff3cdadb9b56a4ffbdc1d4797a78a036bd3f6c51"
+  },
+  "runs": [
+    {
+      "name": "mini_local",
+      "backend": {
+        "backend": "vllm",
+        "model": "/root/.cache/huggingface/hub/models--openbmb--MiniCPM5-1B/snapshots/87179e5c1f455ef22e6223592d2d61351b525bfc",
+        "revision": "87179e5c1f455ef22e6223592d2d61351b525bfc",
+        "max_model_len": 49152,
+        "dtype": "bfloat16",
+        "eager": true,
+        "tensor_parallel_size": 1,
+        "packages": {
+          "vllm": "0.23.0",
+          "transformers": "5.12.1",
+          "torch": "2.11.0"
+        }
+      },
+      "completed_requests": 5,
+      "recorded_calls": 5,
+      "result_sha256": "5eff6a991462ecd3ea3f3bbc282b75683931a38895a9851fe13fb59a43705de4",
+      "trace_sha256": "164fd471720d1518f492d002b8b6507c83b9766602918524433ad7eaabc5e23f",
+      "results": [
+        {
+          "id": "reading-example",
+          "prediction": "四十层",
+          "validation": {
+            "status": "not_checked",
+            "passed": null,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 326,
+          "output_tokens": 592
+        },
+        {
+          "id": "math-example",
+          "prediction": "####60",
+          "validation": {
+            "status": "format_valid",
+            "passed": true,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 111,
+          "output_tokens": 1192
+        },
+        {
+          "id": "code-example",
+          "prediction": "def clamp(value, lower, upper):\n    if value < lower:\n        return lower\n    elif value > upper:\n        return upper\n    else:\n        return value",
+          "validation": {
+            "status": "public_tests_passed",
+            "passed": true,
+            "receipt": {
+              "executor": "isolated_python_v1",
+              "artifact_sha256": "23278352c591901b7bef174cc60e3823b7629054055d0dd9d4ae541b2485ba39",
+              "checks_sha256": "473f3b6a3cd4baa6a2d80c22163686f4d0831832cf36524048d9ebc874fd9530",
+              "passed": true,
+              "status": "executed_checks_passed",
+              "answer": null,
+              "process_exit_code": 0,
+              "stdout": "",
+              "checks_run": 2,
+              "seconds": 0.05198833346366882
+            },
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 194,
+          "output_tokens": 584
+        },
+        {
+          "id": "tool-example",
+          "prediction": {
+            "name": "select_rows",
+            "arguments": {
+              "record_id": "案 Ａ-07",
+              "values": [
+                4,
+                9,
+                2
+              ],
+              "limit": 2
+            }
+          },
+          "validation": {
+            "status": "schema_valid",
+            "passed": true,
+            "errors": [],
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 310,
+          "output_tokens": 41
+        },
+        {
+          "id": "choice-example",
+          "prediction": "A",
+          "validation": {
+            "status": "format_valid",
+            "passed": true,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 136,
+          "output_tokens": 119
+        }
+      ]
+    },
+    {
+      "name": "mini_http",
+      "backend": {
+        "backend": "vllm_http",
+        "model": "/root/.cache/huggingface/hub/models--openbmb--MiniCPM5-1B/snapshots/87179e5c1f455ef22e6223592d2d61351b525bfc",
+        "revision": "87179e5c1f455ef22e6223592d2d61351b525bfc",
+        "max_model_len": 49152,
+        "base_url": "http://127.0.0.1:18041/v1",
+        "served_model": "mini",
+        "server_revision_verified": false
+      },
+      "completed_requests": 5,
+      "recorded_calls": 5,
+      "result_sha256": "cfae4198a9ad6a43d38b1f64e3aed89a7577e31d35f8eda95c3bb444e75c811d",
+      "trace_sha256": "d398b97573f898b0f7e4fc66357ea7569fc67c3f12c46df10c847e8d70d1f414",
+      "results": [
+        {
+          "id": "reading-example",
+          "prediction": "四十層",
+          "validation": {
+            "status": "not_checked",
+            "passed": null,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 326,
+          "output_tokens": 582
+        },
+        {
+          "id": "math-example",
+          "prediction": "#### 60",
+          "validation": {
+            "status": "format_valid",
+            "passed": true,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 111,
+          "output_tokens": 382
+        },
+        {
+          "id": "code-example",
+          "prediction": "def clamp(value, lower, upper):\n    if value < lower:\n        return lower\n    elif value > upper:\n        return upper\n    else:\n        return value",
+          "validation": {
+            "status": "public_tests_passed",
+            "passed": true,
+            "receipt": {
+              "executor": "isolated_python_v1",
+              "artifact_sha256": "23278352c591901b7bef174cc60e3823b7629054055d0dd9d4ae541b2485ba39",
+              "checks_sha256": "473f3b6a3cd4baa6a2d80c22163686f4d0831832cf36524048d9ebc874fd9530",
+              "passed": true,
+              "status": "executed_checks_passed",
+              "answer": null,
+              "process_exit_code": 0,
+              "stdout": "",
+              "checks_run": 2,
+              "seconds": 0.058743417263031006
+            },
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 194,
+          "output_tokens": 469
+        },
+        {
+          "id": "tool-example",
+          "prediction": {
+            "name": "select_rows",
+            "arguments": {
+              "record_id": "案 Ａ-07",
+              "values": [
+                4,
+                9,
+                2
+              ],
+              "limit": 2
+            }
+          },
+          "validation": {
+            "status": "schema_valid",
+            "passed": true,
+            "errors": [],
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 310,
+          "output_tokens": 41
+        },
+        {
+          "id": "choice-example",
+          "prediction": "A",
+          "validation": {
+            "status": "format_valid",
+            "passed": true,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 136,
+          "output_tokens": 119
+        }
+      ]
+    },
+    {
+      "name": "qwen_local",
+      "backend": {
+        "backend": "vllm",
+        "model": "/root/.cache/huggingface/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "max_model_len": 49152,
+        "dtype": "bfloat16",
+        "eager": true,
+        "tensor_parallel_size": 1,
+        "packages": {
+          "vllm": "0.23.0",
+          "transformers": "5.12.1",
+          "torch": "2.11.0"
+        }
+      },
+      "completed_requests": 5,
+      "recorded_calls": 5,
+      "result_sha256": "a8b45ddfc0b0730b249b51c4eef7cbc66c06ca71b685083ae5d97db44509b184",
+      "trace_sha256": "086eb1059e5d359812c789c78593a5fb9cbdca236ec1f750696432bc733be1e7",
+      "results": [
+        {
+          "id": "reading-example",
+          "prediction": "四十層",
+          "validation": {
+            "status": "not_checked",
+            "passed": null,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 349,
+          "output_tokens": 4096
+        },
+        {
+          "id": "math-example",
+          "prediction": "計算步驟如下：\n\n1.  **計算購買筆記本的總金額**：\n    $35 \\text{ 元/本} \\times 4 \\text{ 本} = 140 \\text{ 元}$\n\n2.  **計算應找回的金額**：\n    $200 \\text{ 元（付款）} - 140 \\text{ 元（總價）} = 60 \\text{ 元}$\n\n#### 60",
+          "validation": {
+            "status": "format_valid",
+            "passed": true,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 115,
+          "output_tokens": 727
+        },
+        {
+          "id": "code-example",
+          "prediction": "def clamp(value, lower, upper):\n    if value < lower:\n        return lower\n    elif value > upper:\n        return upper\n    else:\n        return value\n\nassert clamp(-2, 0, 10) == 0\nassert clamp(15, 0, 10) == 10",
+          "validation": {
+            "status": "public_tests_passed",
+            "passed": true,
+            "receipt": {
+              "executor": "isolated_python_v1",
+              "artifact_sha256": "88ddb3dd35135f68efd3e0a51dce182ead73aead7f6b96397dc328c52384a1aa",
+              "checks_sha256": "473f3b6a3cd4baa6a2d80c22163686f4d0831832cf36524048d9ebc874fd9530",
+              "passed": true,
+              "status": "executed_checks_passed",
+              "answer": null,
+              "process_exit_code": 0,
+              "stdout": "",
+              "checks_run": 2,
+              "seconds": 0.05802951008081436
+            },
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 194,
+          "output_tokens": 2819
+        },
+        {
+          "id": "tool-example",
+          "prediction": {
+            "name": "select_rows",
+            "arguments": {
+              "record_id": "案 A-07",
+              "values": [
+                4,
+                9,
+                2
+              ],
+              "limit": 2
+            }
+          },
+          "validation": {
+            "status": "schema_valid",
+            "passed": true,
+            "errors": [],
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 375,
+          "output_tokens": 64
+        },
+        {
+          "id": "choice-example",
+          "prediction": "A",
+          "validation": {
+            "status": "format_valid",
+            "passed": true,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 114,
+          "output_tokens": 628
+        }
+      ]
+    },
+    {
+      "name": "mini_http_without_torch_full_skill",
+      "backend": {
+        "backend": "vllm_http",
+        "model": "/root/.cache/huggingface/hub/models--openbmb--MiniCPM5-1B/snapshots/87179e5c1f455ef22e6223592d2d61351b525bfc",
+        "revision": "87179e5c1f455ef22e6223592d2d61351b525bfc",
+        "max_model_len": 49152,
+        "base_url": "http://127.0.0.1:18041/v1",
+        "served_model": "mini",
+        "server_revision_verified": false
+      },
+      "completed_requests": 1,
+      "recorded_calls": 1,
+      "result_sha256": "095c2cbccae6869759a123db159a0b81266a19c6debd53c9a86e8dbf11b87315",
+      "trace_sha256": "a1f4a5e22baeff8ddb3bc940f642fec6f1b47e8f8d35e078cf40f313e4ba8f8e",
+      "results": [
+        {
+          "id": "request-1",
+          "prediction": "#### 36.",
+          "validation": {
+            "status": "format_valid",
+            "passed": true,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 473,
+          "output_tokens": 67
+        }
+      ]
+    },
+    {
+      "name": "mini_http_free_text_full_skill",
+      "backend": {
+        "backend": "vllm_http",
+        "model": "/root/.cache/huggingface/hub/models--openbmb--MiniCPM5-1B/snapshots/87179e5c1f455ef22e6223592d2d61351b525bfc",
+        "revision": "87179e5c1f455ef22e6223592d2d61351b525bfc",
+        "max_model_len": 49152,
+        "base_url": "http://127.0.0.1:18041/v1",
+        "served_model": "mini",
+        "server_revision_verified": false
+      },
+      "completed_requests": 1,
+      "recorded_calls": 1,
+      "result_sha256": "71e06e835337dbb03a7a3cb7ead536a4b25a57415d0a24087f341fac2cac7908",
+      "trace_sha256": "3dbc204caf0f6390ffba503be6bf7a5a0f8b784bd938ce7e3048f504f7288542",
+      "results": [
+        {
+          "id": "request-1",
+          "prediction": "勵點擊鏈接，專憑獲更多內容。",
+          "validation": {
+            "status": "not_checked",
+            "passed": null,
+            "semantic_correctness": "unknown"
+          },
+          "calls": 1,
+          "prompt_tokens": 508,
+          "output_tokens": 582
+        }
+      ]
+    }
+  ]
+}
