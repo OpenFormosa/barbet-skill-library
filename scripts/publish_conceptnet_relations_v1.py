@@ -18,6 +18,7 @@ from scripts.package_conceptnet_relations_v1 import STATE as SELECTED,PUBLIC,SOU
 from scripts import normalize_conceptnet_relations_v1 as normalizer
 from scripts.index_conceptnet_relations_v1 import STATE as SCORE
 from scripts.render_memory_harness_card_v3 import render
+from scripts.conceptnet_source_notices_v1 import write_notices
 
 STATE=SELECTED/'cumulative-publication-v1'
 DEST=base.WORK/'exports/memory-harness-v2-cumulative-0010'
@@ -114,6 +115,7 @@ ConceptNet attribution, every assertion URI, source dataset, contributing source
 
 Adaptations: one deterministic bounded relation query per base concept, one fixed front/back/tool placement, exact set/count targets, independent SQLite recomputation, actual registered read-only tool observations, skill instructions and assistant-only native token labels. Multiple qualified URI variants of one base concept do not create additional independent questions. No downloaded programs were executed; no teacher-generated answer prose or invented PPL scores were added. Source assertions are evidence within a finite provided snapshot, not independently verified world truth.
 '''
+    notice+=write_notices(DEST,folder)
     (DEST/'NOTICE.md').write_text((PARENT_DEST/'NOTICE.md').read_text()+notice)
     note=f'''This addition contains **{new['counts']['accepted']:,}** independently checked lexical-memory queries. The complete original dump contains 34,074,917 source rows. The prospective Wiktionary/WordNet scope retains 2,847,001 assertions. Its 1,303,855 subject URIs collapse into 871,550 base concepts, avoiding 432,305 additional URI-variant views. Complete construction excluded 283 anchors above adjacency budgets and all seven first non-ACCEPT anchors, leaving 871,260 candidates. All 488,568 recorded tool observations were restored from portable facts. The complete candidate index found no alternative-answer groups; retained singletons are explicitly unscored.
 
