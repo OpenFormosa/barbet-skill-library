@@ -1,0 +1,20 @@
+{
+  "version": "memory-harness-sft-v2-scale-10m-resources-v2",
+  "supersedes_resources_for_unstarted_cohorts_only": "memory_sft_v2_scale_10m.json",
+  "target_accepted_new_episodes": 10000000,
+  "user_authorization": "Expand compliant new data to 10M episodes, retain all answer alternatives for frozen v26 selection, and publish to the authorized HF dataset.",
+  "reason": "Keep immutable prior evidence while adding complete candidate alternatives and exact token arrays. Raise only the prospective processed-storage cap by 64 GiB; record actual disk usage before each new stage and retain the 100 GiB free-disk floor. This does not increase download, worker, model-training or paid-compute scope.",
+  "resources": {
+    "new_raw_cache_cap_bytes": 137438953472,
+    "new_processed_cap_bytes": 618475290624,
+    "minimum_free_disk_bytes": 107374182400,
+    "bounded_source_streaming_allowed": true,
+    "raw_eviction": "Only new source-cache files with pinned upstream revision, full-file hash, completed derived export verification and explicit receipt; never delete historical evidence or unverified source bytes.",
+    "max_cpu_workers": 32,
+    "teacher_workers": 2,
+    "publisher_workers": 1,
+    "no_model_training": true,
+    "no_paid_compute": true
+  },
+  "unchanged": ["all quality gates", "no truncated text", "native v26 minimum conditional answer PPL", "all first holds", "old frozen resource policies and artifacts"]
+}
