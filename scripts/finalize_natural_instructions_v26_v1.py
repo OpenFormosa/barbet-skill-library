@@ -49,13 +49,25 @@ def finalize():
     if not frozen['all_candidate_aliases_included'] or not frozen['all_ancestral_folds_preserved']:
         raise ValueError('incomplete prior fold coverage')
     path, holds = example_holds()
+    example_count = len(holds)
+    db = sqlite3.connect(f'file:{SCORE / "candidates.sqlite"}?mode=ro', uri=True)
+    aliases = [{'query_hash': q, 'complete_inputs': n, 'answers': a} for q, n, a in db.execute(
+        'SELECT query_hash,COUNT(DISTINCT input_hash),COUNT(*) FROM candidates GROUP BY query_hash HAVING COUNT(DISTINCT input_hash)>1')]
+    db.close()
+    holds.update(('allenai/natural-instructions', r['query_hash']) for r in aliases)
+    STATE.mkdir(exist_ok=True)
+    combined = STATE / 'additional-quality-holds-v1.json'
+    base.save(combined, {'worked_example_receipt_sha256': base.file_sha(path),
+        'condition_alias_queries': aliases, 'rule': 'Do not count case/space variants with unequal literal conditions as separate tasks or compare their PPL as if conditioned identically.',
+        'held_source_queries': sorted(holds), 'all_original_candidate_files_and_scores_preserved': True})
     from scripts import finalize_v26_answer_selection as selector
     selector.SCORE = SCORE; selector.STATE = STATE; selector.OUT = OUT; selector.SECOND = FROZEN
-    selector.EXTRA_SOURCE_QUERY_HOLDS = holds; selector.EXTRA_SOURCE_QUERY_HOLD_RECEIPT = path
+    selector.EXTRA_SOURCE_QUERY_HOLDS = holds; selector.EXTRA_SOURCE_QUERY_HOLD_RECEIPT = combined
     selector.main()
     base.save(STATE / 'release-scope.json', {
         'scope': 'New NI wave only. Append to the verified v26 release after new compilation, first-winner diagnosis and public packaging.',
-        'worked_example_target_query_holds': len(holds), 'frozen_prior_summary_sha256': base.file_sha(FROZEN / 'summary.json'),
+        'worked_example_target_query_holds': example_count, 'unequal_condition_alias_query_holds': len(aliases),
+        'frozen_prior_summary_sha256': base.file_sha(FROZEN / 'summary.json'),
         'first_source_diagnosis_sha256': base.file_sha(SOURCE / 'semantic-audit-v1/summary.json'),
         'normalization_policy_sha256': base.file_sha(SOURCE / 'full-normalization-policy-v2.json'),
         'all_alternative_minima_recomputed': True, 'not_yet_published': True, 'weights_trained': False})

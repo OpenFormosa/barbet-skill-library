@@ -1,0 +1,23 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>同題格式變體隔離</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>同題格式變體：發布前隔離</h1><p>最後檢查發現 OpenOrca 與 Orca-Math 中有 7,757 個正規化後相同的單回合題目，卻保留了 15,529 個不同完整輸入視圖。直接檢查的例子只差題目前後空白、內部空白、換行或大小寫。原先每個完整輸入各自選出的最低 PPL，不能再跨不同輸入直接比較。</p><p>這些題目先整組隔離，沒有依資料來源順序選答案，也沒有把空白版本當新題目。它們是等待共同輸入政策的格式歧義，不是新的語意失敗。未來若能證明正規化不改變題意，必須在共同完整輸入下重新量測所有合格答案；原有首票語意失敗仍維持隔離。</p><p>原先 2,742,182 筆本機通過檢查的封裝尚未發布，完整檔案仍保存。新的過濾結果預期為 2,726,653 筆，須完成所有保留值、兩套完整 token/labels 陣列、推論預算證明與家族切分檢查後才發布。</p><p>提供不同文件、工具規格或後續回合的真正不同任務條件不套用這個單回合來源規則。後續仍分別報告軌跡數、不同首題與保守家族數，沒有訓練權重或測得能力提升。</p><pre>{
+  &quot;phase&quot;: &quot;FILTERING_BEFORE_PUBLICATION&quot;,
+  &quot;held_normalized_queries&quot;: 7757,
+  &quot;held_selected_views&quot;: 15529,
+  &quot;cohorts&quot;: {
+    &quot;Open-Orca/OpenOrca&quot;: {
+      &quot;queries&quot;: 6204,
+      &quot;selected_views&quot;: 12423
+    },
+    &quot;microsoft/orca-math-word-problems-200k&quot;: {
+      &quot;queries&quot;: 1553,
+      &quot;selected_views&quot;: 3106
+    }
+  },
+  &quot;prior_local_verified_rows&quot;: 2742182,
+  &quot;expected_retained_rows&quot;: 2726653,
+  &quot;actual_retained_release_verification_complete&quot;: false,
+  &quot;original_compact_payload_published&quot;: false,
+  &quot;original_compact_payload_preserved&quot;: true,
+  &quot;minimum_ppl_only_compares_identical_conditions&quot;: true,
+  &quot;model_weights_trained&quot;: false,
+  &quot;tests_passed&quot;: 2
+}</pre></html>

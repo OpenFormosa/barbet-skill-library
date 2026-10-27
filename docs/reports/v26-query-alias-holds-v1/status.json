@@ -1,0 +1,23 @@
+{
+  "phase": "FILTERING_BEFORE_PUBLICATION",
+  "held_normalized_queries": 7757,
+  "held_selected_views": 15529,
+  "cohorts": {
+    "Open-Orca/OpenOrca": {
+      "queries": 6204,
+      "selected_views": 12423
+    },
+    "microsoft/orca-math-word-problems-200k": {
+      "queries": 1553,
+      "selected_views": 3106
+    }
+  },
+  "prior_local_verified_rows": 2742182,
+  "expected_retained_rows": 2726653,
+  "actual_retained_release_verification_complete": false,
+  "original_compact_payload_published": false,
+  "original_compact_payload_preserved": true,
+  "minimum_ppl_only_compares_identical_conditions": true,
+  "model_weights_trained": false,
+  "tests_passed": 2
+}

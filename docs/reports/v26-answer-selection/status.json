@@ -1,5 +1,5 @@
 {
-  "phase": "SCORED_COMPILED_FIRST_DIAGNOSIS_COMPLETE_PACKAGING",
+  "phase": "ADDITIONAL_SINGLE_TURN_ALIAS_HOLD_BEFORE_PUBLICATION",
   "target_accepted_episodes": 10000000,
   "goal_complete": false,
   "candidate_index": {
@@ -173,5 +173,10 @@
     "source_programs_executed": false,
     "existing_first_negative_holds_preserved": true
   },
-  "public_release_status": "Wave 1 remains public; this PPL-selected replacement has not been published."
+  "public_release_status": "Wave 1 remains public; this PPL-selected replacement has not been published.",
+  "single_turn_alias_holds": {
+    "queries": 7757,
+    "selected_views": 15529,
+    "prior_local_payload_not_published": true
+  }
 }
