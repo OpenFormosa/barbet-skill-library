@@ -1,0 +1,15 @@
+{
+  "driver_sha256": "1868931d5e084c6f450f79b3b2285188816d8dafe4fd8f01cb404c7ba66190d4",
+  "bounded_transport_sha256": "ae00f8862eae111773ff1f3d1b2f9b568be46e9a02843d367ae9cc72c9205663",
+  "data_commit": "7c6d9a992afee7939ce9246ac091bdc0308b223b",
+  "plan_sha256": "6ccf16addd84b5281fcf0513867a2f304480fbc038bdbd9fd87ff4443f669f99",
+  "http_workers": 16,
+  "max_attempts_per_file": 3,
+  "per_attempt_wall_limit_seconds": 180,
+  "socket_read_timeout_seconds": 30,
+  "chunk_bytes": 65536,
+  "anonymous": true,
+  "all_manifest_files_downloaded_and_SHA256_checked": true,
+  "no_prior_revision_receipts_substituted": true,
+  "model_requests": 0
+}

@@ -190,6 +190,7 @@ request = prepare_dataset_request(
 
 # 僅用於具有 registered_relation_snapshot 的關係記憶資料。
 memory = restore_relational_memory(row)
+# 工具呼叫示例需選取有宣告 relation_lookup schema 的 tool_use 資料列。
 handlers = relation_tool_callbacks(row)
 ```
 
@@ -200,6 +201,7 @@ handlers = relation_tool_callbacks(row)
 `restore_relational_memory` 核對 snapshot 雜湊及有界 facts。
 `relation_tool_callbacks` 只提供 `relation_lookup`，由應用程式明確註冊到
 `ContextAgent` 的 `handlers`，並提供該筆資料的對應 `tools` schema。
+reading 列已在上下文提供 facts，可單獨使用 `memory.verify`；它沒有宣告工具 schema 時，不應把 callback 加入工具呼叫介面。
 文件內的工具名稱不會自動變成可執行函式。查詢保留方向、完整 URI 與不同終點語意；
 超過預算會報錯，不會回傳裁切後的部分結果。查不到只表示此有限資料沒有匹配紀錄。
 
