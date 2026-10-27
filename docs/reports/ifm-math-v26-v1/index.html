@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM 數學 v26 標準答案</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM 數學：保留同題候選供 v26 比較</h1><p>完整讀取七個已下載數學來源檔案，共 356,955 列，保留 339,279 個候選答案，尚未計入有效訓練資料。high、medium、low effort 不是獨立題目；不得以來源順序或多數決預選答案。只有完整條件相同、通過品質門檻的候選，才能用固定原生 v26 的答案 token 條件 PPL 選最低者，包含 assistant EOS，排除 prompt 與 observation loss；單一候選另標示沒有比較 PPL。</p><p>排除需要未提供圖形 11,527 列、既有來源問題 5,490 列、首次非通過或已知錯誤問題 16 列、同一正規化問題卻有不同字面輸入 542 列、評測重疊 71 列、特殊分隔符 30 列。圖形關鍵字門檻刻意保守，並不宣稱每一列一定缺圖。不同答案仍需完整 PPL、跨版本任務身份與訓練／驗證集合檢查。</p><p>來源首次診斷數學 18 題有 8 ACCEPT、1 REVISE、9 HOLD；HOLD 是審核輸出未完成，不能當作答案錯誤率。整組 IFM 54 題所有首次非通過問題皆保留隔離，沒有重新評審來求通過。首次來源診斷不等於全資料語義正確保證；此波候選標為來源回應經結構檢查，未經本地逐筆語義驗證。</p><p>記憶只包含使用者原始數學條件，不將教師的 think 或答案放進上下文。完整保留答案作為受監督輸出，沒有執行來源程式或訓練權重。三個轉換回歸測試確認：同題不同答案仍可比較、字面條件不同會隔離、所有首次非通過必須找得到對應問題。</p><p><a href="https://huggingface.co/datasets/IFM/TxT360-3efforts/tree/bfc4a082d11967cd7810fe0b773be87bf54fb32e">固定 IFM 修訂</a>；CC-BY-4.0。來源未提供逐列原始資料集名稱，不補造歸屬。目標仍是至少一千萬筆符合準則的新資料，無模型能力提升結論。</p><p>實際評分已完成：339,195 個不同候選答案、313,153 個完整輸入，24,933 組共 50,975 個候選答案全部取得真實原生 v26 分數；尚待獨立核算最低值、完整編譯、首次選取答案診斷與發布。</p><p>第一個啟動程式因誤帶審核專用 jsonschema 相依套件，八個工作程序都在載入模型及建立分數之前失敗。保留原始失敗後，前瞻新增只匯入原始 scorer 的獨立啟動程式，未修改 Python 套件、原始 scorer、候選檔或數值配方。後續數學首次審核使用 8,192 輸出 token 預算，避免沿用先前不足的 2,048 配額；所有舊 HOLD 仍隔離，不重跑。</p><pre>{
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM 數學 v26 標準答案</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM 數學：保留同題候選供 v26 比較</h1><p>完整讀取七個已下載數學來源檔案，共 356,955 列，保留 339,279 個候選答案，尚未計入有效訓練資料。high、medium、low effort 不是獨立題目；不得以來源順序或多數決預選答案。只有完整條件相同、通過品質門檻的候選，才能用固定原生 v26 的答案 token 條件 PPL 選最低者，包含 assistant EOS，排除 prompt 與 observation loss；單一候選另標示沒有比較 PPL。</p><p>排除需要未提供圖形 11,527 列、既有來源問題 5,490 列、首次非通過或已知錯誤問題 16 列、同一正規化問題卻有不同字面輸入 542 列、評測重疊 71 列、特殊分隔符 30 列。圖形關鍵字門檻刻意保守，並不宣稱每一列一定缺圖。不同答案仍需完整 PPL、跨版本任務身份與訓練／驗證集合檢查。</p><p>來源首次診斷數學 18 題有 8 ACCEPT、1 REVISE、9 HOLD；HOLD 是審核輸出未完成，不能當作答案錯誤率。整組 IFM 54 題所有首次非通過問題皆保留隔離，沒有重新評審來求通過。首次來源診斷不等於全資料語義正確保證；此波候選標為來源回應經結構檢查，未經本地逐筆語義驗證。</p><p>記憶只包含使用者原始數學條件，不將教師的 think 或答案放進上下文。完整保留答案作為受監督輸出，沒有執行來源程式或訓練權重。三個轉換回歸測試確認：同題不同答案仍可比較、字面條件不同會隔離、所有首次非通過必須找得到對應問題。</p><p><a href="https://huggingface.co/datasets/IFM/TxT360-3efforts/tree/bfc4a082d11967cd7810fe0b773be87bf54fb32e">固定 IFM 修訂</a>；CC-BY-4.0。來源未提供逐列原始資料集名稱，不補造歸屬。目標仍是至少一千萬筆符合準則的新資料，無模型能力提升結論。</p><p>實際評分已完成：339,195 個不同候選答案、313,153 個完整輸入，24,933 組共 50,975 個候選答案全部取得真實原生 v26 分數；尚待獨立核算最低值、完整編譯、首次選取答案診斷與發布。</p><p>第一個啟動程式因誤帶審核專用 jsonschema 相依套件，八個工作程序都在載入模型及建立分數之前失敗。保留原始失敗後，前瞻新增只匯入原始 scorer 的獨立啟動程式，未修改 Python 套件、原始 scorer、候選檔或數值配方。後續數學首次審核使用 8,192 輸出 token 預算，避免沿用先前不足的 2,048 配額；所有舊 HOLD 仍隔離，不重跑。</p><p>追加讀取全部 313,153 個選取題目後，隔離 191 個未提供字詞證據的填字題，以及 1 個買羊條件矛盾題。後者的原文條件是 price = 5n − 45 = 7n + 3，因此 n = −24；來源選取答案 12 不能成立。不修改題意，也不拿第二名答案替補。</p><p>高 PPL 亦不表示答案錯誤：(-2)^3 − (-3)^2 = −17 的 PPL 約 147.96，但精確算術正確。新增的有理數檢查器不使用 eval，不執行來源程式，僅覆蓋完整、明確的單一整數計算語法。本波只有 3 題在該範圍內且通過；其餘仍未經此精確驗算，不能宣稱全數學資料已驗證。</p><p>24,933 組比較的選取答案 PPL 中位數為 3.368，第一、二名平均 NLL 差中位數 0.1043；14 組小於 1e−4，沒有精確平手。選取答案平均 948.4 target tokens，所有候選平均 903.8；15,367 組選到最長答案、9,327 組選到最短答案，含部分等長重疊。因此 PPL 規則並不是挑最短答案；這些統計不構成正確率或訓練收益證據。</p><pre>{
   &quot;counts&quot;: {
     &quot;raw_rows_seen&quot;: 356955,
     &quot;candidate_answers&quot;: 339279,
@@ -30,7 +30,7 @@
   &quot;unequal_literal_query_holds&quot;: 253,
   &quot;all_effort_versions_retained_for_v26&quot;: true,
   &quot;phase&quot;: &quot;all_v26_scores_complete_selection_and_export_in_progress&quot;,
-  &quot;updated_at&quot;: &quot;2026-10-27T15:49:01.229628+00:00&quot;,
+  &quot;updated_at&quot;: &quot;2026-10-27T16:17:58.464019+00:00&quot;,
   &quot;goal_complete&quot;: false,
   &quot;candidate_index&quot;: {
     &quot;counts&quot;: {
@@ -48,5 +48,116 @@
   &quot;actual_scored_answers&quot;: 50975,
   &quot;all_competing_groups_completed&quot;: true,
   &quot;initial_import_failure_before_any_score&quot;: true,
-  &quot;runtime_dependencies_modified&quot;: false
+  &quot;runtime_dependencies_modified&quot;: false,
+  &quot;additional_source_scope&quot;: {
+    &quot;counts&quot;: {
+      &quot;selected_rows_seen&quot;: 313153,
+      &quot;arithmetic:outside_scope&quot;: 313150,
+      &quot;held:crossword_external_lexical_knowledge_outside_math_memory_scope&quot;: 191,
+      &quot;held:independently_proven_inconsistent_positive_people_conditions&quot;: 1,
+      &quot;arithmetic:verified&quot;: 3
+    },
+    &quot;held_queries&quot;: 192,
+    &quot;all_selected_source_questions_checked&quot;: true,
+    &quot;policy_sha256&quot;: &quot;e14a672121963369bee6dc38e170b6d764161ccf207eea224b9992cbd285b428&quot;,
+    &quot;query_holds_sha256&quot;: &quot;9036c55f338bccb50af4f5efcf83d681f3637f260eef38e14fa54c7061ed900f&quot;,
+    &quot;arithmetic_proofs_sha256&quot;: &quot;c2d872de8636b2fa9a290d8e2d3bf1e30c7460b83762c6ecefaf91fd1653f952&quot;,
+    &quot;all_other_answers_and_ppl_scores_unchanged&quot;: true,
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;model_requests&quot;: 0,
+    &quot;all_records_semantically_verified&quot;: false
+  },
+  &quot;ppl_diagnostics&quot;: {
+    &quot;counts&quot;: {
+      &quot;groups:selected&quot;: 24933,
+      &quot;alternatives_scored&quot;: 50975,
+      &quot;winner_is_a_shortest_answer&quot;: 9327,
+      &quot;winner_is_a_longest_answer&quot;: 15367,
+      &quot;all_answer_lengths_equal&quot;: 94,
+      &quot;exact_nll_tie&quot;: 0,
+      &quot;nll_margin_below_1e-4&quot;: 14
+    },
+    &quot;runner_up_minus_winner_mean_nll&quot;: {
+      &quot;minimum&quot;: 3.491860561366522e-06,
+      &quot;p25&quot;: 0.0471948776268063,
+      &quot;median&quot;: 0.10426187167544088,
+      &quot;p75&quot;: 0.1888529810029933,
+      &quot;p95&quot;: 0.4405710943572396,
+      &quot;maximum&quot;: 8.39389332376073
+    },
+    &quot;winner_answer_tokens&quot;: {
+      &quot;minimum&quot;: 2,
+      &quot;p25&quot;: 445,
+      &quot;median&quot;: 830,
+      &quot;p75&quot;: 1297,
+      &quot;p95&quot;: 2127,
+      &quot;maximum&quot;: 12911
+    },
+    &quot;all_alternative_answer_tokens&quot;: {
+      &quot;minimum&quot;: 2,
+      &quot;p25&quot;: 408,
+      &quot;median&quot;: 791,
+      &quot;p75&quot;: 1257,
+      &quot;p95&quot;: 2048,
+      &quot;maximum&quot;: 12911
+    },
+    &quot;winner_ppl&quot;: {
+      &quot;minimum&quot;: 1.0309982845320902,
+      &quot;p25&quot;: 3.0273411027948467,
+      &quot;median&quot;: 3.367957678794809,
+      &quot;p75&quot;: 3.73191685931592,
+      &quot;p95&quot;: 4.416784985651314,
+      &quot;maximum&quot;: 296.10646833481144
+    },
+    &quot;winner_tokens_over_group_mean_tokens&quot;: {
+      &quot;minimum&quot;: 0.030949839914621132,
+      &quot;p25&quot;: 0.952808988764045,
+      &quot;median&quot;: 1.040232268768146,
+      &quot;p75&quot;: 1.1402288534888938,
+      &quot;p95&quot;: 1.4092284417549168,
+      &quot;maximum&quot;: 2.9229781771501924
+    },
+    &quot;average_winner_answer_tokens&quot;: 948.4129065896603,
+    &quot;average_alternative_answer_tokens&quot;: 903.7887788131437,
+    &quot;scoring_database_bindings&quot;: [
+      {
+        &quot;bucket&quot;: 0,
+        &quot;sha256&quot;: &quot;41419364765f72ef1fdcb2cabd47aa5b7e16ee8222ee50323d2c9d619773d7c2&quot;
+      },
+      {
+        &quot;bucket&quot;: 1,
+        &quot;sha256&quot;: &quot;bc0e116998c4ecc4a7374d3b504a1b3cdb16256575811b6a0ba39401d98658f6&quot;
+      },
+      {
+        &quot;bucket&quot;: 2,
+        &quot;sha256&quot;: &quot;f49f31b579dae8e4c18232c2d83c822ea281e60bb56a6336c7796de21a3a6ae3&quot;
+      },
+      {
+        &quot;bucket&quot;: 3,
+        &quot;sha256&quot;: &quot;8c4945a31ebb63b36c7bf362976feb5444701ec8c51695407f08d5fa1c781ae8&quot;
+      },
+      {
+        &quot;bucket&quot;: 4,
+        &quot;sha256&quot;: &quot;8050f846078ff7ac3f3bdc92d60de2c384391b9c76477143ad13b3c75ea85db2&quot;
+      },
+      {
+        &quot;bucket&quot;: 5,
+        &quot;sha256&quot;: &quot;d10efa7bd015042626ca802a4802d0bc17f4b32fcb8c9f7c3a22f67e43540c19&quot;
+      },
+      {
+        &quot;bucket&quot;: 6,
+        &quot;sha256&quot;: &quot;6e785ed337ae9e560c559ab2338a17e9025814c431620c18112d64e918c124e7&quot;
+      },
+      {
+        &quot;bucket&quot;: 7,
+        &quot;sha256&quot;: &quot;ab8d7307a9560a612b6f851a3c4e1a4438b389820eb7faac343ca25f6b78eadc&quot;
+      }
+    ],
+    &quot;driver_sha256&quot;: &quot;77158ac2ba45e993df631d9cf1ef204f9ebea8b4ef2f9b340f38bcb7652c1f00&quot;,
+    &quot;standard_answers_changed&quot;: false,
+    &quot;model_requests&quot;: 0,
+    &quot;scope&quot;: &quot;Only the 24,933 competing math groups; excludes singletons and does not assess correctness, training gains or model capability.&quot;,
+    &quot;length_is_not_the_ranking_criterion&quot;: true,
+    &quot;lowest_ppl_is_not_correctness_proof&quot;: true
+  }
 }</pre></html>

@@ -1,0 +1,9 @@
+test_additional_conditions_and_long_responses_are_outside_scope (tests.test_arithmetic_verifier.ArithmeticVerifierTests.test_additional_conditions_and_long_responses_are_outside_scope) ... ok
+test_names_code_and_unbounded_operations_are_not_executed (tests.test_arithmetic_verifier.ArithmeticVerifierTests.test_names_code_and_unbounded_operations_are_not_executed) ... ok
+test_precedence_and_exact_fractions (tests.test_arithmetic_verifier.ArithmeticVerifierTests.test_precedence_and_exact_fractions) ... ok
+test_source_high_ppl_answer_is_correct (tests.test_arithmetic_verifier.ArithmeticVerifierTests.test_source_high_ppl_answer_is_correct) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

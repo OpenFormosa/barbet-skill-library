@@ -30,7 +30,7 @@
   "unequal_literal_query_holds": 253,
   "all_effort_versions_retained_for_v26": true,
   "phase": "all_v26_scores_complete_selection_and_export_in_progress",
-  "updated_at": "2026-10-27T15:49:01.229628+00:00",
+  "updated_at": "2026-10-27T16:17:58.464019+00:00",
   "goal_complete": false,
   "candidate_index": {
     "counts": {
@@ -48,5 +48,116 @@
   "actual_scored_answers": 50975,
   "all_competing_groups_completed": true,
   "initial_import_failure_before_any_score": true,
-  "runtime_dependencies_modified": false
+  "runtime_dependencies_modified": false,
+  "additional_source_scope": {
+    "counts": {
+      "selected_rows_seen": 313153,
+      "arithmetic:outside_scope": 313150,
+      "held:crossword_external_lexical_knowledge_outside_math_memory_scope": 191,
+      "held:independently_proven_inconsistent_positive_people_conditions": 1,
+      "arithmetic:verified": 3
+    },
+    "held_queries": 192,
+    "all_selected_source_questions_checked": true,
+    "policy_sha256": "e14a672121963369bee6dc38e170b6d764161ccf207eea224b9992cbd285b428",
+    "query_holds_sha256": "9036c55f338bccb50af4f5efcf83d681f3637f260eef38e14fa54c7061ed900f",
+    "arithmetic_proofs_sha256": "c2d872de8636b2fa9a290d8e2d3bf1e30c7460b83762c6ecefaf91fd1653f952",
+    "all_other_answers_and_ppl_scores_unchanged": true,
+    "accepted_training_rows": 0,
+    "model_requests": 0,
+    "all_records_semantically_verified": false
+  },
+  "ppl_diagnostics": {
+    "counts": {
+      "groups:selected": 24933,
+      "alternatives_scored": 50975,
+      "winner_is_a_shortest_answer": 9327,
+      "winner_is_a_longest_answer": 15367,
+      "all_answer_lengths_equal": 94,
+      "exact_nll_tie": 0,
+      "nll_margin_below_1e-4": 14
+    },
+    "runner_up_minus_winner_mean_nll": {
+      "minimum": 3.491860561366522e-06,
+      "p25": 0.0471948776268063,
+      "median": 0.10426187167544088,
+      "p75": 0.1888529810029933,
+      "p95": 0.4405710943572396,
+      "maximum": 8.39389332376073
+    },
+    "winner_answer_tokens": {
+      "minimum": 2,
+      "p25": 445,
+      "median": 830,
+      "p75": 1297,
+      "p95": 2127,
+      "maximum": 12911
+    },
+    "all_alternative_answer_tokens": {
+      "minimum": 2,
+      "p25": 408,
+      "median": 791,
+      "p75": 1257,
+      "p95": 2048,
+      "maximum": 12911
+    },
+    "winner_ppl": {
+      "minimum": 1.0309982845320902,
+      "p25": 3.0273411027948467,
+      "median": 3.367957678794809,
+      "p75": 3.73191685931592,
+      "p95": 4.416784985651314,
+      "maximum": 296.10646833481144
+    },
+    "winner_tokens_over_group_mean_tokens": {
+      "minimum": 0.030949839914621132,
+      "p25": 0.952808988764045,
+      "median": 1.040232268768146,
+      "p75": 1.1402288534888938,
+      "p95": 1.4092284417549168,
+      "maximum": 2.9229781771501924
+    },
+    "average_winner_answer_tokens": 948.4129065896603,
+    "average_alternative_answer_tokens": 903.7887788131437,
+    "scoring_database_bindings": [
+      {
+        "bucket": 0,
+        "sha256": "41419364765f72ef1fdcb2cabd47aa5b7e16ee8222ee50323d2c9d619773d7c2"
+      },
+      {
+        "bucket": 1,
+        "sha256": "bc0e116998c4ecc4a7374d3b504a1b3cdb16256575811b6a0ba39401d98658f6"
+      },
+      {
+        "bucket": 2,
+        "sha256": "f49f31b579dae8e4c18232c2d83c822ea281e60bb56a6336c7796de21a3a6ae3"
+      },
+      {
+        "bucket": 3,
+        "sha256": "8c4945a31ebb63b36c7bf362976feb5444701ec8c51695407f08d5fa1c781ae8"
+      },
+      {
+        "bucket": 4,
+        "sha256": "8050f846078ff7ac3f3bdc92d60de2c384391b9c76477143ad13b3c75ea85db2"
+      },
+      {
+        "bucket": 5,
+        "sha256": "d10efa7bd015042626ca802a4802d0bc17f4b32fcb8c9f7c3a22f67e43540c19"
+      },
+      {
+        "bucket": 6,
+        "sha256": "6e785ed337ae9e560c559ab2338a17e9025814c431620c18112d64e918c124e7"
+      },
+      {
+        "bucket": 7,
+        "sha256": "ab8d7307a9560a612b6f851a3c4e1a4438b389820eb7faac343ca25f6b78eadc"
+      }
+    ],
+    "driver_sha256": "77158ac2ba45e993df631d9cf1ef204f9ebea8b4ef2f9b340f38bcb7652c1f00",
+    "standard_answers_changed": false,
+    "model_requests": 0,
+    "scope": "Only the 24,933 competing math groups; excludes singletons and does not assess correctness, training gains or model capability.",
+    "length_is_not_the_ranking_criterion": true,
+    "lowest_ppl_is_not_correctness_proof": true
+  }
 }

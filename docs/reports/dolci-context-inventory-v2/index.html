@@ -1,0 +1,412 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>Dolci 來源盤點</title><style>body{font:17px/1.7 system-ui;max-width:1080px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Dolci：先計算不同題目與來源契約</h1><p>固定修訂的 15 個實際檔案共 2,152,112 列、3,061,427,649 bytes，全部對照原始 LFS SHA256。初版只識別 JSON 函式呼叫，無法投影 208,000 列；查明工具呼叫其實是文字函式語法，觀察角色是 environment。這是讀取器範圍不足，不是資料錯誤率。</p><p>第二版只讀取原始呼叫文字及環境角色，沒有執行字串或補造工具 schema，保留初版 1,944,112 列的每個原始身份值。完成後 2,151,840 列可投影，272 列仍不符合訊息結尾／欄位格式；不同正規化首題為 1,644,535 個，完整最後條件為 1,654,029 個。這些數字還沒有扣除先前資料集重疊，接受訓練筆數仍是零。</p><p>同題版本相當多：Logic Puzzles 的 159,882 列對應 40,000 題；Verifiable Reasoning 的 310,572 列對應 118,148 題；OpenThoughts3+ Science 的 99,268 列對應 6,208 題。不同答案要共同進入 v26 比較，完全相同的答案只保留一份，不能用原始列數充當新增問題數。</p><p>工具子集可見 221,780 個不同首題、227,268 個最後輸入；全來源投影範圍內有 207,728 列文字函式呼叫、197,178 列工具／環境觀察。仍需完整型別適配、來源 schema 與觀察歸屬、對話前綴去重、首次品質診斷、前後記憶與 PPL 分組。程式題與邏輯題亦須各自驗證，來源名稱不能代替正確性。</p><p><a href="https://huggingface.co/datasets/allenai/Dolci-Instruct-SFT/tree/bd3c8f3a9b2cc5a9682e44b96ddd0bb2ff027221">Dolci 固定來源</a> 標示 ODC-BY；<a href="https://opendatacommons.org/licenses/by/1-0/">授權原文</a> 區分資料庫與各內容的權利，因此尚未對整份混合來源宣告內容授權准入。保留逐列 source_dataset，不把來源的 Apache／MIT 或 ODC-BY 名稱整批改標成同一種授權。</p><p>另外，<a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts3-1.2M/tree/61bcf9d4eb38b30295efc2021227a63cc5bb34c8">OpenThoughts3 原始說明</a> 的 1,200,000 列是 75,000 題各生成 16 次，並非 120 萬個不同問題。本次只固定其 metadata 和 README，沒有下載 28.2 GB 答案或增加接受筆數。所有資料盤點均未訓練模型或證明模型能力提升。</p><pre>{
+  &quot;counts&quot;: {
+    &quot;raw_rows&quot;: 2152112,
+    &quot;projected_rows&quot;: 2151840,
+    &quot;multiple_user_turns&quot;: 86791,
+    &quot;multiple_assistant_turns&quot;: 199619,
+    &quot;declared_function_metadata&quot;: 227387,
+    &quot;recorded_function_calls&quot;: 207728,
+    &quot;non_json_function_call_text&quot;: 207728,
+    &quot;recorded_tool_or_environment_observations&quot;: 197178,
+    &quot;inline_thinking_markers&quot;: 388,
+    &quot;reference_solution_marker_in_input&quot;: 0,
+    &quot;unprojectable&quot;: 272
+  },
+  &quot;unique_counts&quot;: {
+    &quot;normalized_first_queries&quot;: 1644535,
+    &quot;source_final_conditions&quot;: 1654029
+  },
+  &quot;source_counts&quot;: {
+    &quot;Tulu 3 Persona MATH&quot;: {
+      &quot;raw_rows&quot;: 149958,
+      &quot;projected_rows&quot;: 149958,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Dolci Instruct OpenThoughts3+ Science&quot;: {
+      &quot;raw_rows&quot;: 99268,
+      &quot;projected_rows&quot;: 99268,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 1,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Dolci Instruct Precise IF&quot;: {
+      &quot;raw_rows&quot;: 136833,
+      &quot;projected_rows&quot;: 136833,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;OpenMathInstruct 2&quot;: {
+      &quot;raw_rows&quot;: 50000,
+      &quot;projected_rows&quot;: 50000,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;WildGuardMix&quot;: {
+      &quot;raw_rows&quot;: 49373,
+      &quot;projected_rows&quot;: 49364,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0,
+      &quot;unprojectable&quot;: 9
+    },
+    &quot;Tulu 3 Persona Python&quot;: {
+      &quot;raw_rows&quot;: 34999,
+      &quot;projected_rows&quot;: 34999,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Logic Puzzles&quot;: {
+      &quot;raw_rows&quot;: 159882,
+      &quot;projected_rows&quot;: 159882,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 343,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Dolci Instruct Python Algorithms&quot;: {
+      &quot;raw_rows&quot;: 186345,
+      &quot;projected_rows&quot;: 186345,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Evol CodeAlpaca&quot;: {
+      &quot;raw_rows&quot;: 107270,
+      &quot;projected_rows&quot;: 107270,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;WildJailbreak&quot;: {
+      &quot;raw_rows&quot;: 49965,
+      &quot;projected_rows&quot;: 49965,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;FLAN&quot;: {
+      &quot;raw_rows&quot;: 89981,
+      &quot;projected_rows&quot;: 89981,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;CoCoNot&quot;: {
+      &quot;raw_rows&quot;: 10957,
+      &quot;projected_rows&quot;: 10956,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0,
+      &quot;unprojectable&quot;: 1
+    },
+    &quot;Aya&quot;: {
+      &quot;raw_rows&quot;: 99987,
+      &quot;projected_rows&quot;: 99987,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Tulu 3 Persona GSM&quot;: {
+      &quot;raw_rows&quot;: 49980,
+      &quot;projected_rows&quot;: 49980,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Tulu 3 Persona Algebra&quot;: {
+      &quot;raw_rows&quot;: 19999,
+      &quot;projected_rows&quot;: 19999,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;OpenAssistant&quot;: {
+      &quot;raw_rows&quot;: 7132,
+      &quot;projected_rows&quot;: 7132,
+      &quot;multiple_user_turns&quot;: 2464,
+      &quot;multiple_assistant_turns&quot;: 2464,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;SciRiff&quot;: {
+      &quot;raw_rows&quot;: 4557,
+      &quot;projected_rows&quot;: 4557,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;TableGPT&quot;: {
+      &quot;raw_rows&quot;: 5000,
+      &quot;projected_rows&quot;: 5000,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Hardcoded Data&quot;: {
+      &quot;raw_rows&quot;: 69,
+      &quot;projected_rows&quot;: 66,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0,
+      &quot;unprojectable&quot;: 3
+    },
+    &quot;Verifiable Reasoning&quot;: {
+      &quot;raw_rows&quot;: 310572,
+      &quot;projected_rows&quot;: 310572,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 0,
+      &quot;reference_solution_marker_in_input&quot;: 0
+    },
+    &quot;Wildchat&quot;: {
+      &quot;raw_rows&quot;: 302406,
+      &quot;projected_rows&quot;: 302339,
+      &quot;multiple_user_turns&quot;: 0,
+      &quot;multiple_assistant_turns&quot;: 0,
+      &quot;declared_function_metadata&quot;: 0,
+      &quot;recorded_function_calls&quot;: 0,
+      &quot;non_json_function_call_text&quot;: 0,
+      &quot;recorded_tool_or_environment_observations&quot;: 0,
+      &quot;inline_thinking_markers&quot;: 1,
+      &quot;reference_solution_marker_in_input&quot;: 0,
+      &quot;unprojectable&quot;: 67
+    },
+    &quot;Dolci Instruct Tool Use&quot;: {
+      &quot;raw_rows&quot;: 227579,
+      &quot;projected_rows&quot;: 227387,
+      &quot;multiple_user_turns&quot;: 84327,
+      &quot;multiple_assistant_turns&quot;: 197155,
+      &quot;declared_function_metadata&quot;: 227387,
+      &quot;recorded_function_calls&quot;: 207728,
+      &quot;non_json_function_call_text&quot;: 207728,
+      &quot;recorded_tool_or_environment_observations&quot;: 197178,
+      &quot;inline_thinking_markers&quot;: 43,
+      &quot;reference_solution_marker_in_input&quot;: 0,
+      &quot;unprojectable&quot;: 192
+    }
+  },
+  &quot;source_unique_counts&quot;: {
+    &quot;Aya&quot;: {
+      &quot;unique_first_queries&quot;: 89118,
+      &quot;unique_final_conditions&quot;: 90461,
+      &quot;distinct_source_answer_pairs&quot;: 97126
+    },
+    &quot;CoCoNot&quot;: {
+      &quot;unique_first_queries&quot;: 10956,
+      &quot;unique_final_conditions&quot;: 10956,
+      &quot;distinct_source_answer_pairs&quot;: 10956
+    },
+    &quot;Dolci Instruct OpenThoughts3+ Science&quot;: {
+      &quot;unique_first_queries&quot;: 6208,
+      &quot;unique_final_conditions&quot;: 6211,
+      &quot;distinct_source_answer_pairs&quot;: 99268
+    },
+    &quot;Dolci Instruct Precise IF&quot;: {
+      &quot;unique_first_queries&quot;: 136703,
+      &quot;unique_final_conditions&quot;: 136717,
+      &quot;distinct_source_answer_pairs&quot;: 136813
+    },
+    &quot;Dolci Instruct Python Algorithms&quot;: {
+      &quot;unique_first_queries&quot;: 186345,
+      &quot;unique_final_conditions&quot;: 186345,
+      &quot;distinct_source_answer_pairs&quot;: 186345
+    },
+    &quot;Dolci Instruct Tool Use&quot;: {
+      &quot;unique_first_queries&quot;: 221780,
+      &quot;unique_final_conditions&quot;: 227268,
+      &quot;distinct_source_answer_pairs&quot;: 227380
+    },
+    &quot;Evol CodeAlpaca&quot;: {
+      &quot;unique_first_queries&quot;: 107269,
+      &quot;unique_final_conditions&quot;: 107270,
+      &quot;distinct_source_answer_pairs&quot;: 107270
+    },
+    &quot;FLAN&quot;: {
+      &quot;unique_first_queries&quot;: 89098,
+      &quot;unique_final_conditions&quot;: 89098,
+      &quot;distinct_source_answer_pairs&quot;: 89981
+    },
+    &quot;Hardcoded Data&quot;: {
+      &quot;unique_first_queries&quot;: 66,
+      &quot;unique_final_conditions&quot;: 66,
+      &quot;distinct_source_answer_pairs&quot;: 66
+    },
+    &quot;Logic Puzzles&quot;: {
+      &quot;unique_first_queries&quot;: 40000,
+      &quot;unique_final_conditions&quot;: 40000,
+      &quot;distinct_source_answer_pairs&quot;: 84115
+    },
+    &quot;OpenAssistant&quot;: {
+      &quot;unique_first_queries&quot;: 7103,
+      &quot;unique_final_conditions&quot;: 7125,
+      &quot;distinct_source_answer_pairs&quot;: 7131
+    },
+    &quot;OpenMathInstruct 2&quot;: {
+      &quot;unique_first_queries&quot;: 36408,
+      &quot;unique_final_conditions&quot;: 36410,
+      &quot;distinct_source_answer_pairs&quot;: 50000
+    },
+    &quot;SciRiff&quot;: {
+      &quot;unique_first_queries&quot;: 4550,
+      &quot;unique_final_conditions&quot;: 4550,
+      &quot;distinct_source_answer_pairs&quot;: 4551
+    },
+    &quot;TableGPT&quot;: {
+      &quot;unique_first_queries&quot;: 4992,
+      &quot;unique_final_conditions&quot;: 4992,
+      &quot;distinct_source_answer_pairs&quot;: 4992
+    },
+    &quot;Tulu 3 Persona Algebra&quot;: {
+      &quot;unique_first_queries&quot;: 19999,
+      &quot;unique_final_conditions&quot;: 19999,
+      &quot;distinct_source_answer_pairs&quot;: 19999
+    },
+    &quot;Tulu 3 Persona GSM&quot;: {
+      &quot;unique_first_queries&quot;: 49976,
+      &quot;unique_final_conditions&quot;: 49976,
+      &quot;distinct_source_answer_pairs&quot;: 49980
+    },
+    &quot;Tulu 3 Persona MATH&quot;: {
+      &quot;unique_first_queries&quot;: 149958,
+      &quot;unique_final_conditions&quot;: 149958,
+      &quot;distinct_source_answer_pairs&quot;: 149958
+    },
+    &quot;Tulu 3 Persona Python&quot;: {
+      &quot;unique_first_queries&quot;: 34991,
+      &quot;unique_final_conditions&quot;: 34991,
+      &quot;distinct_source_answer_pairs&quot;: 34998
+    },
+    &quot;Verifiable Reasoning&quot;: {
+      &quot;unique_first_queries&quot;: 118148,
+      &quot;unique_final_conditions&quot;: 118148,
+      &quot;distinct_source_answer_pairs&quot;: 310117
+    },
+    &quot;WildGuardMix&quot;: {
+      &quot;unique_first_queries&quot;: 33747,
+      &quot;unique_final_conditions&quot;: 33766,
+      &quot;distinct_source_answer_pairs&quot;: 49095
+    },
+    &quot;WildJailbreak&quot;: {
+      &quot;unique_first_queries&quot;: 40495,
+      &quot;unique_final_conditions&quot;: 40503,
+      &quot;distinct_source_answer_pairs&quot;: 45036
+    },
+    &quot;Wildchat&quot;: {
+      &quot;unique_first_queries&quot;: 260345,
+      &quot;unique_final_conditions&quot;: 262830,
+      &quot;distinct_source_answer_pairs&quot;: 301214
+    }
+  },
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;v1_projected_rows_retained_exactly&quot;: 1944112,
+  &quot;prior_release_overlap_not_yet_subtracted&quot;: true,
+  &quot;source_content_license_admission_not_completed&quot;: true,
+  &quot;model_weights_trained&quot;: false,
+  &quot;updated_at&quot;: &quot;2026-10-27T16:17:58.464019+00:00&quot;,
+  &quot;goal_complete&quot;: false,
+  &quot;revision&quot;: &quot;bd3c8f3a9b2cc5a9682e44b96ddd0bb2ff027221&quot;,
+  &quot;v1_unprojectable&quot;: 208000,
+  &quot;v1_failure_was_adapter_scope_not_source_quality&quot;: true
+}</pre></html>

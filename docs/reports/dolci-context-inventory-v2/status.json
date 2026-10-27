@@ -1,0 +1,412 @@
+{
+  "counts": {
+    "raw_rows": 2152112,
+    "projected_rows": 2151840,
+    "multiple_user_turns": 86791,
+    "multiple_assistant_turns": 199619,
+    "declared_function_metadata": 227387,
+    "recorded_function_calls": 207728,
+    "non_json_function_call_text": 207728,
+    "recorded_tool_or_environment_observations": 197178,
+    "inline_thinking_markers": 388,
+    "reference_solution_marker_in_input": 0,
+    "unprojectable": 272
+  },
+  "unique_counts": {
+    "normalized_first_queries": 1644535,
+    "source_final_conditions": 1654029
+  },
+  "source_counts": {
+    "Tulu 3 Persona MATH": {
+      "raw_rows": 149958,
+      "projected_rows": 149958,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "Dolci Instruct OpenThoughts3+ Science": {
+      "raw_rows": 99268,
+      "projected_rows": 99268,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 1,
+      "reference_solution_marker_in_input": 0
+    },
+    "Dolci Instruct Precise IF": {
+      "raw_rows": 136833,
+      "projected_rows": 136833,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "OpenMathInstruct 2": {
+      "raw_rows": 50000,
+      "projected_rows": 50000,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "WildGuardMix": {
+      "raw_rows": 49373,
+      "projected_rows": 49364,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0,
+      "unprojectable": 9
+    },
+    "Tulu 3 Persona Python": {
+      "raw_rows": 34999,
+      "projected_rows": 34999,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "Logic Puzzles": {
+      "raw_rows": 159882,
+      "projected_rows": 159882,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 343,
+      "reference_solution_marker_in_input": 0
+    },
+    "Dolci Instruct Python Algorithms": {
+      "raw_rows": 186345,
+      "projected_rows": 186345,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "Evol CodeAlpaca": {
+      "raw_rows": 107270,
+      "projected_rows": 107270,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "WildJailbreak": {
+      "raw_rows": 49965,
+      "projected_rows": 49965,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "FLAN": {
+      "raw_rows": 89981,
+      "projected_rows": 89981,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "CoCoNot": {
+      "raw_rows": 10957,
+      "projected_rows": 10956,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0,
+      "unprojectable": 1
+    },
+    "Aya": {
+      "raw_rows": 99987,
+      "projected_rows": 99987,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "Tulu 3 Persona GSM": {
+      "raw_rows": 49980,
+      "projected_rows": 49980,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "Tulu 3 Persona Algebra": {
+      "raw_rows": 19999,
+      "projected_rows": 19999,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "OpenAssistant": {
+      "raw_rows": 7132,
+      "projected_rows": 7132,
+      "multiple_user_turns": 2464,
+      "multiple_assistant_turns": 2464,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "SciRiff": {
+      "raw_rows": 4557,
+      "projected_rows": 4557,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "TableGPT": {
+      "raw_rows": 5000,
+      "projected_rows": 5000,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "Hardcoded Data": {
+      "raw_rows": 69,
+      "projected_rows": 66,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0,
+      "unprojectable": 3
+    },
+    "Verifiable Reasoning": {
+      "raw_rows": 310572,
+      "projected_rows": 310572,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 0,
+      "reference_solution_marker_in_input": 0
+    },
+    "Wildchat": {
+      "raw_rows": 302406,
+      "projected_rows": 302339,
+      "multiple_user_turns": 0,
+      "multiple_assistant_turns": 0,
+      "declared_function_metadata": 0,
+      "recorded_function_calls": 0,
+      "non_json_function_call_text": 0,
+      "recorded_tool_or_environment_observations": 0,
+      "inline_thinking_markers": 1,
+      "reference_solution_marker_in_input": 0,
+      "unprojectable": 67
+    },
+    "Dolci Instruct Tool Use": {
+      "raw_rows": 227579,
+      "projected_rows": 227387,
+      "multiple_user_turns": 84327,
+      "multiple_assistant_turns": 197155,
+      "declared_function_metadata": 227387,
+      "recorded_function_calls": 207728,
+      "non_json_function_call_text": 207728,
+      "recorded_tool_or_environment_observations": 197178,
+      "inline_thinking_markers": 43,
+      "reference_solution_marker_in_input": 0,
+      "unprojectable": 192
+    }
+  },
+  "source_unique_counts": {
+    "Aya": {
+      "unique_first_queries": 89118,
+      "unique_final_conditions": 90461,
+      "distinct_source_answer_pairs": 97126
+    },
+    "CoCoNot": {
+      "unique_first_queries": 10956,
+      "unique_final_conditions": 10956,
+      "distinct_source_answer_pairs": 10956
+    },
+    "Dolci Instruct OpenThoughts3+ Science": {
+      "unique_first_queries": 6208,
+      "unique_final_conditions": 6211,
+      "distinct_source_answer_pairs": 99268
+    },
+    "Dolci Instruct Precise IF": {
+      "unique_first_queries": 136703,
+      "unique_final_conditions": 136717,
+      "distinct_source_answer_pairs": 136813
+    },
+    "Dolci Instruct Python Algorithms": {
+      "unique_first_queries": 186345,
+      "unique_final_conditions": 186345,
+      "distinct_source_answer_pairs": 186345
+    },
+    "Dolci Instruct Tool Use": {
+      "unique_first_queries": 221780,
+      "unique_final_conditions": 227268,
+      "distinct_source_answer_pairs": 227380
+    },
+    "Evol CodeAlpaca": {
+      "unique_first_queries": 107269,
+      "unique_final_conditions": 107270,
+      "distinct_source_answer_pairs": 107270
+    },
+    "FLAN": {
+      "unique_first_queries": 89098,
+      "unique_final_conditions": 89098,
+      "distinct_source_answer_pairs": 89981
+    },
+    "Hardcoded Data": {
+      "unique_first_queries": 66,
+      "unique_final_conditions": 66,
+      "distinct_source_answer_pairs": 66
+    },
+    "Logic Puzzles": {
+      "unique_first_queries": 40000,
+      "unique_final_conditions": 40000,
+      "distinct_source_answer_pairs": 84115
+    },
+    "OpenAssistant": {
+      "unique_first_queries": 7103,
+      "unique_final_conditions": 7125,
+      "distinct_source_answer_pairs": 7131
+    },
+    "OpenMathInstruct 2": {
+      "unique_first_queries": 36408,
+      "unique_final_conditions": 36410,
+      "distinct_source_answer_pairs": 50000
+    },
+    "SciRiff": {
+      "unique_first_queries": 4550,
+      "unique_final_conditions": 4550,
+      "distinct_source_answer_pairs": 4551
+    },
+    "TableGPT": {
+      "unique_first_queries": 4992,
+      "unique_final_conditions": 4992,
+      "distinct_source_answer_pairs": 4992
+    },
+    "Tulu 3 Persona Algebra": {
+      "unique_first_queries": 19999,
+      "unique_final_conditions": 19999,
+      "distinct_source_answer_pairs": 19999
+    },
+    "Tulu 3 Persona GSM": {
+      "unique_first_queries": 49976,
+      "unique_final_conditions": 49976,
+      "distinct_source_answer_pairs": 49980
+    },
+    "Tulu 3 Persona MATH": {
+      "unique_first_queries": 149958,
+      "unique_final_conditions": 149958,
+      "distinct_source_answer_pairs": 149958
+    },
+    "Tulu 3 Persona Python": {
+      "unique_first_queries": 34991,
+      "unique_final_conditions": 34991,
+      "distinct_source_answer_pairs": 34998
+    },
+    "Verifiable Reasoning": {
+      "unique_first_queries": 118148,
+      "unique_final_conditions": 118148,
+      "distinct_source_answer_pairs": 310117
+    },
+    "WildGuardMix": {
+      "unique_first_queries": 33747,
+      "unique_final_conditions": 33766,
+      "distinct_source_answer_pairs": 49095
+    },
+    "WildJailbreak": {
+      "unique_first_queries": 40495,
+      "unique_final_conditions": 40503,
+      "distinct_source_answer_pairs": 45036
+    },
+    "Wildchat": {
+      "unique_first_queries": 260345,
+      "unique_final_conditions": 262830,
+      "distinct_source_answer_pairs": 301214
+    }
+  },
+  "accepted_training_rows": 0,
+  "v1_projected_rows_retained_exactly": 1944112,
+  "prior_release_overlap_not_yet_subtracted": true,
+  "source_content_license_admission_not_completed": true,
+  "model_weights_trained": false,
+  "updated_at": "2026-10-27T16:17:58.464019+00:00",
+  "goal_complete": false,
+  "revision": "bd3c8f3a9b2cc5a9682e44b96ddd0bb2ff027221",
+  "v1_unprojectable": 208000,
+  "v1_failure_was_adapter_scope_not_source_quality": true
+}

@@ -1,0 +1,8 @@
+test_empty_function_json_is_not_a_declared_tool (tests.test_dolci_source_inventory.DolciSourceInventoryTests.test_empty_function_json_is_not_a_declared_tool) ... ok
+test_source_call_text_is_counted_without_execution (tests.test_dolci_source_inventory.DolciSourceInventoryTests.test_source_call_text_is_counted_without_execution) ... ok
+test_unresolved_last_tool_turn_is_not_final_answer (tests.test_dolci_source_inventory.DolciSourceInventoryTests.test_unresolved_last_tool_turn_is_not_final_answer) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
