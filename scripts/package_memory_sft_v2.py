@@ -23,6 +23,7 @@ from scripts.build_memory_sft_v2 import OUT, STATE, WORK, RAW, file_sha, save
 
 PUBLIC=WORK/'exports/memory-harness-v2-public'
 WAVE='wave-0001'
+EXTRA_ROW_GATE=None
 
 
 def init():
@@ -92,6 +93,10 @@ def job(path):
         keep=[]
         for n,row in enumerate(tables['records'].to_pylist()):
             counts['seen']+=1
+            if EXTRA_ROW_GATE is not None:
+                reason=EXTRA_ROW_GATE(row)
+                if reason:
+                    counts['excluded:'+reason]+=1;continue
             if row['record_id'] in HOLD_IDS or row['query_hash'] in HOLD_QUERIES:
                 counts['excluded:first_semantic_hold']+=1;continue
             if row['domain']=='search' and row['record_id'] not in SEARCH_ALLOWED:

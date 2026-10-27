@@ -1,0 +1,16 @@
+{
+  "counts": {
+    "seen": 2742619,
+    "terminal_source": 20532,
+    "unresolved_terminal_error_before_completion_claim": 189
+  },
+  "gate_code_sha256": "25c4b8e836f24e1388e27f39fad9bb416f40b045cd119a825c46ebed4aaf1568",
+  "origin": "First winner diagnostic found a terminal completion claim after a SyntaxError in the last recorded observation.",
+  "scope": "Exact source-specific JSON task_complete true plus an explicit exception line in the last run_terminal observation. A conservative unresolved concern, not proof that every printed error invalidates the task.",
+  "does_not_prove_older_errors_were_resolved": true,
+  "source_programs_executed": false,
+  "existing_first_negative_holds_preserved": true,
+  "known_held_records": 189,
+  "publication_status": "WILL_BE_EXCLUDED_DURING_NEW_RELEASE_PACKAGING",
+  "tests_passed": 4
+}

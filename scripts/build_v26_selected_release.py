@@ -53,6 +53,8 @@ def audit():
 
 def package_init():
     package.STATE=STATE;package.OUT=OUT;package.PUBLIC=PUBLIC;package.WAVE=WAVE;package.init()
+    from barbet_inference.dataset_quality import terminal_completion_hold
+    package.EXTRA_ROW_GATE=terminal_completion_hold
     # Five search examples already had a positive first review. They are not
     # rereviewed or relabeled as fresh approvals in the new winner diagnosis.
     original=json.loads((FIRST/'semantic-audit-v1/summary.json').read_text())
@@ -62,8 +64,13 @@ def package_init():
 def package_all(workers):
     if (STATE/'SUPERSEDED.json').exists():raise ValueError('selected release was superseded before packaging')
     if not (STATE/'compile-summary.json').exists():raise ValueError('compiled data incomplete')
+    terminal_audit=json.loads((STATE/'terminal-completion-audit-v1/summary.json').read_text())
+    if terminal_audit['gate_code_sha256']!=base.file_sha(base.REPO/'barbet_inference/dataset_quality.py'):raise ValueError('terminal quality scan is stale')
+    scanned={r['selected_file'].removesuffix('.jsonl'):r['selected_file_sha256'] for r in terminal_audit['selected_shard_bindings']}
     paths=sorted((STATE/'compiled').glob('[0-9]*.json'))
     if len(paths)!=json.loads((STATE/'dedup-summary.json').read_text())['shards']:raise ValueError('missing compiled shard')
+    for path in paths:
+        if json.loads(path.read_text())['source_shard_sha256']!=scanned.get(path.stem):raise ValueError('quality scan and compiled source differ')
     totals=Counter();files=[]
     with ProcessPoolExecutor(max_workers=workers,initializer=package_init) as pool:
         for n,result in enumerate(pool.map(package.job,paths),1):
@@ -79,12 +86,15 @@ def package_all(workers):
         if db.execute(f'SELECT COUNT(*) FROM (SELECT {key} FROM records GROUP BY {key} HAVING COUNT(DISTINCT split)>1)').fetchone()[0]:raise ValueError('selected release split leakage')
     db.execute('ATTACH DATABASE ? AS previous',(str(FIRST/'public-index.sqlite'),))
     if db.execute('SELECT COUNT(*) FROM records r JOIN previous.records p USING(query_hash) WHERE r.split != p.split').fetchone()[0]:raise ValueError('published question fold changed')
+    for r in terminal_audit['held']:
+        if db.execute('SELECT 1 FROM records WHERE record_id=?',(r['record_id'],)).fetchone():raise ValueError('terminal completion hold was revived')
     db.close();audit_scope=json.loads((STATE/'semantic-audit-v1/summary.json').read_text())
     base.save(STATE/'public-package-summary.json',{'wave':WAVE,'status':'LOCAL_VERIFIED_NOT_YET_PUBLISHED','counts':dict(totals),'unique_counts':unique,'files':files,
         'selection':'One minimum v26 answer-PPL candidate per complete eligible input group; singleton groups require no ranking.',
         'ppl_binding_sha256':base.file_sha(STATE/'ppl-score-binding.json'),'old_source_order_release_superseded':True,
         'all_records_and_arrays_reread':True,'all_answer_free_qwen_chat_and_completion_budgets_measured':True,
         'all_training_and_native_minicpm_budgets_with_4096_reserve':True,'all_published_query_folds_preserved':True,
+        'all_terminal_completion_holds_absent':True,'terminal_quality_scan_sha256':base.file_sha(STATE/'terminal-completion-audit-v1/summary.json'),
         'new_winner_audit_scope':{'samples':len(audit_scope['results']),'verdicts':audit_scope['counts'],'all_rows_semantically_verified':False},
         'legacy_active_rows':0,'accepted_episodes_target':10000000,'full_goal_complete':False,'model_weights_trained':False,'model_efficacy_measured':False})
     print(json.dumps({'accepted':totals['accepted'],'unique':unique,'files':len(files)}),flush=True)

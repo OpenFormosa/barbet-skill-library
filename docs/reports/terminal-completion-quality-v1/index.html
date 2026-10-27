@@ -1,0 +1,16 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>工具完成聲明檢查</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>工具驗證與完成聲明：新增資料檢查</h1><p>首次選中答案診斷發現，一筆上游終端機軌跡在 JSON 檢查失敗後宣稱驗證完成。任務本身還有 12 欄與 11＋4 欄的衝突；保留原始首次失敗，不改寫來源來讓它通過。</p><p>完整掃描 2,742,619 筆重選資料，當中 20,532 筆來自 Nemotron Terminal。189 筆同時符合：最後 assistant 的 JSON 宣告 task_complete 為 true，且最後 run_terminal 觀察含明確 Python 例外行。這些紀錄將在發布時隔離。</p><p>此規則是保守的不確定性處理，不把每個錯誤都說成整個任務失敗。沒有完成聲明的診斷呼叫可繼續保留；有後續觀察時檢查最新觀察，但沒有宣稱能證明所有早期錯誤已修復。來源程式碼沒有在本機執行。</p><p>四項回歸檢查涵蓋本次實際錯誤、後續觀察、尚未完成的診斷，以及一般文字與其他來源。發布時會比對掃描與 token 編譯的完整來源雜湊，並確認所有隔離 ID 都不在現役資料中。</p><details><summary>實際掃描範圍</summary><pre>{
+  &quot;counts&quot;: {
+    &quot;seen&quot;: 2742619,
+    &quot;terminal_source&quot;: 20532,
+    &quot;unresolved_terminal_error_before_completion_claim&quot;: 189
+  },
+  &quot;gate_code_sha256&quot;: &quot;25c4b8e836f24e1388e27f39fad9bb416f40b045cd119a825c46ebed4aaf1568&quot;,
+  &quot;origin&quot;: &quot;First winner diagnostic found a terminal completion claim after a SyntaxError in the last recorded observation.&quot;,
+  &quot;scope&quot;: &quot;Exact source-specific JSON task_complete true plus an explicit exception line in the last run_terminal observation. A conservative unresolved concern, not proof that every printed error invalidates the task.&quot;,
+  &quot;does_not_prove_older_errors_were_resolved&quot;: true,
+  &quot;source_programs_executed&quot;: false,
+  &quot;existing_first_negative_holds_preserved&quot;: true,
+  &quot;known_held_records&quot;: 189,
+  &quot;publication_status&quot;: &quot;WILL_BE_EXCLUDED_DURING_NEW_RELEASE_PACKAGING&quot;,
+  &quot;tests_passed&quot;: 4
+}</pre></details></html>

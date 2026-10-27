@@ -22,7 +22,7 @@ def configure():
 def prepare():
     if (STATE/'publication-data-commit.json').exists():raise ValueError('committed payload is immutable')
     s=json.loads((STATE/'summary.json').read_text());c=s['counts'];u=s['unique_counts']
-    if not all(s[k] for k in ['all_retained_records_and_token_arrays_equal','all_budget_proofs_preserved','all_known_first_wave_tool_holds_absent']):raise ValueError('missing data release gates')
+    if not all(s[k] for k in ['all_retained_records_and_token_arrays_equal','all_budget_proofs_preserved','all_known_first_wave_tool_holds_absent','all_terminal_completion_holds_absent']):raise ValueError('missing data release gates')
     for f in s['files']:
         if base.file_sha(DEST/f['path'])!=f['sha256']:raise ValueError('compacted payload changed')
     parent=json.loads((FIRST/'publication-final-commit.json').read_text())['final_head']
@@ -38,6 +38,8 @@ def prepare():
                      (SELECTED/'dedup-summary.json','selected-before-token-budget.json'),
                      (SELECTED/'ppl-score-binding.json','ppl-score-binding.json'),
                      (SELECTED/'selection-policy.json','selection-policy.json')]:shutil.copyfile(src,reports/name)
+    shutil.copyfile(SELECTED/'terminal-completion-audit-v1/summary.json',reports/'terminal-completion-quality-scan.json')
+    shutil.copyfile(FIRST/'terminal-completion-quality-tests-v1.log',reports/'terminal-completion-quality-tests-v1.log')
     audit=json.loads((SELECTED/'semantic-audit-v1/summary.json').read_text())
     scopes={}
     for label,state in [('wave-0001',FIRST),('wave-0002',SECOND),('v26-winner-diagnosis',SELECTED)]:
@@ -103,6 +105,8 @@ Exact dialogue-prefix training views do not add episodes. Same static tasks with
 Use the library's `prepare_dataset_request` adapter for answer-free Chat or exact-renderer Completion inputs. Do not feed stored training labels as inference requests. Both served-Qwen request modes and native MiniCPM/Pangolin budgets are measured for every row, with a 4,096-token output reserve and no truncation. These are format/budget checks, not Barbet vLLM backend certification.
 
 Most imported answers retain their explicit upstream verification tier; they have not all been independently semantically verified. The new winner diagnostic reviews {len(audit['results'])} samples, with verdict counts `{json.dumps(audit['counts'],sort_keys=True)}`. First non-accepts and their same-query variants are excluded. This purposive diagnostic is not a whole-corpus accuracy estimate. Historical `recorded_error_followup` only detects error-related words in tool text and does not establish a successful repair. Imported tool observations are recorded or simulated upstream as labeled, not locally re-executed source programs.
+
+A new source-specific guard excludes {c.get('excluded:unresolved_terminal_error_before_completion_claim',0):,} compiled Nemotron Terminal trajectories whose final JSON declares `task_complete: true` while the last `run_terminal` observation contains an explicit Python exception line. The trigger was a first-review case that claimed JSON validation had succeeded despite a recorded `SyntaxError`. This is a conservative unresolved-validation hold; it neither proves that every printed error invalidates a task nor proves that older errors were resolved by a later observation. Diagnostic errors without a completion claim remain eligible under the other gates.
 
 The library provides causal memory, skill retrieval, registered typed callbacks and bounded verifier-driven refinement. No model weights were trained, and this release does not establish small-model parity with a 9B model. MiniCPM5-2B is the pinned native formatting/context reference; the exact private training mixture is not claimed reproduced.
 
