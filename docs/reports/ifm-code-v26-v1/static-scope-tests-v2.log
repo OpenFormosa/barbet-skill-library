@@ -1,0 +1,11 @@
+test_indented_duplicate_is_still_found (tests.test_code_source_scope_v2.IndentationTests.test_indented_duplicate_is_still_found) ... ok
+test_markdown_indented_fence_is_not_syntax_error (tests.test_code_source_scope_v2.IndentationTests.test_markdown_indented_fence_is_not_syntax_error) ... ok
+test_duplicate_literal_keys_and_python_equal_keys (tests.test_code_source_scope_v2.load_tests.<locals>.OriginalChecksWithV2.test_duplicate_literal_keys_and_python_equal_keys) ... ok
+test_expected_prints_and_dry_run_are_not_actual_execution (tests.test_code_source_scope_v2.load_tests.<locals>.OriginalChecksWithV2.test_expected_prints_and_dry_run_are_not_actual_execution) ... ok
+test_explicit_execution_claim_needs_observation (tests.test_code_source_scope_v2.load_tests.<locals>.OriginalChecksWithV2.test_explicit_execution_claim_needs_observation) ... ok
+test_nested_dicts_are_independent_and_code_is_never_run (tests.test_code_source_scope_v2.load_tests.<locals>.OriginalChecksWithV2.test_nested_dicts_are_independent_and_code_is_never_run) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+OK

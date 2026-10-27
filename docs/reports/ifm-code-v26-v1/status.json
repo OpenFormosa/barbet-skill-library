@@ -1,0 +1,30 @@
+{
+  "phase": "complete_native_v26_selection_and_scope_filter; publication_pending",
+  "raw_rows": 1865716,
+  "candidate_answers": 159640,
+  "distinct_answers": 159639,
+  "selected_full_input_groups": 149150,
+  "competing_groups": 10245,
+  "answers_actually_scored": 20734,
+  "first_winner_diagnosis": {
+    "ACCEPT": 14,
+    "REJECT": 2,
+    "REVISE": 8
+  },
+  "static_scope_counts": {
+    "selected_rows_seen": 149150,
+    "held:explicit_python_block_not_parseable": 1320,
+    "held:duplicate_literal_dictionary_key_scope_hold": 102,
+    "held:past_execution_claim_without_recorded_observation": 2
+  },
+  "static_scope_held_queries": 1423,
+  "combined_query_holds": 1432,
+  "expected_package_rows": 147718,
+  "public_rows_so_far": 4762377,
+  "public_proof_head": "0037e535bc259a61922209c1ed301cbda1908768",
+  "all_retained_answers_and_scores_unchanged": true,
+  "source_programs_executed": false,
+  "model_weights_trained": false,
+  "corpus_semantic_accuracy_measured": false,
+  "goal_complete": false
+}

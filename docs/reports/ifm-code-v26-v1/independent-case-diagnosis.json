@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "record_id": "332bd067423ca24637ecf7602cfd47201e9d2a64465aabb58ed75938cab9900b",
+      "query_hash": "ae8225ee235113bc1c4e95c6da85c6c141f42f94f189e11b7d403988de75771e",
+      "independent_result": {
+        "a": 1,
+        "b": 100,
+        "minimum_correct_arrival": 19,
+        "departures_attaining_minimum": [
+          9
+        ],
+        "selected_expression_at_departure_zero": 100
+      },
+      "status": "incorrect transition; first provided example contradicted",
+      "scope": "One literal example and selected expression, not execution of the source program."
+    },
+    {
+      "record_id": "1e002ad4823e3b09292c61fd2166556c3ed0c58778f093e2cdcfba27c0c810a7",
+      "query_hash": "dc6d39cff812dad7e5c5a7fad2597b6ebe5a8e3ddcbfa011ecc89c7c8872415f",
+      "status": "expected example contains duplicate literal s key; intended regex yields s twice while dictionary retains value one",
+      "scope": "Static inspection of the supplied example, not a claim of executing its test harness."
+    },
+    {
+      "record_id": "d7f4c84b65f9c032550e2b499856e4b6f674997bee4944f7c7cddfd907fcb667",
+      "query_hash": "81c75b39d43a2845f4116865d955fa5deafc894c02c0f56503d8f5639ae00987",
+      "status": "reviewer execution-fabrication allegation not independently established",
+      "scope": "Running the script prints describes expected output; it does not explicitly state the source model actually ran it. First non-accept hold is nevertheless preserved."
+    }
+  ],
+  "all_first_dispositions_unchanged": true,
+  "model_requests": 0,
+  "source_programs_executed": false
+}
