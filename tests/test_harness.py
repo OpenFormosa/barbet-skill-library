@@ -82,6 +82,28 @@ class HarnessTests(unittest.TestCase):
     def test_malformed_tool_name_cannot_crash_validation(self):
         self.assertTrue(validate_call({'name': [], 'arguments': {}}, []))
 
+    def test_stdout_interface_requires_one_executed_numeric_result(self):
+        req = PublicRequest('made-up', 'Compute 2*17.', 'number')
+        policy = Policy('stdout', program=True, execute=True, program_format='python_stdout')
+        e = episode(req, policy)
+        answer(e, 'print(2*17)')
+        self.assertEqual(e.prediction, '34')
+        self.assertEqual(e.trace[0]['execution']['status'], 'executed_numeric_stdout')
+        for code in ['print("answer: 34")', 'print(17)\nprint(34)', 'raise ValueError("34")']:
+            e = episode(req, policy)
+            answer(e, code)
+            self.assertIsNone(e.prediction)
+
+    def test_json_tool_interface_preserves_schema_and_user_values(self):
+        req = PublicRequest('made-up', 'Use literal 案 Ａ and count 17.', 'tool_call',
+            tools=[{'name': 'work', 'parameters': {'type': 'object', 'properties': {
+                'record': {'type': 'string'}, 'count': {'type': 'integer'}},
+                'required': ['record', 'count'], 'additionalProperties': False}}])
+        e = episode(req, Policy('json', tool_format='json', execute=True))
+        answer(e, '{"name":"work","arguments":{"record":"案 Ａ","count":17}}')
+        self.assertEqual(e.prediction['arguments'], {'record': '案 Ａ', 'count': 17})
+        self.assertEqual(e.trace[0]['schema_errors'], [])
+
 
 if __name__ == '__main__':
     unittest.main()

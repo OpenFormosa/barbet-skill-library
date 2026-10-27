@@ -1,0 +1,28 @@
+[
+  {
+    "round": 0,
+    "stage": "initial dev complete; four initial validation arms complete",
+    "decision": "No initial policy demonstrated a valid all-domain promotion. RAG raises source visibility, but full skill hurts tools; program JSON execution fails on missing answer binding. State repair improves coding on dev. Self-revision increases output tokens and lowers primary macro.",
+    "initial_dev_macro": {
+      "bare": 37.5,
+      "rag_skill": 42.1875,
+      "self_revise": 36.71875
+    },
+    "validation_macro": {
+      "bare": 52.6041666667,
+      "rag_skill": 47.3958333333
+    },
+    "statistics": "development observations only; final CIs pending"
+  },
+  {
+    "round": 1,
+    "stage": "prelaunch",
+    "candidates": [
+      "routed",
+      "stdout"
+    ],
+    "hypothesis": "Contract routing preserves bare native tools while retaining skill/RAG and executable coding feedback; a one-number Python stdout interface removes the failed dual JSON/variable contract for arithmetic.",
+    "selection_rule": "same preregistered validation promotion gate; no final-test access",
+    "warning": "Routed combines dev-selected components; stdout is its single math-interface intervention. Neither is proven yet."
+  }
+]
