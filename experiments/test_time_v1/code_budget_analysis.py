@@ -29,6 +29,20 @@ def main():
     requests = {r['id']: r for r in map(json.loads, (source / 'test.inputs.jsonl').read_text().splitlines())}
     rows = [r for path in sorted((source / 'runs/final/test/mini' / chosen).glob('*.jsonl'))
             for r in map(json.loads, path.read_text().splitlines()) if labels[r['id']]['domain'] == 'mbpp']
+    final_scores = {(r['id'], r['seed']): r for r in final['scores'] if r['domain'] == 'mbpp'}
+    cache = {(r['id'], r['seed'], r['prediction']): final_scores[r['id'], r['seed']] for r in rows}
+    def cached_grade(row):
+        key = (row['id'], row['seed'], row['prediction'])
+        if key not in cache:
+            cache[key] = grade(row, labels[row['id']], requests[row['id']])
+        scored = dict(cache[key])
+        scored.update(policy=row['policy'], calls=row['calls'], prompt_tokens=row['prompt_tokens'],
+            output_tokens=row['output_tokens'], generation_seconds_amortized=row['amortized_generation_seconds'],
+            execution_seconds=row['execution_seconds'], retrieval_seconds=row['retrieval_seconds'],
+            unclosed_thinking_calls=sum(t['unclosed_thinking'] for t in row['trace']),
+            length_stopped_calls=sum(t['finish_reason']=='length' for t in row['trace']),
+            public_pass_before_scoring=any(t.get('execution', {}).get('passed') for t in row['trace']))
+        return scored
     reports = {}
     for ceiling in [1, 2, 3]:
         prefix_rows = []
@@ -43,10 +57,10 @@ def main():
             row['execution_seconds'] = sum(t.get('execution', {}).get('seconds', 0) for t in row['trace'])
             prefix_rows.append(row)
         with ThreadPoolExecutor(max_workers=12) as pool:
-            scores = list(pool.map(lambda r: grade(r, labels[r['id']], requests[r['id']]), prefix_rows))
+            scores = list(pool.map(cached_grade, prefix_rows))
         reports[ceiling] = {'model': 'mini', 'policy': f'code_prefix_{ceiling}',
             'scores': scores, 'summary': summarize(scores)}
-    result = {'method': 'Replay prefixes of the final selected code trajectories; same exact initial generations. Actual serving at a smaller call ceiling may differ through BF16 batch effects.',
+    result = {'method': 'Replay prefixes of the final selected code trajectories; same exact initial generations. Reuse recorded final grades for identical question/seed/code bytes; grade each additional artifact once. Actual serving at a smaller call ceiling may differ through BF16 batch effects.',
         'does_not_select_a_new_policy': True,
         'unit': '128 held-out code questions, three seeds; public checks only during generation, hidden checks only here',
         'table': [{'call_ceiling': k, **r['summary']} for k, r in reports.items()],
