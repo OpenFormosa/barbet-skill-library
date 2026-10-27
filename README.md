@@ -67,6 +67,10 @@ barbet-infer run --family mini \
 
 更新短卡後另執行 `python scripts/build_inference_cards.py` 與 `python scripts/build_inference_cards.py --check`。
 
+## SFT 資料改造提案
+
+[v26 診斷與 skill-aware SFT 設計](docs/skill-aware-sft-v1.html) 將輸入介面、數學、工具語意及資料覆蓋的問題，對應到技能使用、RAG 與真實回饋修復的學習視圖。[版本化配方](docs/configs/skill-aware-sft-v1.json) 明確區分目前 harness 已支援的流程、尚需實作的 adapter，以及訓練後需要驗證的 skill 增益。這是尚未採用的資料方案；沒有啟動訓練或修改 HF release。完整彙總與來源雜湊見 [v26 分析](docs/results/v26-sft-diagnosis.json)，可用 [唯讀腳本](scripts/analyze_v26_for_sft.py) 重現。
+
 ## 維護
 
 任何人都可以 fork 並送 pull request，也可以用 [Issues](https://github.com/OpenFormosa/barbet-skill-library/issues) 提議新技能或回報問題。請編輯對應的 `skill.json`，更新技能版本，執行：

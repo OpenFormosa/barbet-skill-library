@@ -1,0 +1,139 @@
+{
+  "version": "skill-aware-sft-v1",
+  "status": "PROPOSED_NOT_ADOPTED_NOT_TRAINED",
+  "created_date": "2026-10-27",
+  "objective": "Improve the additional benefit of skills, retrieved evidence and real feedback at inference time, while preserving bare-model capability.",
+  "library_baseline_commit": "0065d21d567173f33a8846943484f843220232b3",
+  "diagnosis": "../results/v26-sft-diagnosis.json",
+  "report": "../skill-aware-sft-v1.html",
+  "weight_training_started": false,
+  "accepted_training_records_created": 0,
+  "dataset_release_modified": false,
+  "evidence_scopes": {
+    "v26": {
+      "model": "voidful/barbet-skill",
+      "revision": "67131067ff1825179d5e38e91d499159669e9c66",
+      "candidate_dataset": "voidful/barbet-skill-sft",
+      "candidate_revision": "e1dff16fcacc724e2cb5f5c499b1f189bcb98bf5",
+      "actually_consumed_training_subset": "unknown",
+      "teacher_for_new_semantic_generation": "Keep the separately approved local Qwen teacher; no teacher change is made by this proposal."
+    },
+    "long_context_dataset": {
+      "dataset": "OpenFormosa/barbet-long-context-sft",
+      "canonical_new_record_tokens_min": 1000000,
+      "canonical_new_record_tokens_max": 1048576,
+      "canonical_tokenizer": "Pinned Pangolin tokenizer in the data project",
+      "canonical_release_policy": "Preserve existing releases and locks. Short learner views require a separately versioned export/recipe; they are not accepted canonical 1M records."
+    }
+  },
+  "runtime_alignment": {
+    "phase_1": {
+      "supported_families": ["mini", "qwen"],
+      "skill_routing": "Host-selected output-contract card or explicit full skill IDs",
+      "retrieval": "Host lexical retrieval and measured document packing",
+      "feedback_role": "user",
+      "feedback_note": "The current harness serializes execution/schema feedback in a user continuation. Do not relabel it as a tool message in a supposedly identical training view.",
+      "observations": "Use the exact per-call prompt, source selection, mode, native tool template and budget of the selected runtime adapter.",
+      "max_calls_current_api": 3,
+      "formats": ["text", "short_answer", "number", "python", "tool_call", "choice"],
+      "validation_note": "Runtime schema/format/public-test success is not independent semantic acceptance."
+    },
+    "barbet_native": "Requires a separate tested adapter matching Barbet tokenizer, tool tokens, skill position and stop tokens. The new mini/qwen API does not certify the Barbet Attention/Mamba backend.",
+    "phase_2": {
+      "status": "INTERFACE_REQUIRED_BEFORE_DATA",
+      "potential_actions": ["search_skills", "load_skill", "retrieve_more", "handoff_state"],
+      "condition": "Implement, version and test real dispatcher semantics and feedback before supervising these actions. No new tokens or autonomous router are assumed."
+    }
+  },
+  "canonical_episode_required_fields": [
+    "episode_id", "root_task_id", "source_group", "source_revision", "source_license",
+    "split", "task_contract", "public_request", "public_documents", "public_tool_registry",
+    "library_commit", "skills_with_versions_and_hashes", "private_verification_locator",
+    "accepted_assistant_targets", "verification_scope", "review_status"
+  ],
+  "learner_view_required_fields": [
+    "view_id", "parent_episode_id", "root_task_id", "split", "view_type",
+    "target_model_revision", "target_tokenizer_revision", "chat_template_hash",
+    "renderer_version", "harness_commit", "policy_hash", "skill_representation_hash",
+    "selected_source_hashes_and_spans", "prompt_sha256", "prompt_token_ids_hash",
+    "approved_target_sha256", "loss_spans", "input_tokens", "supervised_tokens",
+    "output_token_reserve", "feedback_receipt_hashes", "acceptance_evidence"
+  ],
+  "views": [
+    {"id": "bare_retention", "purpose": "Answer tasks solvable without a skill; retain language, knowledge, literal copying and output completion."},
+    {"id": "matched_skill", "purpose": "Apply a relevant versioned procedure with necessary public intermediate results."},
+    {"id": "near_miss_skill", "purpose": "Ignore irrelevant or inapplicable procedures, or state genuinely missing inputs."},
+    {"id": "counterfactual_contract", "purpose": "Change one meaningful input/negation/enum/order/unit and independently recompute the accepted target."},
+    {"id": "rag_distractors", "purpose": "Use supporting spans among similar but irrelevant, outdated, contradicted or unsupported passages."},
+    {"id": "verified_repair", "purpose": "Condition on actual student failure and actual public feedback; supervise only independently accepted replacements."},
+    {"id": "state_continuation", "purpose": "Continue from an actually constructed source-bound state; retain unknowns, failed checks and remaining task requirements."},
+    {"id": "compatible_composition", "purpose": "Use typed intermediate outputs when they satisfy the next procedure's preconditions; avoid unnecessary composition."},
+    {"id": "representation_and_length", "purpose": "Compare audited compact/full skill representations and real evidence distance using the target tokenizer; never pad repeated prose."}
+  ],
+  "sampling_proposal": {
+    "status": "ENGINEERING_HEURISTIC_NOT_MEASURED_OPTIMUM",
+    "unit": "Unique source task families, with supervised-token exposure tracked separately; do not balance by raw expanded row count alone.",
+    "initial_family_percent": {
+      "general_retention_and_instruction_contracts": 20,
+      "arithmetic_relations_and_programs": 25,
+      "tool_selection_and_semantic_arguments": 25,
+      "grounded_evidence_and_rag": 20,
+      "code_feedback_and_state": 10
+    },
+    "view_sampling": "Views overlap across task families. Do not materialize every view for every row; cap sibling exposure and sample by diagnosed missing behaviors.",
+    "curriculum": "Inside one mixed SFT: simple valid contracts and local evidence first; introduce discriminative negatives, real repair and compatible composition as validation permits. Keep retention examples throughout.",
+    "initial_learner_context_caps_tokens": [2048, 4096, 8192, 16384],
+    "length_note": "Heuristic pilot caps, measured with the target tokenizer and actual output reserve. Unsupported or mandatory-content-overbudget views fail export. This is not a change to the canonical 1M contract."
+  },
+  "loss_contract": {
+    "labels": "Unshifted labels; ignored positions are -100; trainer applies the causal shift exactly once.",
+    "supervised": "Only independently accepted assistant targets and their required terminal tokens.",
+    "masked": ["skills", "source_documents", "system_and_user_turns", "host_or_tool_observations", "failed_assistant_attempts", "rejected_or_unreviewed_targets"],
+    "error_context": "Keep useful failed attempts as conditioning context with zero loss; do not train their erroneous actions or repeat loops.",
+    "template_gate": "Verify actual token-boundary spans under the target template, including tool tags, thinking-mode boundaries, EOS and truncation. Reject ambiguous prefix/target alignment.",
+    "training_normalization": "Record the reduction and denominator for loss and accumulation; compare effective supervised tokens as well as total input tokens.",
+    "packing": "Preserve the existing no-cross-example-packing contract; no silent sequence concatenation."
+  },
+  "admission_gates": [
+    "Preserve source lineage, licenses, task semantics, root/group splits and versioned hashes.",
+    "Keep answer keys, private tests, acceptance verdicts and target-selection annotations out of model-visible prompts and retrieval indexes.",
+    "Changed task semantics require new independent verification, not blind reuse of the original answer.",
+    "Arithmetic: verify equations against the problem and numerical execution separately; executing the wrong equation is not acceptance.",
+    "Tools: check capability, literal field bindings, types, enums, omitted optional values and observation scope, not merely JSON syntax.",
+    "RAG: check entailment, entity/time/negation/units and source provenance; matching a quotation alone is insufficient.",
+    "Code: run only in the approved isolated execution subset; separate public runtime feedback from private admission tests.",
+    "Respect original first-review holds and immutable receipts; this proposal never reopens rejected source jobs.",
+    "Do not automatically convert inference traces into accepted training examples.",
+    "Audit target completeness, stop tokens, role masks, boundary alignment and actual served context budget before export."
+  ],
+  "experiment_ladder": [
+    {"id": "B0", "change": "Existing SFT data recipe", "status": "NOT_RUN"},
+    {"id": "B1", "change": "B0 with only the relevant full skill text refreshed to a pinned library revision, preserving reviewed task/target semantics. B0 already has prefill; this is not a no-skill comparison.", "status": "NOT_RUN"},
+    {"id": "B2", "change": "B1 with runtime-aligned discriminative skill/evidence/contract views", "status": "NOT_RUN"},
+    {"id": "B3", "change": "B2 plus actual failure-feedback-repair views", "status": "NOT_RUN"},
+    {"id": "B4", "change": "B3 plus source-bound state continuation", "status": "NOT_RUN"}
+  ],
+  "evaluation": {
+    "four_cells": ["base_bare", "base_harness", "sft_bare", "sft_harness"],
+    "skill_lift_base": "score(base_harness) - score(base_bare)",
+    "skill_lift_sft": "score(sft_harness) - score(sft_bare)",
+    "interaction": "skill_lift_sft - skill_lift_base",
+    "required_absolute_improvement": "sft_harness must also improve over base_harness; worsening sft_bare is not evidence of better skill use.",
+    "deployment_metrics": ["pass_at_1", "selected_at_K_with_deployable_checks", "oracle_pass_at_K_upper_bound", "repair_gain", "harmful_revision_rate", "valid_tool_semantic_accuracy", "evidence_entailment_accuracy", "strict_and_semantic_answer_accuracy", "prompt_tokens", "output_tokens", "calls", "latency", "peak_memory"],
+    "compute_matching": "Report fixed-output-token and fixed-latency comparisons separately; also hold the document pool and available tools constant.",
+    "training_matching": "Same base revision, source-family inventory, optimizer settings and supervised-token budget; disclose different total input tokens and FLOPs from longer prefixes.",
+    "holdout": "New root/group-disjoint and near-duplicate-screened train/dev/final-test families; reserve unseen skills, compositions, tool schemas and evidence versions. Old v26/MiniCPM evaluation items are diagnosis-only.",
+    "statistics": "Paired differences with family-clustered bootstrap intervals; multiple training seeds when resources permit. Do not treat seeds, paraphrases or repeated templates as independent tasks.",
+    "selection_window": "Freeze optimizer budget and checkpoint cadence in supervised tokens before launch. Choose on development only; evaluate the selected checkpoint once on the fresh final set.",
+    "pilot_gate": "Proceed only with positive absolute harness gain and positive interaction, with intervals supporting both; no predefined retention slice may exceed its preregistered regression margin.",
+    "rollback": "Keep the previous recipe/checkpoint if absolute gain, interaction or retention gates fail. Drop only the isolated failed component; do not tune on final test.",
+    "unresolved_before_training": ["exact base checkpoint and training adapter", "trainer and loss reduction", "pilot supervised-token budget and checkpoint cadence", "retention margins and attainable test power", "measured training memory/throughput"]
+  },
+  "references": [
+    "https://arxiv.org/abs/2403.10131",
+    "https://arxiv.org/abs/2302.04761",
+    "https://arxiv.org/abs/2310.11511",
+    "https://arxiv.org/html/2602.15763v1",
+    "https://arxiv.org/abs/2511.06221"
+  ]
+}

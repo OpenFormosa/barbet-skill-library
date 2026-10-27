@@ -1,0 +1,788 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-27T03:55:24.490749+00:00",
+  "status": "READ_ONLY_REANALYSIS_NO_NEW_MODEL_RUN",
+  "model": {
+    "repo": "voidful/barbet-skill",
+    "requested_revision": "v26",
+    "revision": "67131067ff1825179d5e38e91d499159669e9c66"
+  },
+  "scope": "514 fixed diagnostic items. Numeric and tool results independently reconciled against raw outputs; IFEval and MC judgments use the frozen item ledger. Not a new hidden test or full official benchmark.",
+  "native_task_metrics": {
+    "gsm8k": {
+      "n": 127,
+      "correct": 0,
+      "length_capped": 44,
+      "format_valid": 1
+    },
+    "ifeval": {
+      "n": 127,
+      "correct": 12,
+      "length_capped": 13
+    },
+    "tmmluplus": {
+      "n": 133,
+      "correct": 10,
+      "length_capped": 0,
+      "format_valid": 42,
+      "parseable_option": 61,
+      "correct_with_strict_letter_format": 7
+    },
+    "fresh_tools": {
+      "n": 127,
+      "correct": 4,
+      "length_capped": 0,
+      "format_valid": 105
+    }
+  },
+  "frozen_model_comparison": {
+    "barbet-v26": {
+      "completed": 514,
+      "expected": 514,
+      "tasks": {
+        "gsm8k": {
+          "n": 127,
+          "correct": 0,
+          "accuracy": 0.0,
+          "length_capped": 44,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 1423.4094488188975,
+          "format_accuracy": 0.007874015748031496
+        },
+        "tmmluplus": {
+          "n": 133,
+          "correct": 10,
+          "accuracy": 0.07518796992481203,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 8.533834586466165,
+          "format_accuracy": 0.3157894736842105
+        },
+        "ifeval": {
+          "n": 127,
+          "correct": 12,
+          "accuracy": 0.09448818897637795,
+          "length_capped": 13,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 544.6456692913385,
+          "prompt_loose_accuracy": 0.10236220472440945,
+          "instruction_strict_accuracy": 0.205,
+          "instruction_loose_accuracy": 0.215
+        },
+        "fresh_tools": {
+          "n": 127,
+          "correct": 4,
+          "accuracy": 0.031496062992125984,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 47.59055118110236,
+          "format_accuracy": 0.8267716535433071
+        }
+      },
+      "macro_accuracy": 0.05029305547332899,
+      "macro_95ci": [
+        0.03275412941803327,
+        0.06953407139896986
+      ]
+    },
+    "qwen-0.8b-nonthinking": {
+      "completed": 514,
+      "expected": 514,
+      "tasks": {
+        "gsm8k": {
+          "n": 127,
+          "correct": 55,
+          "accuracy": 0.4330708661417323,
+          "length_capped": 25,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 1363.4566929133857,
+          "format_accuracy": 0.8031496062992126
+        },
+        "tmmluplus": {
+          "n": 133,
+          "correct": 40,
+          "accuracy": 0.3007518796992481,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 3.56390977443609,
+          "format_accuracy": 0.9924812030075187
+        },
+        "ifeval": {
+          "n": 127,
+          "correct": 66,
+          "accuracy": 0.5196850393700787,
+          "length_capped": 3,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 295.87401574803147,
+          "prompt_loose_accuracy": 0.5826771653543307,
+          "instruction_strict_accuracy": 0.645,
+          "instruction_loose_accuracy": 0.695
+        },
+        "fresh_tools": {
+          "n": 127,
+          "correct": 116,
+          "accuracy": 0.9133858267716536,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 39.15748031496063,
+          "format_accuracy": 1.0
+        }
+      },
+      "macro_accuracy": 0.5417234029956782,
+      "macro_95ci": [
+        0.5029749570777338,
+        0.58020543484696
+      ]
+    },
+    "qwen-2b-nonthinking": {
+      "completed": 514,
+      "expected": 514,
+      "tasks": {
+        "gsm8k": {
+          "n": 127,
+          "correct": 100,
+          "accuracy": 0.7874015748031497,
+          "length_capped": 11,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 863.0629921259842,
+          "format_accuracy": 0.889763779527559
+        },
+        "tmmluplus": {
+          "n": 133,
+          "correct": 51,
+          "accuracy": 0.38345864661654133,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 2.0,
+          "format_accuracy": 1.0
+        },
+        "ifeval": {
+          "n": 127,
+          "correct": 74,
+          "accuracy": 0.5826771653543307,
+          "length_capped": 2,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 282.4488188976378,
+          "prompt_loose_accuracy": 0.6220472440944882,
+          "instruction_strict_accuracy": 0.7,
+          "instruction_loose_accuracy": 0.725
+        },
+        "fresh_tools": {
+          "n": 127,
+          "correct": 118,
+          "accuracy": 0.9291338582677166,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 42.40157480314961,
+          "format_accuracy": 1.0
+        }
+      },
+      "macro_accuracy": 0.6706678112604346,
+      "macro_95ci": [
+        0.6339766739683854,
+        0.707094754603043
+      ]
+    },
+    "qwen-4b-nonthinking": {
+      "completed": 514,
+      "expected": 514,
+      "tasks": {
+        "gsm8k": {
+          "n": 127,
+          "correct": 119,
+          "accuracy": 0.937007874015748,
+          "length_capped": 1,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 468.74015748031496,
+          "format_accuracy": 0.9921259842519685
+        },
+        "tmmluplus": {
+          "n": 133,
+          "correct": 77,
+          "accuracy": 0.5789473684210527,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 2.0,
+          "format_accuracy": 1.0
+        },
+        "ifeval": {
+          "n": 127,
+          "correct": 98,
+          "accuracy": 0.7716535433070866,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 243.0236220472441,
+          "prompt_loose_accuracy": 0.8110236220472441,
+          "instruction_strict_accuracy": 0.84,
+          "instruction_loose_accuracy": 0.865
+        },
+        "fresh_tools": {
+          "n": 127,
+          "correct": 127,
+          "accuracy": 1.0,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 67.91338582677166,
+          "format_accuracy": 1.0
+        }
+      },
+      "macro_accuracy": 0.8219021964359718,
+      "macro_95ci": [
+        0.7929074655141791,
+        0.850810342786099
+      ]
+    },
+    "qwen-9b-nonthinking": {
+      "completed": 514,
+      "expected": 514,
+      "tasks": {
+        "gsm8k": {
+          "n": 127,
+          "correct": 122,
+          "accuracy": 0.9606299212598425,
+          "length_capped": 1,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 436.31496062992125,
+          "format_accuracy": 0.9921259842519685
+        },
+        "tmmluplus": {
+          "n": 133,
+          "correct": 88,
+          "accuracy": 0.6616541353383458,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 2.0,
+          "format_accuracy": 1.0
+        },
+        "ifeval": {
+          "n": 127,
+          "correct": 107,
+          "accuracy": 0.84251968503937,
+          "length_capped": 1,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 291.1023622047244,
+          "prompt_loose_accuracy": 0.8818897637795275,
+          "instruction_strict_accuracy": 0.895,
+          "instruction_loose_accuracy": 0.92
+        },
+        "fresh_tools": {
+          "n": 127,
+          "correct": 127,
+          "accuracy": 1.0,
+          "length_capped": 0,
+          "unclosed_thinking": 0,
+          "mean_output_tokens": 63.653543307086615,
+          "format_accuracy": 1.0
+        }
+      },
+      "macro_accuracy": 0.8662009354093896,
+      "macro_95ci": [
+        0.8393500976851578,
+        0.8929607483275117
+      ]
+    }
+  },
+  "interface_dash_only": {
+    "original": 257,
+    "native": 0
+  },
+  "math_diagnostics": {
+    "numeric_parseable": 50,
+    "hash_and_whitespace_only": 73,
+    "literal_2": 23
+  },
+  "choice_predictions": {
+    "B": 37,
+    "A": 21,
+    "None": 72,
+    "C": 1,
+    "D": 2
+  },
+  "tool_counts": {
+    "one_parseable_call": 105,
+    "right_tool_name": 43,
+    "right_tool_wrong_arguments": 39,
+    "wrong_tool_name": 62,
+    "no_single_parseable_call": 22,
+    "fully_correct": 4
+  },
+  "argument_errors_among_right_tool_wrong_arguments_overlap": {
+    "missing_expected_fields": 19,
+    "extra_fields": 20,
+    "wrong_boolean_value_or_type": 12,
+    "wrong_string_or_enum_value_or_type": 17,
+    "wrong_numeric_value_or_type": 1,
+    "wrong_array_value_or_type": 1
+  },
+  "tool_families": {
+    "1": {
+      "n": 16,
+      "correct": 0
+    },
+    "2": {
+      "n": 16,
+      "correct": 0
+    },
+    "3": {
+      "n": 16,
+      "correct": 0
+    },
+    "4": {
+      "n": 16,
+      "correct": 0
+    },
+    "5": {
+      "n": 16,
+      "correct": 0
+    },
+    "6": {
+      "n": 16,
+      "correct": 0
+    },
+    "7": {
+      "n": 16,
+      "correct": 0
+    },
+    "0": {
+      "n": 15,
+      "correct": 4
+    }
+  },
+  "native_ifeval_by_instruction": {
+    "language:response_language": {
+      "n": 6,
+      "correct": 0
+    },
+    "change_case:english_lowercase": {
+      "n": 9,
+      "correct": 1
+    },
+    "keywords:letter_frequency": {
+      "n": 8,
+      "correct": 3
+    },
+    "combination:repeat_prompt": {
+      "n": 13,
+      "correct": 0
+    },
+    "punctuation:no_comma": {
+      "n": 17,
+      "correct": 8
+    },
+    "keywords:frequency": {
+      "n": 13,
+      "correct": 2
+    },
+    "change_case:english_capital": {
+      "n": 11,
+      "correct": 0
+    },
+    "detectable_content:postscript": {
+      "n": 7,
+      "correct": 0
+    },
+    "startend:end_checker": {
+      "n": 9,
+      "correct": 2
+    },
+    "detectable_format:number_highlighted_sections": {
+      "n": 19,
+      "correct": 0
+    },
+    "keywords:existence": {
+      "n": 5,
+      "correct": 4
+    },
+    "detectable_format:title": {
+      "n": 8,
+      "correct": 0
+    },
+    "length_constraints:number_sentences": {
+      "n": 10,
+      "correct": 6
+    },
+    "keywords:forbidden_words": {
+      "n": 14,
+      "correct": 7
+    },
+    "detectable_format:number_bullet_lists": {
+      "n": 4,
+      "correct": 0
+    },
+    "length_constraints:number_words": {
+      "n": 13,
+      "correct": 2
+    },
+    "startend:quotation": {
+      "n": 9,
+      "correct": 0
+    },
+    "change_case:capital_word_frequency": {
+      "n": 5,
+      "correct": 3
+    },
+    "detectable_format:multiple_sections": {
+      "n": 2,
+      "correct": 0
+    },
+    "combination:two_responses": {
+      "n": 4,
+      "correct": 0
+    },
+    "length_constraints:number_paragraphs": {
+      "n": 2,
+      "correct": 0
+    },
+    "detectable_content:number_placeholders": {
+      "n": 6,
+      "correct": 0
+    },
+    "detectable_format:constrained_response": {
+      "n": 3,
+      "correct": 1
+    },
+    "length_constraints:nth_paragraph_first_word": {
+      "n": 1,
+      "correct": 0
+    },
+    "detectable_format:json_format": {
+      "n": 2,
+      "correct": 2
+    }
+  },
+  "small_control": {
+    "n": 16,
+    "single_skill_correct": 1,
+    "three_skills_correct_same_ids": 0
+  },
+  "toy_native_probes": {
+    "training_native": {
+      "math_zh": {
+        "n": 8,
+        "dash_only": 0,
+        "length": 0,
+        "strict": 0,
+        "numeric": 0
+      },
+      "math_en": {
+        "n": 8,
+        "dash_only": 0,
+        "length": 1,
+        "strict": 0,
+        "numeric": 0
+      },
+      "tools": {
+        "n": 8,
+        "dash_only": 0,
+        "length": 0
+      },
+      "instruction": {
+        "n": 8,
+        "dash_only": 0,
+        "length": 0,
+        "strict": 0,
+        "gold_string_present": 0
+      },
+      "reading": {
+        "n": 8,
+        "dash_only": 0,
+        "length": 0,
+        "strict": 8,
+        "gold_string_present": 8
+      }
+    },
+    "training_native_tools": {
+      "tools": {
+        "n": 8,
+        "dash_only": 0,
+        "length": 0,
+        "call_parseable": 8,
+        "strict": 7
+      }
+    }
+  },
+  "execution_protocol": {
+    "scope": "Clarify actual CLI-controlled execution settings without rewriting the frozen protocol or runtime receipts.",
+    "barbet": {
+      "decoding": "published greedy",
+      "max_new_tokens": 4096,
+      "shards": 8
+    },
+    "qwen_native_tool_runs": {
+      "mode": "non-thinking",
+      "CLI_flag": "--nonthinking",
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "seed": 20261024,
+      "max_new_tokens": 4096
+    },
+    "metadata_note": "protocol.json inherits the original run's qwen_decoding dictionary describing its historical thinking arm. The new Qwen jobs are all explicitly non-thinking, recorded in their CLI, file names, runtime thinking_mode=false, and the actual runner code. No new thinking run is claimed. The inherited historical native_renderer_sha256 is not used by this native wrapper.",
+    "qwen_non_tool_rows": "Exactly reuse the original 387 non-thinking results per model; their user inputs and sampling settings are unchanged.",
+    "new_native_tool_rows": "127 per model, using the actual tools argument in each model's published chat template."
+  },
+  "candidate_snapshot_historical_audit": {
+    "repo": "voidful/barbet-skill-sft",
+    "revision": "e1dff16fcacc724e2cb5f5c499b1f189bcb98bf5",
+    "static_pass_train_rows": 41361,
+    "counts": {
+      "supervised_assistant_points": 81467,
+      "has_tool_calls": 31512,
+      "content_dash_only": 0,
+      "content_starts_dash_separator": 0,
+      "immediately_preceded_by_skill_system": 80657
+    },
+    "unique_skills": 27,
+    "skill_row_counts": {
+      "literal-typed-tool-arguments": 30832,
+      "tool-capability-triage": 10412,
+      "tool-result-interpretation": 12436,
+      "concept-explanation": 1302,
+      "option-generation": 718,
+      "comparison-by-dimensions": 736,
+      "factual-question-resolution": 1046,
+      "practical-guidance": 345,
+      "numeric-expression-evaluation": 86,
+      "constrained-creative-writing": 112,
+      "tool-selection-and-arguments": 427,
+      "text-transformation": 30,
+      "external-state-grounding": 852,
+      "classification-with-criteria": 39,
+      "constrained-sample-generation": 79,
+      "code-task-framing": 39,
+      "validation-scope-check": 16,
+      "translation-alignment": 15,
+      "conversation-reference-resolution": 20,
+      "descriptive-statistics": 13,
+      "hypothesis-and-evidence": 7,
+      "string-property-analysis": 17,
+      "arithmetic-modeling": 1,
+      "unit-conversion": 3,
+      "ordered-top-k": 11,
+      "clarify-missing-inputs": 2,
+      "artifact-operation-contract": 16
+    },
+    "limit": "This audits the linked published candidate snapshot, not the private training job or the exact subset consumed by v26."
+  },
+  "limitations": [
+    "The candidate dataset is not proof of the data actually consumed by the private v26 training job.",
+    "OpenFormosa/barbet-long-context-sft is a separate dataset with a separate 1M-token contract.",
+    "No predecessor checkpoint, optimizer history, actual trainer masks or causal-shift implementation were audited.",
+    "Existing v26 and MiniCPM test items must be excluded from new training and model selection; derive failure families, not their answers.",
+    "Skill-tag counts and syntactic checks do not certify semantic correctness or independent task diversity."
+  ],
+  "candidate_snapshot_reinspection": {
+    "source": {
+      "repo": "voidful/barbet-skill-sft",
+      "revision": "e1dff16fcacc724e2cb5f5c499b1f189bcb98bf5",
+      "parquet_sha256": "38af22b353290bf76759c4a3e9378b5f8d2b989684ca28ea3efbb42d44475434"
+    },
+    "rows": 41361,
+    "distinct_root_task_ids": 21355,
+    "distinct_source_groups": 21355,
+    "counts": {
+      "rows_with_tool_observation": 12441,
+      "rows_with_multiple_approved_assistant_turns": 14113,
+      "loss_on_non_assistant_turns": 0,
+      "supervised_assistant_points": 81467,
+      "has_tool_calls": 31512,
+      "content_dash_only": 0,
+      "immediately_preceded_by_skill_system": 80657
+    },
+    "reasoning_modes": {
+      "no_think": 41361
+    },
+    "source_row_counts": {
+      "argilla/apigen-function-calling": 10485,
+      "hiyouga/glaive-function-calling-v2-sharegpt": 12782,
+      "Team-ACE/ToolACE": 1258,
+      "nvidia/When2Call": 7313,
+      "NousResearch/hermes-function-calling-v1": 1188,
+      "interstellarninja/hermes_reasoning_tool_use": 7318,
+      "Nanbeige/ToolMind": 1017
+    },
+    "preceding_role_patterns": {
+      "user>system>assistant": 61069,
+      "tool>system>assistant": 19588,
+      "user>assistant": 626,
+      "assistant>user>assistant": 158,
+      "system>user>assistant": 26
+    },
+    "stored_token_statistics": {
+      "total_tokens": 78543111,
+      "supervised_tokens": 6491976,
+      "supervised_fraction": 0.08265493838154692,
+      "median_total_tokens": 1328,
+      "median_supervised_tokens": 81,
+      "scope": "Stored row counts; this analysis does not retokenize every row or verify trainer consumption."
+    },
+    "skill_coverage": {
+      "arithmetic-modeling": {
+        "rows": 1,
+        "distinct_root_task_ids": 1,
+        "associated_row_supervised_tokens": 824
+      },
+      "artifact-operation-contract": {
+        "rows": 16,
+        "distinct_root_task_ids": 12,
+        "associated_row_supervised_tokens": 1334
+      },
+      "clarify-missing-inputs": {
+        "rows": 2,
+        "distinct_root_task_ids": 1,
+        "associated_row_supervised_tokens": 181
+      },
+      "classification-with-criteria": {
+        "rows": 39,
+        "distinct_root_task_ids": 39,
+        "associated_row_supervised_tokens": 19818
+      },
+      "code-task-framing": {
+        "rows": 39,
+        "distinct_root_task_ids": 39,
+        "associated_row_supervised_tokens": 32728
+      },
+      "comparison-by-dimensions": {
+        "rows": 736,
+        "distinct_root_task_ids": 734,
+        "associated_row_supervised_tokens": 638821
+      },
+      "concept-explanation": {
+        "rows": 1302,
+        "distinct_root_task_ids": 1295,
+        "associated_row_supervised_tokens": 1155309
+      },
+      "constrained-creative-writing": {
+        "rows": 112,
+        "distinct_root_task_ids": 110,
+        "associated_row_supervised_tokens": 102930
+      },
+      "constrained-sample-generation": {
+        "rows": 79,
+        "distinct_root_task_ids": 68,
+        "associated_row_supervised_tokens": 15817
+      },
+      "conversation-reference-resolution": {
+        "rows": 20,
+        "distinct_root_task_ids": 20,
+        "associated_row_supervised_tokens": 13521
+      },
+      "descriptive-statistics": {
+        "rows": 13,
+        "distinct_root_task_ids": 13,
+        "associated_row_supervised_tokens": 8232
+      },
+      "external-state-grounding": {
+        "rows": 852,
+        "distinct_root_task_ids": 677,
+        "associated_row_supervised_tokens": 119845
+      },
+      "factual-question-resolution": {
+        "rows": 1046,
+        "distinct_root_task_ids": 987,
+        "associated_row_supervised_tokens": 679704
+      },
+      "hypothesis-and-evidence": {
+        "rows": 7,
+        "distinct_root_task_ids": 5,
+        "associated_row_supervised_tokens": 2674
+      },
+      "literal-typed-tool-arguments": {
+        "rows": 30832,
+        "distinct_root_task_ids": 18156,
+        "associated_row_supervised_tokens": 4233668
+      },
+      "numeric-expression-evaluation": {
+        "rows": 86,
+        "distinct_root_task_ids": 78,
+        "associated_row_supervised_tokens": 50103
+      },
+      "option-generation": {
+        "rows": 718,
+        "distinct_root_task_ids": 713,
+        "associated_row_supervised_tokens": 593484
+      },
+      "ordered-top-k": {
+        "rows": 11,
+        "distinct_root_task_ids": 11,
+        "associated_row_supervised_tokens": 2458
+      },
+      "practical-guidance": {
+        "rows": 345,
+        "distinct_root_task_ids": 339,
+        "associated_row_supervised_tokens": 301627
+      },
+      "string-property-analysis": {
+        "rows": 17,
+        "distinct_root_task_ids": 14,
+        "associated_row_supervised_tokens": 2577
+      },
+      "text-transformation": {
+        "rows": 30,
+        "distinct_root_task_ids": 30,
+        "associated_row_supervised_tokens": 16939
+      },
+      "tool-capability-triage": {
+        "rows": 10412,
+        "distinct_root_task_ids": 3080,
+        "associated_row_supervised_tokens": 1402887
+      },
+      "tool-result-interpretation": {
+        "rows": 12436,
+        "distinct_root_task_ids": 2624,
+        "associated_row_supervised_tokens": 3114751
+      },
+      "tool-selection-and-arguments": {
+        "rows": 427,
+        "distinct_root_task_ids": 186,
+        "associated_row_supervised_tokens": 125138
+      },
+      "translation-alignment": {
+        "rows": 15,
+        "distinct_root_task_ids": 15,
+        "associated_row_supervised_tokens": 5689
+      },
+      "unit-conversion": {
+        "rows": 3,
+        "distinct_root_task_ids": 3,
+        "associated_row_supervised_tokens": 1363
+      },
+      "validation-scope-check": {
+        "rows": 16,
+        "distinct_root_task_ids": 11,
+        "associated_row_supervised_tokens": 3405
+      }
+    },
+    "coverage_note": "Skill tags overlap. Associated row tokens are not tokens exclusively attributable to that skill.",
+    "limit": "This audits the linked published candidate snapshot, not the private training job or the exact subset consumed by v26."
+  },
+  "source_sha256": {
+    "diagnostics/failure_20261024/native_rerun/questions.jsonl": "49f9117cf8eef8fa1a63074bf8266fcb0bf6d1fa4891b25a0b7592ea1eff178e",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26-s0.jsonl": "e5b1bc1f81f5075ba35b2688e7fbf4f18bc622abfa3194b0e28933d44c69fb35",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26-s1.jsonl": "0aa88b06dca718cfbe824c4af22037bfb8ba3bd0436053b7e0888bbe4ddb70f5",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26-s2.jsonl": "c79c2e37f2d9917c93fe34f30657caae1156ca980e957b6dcad1a3c88af3bffd",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26-s3.jsonl": "03d8497b9a5aeeb5606a9de5ee753ef2a057c424208723aabd200716a1dd1984",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26-s4.jsonl": "2af1674b8ce02d73413140f1807c01f850be21d763d63acb7bab1eb70c027718",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26-s5.jsonl": "843718673a256d8696539aef1d25ad011f33fe2aefd80eacce54b0c4344229a5",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26-s6.jsonl": "14a5ce84aa2f832978270cd5b4ff6fb11919b4a9349c1170e3adcf0174c546f8",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26-s7.jsonl": "2f66536a1ede79ec11ae96379da316b2a22ad5d8758bf3e5a326bac57ea9f591",
+    "diagnostics/failure_20261024/native_rerun/combined/primary-scored_items.jsonl": "a5d67ac14edf8ad297338303e31c6d747be2701c7735a4e5e31c012d24c8133e",
+    "runs/20261024-v26/barbet-v26-s0.jsonl": "6e9902ac9b960589ab2a0af1760e3d56005094f190cffe5e2800236f865e4ab9",
+    "runs/20261024-v26/barbet-v26-s1.jsonl": "25244c5f2bd0e79b12e7556ceaa1d96e66b7866f652f790ec55488ec1daab046",
+    "runs/20261024-v26/barbet-v26-s2.jsonl": "4d1dbe2055635294cb3813a18557a10902e6cf0f046733c12ede4d51126fa2b7",
+    "runs/20261024-v26/barbet-v26-s3.jsonl": "577c69ed626f65a604c53f0cd888004396a9aa4b6fde29048671d539c371dc6c",
+    "diagnostics/failure_20261024/native_rerun/combined/primary-scores.json": "3079899c9e44e6963dbc4f28c4caf648ab2b78a36e6a50394f21f17d75761476",
+    "diagnostics/failure_20261024/native_rerun/protocol.json": "2413153f988e11b104943c5c17a363fb7782ec5a02603aa67ff58b8884cf0cb1",
+    "diagnostics/failure_20261024/native_rerun/barbet-v26.json": "7b3852b18463f8954c782dddaef4c8cb28d019e00124d5af2346eeccc5151df7",
+    "diagnostics/failure_20261024/native_rerun/execution_parameters.json": "59fe9ada02fee6d7e83b66c9d241ec4e72005f4e92bc80d94664909561cdb79c",
+    "diagnostics/failure_20261024/native_rerun/combined/combination_audit.json": "b9dee76f723da06d552abe84b5471a216ca8fab379eab7fcb2d93023df9f1e0a",
+    "diagnostics/failure_20261024/native_rerun/combined/native_parser_provenance.json": "6043a5ac155ef35f044eb0ca735c535f4f347827c13f21d8537e0d358ab37e02",
+    "diagnostics/failure_20261024/training_snapshot_audit.json": "613cca863ba426cc58d61e1904221a094e3a0f2ea870edf1b4fad82d09df524c",
+    "diagnostics/failure_20261024/native_error_analysis.json": "9e5c905d587985dd073c1f815ed212ed73ce09a697ac12aa37730ceacd17dcc3",
+    "diagnostics/failure_20261024/probe_scores.json": "8d499f383368c171a075525b1fef65cac1461a55e03129fa00cad37d3e287f84",
+    "score.py": "c9055cdc5a7f2600785471ccfe8f632f927afed2d7973c734126b57b1224d007",
+    "prepare_data.py": "2bb9a48267427af90955b21fd06de9c29f403663e5f04892554e4984d0c2358a"
+  },
+  "analysis_script_sha256": "86637ba425312bc5692a8ddb49d097d9bfde806213896464773289ee8c76adfd"
+}

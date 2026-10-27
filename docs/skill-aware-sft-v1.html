@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>從 v26 診斷到能利用 skill 的 SFT 資料</title>
+<style>
+:root{color-scheme:light;--ink:#192b36;--muted:#52636c;--line:#d2dce0;--accent:#075e64;--bg:#f4f6f5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.8 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:40px 24px 80px}h1{font-size:2rem;line-height:1.4}h2{margin:2.6em 0 .7em;font-size:1.35rem;border-bottom:2px solid var(--line);padding-bottom:.4em}h3{font-size:1.05rem;margin-top:1.8em}a{color:var(--accent)}p{max-width:96ch}.muted,small{color:var(--muted)}.notice{border-left:5px solid var(--accent);padding:14px 20px;background:#e6f0ee}.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tile{background:white;border:1px solid var(--line);padding:18px}.tile strong{display:block;font-size:1.8rem;font-variant-numeric:tabular-nums}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white;font-size:.94rem}th,td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left}th{background:#e9efee}code,pre{font: .88em/1.65 ui-monospace,monospace}code{overflow-wrap:anywhere}pre{overflow:auto;background:#e9efee;padding:18px;white-space:pre-wrap}li{margin:.5em 0}summary{cursor:pointer;font-weight:600}details{background:white;border:1px solid var(--line);padding:14px 18px;margin:14px 0}.flow{padding:18px;background:white;border:1px solid var(--line);font-weight:600}.status{font-weight:650;color:var(--accent)}nav{display:flex;gap:18px;flex-wrap:wrap}footer{border-top:1px solid var(--line);margin-top:3em;padding-top:1em;font-size:.85rem}@media print{body{background:white}main{padding:0}details>*{display:block}nav{display:none}h2{break-after:avoid}tr{break-inside:avoid}}
+</style>
+<main>
+<p class="muted">2026-10-27 · skill-aware-sft-v1 · 版本化提案</p>
+<h1>讓小模型學會使用 library：<br>v26 診斷、SFT 資料改造與驗證方案</h1>
+<p class="notice"><strong>建議先改「模型應學會的行為」與訓練／推論介面。</strong>將一筆問答改造成可驗證的技能使用、證據選擇及失敗修復樣本，才有機會讓增加 test-time 資源帶來穩定收益。這份提案沒有啟動權重訓練、產出核准訓練資料或修改已發布資料集；收益尚未測量。</p>
+<nav><a href="#diagnosis">v26 證據</a><a href="#data">資料缺口</a><a href="#recipe">改造流程</a><a href="#length">上下文與 masking</a><a href="#verify">實驗與驗收</a><a href="#delivery">交付與重現</a></nav>
+<div class="tiles">
+<div class="tile">v26 修正介面後四項平均<strong>5.03%</strong><small>514 題固定診斷子集；非完整官方榜單</small></div>
+<div class="tile">相同題目的 Qwen3.5-0.8B<strong>54.17%</strong><small>無額外 skill，non-thinking；非同一推論後端</small></div>
+<div class="tile">候選 SFT 快照<strong>41,361 筆</strong><small>21,355 個 root_task_id；不是 v26 私有訓練清單</small></div>
+<div class="tile">本提案新增訓練成果<strong>0</strong><small>資料設計已提出；訓練、收益與發布均未宣稱</small></div>
+</div>
+
+<h2 id="diagnosis">v26 暴露的問題，哪些確定、哪些仍未知</h2>
+<p>分析固定在 <code>voidful/barbet-skill@67131067ff1825179d5e38e91d499159669e9c66</code>（v26）。重新核對原始輸出、逐題評分及統計：數學數值與工具 typed equality 由本次分析另行重算並與舊 ledger 對帳；IFEval 與選擇題沿用封存的逐題判定再彙總。本次沒有重新生成模型答案。</p>
+<div class="table"><table>
+<thead><tr><th>能力／主要指標</th><th>v26＋skill，native adapter</th><th>Qwen3.5-0.8B</th><th>對資料的直接含義</th></tr></thead>
+<tbody>
+<tr><td>GSM8K 數值答案</td><td>0／127 · 0.00%</td><td>55／127 · 43.31%</td><td>補數量關係、單位、必要計算、完整結束；單靠結果格式無法修復。</td></tr>
+<tr><td>TMMLU+ 選項答案</td><td>10／133 · 7.52%</td><td>40／133 · 30.08%</td><td>分開檢查知識／判斷、選項映射與只輸出字母。</td></tr>
+<tr><td>IFEval prompt strict</td><td>12／127 · 9.45%</td><td>66／127 · 51.97%</td><td>建立簡單到組合的輸出契約，並保留完整回答的內容要求。</td></tr>
+<tr><td>新工具名稱＋型別及參數 exact match</td><td>4／127 · 3.15%</td><td>116／127 · 91.34%</td><td>重點是選對功能、讀懂否定、逐欄綁定值；合法 JSON 只是第一關。</td></tr>
+<tr><td>四類不加權平均</td><td>5.03%；歷史 bootstrap 95% CI 3.28–6.95%</td><td>54.17%</td><td>不能據此說 v26 已達 0.8B；也不能把這個平均當成所有能力的參數量換算。</td></tr>
+</tbody></table></div>
+<p class="muted">Qwen 的 387 題非工具結果沿用原 non-thinking run，127 題工具結果以 native tools 介面重跑。實際 CLI／runtime 設定以 execution_parameters 為準；舊 protocol 中保留的 thinking 字典不是這些新工具 run 的設定。比較受各模型原生生成器與 tokenizer 差異限制。</p>
+
+<p><strong>第一層是介面敏感。</strong>原介面 514 題中有 257 題只輸出 <code>---</code>；採用接近連結候選資料的 skill wrapper、訊息順序與 native tools 後，降至 0。公開候選資料中的受監督 assistant 內容沒有只含 <code>---</code> 的目標。因此可確定介面會顯著改變行為，但不能反推「訓練標籤都是分隔線」。修正後平均反而由 8.22% 變成 5.03%，表示修正傳輸格式不等於全面能力提升。</p>
+<p><strong>第二層是基本語意與完成任務能力。</strong>數學有 50／127 題能解析出數字，仍全部答錯；73 題輸出只含井號或空白，23 題直接回答 <code>2</code>，44 題撞到輸出長度上限。這些數字有重疊，不能加總成互斥錯誤類別。數學 scorer 已容許沒有 <code>####</code> 的數值答案，0 分並非全由少了標記造成。</p>
+<p>工具有 105／127 題能解析成單次呼叫；其中 62 題選錯名稱，43 題選對名稱，但有 39 題參數錯誤。這 39 題中，19 題缺預期欄位、20 題有額外欄位，另有 12 個布林值錯誤與 17 個字串／enum 錯誤，分類可重疊。8 個合成工具家族中，只有天氣家族得到 4／15，其餘 7 個家族各 0／16；換名字、數字的多筆樣本不代表多個獨立能力。未提供 v26 的實際訓練輸入、前一版 checkpoint、trainer 或 loss 曲線，故目前不能斷言是 learning rate、double shift、遺忘或模型架構造成。</p>
+<details><summary>指令與選擇題的進一步診斷</summary>
+<p>TMMLU+ 有 61／133 題可解析出選項，只有 42 題符合單一字母格式；10 個正確答案中，7 個符合該嚴格格式。解析後選項分布為 A 21、B 37、C 1、D 2，另 72 題無法解析。這顯示格式與選項偏差並存，不能用格式清洗宣稱補齊知識。</p>
+<p>native IFEval 的微小切片中，語言要求 0／6、全大寫 0／11、標題 0／8、重複指定提示 0／13、指定高亮區塊數 0／19；JSON 2／2。每類樣本很少，這些只用來建立缺口清單，不當作穩定排名。IFEval 也不保證整篇答案語義正確。</p>
+<p>小型格式探針曾有 native reading 8／8 與 native-tools 7／8；另 16 題單 skill 控制只有 1 題正確，對應三 skill 為 0。這些有限探針說明某些格式可用，沒有證明大量刪減 skill 就能恢復整體能力。</p>
+</details>
+
+<h2 id="data">公開候選 SFT 快照：覆蓋偏斜比資料筆數更值得處理</h2>
+<p>重新讀取 <a href="https://huggingface.co/datasets/voidful/barbet-skill-sft/tree/e1dff16fcacc724e2cb5f5c499b1f189bcb98bf5">固定 revision 的公開候選快照</a>，核對全部 static_pass/train 的 41,361 筆。它有 21,355 個不同 root_task_id；這是 ID 去重，不是完整語義去重。技能標籤有 27 種，目前 library 則有 64 個技能。<strong>此快照是否就是 v26 實際吃到的全部資料，仍未知。</strong></p>
+<div class="table"><table>
+<thead><tr><th>觀察</th><th>實際數量</th><th>建議修正</th></tr></thead><tbody>
+<tr><td>literal-typed-tool-arguments</td><td>30,832 筆；18,156 個 root ID</td><td>停止只靠新增相似 function-calling 記錄增加總量；補功能辨識、否定、enum、順序、optional 值的辨別案例。</td></tr>
+<tr><td>arithmetic-modeling</td><td>1 筆／1 root；該列 824 個 supervised tokens</td><td>新增不同關係結構與單位條件的已驗證任務，而非複製同一句提示。</td></tr>
+<tr><td>unit-conversion</td><td>3 筆／3 roots</td><td>區分「自己換算」與「把原始值交給換算工具」；避免重複換算。</td></tr>
+<tr><td>tool-selection-and-arguments</td><td>427 筆／186 roots</td><td>同一 registry 中加入語義相近、能力不同的工具，選擇依真實描述而非工具名字。</td></tr>
+<tr><td>clarify-missing-inputs</td><td>2 筆／1 root</td><td>補缺必要資訊、資訊已足夠、只缺非必要值等情況，避免亂補值與過度澄清。</td></tr>
+<tr><td>skill 緊接在 supervised assistant 前</td><td>80,657／81,467 回覆點，約 99.01%</td><td>這主要教「消費已提供的 skill」。先對齊 host routing，再另驗證自主選取；不能把 prefill 視為 routing 已學會。</td></tr>
+<tr><td>多輪與觀察</td><td>14,113 筆有多個受監督 assistant；12,441 筆有 tool observation</td><td>既有資料不是純單輪。應另外審查是否包含真實失敗→回饋→正確修復，而非僅增加 turn 數。</td></tr>
+<tr><td>模式與訓練訊號</td><td>全 41,361 筆標示 no_think；儲存統計為 78,543,111 個總 tokens、6,491,976 個 supervised tokens</td><td>分開追蹤兩種 token；保留直接作答，用公開計算、程式或狀態教必要中間步驟，不強迫所有題輸出長推理。</td></tr>
+</tbody></table></div>
+<p>儲存的 supervised 比例約 8.27%，每列總長度中位數 1,328，supervised 中位數 81。這些是欄位統計，沒有逐列重新 tokenize，也沒有確認 trainer 真正消耗量；低比例本身不證明資料錯誤。turn mask 檢查未見非 assistant 回合開 loss，但這不排除訓練器的 token mask／shift 問題。每個 skill 的列數與 token 歸屬可重疊，不能直接當成互斥資料配比；技能標籤也不完整等同於內容能力，例如其他標籤下仍可能含有數量計算，需要另做語義覆蓋審查。</p>
+<p>另一本 <a href="https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft">OpenFormosa/barbet-long-context-sft</a> 有自己的 Pangolin tokenizer、renderer 與新 canonical 樣本 1,000,000–1,048,576 token 契約。不可把以上 41,361 筆統計套到該資料集，也不可因本提案而覆寫其既有 release、first-review holds 或發布證據。</p>
+
+<h2 id="recipe">改造單位：一個來源任務，衍生少量有用途的學習視圖</h2>
+<p class="flow">固定來源與 split → 審核任務及答案 → 選資料缺口 → 以實際 harness 產生輸入 → 收集學生行為與真實回饋 → Qwen 修正必要部分 → 獨立驗證 → 編譯 loss spans → 匯出版本化 learner view</p>
+<p>原始 episode 保留來源、權利、root/group、split、工具 registry、來源證據、技能版本及私有驗證定位。衍生 view 另外記錄目標 tokenizer、chat template、policy、實際 prompt hash、可見來源、loss spans 與回饋 receipt hash。先按來源家族切分，再衍生所有 view；同題換語言、換數字、換 skill 表示或增加修復回合，都不能跨到另一個 split。</p>
+<div class="table"><table>
+<thead><tr><th>視圖</th><th>模型要學的行為</th><th>驗證與邊界</th></tr></thead><tbody>
+<tr><td>基本作答與無 skill</td><td>保留語言、基本知識、逐字傳遞、單步計算、完整答案與終止符。</td><td>避免學成沒有 skill 就拒答；測 bare 能力是否退步。</td></tr>
+<tr><td>正確 skill／相似但不適用</td><td>遵守前提，使用必要程序；不把沒有用到的技能強行套上。</td><td>輸入不能含「正確技能」標記或 teacher 選擇理由。skill 重命名但程序不變時，行為應保持。</td></tr>
+<tr><td>語義最小對比</td><td>讀懂啟用／停用、先後次序、原始值／換算值、必填／選填、排序方向。</td><td>改一個有意義條件就重驗 target；不能沿用原答案。不要只換實體名製造表面多樣性。</td></tr>
+<tr><td>RAG 與干擾</td><td>在相似實體、舊版本、否定敘述中找支持來源；無證據時標示缺口。</td><td>引用位置正確與答案被支持分開驗證。隱藏答案、teacher 解答與驗收標記不能進檢索庫。</td></tr>
+<tr><td>真實回饋修復</td><td>保留已正確部分，根據實際錯誤修復；不改測試，不憑空報成功。</td><td>錯誤輸出保留但不計 loss；修正版須過獨立驗收。公開測試通過仍不代表完整正確。</td></tr>
+<tr><td>有來源的狀態交接</td><td>延續已知值、待解問題、失敗與尚未執行的動作；壓縮時保留限定條件。</td><td>從完整可追溯的實際歷史產生 state；不能把 teacher 才知道的答案當成 memory。</td></tr>
+<tr><td>有限組合</td><td>讓前一 skill 的具型別輸出符合下一 skill 的輸入，例如抽取→單位統一→計算。</td><td>一個 skill 可完成時直接完成；保留缺輸入、不相容及中途失敗的案例。</td></tr>
+</tbody></table></div>
+<p>增加 skill 利用率不等於每題放全部 64 個 skill。應衡量每個程序的適用、近似不適用、缺輸入、失敗恢復及跨情境遷移。基礎數學與工具語意目前最缺，可以優先新增有獨立來源及不同關係結構的樣本；同一成功 target 僅在語義與契約不變時才能重用。</p>
+
+<details open><summary>目前 harness 能直接支援什麼，哪些還需要新介面</summary>
+<p>目前 <code>barbet_inference</code> 支援 MiniCPM／Qwen 原生模板。skill 由 host 按 output contract 選短卡，或由呼叫者明確指定完整技能；檢索、公開執行檢查及最多三次呼叫也由 host 控制。第一階段 SFT 應使用同一個實際渲染流程；<code>prepare</code> 可檢查初始 prompt，trace 可核對後續 prompt。</p>
+<p><strong>目前 repair feedback 被序列化為 user continuation。</strong>若資料自行改成 tool role，就不是相同介面。需保留原始 native tool token、thinking mode、停止標記、公開測試與來源選取；Barbet 則需要另外測試其 tokenizer／renderer／生成器 adapter，不能把 mini/qwen 後端當成 Barbet Attention/Mamba 支援證明。</p>
+<p>模型自主 <code>search_skills</code>、<code>load_skill</code> 或反覆檢索，尚未在此 API 實作。若要訓練這些動作，先實作有真實回傳、錯誤與預算語義的 dispatcher，再生成對應資料。不能先教一組不存在的工具名稱，便宣稱 test time 可運作。</p>
+</details>
+
+<h3>資料樣本應長什麼樣</h3>
+<p>以下是自行撰寫的格式示意，並非訓練樣本、真實模型輸出或核准資料。工具名 <code>configure_notice</code> 在此示例 registry 中定義為設定門檻及啟用狀態。同一門檻值的「立即啟用」與「先停用」應分別產生 <code>true</code> 與 <code>false</code>；換掉工具名稱但保留能力及 schema，答案應跟著使用新名稱。對照樣本應再涵蓋相似的「查詢既有設定」工具，讓模型依功能選擇。</p>
+<pre>{
+  "episode_id": "authored-example-only",
+  "root_task_id": "one-source-family",
+  "split": "train",
+  "view_type": "verified_repair",
+  "runtime_adapter": "pinned-model-template-and-harness",
+  "input": "實際渲染的 task + skill + registry + 失敗輸出 + 公開回饋",
+  "target": "經獨立驗證的完整修正版，依原生工具格式序列化",
+  "loss": {
+    "task_skill_sources": 0,
+    "failed_assistant_attempt": 0,
+    "actual_host_feedback": 0,
+    "approved_replacement_and_terminal_tokens": 1
+  },
+  "feedback_receipt_sha256": "必須指向真實 receipt；不能由教師臆造",
+  "review_status": "ILLUSTRATION_NOT_ACCEPTED_DATA"
+}</pre>
+<p>這是中介規格，不是可直接丟給任意 trainer 的 tokenized dataset。正式 compiler 必須按目標模板產生正確 token spans，且保證 private validation 欄位不會進 prompt。對只要求 JSON 或 code 的任務，公開計算與操作說明應放在適當的技能／中間介面，不可插入答案破壞契約。</p>
+
+<h2 id="length">長上下文與 reasoning：把長度用在必要資訊上</h2>
+<p>較長 context 提供外部知識及工作空間，但小模型仍需學會選取、綁定、更新與忽略。先建立短且完整的工作區，再增加真實干擾、來源距離、依賴深度與狀態變更；這四個軸應分開控制。不能用重複文字填長度，也不能把更多生成 tokens 當成更強 reasoning。</p>
+<p>既有固定權重實驗提供一個警訊：MiniCPM 的四領域平均由 38.02% 提升至 50.39%，但同 harness 的 Qwen 為 76.24%。盲目三輪自我檢查僅 38.54%，平均 output tokens 約 4,782；選定方案為約 1,944 tokens、1.19 次呼叫。程式的真實執行回饋則有用：同一批軌跡的前 1／2／3 次成功率為 55.73／64.06／66.41%。這支持優先教「使用外部可驗證回饋」，而非統一延長自言自語。完整定義與限制見<a href="test-time-study.html">固定權重報告</a>。</p>
+<p>長度視圖的工程起點可用目標 tokenizer 的 2K、4K、8K、16K 上限，這是待驗證的 heuristic。完整 task、schema、必要來源與 output reserve 超出預算時應拒絕匯出，不能偷偷截斷。MiniCPM、Qwen 與 Pangolin 的 token 數不可互換。</p>
+<p><strong>保留 canonical 1M 原件，短 learner view 另立版本。</strong>此提案沒有把 1M 規格取消或把短樣本偽裝成合格的 canonical 新資料。若正式採用短工作區，需要另行固定 export／recipe；保留父樣本 lineage、split、來源範圍及完整原件，審查抽取後是否仍含所有必要前提。真正測試 1M 能力時，仍需能處理該長度的實際模型後端、足額 output 預算及新 holdout。</p>
+
+<div class="table"><table><thead><tr><th>訓練編譯項目</th><th>必須保證</th></tr></thead><tbody>
+<tr><td>loss masking</td><td>只監督核准 assistant targets 與所需終止符；skill、來源、user、tool／host 觀察、失敗與未核准輸出皆為 <code>-100</code>。</td></tr>
+<tr><td>錯誤與修復</td><td>錯誤可保留為後續修復的條件，但不正向訓練錯誤 token。沒有回饋的「再想一次」不能偽稱 execution feedback。</td></tr>
+<tr><td>causal shift</td><td>輸出的 labels 不預先 shift，由 trainer 恰好 shift 一次；檢查第一個 answer token、最後終止符與跨 turn 邊界。</td></tr>
+<tr><td>token 邊界</td><td>以實際 template／tokenizer 驗證，不僅用字元位置猜測；prefix 與 target 合併分詞不一致時停止輸出。</td></tr>
+<tr><td>截斷／packing</td><td>不得產生只剩答案前半段或沒有終止符的正樣本；維持現有不跨樣本 packing 契約。</td></tr>
+<tr><td>成本與 normalization</td><td>追蹤 input 與 supervised tokens、loss reduction 與梯度累積分母。全長 tokens 相同不等於有效監督量相同。</td></tr>
+</tbody></table></div>
+
+<h2 id="verify">實驗要證明「SFT 讓模型更能從 harness 得益」</h2>
+<p>僅比較訓練前後總分，無法區分基本能力進步與 skill 利用率進步。每個候選 checkpoint 都需要下列四格，使用相同公開文件池、工具、task family 與固定策略；另做 token 與 latency 配額的比較。</p>
+<div class="table"><table><thead><tr><th></th><th>bare</th><th>同一 harness</th></tr></thead><tbody>
+<tr><th>訓練前 base</th><td>A</td><td>B</td></tr>
+<tr><th>新 SFT checkpoint</th><td>C</td><td>D</td></tr>
+</tbody></table></div>
+<pre>訓練前的 harness 增益 = B − A
+訓練後的 harness 增益 = D − C
+skill 利用能力的交互增益 = (D − C) − (B − A)
+同時要求 D &gt; B，並守住 C 的基礎能力保留門檻。</pre>
+<p>不能靠把 C 訓壞而製造漂亮增益。pilot 的工程驗收原則是：D 對 B 的提升與交互增益都有正向統計證據，預先選定的語言、知識、指令與基本計算 retention 切片沒有超出退步容忍值。容忍值、統計 power、訓練 budget 與 checkpoint cadence 需在真正啟動前固定；本提案未冒稱已指定或完成訓練。</p>
+<div class="table"><table><thead><tr><th>實驗</th><th>只增加的因素</th><th>要回答的問題</th><th>狀態</th></tr></thead><tbody>
+<tr><td>B0</td><td>原 SFT 配方</td><td>現有資料在相同 base 上的可重現起點。</td><td>未執行</td></tr>
+<tr><td>B1</td><td>只將原有相關 skill prefill 更新至固定 library 版本</td><td>保持已審核任務與 target，只刷新技能文字有多少效果？B0 已有 prefill。</td><td>未執行</td></tr>
+<tr><td>B2</td><td>runtime 一致、語義對比及 RAG 視圖</td><td>正確使用程序與來源的監督是否帶來交互增益？</td><td>未執行</td></tr>
+<tr><td>B3</td><td>真實學生失敗與修復視圖</td><td>可部署的修復成功率是否提高？</td><td>未執行</td></tr>
+<tr><td>B4</td><td>可追溯的 state continuation</td><td>能否在更小工作區保留多步任務能力？</td><td>未執行</td></tr>
+</tbody></table></div>
+<p>B2 是資料表示方案的整體比較；若有效，再各自移除 near-miss、counterfactual、RAG distractors，分辨內部成分的貢獻。不得把 B2 的整體提升歸因給其中一項。各組固定 base、來源家族庫、optimizer 與 supervised-token 預算，同時揭露總 input tokens／FLOPs 的差異。禁止為了假裝算力公平而偷偷刪除必要 context。</p>
+<p>資料抽樣的初始 heuristic 是：20% 基本能力與指令、25% 數量關係與程式計算、25% 工具語意、20% 證據／RAG、10% 程式回饋及狀態。這是針對 v26 缺口的起始提案，並非論文最佳比例；按獨立來源家族與 supervised-token 曝光量監控，不按展開後的列數盲抽。修復與 near-miss 是跨家族視圖，不是另外再加一組比例。維持單一混合 SFT，逐步提高困難度而持續保留基礎題。</p>
+<p>評估報告同時列出 pass@1、實際 selector 的 selected@K、oracle pass@K 上界、修復收益、把正確答案改壞的比例，以及工具語意、來源支持、格式與語義分開的準確率。更多候選中恰有一個正解，若部署時選不出來，就不能算已獲得效能。記錄每題 input／output tokens、呼叫數、延遲與顯存；固定 output-token 配額與固定 latency 是不同比較，分開報告。</p>
+<p><strong>所有已看過的 v26／MiniCPM 測試題保持 diagnosis-only。</strong>不把失敗答案搬入新 SFT，也不在舊 final test 上選新配方。建立新的來源家族 holdout，涵蓋未見 skill、工具 schema、組合與來源版本；同家族 paraphrase 不能跨 split。以來源家族做 paired cluster bootstrap，訓練資源允許時用多個 seed；少數工具模板的重複變形不能當成大量獨立證據。</p>
+
+<h2>這個方向的研究依據與適用限制</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2403.10131">RAFT</a>直接訓練模型在檢索文件中忽略干擾、使用支持證據。可借鑑其資料結構，但其領域內結果不證明 1B 在通用任務達到 9B。</li>
+<li><a href="https://arxiv.org/abs/2302.04761">Toolformer</a>把何時呼叫、選 API、參數與結果使用納入學習；<a href="https://arxiv.org/abs/2310.11511">Self-RAG</a>訓練按需檢索及判斷證據。後者主實驗為 7B／13B，且有自己的 reflection-token 協定，不能直接當作目前 runtime 已有功能。</li>
+<li><a href="https://arxiv.org/html/2602.15763v1">GLM-5 §3.1</a>描述將錯誤片段保留在軌跡中、但排除其 loss 的做法，支持修復資料的 masking 設計；是否同樣改善此 1B 模型仍須實驗。</li>
+<li><a href="https://arxiv.org/abs/2511.06221">VibeThinker-1.5B</a>以多樣化 SFT 後接 RL 提升推理。可借鑑對解法覆蓋的重視，但不能把含 RL 的結果歸因於單獨 SFT，也不能用 oracle pass@K 代替實際系統成功率。</li>
+</ul>
+
+<h2 id="delivery">已完成、待實作與重現入口</h2>
+<p><span class="status">已完成：</span>可安裝的 harness／inference API、CLI、本機與 HTTP 推論；81 項測試、wheel 安裝檢查及 17 個實際推論請求的整合紀錄。此次新增可重現的 v26 統計重算及候選資料覆蓋分析、這份報告與機器可讀提案。</p>
+<p><span class="status">待實作：</span>新來源的語義建置與審查、learner-view compiler、Barbet 專用 adapter、完整 token-span／trainer 驗證、訓練與新 holdout。現有 inference trace 不會自動成為核准 SFT；此 JSON 配方是 reviewable specification，並非已可直接開跑的 trainer config。</p>
+<p><a href="configs/skill-aware-sft-v1.json">版本化 recipe</a> · <a href="results/v26-sft-diagnosis.json">完整統計與來源 SHA-256</a> · <a href="../scripts/analyze_v26_for_sft.py">唯讀分析程式</a> · <a href="inference.md">inference 使用說明</a> · <a href="student-1b-guidance.md">既有 1B 資料契約</a></p>
+<pre>python scripts/analyze_v26_for_sft.py \
+  --benchmark-root /path/to/barbet-qwen-benchmark \
+  --output /tmp/v26-analysis.json
+
+# 可選：在已有 pyarrow 的環境，讀取固定 revision 的 train.parquet
+# --candidate-train-parquet /path/to/static_pass/train.parquet
+# 不生成模型答案、不寫入來源資料；output 必須是不存在的新檔。</pre>
+<footer>報告版本：skill-aware-sft-v1，2026-10-27。Library／harness 基線：0065d21d567173f33a8846943484f843220232b3。所有能力數字來自既有封存評測或本次唯讀統計；新 SFT 的品質、訓練成本與模型增益均為未測量。原始試題、逐題軌跡、私有驗證資料保留在原工作區，本報告僅發布彙總結果。原始指標與本次分析的限制以 JSON 為準。</footer>
+</main>
+</html>
