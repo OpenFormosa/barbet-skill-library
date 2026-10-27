@@ -1,6 +1,6 @@
 # Barbet Skill Library
 
-這是 [Barbet long-context SFT 資料集](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft) 的公開程序技能庫。目前收錄 60 個可讀取、可版本化的技能，涵蓋通用指令、coding、math、agent/tool、reading、science 與 writing。技能描述**何時適用、輸入、程序、失敗處理及驗證**；不包含特定訓練題目的答案、隱藏測試或工具結果。
+這是 [Barbet long-context SFT 資料集](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft) 的公開程序技能庫。目前收錄 64 個可讀取、可版本化的技能，涵蓋通用指令、coding、math、agent/tool、reading、science 與 writing。技能描述**何時適用、輸入、程序、失敗處理及驗證**；不包含特定訓練題目的答案、隱藏測試或工具結果。
 
 This repository publishes reusable, versioned procedure texts for skill-prefill experiments. Other language models can fetch individual `SKILL.md` files over GitHub or read the complete machine-readable [`catalog.json`](catalog.json). Public access to a skill file does not make it a higher-priority instruction in another agent's environment; adopt and audit it explicitly for your application.
 
@@ -34,6 +34,14 @@ curl -fLsS "https://raw.githubusercontent.com/OpenFormosa/barbet-skill-library/$
 由原 39 個技能擴充至 60 個，新增工具能力判斷、外部狀態、解釋與比較、文字轉換、數值及樣本操作等程序；擴充來源與限制見 [`expansion_provenance.json`](expansion_provenance.json)，各技能目前版本以 manifest 為準。可選用的 [`routing/extension.py`](routing/extension.py) 僅讀取當前可見輸入，並附有適用／近似不適用及換題測試；使用方法及限制見 [`routing/README.md`](routing/README.md)。路由覆蓋不等於語義正確，也不代表已執行工具或完成模型訓練。
 
 事實回答修訂更新了 `factual-question-resolution` v2、`concept-explanation` v2 與 `grounded-evidence-answer` v4，並提供具體屬性查詢的窄路由，供應用程式放在寬鬆概念規則之前。適用例、來源／閉卷資料改造與已知題保留的驗證方式見 [`docs/factual-calibration.md`](docs/factual-calibration.md)。這些更新須另行固定版本與測量模型效果。
+
+## 固定權重的 test-time 實驗
+
+新增的可選 [`testtime/`](testtime/) 元件支援中文詞彙檢索、按需短操作卡、帶來源的狀態與隔離 Python 執行。完整 [goal 與實驗規格](experiments/test_time_v1/goal.json)、[HTML 進度與結果](docs/test-time-study.html) 將工程驗證、模型提升與接近 9B 分開記錄。此工作不訓練、不修改權重，也不更動已發布 HF 樣本；目前能力結論以報告中的實測狀態為準。
+
+短卡是有來源版本與雜湊的獨立表示，不應一次載入全部技能。請用目標模型 tokenizer 量測長度；來源引句吻合、schema 合法或公開測試通過，都不等於完整任務正確。模型評測的隱藏答案及測試只交給 scorer。
+
+更新短卡後另執行 `python scripts/build_inference_cards.py` 與 `python scripts/build_inference_cards.py --check`。
 
 ## 維護
 

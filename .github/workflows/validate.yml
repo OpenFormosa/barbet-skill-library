@@ -18,3 +18,5 @@ jobs:
           python-version: '3.12'
       - name: Validate generated catalog and Markdown
         run: python scripts/build.py --check
+      - name: Validate compact inference cards
+        run: python scripts/build_inference_cards.py --check

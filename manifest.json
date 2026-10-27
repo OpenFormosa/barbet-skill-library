@@ -1,16 +1,16 @@
 {
-  "catalog_sha256": "910131e8ec7ac4c7c3aa4b7cf27ca1cf16cfc730f7066639c049cf83c85dcf20",
+  "catalog_sha256": "ab29cd49726767defd84520be85180c101ef77cf83ae80ec6b20ad8215ccd1e1",
   "schema_version": "1",
   "scope_counts": {
-    "agent": 6,
-    "coding": 12,
+    "agent": 7,
+    "coding": 13,
     "general": 20,
     "math": 10,
-    "reading": 4,
+    "reading": 6,
     "science": 3,
     "writing": 5
   },
-  "skill_count": 60,
+  "skill_count": 64,
   "skills": [
     {
       "json_path": "skills/arithmetic-modeling/skill.json",
@@ -199,6 +199,15 @@
       "markdown_sha256": "f33db1e4440c4851d498a900e836f0cf2af27ea8ac45c45d0961f2cf1e9d264c",
       "name": "equal-total-balance",
       "scope": "math",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/execution-feedback-repair/skill.json",
+      "json_sha256": "684adfc7c2b1251ee57c669cb4d0ffd608d463a5702fb65c6cebacef4309a1d7",
+      "markdown_path": "skills/execution-feedback-repair/SKILL.md",
+      "markdown_sha256": "7f287c2512868ac8d32989580d9015cae8e565841881b2cd6a4d9eb95af2280a",
+      "name": "execution-feedback-repair",
+      "scope": "coding",
       "version": "1"
     },
     {
@@ -427,6 +436,15 @@
       "version": "1"
     },
     {
+      "json_path": "skills/retrieval-query-refinement/skill.json",
+      "json_sha256": "83f3a89f3a57b11255de082377ec40eea867e06a31a1bd8d8b3d1f5fa73629b9",
+      "markdown_path": "skills/retrieval-query-refinement/SKILL.md",
+      "markdown_sha256": "575f044d8cd087bc66ef9593fca9842b0a5a9ff63925a3c57fb981e8cade139c",
+      "name": "retrieval-query-refinement",
+      "scope": "reading",
+      "version": "1"
+    },
+    {
       "json_path": "skills/sequence-inspection-and-reduction/skill.json",
       "json_sha256": "c1af4f4447f9fadf9259ae2b3ba2853cb2b3332c8de75443124be47365d1c159",
       "markdown_path": "skills/sequence-inspection-and-reduction/SKILL.md",
@@ -470,6 +488,15 @@
       "name": "taiwan-text-rewrite",
       "scope": "general",
       "version": "2"
+    },
+    {
+      "json_path": "skills/test-time-evidence-selection/skill.json",
+      "json_sha256": "93289fa3e08bf61c50a5e43962345d5c0279b8df275bc28fe6ff81b58d88e6de",
+      "markdown_path": "skills/test-time-evidence-selection/SKILL.md",
+      "markdown_sha256": "820acc6666d25c39f2e2554dfa386303ac7c20a017593a45ffd902f70204fa3e",
+      "name": "test-time-evidence-selection",
+      "scope": "reading",
+      "version": "1"
     },
     {
       "json_path": "skills/text-transformation/skill.json",
@@ -541,6 +568,15 @@
       "markdown_sha256": "86b1bc79280fa1cd19fdd8bead27038eb9a2cf1bfdd4fe015c3d77c506152a3b",
       "name": "validation-scope-check",
       "scope": "general",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/verified-state-handoff/skill.json",
+      "json_sha256": "95ecd5525c6248684c06bb6e9c6ced574a656e018c483f5f3811650b8d5621fa",
+      "markdown_path": "skills/verified-state-handoff/SKILL.md",
+      "markdown_sha256": "16f8c0e8f6962c3d3ab79e23fcbf364874864b6e390e44b97e1558c52fa45084",
+      "name": "verified-state-handoff",
+      "scope": "agent",
       "version": "1"
     },
     {

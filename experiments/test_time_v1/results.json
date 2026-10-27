@@ -1,0 +1,7 @@
+{
+  "status": "initial_dev_launch",
+  "engineering": "52 core/routing/execution tests; no model score yet",
+  "model_evidence": null,
+  "planned_first_wave": "12 MiniCPM policies and Qwen bare, all on dev only",
+  "test": "sealed; no generation before final selection"
+}

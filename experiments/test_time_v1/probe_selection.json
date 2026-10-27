@@ -1,0 +1,25 @@
+{
+  "selection": "first two records per dev domain in frozen shuffled input order, selected before generation",
+  "ids": {
+    "tools": [
+      "tool:dev:8",
+      "tool:dev:6"
+    ],
+    "tmmluplus": [
+      "tmmluplus:technical:262",
+      "tmmluplus:junior_chemistry:185"
+    ],
+    "gsm8k": [
+      "gsm8k:train:2379",
+      "gsm8k:train:488"
+    ],
+    "drcd": [
+      "drcd:340-1-3",
+      "drcd:1143-9-2"
+    ],
+    "mbpp": [
+      "mbpp:741",
+      "mbpp:770"
+    ]
+  }
+}
