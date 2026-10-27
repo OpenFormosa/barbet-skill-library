@@ -5,6 +5,7 @@ No model answers are used for selection. Never print final test questions/gold.
 Public-source passages are a permissible knowledge corpus, not a QA answer bank.
 """
 from __future__ import annotations
+import argparse
 import csv
 import hashlib
 import json
@@ -95,13 +96,23 @@ def previous_questions():
 
 
 def main():
+    global WORK
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--work', type=Path, default=WORK)
+    parser.add_argument('--selection', type=Path, default=Path(__file__).with_name('selected_ids.json'))
+    parser.add_argument('--original-selection', action='store_true',
+        help='Repeat the original exclusion search; requires the archived earlier-study inputs.')
+    args = parser.parse_args()
+    WORK = args.work
+    selection = None if args.original_selection else json.loads(args.selection.read_text()) if args.selection.exists() else None
+    selected = {s: set(v) for s, v in selection['ids'].items()} if selection else None
     WORK.mkdir(parents=True, exist_ok=True)
     data = {s: [] for s in COUNTS}
     labels = {s: [] for s in COUNTS}
     diagnostics = {'pins': PINS, 'seed': SEED, 'selection_uses_model_outputs': False,
         'public_pretraining_overlap': 'unknown; this is not a decontaminated-pretraining claim',
         'exclusions': {}, 'license_notice': 'Source datasets retain their terms; downloaded texts/gold are not committed to the skill library.'}
-    old = previous_questions()
+    old = previous_questions() if selected is None else []
     old_texts = [r.get('user_prompt', r.get('question', r.get('prompt', ''))) for r in old]
     old_templates = {re.sub(r'\d+', '#', normalized(t)) for t in old_texts}
     old_template_hashes = {r.get('metadata', {}).get('template_sha256') for r in old}
@@ -166,7 +177,7 @@ def main():
     # Math: new train questions for development, previously unused official test.
     excluded = 0
     math_pools = {s: parquet('openai/gsm8k', f'main/{s}-00000-of-00001.parquet') for s in ['train', 'test']}
-    math_near = NearFilter([t for t, r in zip(old_texts, old) if r.get('task') == 'gsm8k'],
+    math_near = None if selected else NearFilter([t for t, r in zip(old_texts, old) if r.get('task') == 'gsm8k'],
         [r['question'] for part in ['train', 'test'] for r in math_pools[part]])
     old_ids = {str(r.get('id')) for r in old if r.get('task') == 'gsm8k'}
     used_math = set()
@@ -177,12 +188,14 @@ def main():
         picked = 0
         for i in indices:
             row = math_pools[part][i]
+            if selected and f'gsm8k:{part}:{i}' not in selected[split]:
+                continue
             key = re.sub(r'\d+', '#', normalized(row['question']))
             if ((part, i) in used_math or key in old_templates or old_template(row['question']) in old_template_hashes
                     or (part == 'test' and f'gsm8k:{i}' in old_ids)):
                 excluded += 1
                 continue
-            if not math_near.accept(i + (len(math_pools['train']) if part == 'test' else 0)):
+            if math_near is not None and not math_near.accept(i + (len(math_pools['train']) if part == 'test' else 0)):
                 continue
             used_math.add((part, i))
             old_templates.add(key)
@@ -194,7 +207,7 @@ def main():
         if picked != count:
             raise RuntimeError('insufficient new math questions')
     diagnostics['exclusions']['math_exact_ids_and_numeric_templates'] = excluded
-    diagnostics['exclusions']['math_char_ngram_near_duplicates'] = math_near.rejections
+    diagnostics['exclusions']['math_char_ngram_near_duplicates'] = math_near.rejections if math_near else 'frozen-ID replay; see committed original data_audit.json'
 
     # MBPP: one public test; remaining tests are scorer-only. Verify references
     # in the same constrained executor before accepting a task, independently of
@@ -206,7 +219,7 @@ def main():
                   for p in ['train', 'validation', 'test']}
     code_all = [r for p in ['train', 'validation', 'test'] for r in code_pools[p]]
     code_pos = {r['task_id']: i for i, r in enumerate(code_all)}
-    code_near = NearFilter([], [r.get('prompt', r.get('text', '')) for r in code_all])
+    code_near = None if selected else NearFilter([], [r.get('prompt', r.get('text', '')) for r in code_all])
     for split, count in COUNTS.items():
         part = {'dev': 'train', 'validation': 'validation', 'test': 'test'}[split]
         rows = list(code_pools[part])
@@ -219,6 +232,8 @@ def main():
             tests = row['test_list']
             setup = '\n'.join(row.get('test_imports', []))
             ident = 'mbpp:' + str(row['task_id'])
+            if selected and ident not in selected[split]:
+                continue
             if row['task_id'] in code_used_ids or normalized(text) in code_used or len(tests) < 2:
                 code_exclusions.append({'id': ident, 'reason': 'duplicate_or_insufficient_checks'})
                 continue
@@ -226,7 +241,7 @@ def main():
             if not receipt['passed']:
                 code_exclusions.append({'id': ident, 'reason': receipt['status'], 'error': receipt.get('error', '')})
                 continue
-            if not code_near.accept(code_pos[row['task_id']]):
+            if code_near is not None and not code_near.accept(code_pos[row['task_id']]):
                 code_exclusions.append({'id': ident, 'reason': 'near_duplicate'})
                 continue
             code_used.add(normalized(text))
@@ -295,7 +310,7 @@ def main():
             rows = rows[1:]
         mc_by_subject[subject] = (rows, len(mc_candidates))
         mc_candidates += [r[0] + '\n' + '\n'.join(f'{k}. {v}' for k, v in zip('ABCD', r[1:5])) for r in rows]
-    mc_near = NearFilter([t for t, r in zip(old_texts, old) if r.get('task') == 'tmmluplus'], mc_candidates)
+    mc_near = None if selected else NearFilter([t for t, r in zip(old_texts, old) if r.get('task') == 'tmmluplus'], mc_candidates)
     for subject, (rows, mc_offset) in mc_by_subject.items():
         indices = list(range(len(rows)))
         random.Random(f'{SEED}:mc:{subject}').shuffle(indices)
@@ -305,11 +320,13 @@ def main():
                 i = indices.pop()
                 row = rows[i]
                 ident = f'tmmluplus:{subject}:{i}'
+                if selected and ident not in selected[split]:
+                    continue
                 text = row[0] + '\n' + '\n'.join(f'{k}. {v}' for k, v in zip('ABCD', row[1:5]))
                 key = re.sub(r'\d+', '#', normalized(text))
                 if ident in old_mc_ids or key in old_templates or old_template(text) in old_template_hashes:
                     continue
-                if not mc_near.accept(mc_offset + i):
+                if mc_near is not None and not mc_near.accept(mc_offset + i):
                     continue
                 old_templates.add(key)
                 add(split, request(ident, text + '\n只輸出正確選項的英文字母 A、B、C 或 D。', 'choice'),
@@ -317,7 +334,7 @@ def main():
                 picked += 1
             if picked != count:
                 raise RuntimeError('insufficient fresh subject questions')
-    diagnostics['exclusions']['tmmlu_char_ngram_near_duplicates'] = mc_near.rejections
+    diagnostics['exclusions']['tmmlu_char_ngram_near_duplicates'] = mc_near.rejections if mc_near else 'frozen-ID replay; see committed original data_audit.json'
 
     manifest = []
     for split in COUNTS:
@@ -328,6 +345,12 @@ def main():
         manifest.append(write(WORK / f'{split}.inputs.jsonl', data[split]))
         manifest.append(write(WORK / f'{split}.labels.jsonl', labels[split]))
     diagnostics['manifest'] = manifest
+    if selection:
+        if manifest != selection['manifest']:
+            raise RuntimeError('replayed dataset hashes differ from original frozen selection')
+        if sha((WORK / 'corpus.jsonl').read_bytes()) != selection['corpus_sha256']:
+            raise RuntimeError('replayed corpus hash differs')
+        diagnostics['replayed_frozen_ids'] = True
     diagnostics['test_status'] = 'sealed: do not read test labels or generate test answers before final selection'
     (WORK / 'data_audit.json').write_text(json.dumps(diagnostics, ensure_ascii=False, indent=2))
     print(json.dumps({'event': 'data_prepared', 'counts': {s: len(v) for s, v in data.items()},

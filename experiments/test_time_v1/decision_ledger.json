@@ -41,5 +41,22 @@
     ],
     "hypothesis": "Change only tool serialization to schema-explicit JSON with thinking; separately ask reading answers to copy exact source spans to preserve names/units. Both are compared with routed.",
     "selection_rule": "unchanged validation gate; no final-test access"
+  },
+  {
+    "round": 2,
+    "stage": "completed",
+    "decision": "Neither policy passes the gate. tool_json validation tool accuracy falls 97.92→75.0. literal macro rises 67.71→68.75, but arithmetic falls 70.83→66.67, exceeding the 3 pp guard despite unchanged arithmetic prompts. Keep routed provisionally.",
+    "incumbent": "routed",
+    "runtime_observation": "BF16 batched inference changes some sampled outputs when other requests change. Do not attribute unchanged-contract score changes to the modified component."
+  },
+  {
+    "round": 3,
+    "stage": "prelaunch",
+    "candidates": [
+      "focus",
+      "knowledge"
+    ],
+    "hypothesis": "Focus changes only the reading source count from literal: top 4→top 1. Knowledge adds full-corpus lexical retrieval for choice questions; no QA labels and no larger model.",
+    "selection_rule": "Use three-seed validation for routed/literal/focus/knowledge to reduce selection driven by one-seed serving variation; preserve the same +1 pp and regression gates. Search stops at 18 policies regardless of final outcome."
   }
 ]

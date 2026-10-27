@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "phase": "16 policies registered; round 2 prelaunch",
+  "phase": "18 policies registered; final failure-driven round prelaunch",
   "policies": {
     "bare": {},
     "skill": {
@@ -110,6 +110,42 @@
         },
         "short_answer": {
           "literal_answer": true
+        }
+      }
+    },
+    "focus": {
+      "retrieval": true,
+      "skill": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        },
+        "short_answer": {
+          "literal_answer": true,
+          "top_k": 1
+        }
+      }
+    },
+    "knowledge": {
+      "retrieval": true,
+      "skill": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        },
+        "short_answer": {
+          "literal_answer": true,
+          "top_k": 1
+        },
+        "choice": {
+          "knowledge_retrieval": true,
+          "top_k": 4
         }
       }
     }
