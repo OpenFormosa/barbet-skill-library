@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>ConceptNet 公開來源盤點</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap}</style><h1>ConceptNet 5.7 原始公開來源</h1><p>原作者 assertions 5.7.0 壓縮檔 497,963,447 bytes 完整下載並驗證 gzip CRC，解壓 34,074,917 列逐 byte 雜湊相符。僅盤點兩端皆為英語概念的 3,423,004 列；1 列超出有界 fact 欄位長度，剩 3,423,003 條，沒有重複 literal triple 或 assertion URI。</p><p>逐列保留來源 URI、sense、關係方向與否定關係、原始 metadata、權重和來源貢獻者。列授權為 CC-BY-SA 4.0 或 CC-BY 4.0，不改寫為單一寬鬆授權。資料包含廣義 RelatedTo 與詞形關係；後續需控制這類集中，不能把原始 1,410,296 個 subject URI 直接稱為獨立高難度題目，也不能把不同 sense/詞形視圖自動重複計數。</p><p>目前新增訓練資料 0 筆，尚待題型契約、去重、來源歸屬、首次診斷與精確匯出檢查。來源紀錄的存在也不代表已獨立證明真實世界事實。</p><p><a href="https://github.com/commonsense/conceptnet5/wiki/Downloads">原作者下載頁</a>；<a href="https://github.com/commonsense/conceptnet5/wiki/Copying-and-sharing-ConceptNet">原作者授權與歸屬說明</a>。</p><pre>{
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>ConceptNet 詞典記憶資料</title><style>body{font:17px/1.7 system-ui;max-width:1100px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>ConceptNet 5.7：有來源的詞彙檢索</h1><p>原始公開檔共 34,074,917 列，完整壓縮檔及解壓資料雜湊已核對。保留原始 assertion URI、詞性／詞義 suffix、關係方向及正負語意，並保存逐條來源與授權；不把來源敘述認定為已核實的世界事實。</p><p>本批只使用英文概念兩端、來自 Wiktionary en/fr/de 或 WordNet 3.1 的詞典紀錄，排除其他群眾來源。詞典範圍共 2,847,001 條紀錄；1,303,855 個 subject URI 合併成 871,550 個基礎詞彙 anchor，432,305 個詞性／詞義 URI 變體不另外增加題數。每個基礎詞彙最多一個固定題目與記憶位置。</p><p>首次 25 題語意診斷為 18 ACCEPT、7 REVISE；7 題全部保留隔離。25 題的完整實際請求均已核對；精確 SQL 與證據集合一致。部分評審指控缺少 JSON 引號或證據，與保存的字串矛盾；有些評審明確說答案正確卻選 REVISE。這些診斷票數不能當作資料錯誤率，也不會重跑到通過。</p><p>另有 1,024 個固定抽樣的基礎詞彙通過完整編譯、三種 config 回讀及候選封存還原，618 個實際工具 observation 可重建。全池儲存外推約 6.59 GB，只是估計而非上限。完整候選建置已啟動，尚無本來源資料計入 HF。</p><p>逐條 CC-BY-SA-4.0 或 CC-BY-4.0 條款與原始 provenance 保留；含 ShareAlike 的組合列標為 CC-BY-SA-4.0，不改標成整個 repo 的 Apache-2.0。工具狀態可以明確註冊為 relation_lookup，查詢只作用於提供的有限紀錄。</p><p>來源：<a href="https://github.com/commonsense/conceptnet5/wiki/Downloads">官方下載</a>、<a href="https://github.com/commonsense/conceptnet5/wiki/Copying-and-sharing-ConceptNet">官方授權說明</a>。</p><pre>{
   &quot;counts&quot;: {
     &quot;raw_rows&quot;: 34074917,
     &quot;outside_both_english_concepts&quot;: 30651913,
@@ -37,5 +37,64 @@
   &quot;complete_source_stream_sha256&quot;: &quot;40ad6e34b1bf86b013e46645fcb20e9b9c74091614c8b914c3c42f55c117afd2&quot;,
   &quot;accepted_training_rows&quot;: 0,
   &quot;model_requests&quot;: 0,
-  &quot;semantic_task_diagnosis_and_exact_export_gates_still_required&quot;: true
+  &quot;semantic_task_diagnosis_and_exact_export_gates_still_required&quot;: true,
+  &quot;phase&quot;: &quot;lexical_first_diagnosis_complete; full_candidate_construction_running&quot;,
+  &quot;lexical_scope&quot;: {
+    &quot;counts&quot;: {
+      &quot;facts&quot;: 2847001,
+      &quot;license:cc:by-sa/4.0&quot;: 2628940,
+      &quot;source:/d/wiktionary/fr&quot;: 104892,
+      &quot;source:/d/wiktionary/en&quot;: 2492328,
+      &quot;license:cc:by/4.0&quot;: 218061,
+      &quot;source:/d/wordnet/3.1&quot;: 218061,
+      &quot;source:/d/wiktionary/de&quot;: 31720
+    },
+    &quot;source_subject_uris&quot;: 1303855,
+    &quot;distinct_base_concept_anchors&quot;: 871550,
+    &quot;collapsed_subject_uri_variants&quot;: 432305,
+    &quot;anchor_degree_counts&quot;: {
+      &quot;two_to_eight&quot;: 279871,
+      &quot;one&quot;: 576771,
+      &quot;nine_to_32&quot;: 14625,
+      &quot;above_32&quot;: 283
+    },
+    &quot;bounded_anchor_capacity&quot;: 871267,
+    &quot;database_sha256&quot;: &quot;517f897cf96c9f1d5784f8d9bf54f06b0aaca32d38d81c188092717a52f79db1&quot;,
+    &quot;database_bytes&quot;: 399990784,
+    &quot;policy_sha256&quot;: &quot;0f3231cfdc91ecde8ca2e9c7c6fd7732aa508893145180ebb1b5d3a830cedb43&quot;,
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;model_requests&quot;: 0,
+    &quot;new_task_contract_first_diagnosis_and_export_gates_still_required&quot;: true
+  },
+  &quot;first_source_audit&quot;: {
+    &quot;ACCEPT&quot;: 18,
+    &quot;REVISE&quot;: 7
+  },
+  &quot;first_diagnostic_samples&quot;: 25,
+  &quot;first_nonaccept_base_concepts_held&quot;: 7,
+  &quot;first_review_requests_compared&quot;: 25,
+  &quot;export_probe&quot;: {
+    &quot;driver_sha256&quot;: &quot;534ebd73011d420d93a56ff059565b2c6b32cc59e0ea997d44ebe9ff65fa8dde&quot;,
+    &quot;adapter_sha256&quot;: &quot;a2e8faf2792958d59d4bab5d6d1cb20fa459b907c020129dbc8e49d9edf95c1b&quot;,
+    &quot;original_compiler_sha256&quot;: &quot;64bfa15c1245bf0d5a6aefff4b4334aa25b3831c72096c629c2e56813f181d2e&quot;,
+    &quot;first_audit_sha256&quot;: &quot;dc04c54ffc7e06be6f09814ecda115f5dbe7e64d13d174693c0b9cf2ca2706b3&quot;,
+    &quot;first_review_analysis_sha256&quot;: &quot;a28b2b470bf4c948465e9dc9638c1b403bc798409b096c94740961fccd6033d7&quot;,
+    &quot;counts&quot;: {
+      &quot;compiled&quot;: 1024,
+      &quot;pangolin_tokens&quot;: 2147513,
+      &quot;minicpm_tokens&quot;: 1877594,
+      &quot;restored_observations&quot;: 618
+    },
+    &quot;archive_bytes&quot;: 4864514,
+    &quot;archive_sha256&quot;: &quot;449b652e0302a44a649cfca19857beef2e69127f305a802ca59166c2fae57e33&quot;,
+    &quot;raw_payload_bytes&quot;: 13269522,
+    &quot;measured_combined_bytes_per_row&quot;: 7555.7177734375,
+    &quot;projected_full_anchor_pool_bytes&quot;: 6585185825,
+    &quot;projection_is_not_a_storage_upper_bound&quot;: true,
+    &quot;all_three_configs_and_archive_exact_readback&quot;: true,
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;model_requests&quot;: 0,
+    &quot;source_programs_executed&quot;: false,
+    &quot;first_holds_preserved&quot;: true
+  }
 }</pre></html>

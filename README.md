@@ -67,9 +67,15 @@ barbet-infer run --family mini \
 
 更新短卡後另執行 `python scripts/build_inference_cards.py` 與 `python scripts/build_inference_cards.py --check`。
 
-## SFT 資料改造提案
+## 記憶、技能與 harness 訓練資料
 
-[v26 診斷與 skill-aware SFT 設計](docs/skill-aware-sft-v1.html) 將輸入介面、數學、工具語意及資料覆蓋的問題，對應到技能使用、RAG 與真實回饋修復的學習視圖。[版本化配方](docs/configs/skill-aware-sft-v1.json) 明確區分目前 harness 已支援的流程、尚需實作的 adapter，以及訓練後需要驗證的 skill 增益。這是尚未採用的資料方案；沒有啟動訓練或修改 HF release。完整彙總與來源雜湊見 [v26 分析](docs/results/v26-sft-diagnosis.json)，可用 [唯讀腳本](scripts/analyze_v26_for_sft.py) 重現。
+目前 [HF 已完整回讀驗證的版本](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/fb77a686ec974196278dab3891227d918951dde1) 有 **4,910,095 筆新資料**，現役舊資料為 0；目標為至少一千萬筆合格、去重的 episode。問題數、任務家族、assistant 回合、實際工具觀察與兩種 tokenizer 的有效訓練 tokens 分開統計。多答案、前後記憶位置與對話前綴不增加獨立題數。
+
+**同一完整輸入有多個合格答案時，以固定 native Barbet v26 的最低條件答案 PPL 為標準。** 全部競爭答案必須實際計分；只有一個答案時明確標示未量測。首次未通過的題目持續隔離，不改選次低答案。低 PPL 不代表答案正確。已發布 coding 資料的範圍與限制見 [IFM coding 報告](docs/reports/ifm-code-v26-v1/index.html)。
+
+新增的 [Wikidata 關係記憶批次](docs/reports/wikidata-relations-v1/index.html) 已完成 4,547,341 個單一答案題的來源、獨立 SQL、重複題與切分檢查，完整訓練檔正在匯出，尚未計入上述 HF 數量。[ConceptNet 詞典來源](docs/reports/conceptnet57-inventory-v1/index.html) 已完成第一輪診斷並開始建置；每個基礎詞彙最多一題，詞性與詞義 URI 變體不各算一題。兩批都保留可由 `relation_tool_callbacks` 還原的真實唯讀工具狀態，使用方式見 [推論資料與關係記憶介面](docs/inference.md#資料集與關係記憶介面)。
+
+早期 [v26 診斷與 skill-aware SFT 設計](docs/skill-aware-sft-v1.html)、[版本化配方](docs/configs/skill-aware-sft-v1.json) 和 [v26 分析](docs/results/v26-sft-diagnosis.json) 保留作為設計依據；現行資料處理與驗收證據在 `scripts/` 及 `docs/reports/`。本次資料重建沒有訓練權重，也沒有量測新資料帶來的模型能力增益；前述固定權重的 test-time 實驗是另外一項已封存實驗。
 
 ## 維護
 

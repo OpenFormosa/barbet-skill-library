@@ -37,5 +37,64 @@
   "complete_source_stream_sha256": "40ad6e34b1bf86b013e46645fcb20e9b9c74091614c8b914c3c42f55c117afd2",
   "accepted_training_rows": 0,
   "model_requests": 0,
-  "semantic_task_diagnosis_and_exact_export_gates_still_required": true
+  "semantic_task_diagnosis_and_exact_export_gates_still_required": true,
+  "phase": "lexical_first_diagnosis_complete; full_candidate_construction_running",
+  "lexical_scope": {
+    "counts": {
+      "facts": 2847001,
+      "license:cc:by-sa/4.0": 2628940,
+      "source:/d/wiktionary/fr": 104892,
+      "source:/d/wiktionary/en": 2492328,
+      "license:cc:by/4.0": 218061,
+      "source:/d/wordnet/3.1": 218061,
+      "source:/d/wiktionary/de": 31720
+    },
+    "source_subject_uris": 1303855,
+    "distinct_base_concept_anchors": 871550,
+    "collapsed_subject_uri_variants": 432305,
+    "anchor_degree_counts": {
+      "two_to_eight": 279871,
+      "one": 576771,
+      "nine_to_32": 14625,
+      "above_32": 283
+    },
+    "bounded_anchor_capacity": 871267,
+    "database_sha256": "517f897cf96c9f1d5784f8d9bf54f06b0aaca32d38d81c188092717a52f79db1",
+    "database_bytes": 399990784,
+    "policy_sha256": "0f3231cfdc91ecde8ca2e9c7c6fd7732aa508893145180ebb1b5d3a830cedb43",
+    "accepted_training_rows": 0,
+    "model_requests": 0,
+    "new_task_contract_first_diagnosis_and_export_gates_still_required": true
+  },
+  "first_source_audit": {
+    "ACCEPT": 18,
+    "REVISE": 7
+  },
+  "first_diagnostic_samples": 25,
+  "first_nonaccept_base_concepts_held": 7,
+  "first_review_requests_compared": 25,
+  "export_probe": {
+    "driver_sha256": "534ebd73011d420d93a56ff059565b2c6b32cc59e0ea997d44ebe9ff65fa8dde",
+    "adapter_sha256": "a2e8faf2792958d59d4bab5d6d1cb20fa459b907c020129dbc8e49d9edf95c1b",
+    "original_compiler_sha256": "64bfa15c1245bf0d5a6aefff4b4334aa25b3831c72096c629c2e56813f181d2e",
+    "first_audit_sha256": "dc04c54ffc7e06be6f09814ecda115f5dbe7e64d13d174693c0b9cf2ca2706b3",
+    "first_review_analysis_sha256": "a28b2b470bf4c948465e9dc9638c1b403bc798409b096c94740961fccd6033d7",
+    "counts": {
+      "compiled": 1024,
+      "pangolin_tokens": 2147513,
+      "minicpm_tokens": 1877594,
+      "restored_observations": 618
+    },
+    "archive_bytes": 4864514,
+    "archive_sha256": "449b652e0302a44a649cfca19857beef2e69127f305a802ca59166c2fae57e33",
+    "raw_payload_bytes": 13269522,
+    "measured_combined_bytes_per_row": 7555.7177734375,
+    "projected_full_anchor_pool_bytes": 6585185825,
+    "projection_is_not_a_storage_upper_bound": true,
+    "all_three_configs_and_archive_exact_readback": true,
+    "accepted_training_rows": 0,
+    "model_requests": 0,
+    "source_programs_executed": false,
+    "first_holds_preserved": true
+  }
 }

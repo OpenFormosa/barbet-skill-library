@@ -1,0 +1,310 @@
+{
+  "cases": [
+    {
+      "record_id": "9ec98cc43cf432ce3965180c3bac8a2492e628da73461e30d31d2780bbe34471",
+      "first_verdict": "REVISE",
+      "first_issues": [
+        "evidence_ids definition: The prompt requires the sorted union of every matching record ID traversed at every step. The assistant correctly identified the single matching record ID cn57:12564546. (196)"
+      ],
+      "exact_target": {
+        "count": 1,
+        "evidence_ids": [
+          "cn57:12564546"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "/r/FormOf"
+              }
+            ],
+            "start": "/c/en/apocrine_glands/n"
+          }
+        ],
+        "operation": "count"
+      },
+      "actual_review_request_matches_complete_saved_messages": true,
+      "target_valid_json": true,
+      "target_evidence_matches_all_steps": true,
+      "independent_SQL_equal": true,
+      "still_held": true
+    },
+    {
+      "record_id": "c461e3df6cea8a024d606f359933952070a2d8cbe060eb1e970281cd9c012729",
+      "first_verdict": "REVISE",
+      "first_issues": [
+        "The assistant's count is 1, which is correct for the final endpoints (only /c/en/window_covering/n is reached via the full path).",
+        "The evidence_ids list includes all traversed records: cn57:18923701, cn57:18923702, cn57:18923703 (step 1) and cn57:17136644 (step 2). This matches the requirement to include traversed records even if"
+      ],
+      "exact_target": {
+        "count": 1,
+        "evidence_ids": [
+          "cn57:17136644",
+          "cn57:18923701",
+          "cn57:18923702",
+          "cn57:18923703"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "/r/RelatedTo"
+              },
+              {
+                "direction": "out",
+                "relation": "/r/IsA"
+              }
+            ],
+            "start": "/c/en/blind_massage/n"
+          }
+        ],
+        "operation": "count"
+      },
+      "actual_review_request_matches_complete_saved_messages": true,
+      "target_valid_json": true,
+      "target_evidence_matches_all_steps": true,
+      "independent_SQL_equal": true,
+      "still_held": true
+    },
+    {
+      "record_id": "e2d3186683c5bae334668533dc6c843c9b2e4ad29c3bc4f97511e06a5f5ac1cf",
+      "first_verdict": "REVISE",
+      "first_issues": [
+        "The final assistant response is a JSON string but lacks the required 'evidence_ids' sorting verification in the thought process, though the output itself is sorted. More critically, the prompt asks to"
+      ],
+      "exact_target": {
+        "count": 1,
+        "evidence_ids": [
+          "cn57:12829593",
+          "cn57:19455445",
+          "cn57:19455446",
+          "cn57:19455447",
+          "cn57:19455448",
+          "cn57:19455449"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "/r/RelatedTo"
+              },
+              {
+                "direction": "out",
+                "relation": "/r/FormOf"
+              }
+            ],
+            "start": "/c/en/haut_gout/n"
+          }
+        ],
+        "operation": "count"
+      },
+      "actual_review_request_matches_complete_saved_messages": true,
+      "target_valid_json": true,
+      "target_evidence_matches_all_steps": true,
+      "independent_SQL_equal": true,
+      "still_held": true
+    },
+    {
+      "record_id": "7f7ff45917e18fa7c333252d4a62af1c7cd0e9888d11cd940ed6a89b5f1e039e",
+      "first_verdict": "REVISE",
+      "first_issues": [
+        "The prompt specifies 'count counts those endpoints' for the first branch. The endpoints are /c/en/map and /c/en/sky. Count is 2. This is correct.",
+        "evidence_ids must be the sorted union of every matching record ID traversed at every step. Traversed records: cn57:12858704 (step 1), cn57:823342 (step 2), cn57:823343 (step 2). Sorted: cn57:12858704,"
+      ],
+      "exact_target": {
+        "count": 2,
+        "evidence_ids": [
+          "cn57:12858704",
+          "cn57:823342",
+          "cn57:823343"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "/r/FormOf"
+              },
+              {
+                "direction": "out",
+                "relation": "/r/DerivedFrom"
+              }
+            ],
+            "start": "/c/en/skymaps/n"
+          }
+        ],
+        "operation": "count"
+      },
+      "actual_review_request_matches_complete_saved_messages": true,
+      "target_valid_json": true,
+      "target_evidence_matches_all_steps": true,
+      "independent_SQL_equal": true,
+      "still_held": true
+    },
+    {
+      "record_id": "27e0d63431bfc34031d09c4e1d8fe1015f55b202369025978ea7a25569878aba",
+      "first_verdict": "REVISE",
+      "first_issues": [
+        "The assistant's JSON output contains a syntax error in the evidence_ids array. The string values are not properly quoted or escaped in the provided text representation, specifically looking at the raw",
+        "content",
+        "Wait, re-reading the assistant content: {",
+        "count:4,evidence_ids:[cn57:19148696,cn57:19148697,cn57:19148698,cn57:19148699,cn57:629898]}. The IDs are missing double quotes. JSON requires strings to be quoted. This is invalid JSON."
+      ],
+      "exact_target": {
+        "count": 4,
+        "evidence_ids": [
+          "cn57:19148696",
+          "cn57:19148697",
+          "cn57:19148698",
+          "cn57:19148699",
+          "cn57:629898"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "/r/DerivedFrom"
+              },
+              {
+                "direction": "out",
+                "relation": "/r/RelatedTo"
+              }
+            ],
+            "start": "/c/en/dartford"
+          }
+        ],
+        "operation": "count"
+      },
+      "actual_review_request_matches_complete_saved_messages": true,
+      "target_valid_json": true,
+      "target_evidence_matches_all_steps": true,
+      "independent_SQL_equal": true,
+      "still_held": true
+    },
+    {
+      "record_id": "abd1ab6cc78e48f2e177f37ba1bb0e97e31fe55d1dd890f0d8cc6e0b61d18e25",
+      "first_verdict": "REVISE",
+      "first_issues": [
+        "Branch 1 Step 2 is incomplete. The assistant missed the synonym edge from /c/en/between_rock_and_hard_place to /c/en/caught_between_devil_and_deep_blue_sea (cn57:28357704). Consequently, the endpoint",
+        "Evidence IDs are incorrect. The assistant included cn57:18902437, 18902438, 18902439 (RelatedTo edges) which are not part of Branch 1 (Synonym) or Branch 2 (RelatedTo->Synonym) traversal for Branch 1",
+        "Branch 2 (RelatedTo->Synonym) from /c/en/between_scylla_and_charybdis: Step 1 finds RelatedTo objects (cn57:18902437, 18902438, 18902439). Step 2 finds synonyms of those objects. /c/en/between_rock_a"
+      ],
+      "exact_target": {
+        "answer_ids": [
+          "/c/en/caught_between_devil_and_deep_blue_sea"
+        ],
+        "evidence_ids": [
+          "cn57:18902437",
+          "cn57:18902438",
+          "cn57:18902439",
+          "cn57:28357704",
+          "cn57:28357714",
+          "cn57:28357715",
+          "cn57:28357716",
+          "cn57:29238619",
+          "cn57:29238620"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "/r/Synonym"
+              },
+              {
+                "direction": "out",
+                "relation": "/r/Synonym"
+              }
+            ],
+            "start": "/c/en/between_scylla_and_charybdis"
+          },
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "/r/RelatedTo"
+              },
+              {
+                "direction": "out",
+                "relation": "/r/Synonym"
+              }
+            ],
+            "start": "/c/en/between_scylla_and_charybdis"
+          }
+        ],
+        "operation": "intersection"
+      },
+      "actual_review_request_matches_complete_saved_messages": true,
+      "target_valid_json": true,
+      "target_evidence_matches_all_steps": true,
+      "independent_SQL_equal": true,
+      "still_held": true
+    },
+    {
+      "record_id": "1c300a6c3dfd47d4d7146dc2cdcb7711dada64e477a1cc2b6c1827a5a7c7db44",
+      "first_verdict": "REVISE",
+      "first_issues": [
+        "evidence_ids is incomplete. The specification requires including 'every matching record ID traversed at every step... including traversed records whose next step has no match'.",
+        "The path from /c/en/megalitre to /c/en/litre (via cn57:724404) was traversed. Although /c/en/litre has no Synonym edge, cn57:724404 is a traversed record and must be in evidence_ids.",
+        "The path from /c/en/megalitre to /c/en/mega (via cn57:724405) was traversed. cn57:724405 is a traversed record and must be in evidence_ids.",
+        "The path from /c/en/mega to /c/en/megalo (via cn57:29123767) was traversed. cn57:29123767 is a traversed record and must be in evidence_ids."
+      ],
+      "exact_target": {
+        "answer_ids": [
+          "/c/en/megalo"
+        ],
+        "evidence_ids": [
+          "cn57:29123767",
+          "cn57:724404",
+          "cn57:724405"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "/r/DerivedFrom"
+              },
+              {
+                "direction": "out",
+                "relation": "/r/Synonym"
+              }
+            ],
+            "start": "/c/en/megalitre"
+          }
+        ],
+        "operation": "project"
+      },
+      "actual_review_request_matches_complete_saved_messages": true,
+      "target_valid_json": true,
+      "target_evidence_matches_all_steps": true,
+      "independent_SQL_equal": true,
+      "still_held": true
+    }
+  ],
+  "actual_requests_compared": 25,
+  "first_audit_sha256": "dc04c54ffc7e06be6f09814ecda115f5dbe7e64d13d174693c0b9cf2ca2706b3",
+  "driver_sha256": "534ebd73011d420d93a56ff059565b2c6b32cc59e0ea997d44ebe9ff65fa8dde",
+  "model_requests": 0,
+  "answers_rewritten": 0,
+  "first_dispositions_unchanged": true,
+  "interpretation": "Several critiques contradict valid JSON, present evidence IDs, or assert correctness while choosing REVISE. All first holds persist. The diagnosis is not a full-corpus error rate; finite-record exactness is separate from world truth."
+}

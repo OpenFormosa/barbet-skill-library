@@ -1,5 +1,5 @@
 {
-  "phase": "first_diagnosis_complete; full_training_export_not_started",
+  "phase": "4547341_unique_unscored_singletons_selected; full_export_running",
   "original_train_entities": 4579609,
   "original_train_triples": 20496514,
   "usable_training_entities": 4574732,
@@ -31,5 +31,54 @@
   "accepted_training_rows": 0,
   "model_weights_trained": false,
   "model_capability_gain_measured": false,
-  "one_task_per_anchor_and_no_memory_position_duplicates": true
+  "one_task_per_anchor_and_no_memory_position_duplicates": true,
+  "full_normalization_counts": {
+    "source_anchors_seen": 4554029,
+    "candidate_answers": 4547341,
+    "independent_sql_targets_equal": 4547341,
+    "actual_observations_restored": 2974827,
+    "held:complete_adjacency_above_task_budget": 6673,
+    "held:first_source_nonaccept_anchor": 15
+  },
+  "query_schema_counts": {
+    "finite-relations-intersection-2-2": 13215,
+    "finite-relations-project-2": 3413453,
+    "finite-relations-count-2": 861020,
+    "finite-relations-union-2-2": 13553,
+    "finite-relations-project-1": 191344,
+    "finite-relations-difference-2-2": 6646,
+    "finite-relations-count-1": 48110
+  },
+  "candidate_index": {
+    "counts": {
+      "seen": 4547341,
+      "eligible": 4547341
+    },
+    "distinct_answers": 4547341,
+    "input_groups": 4547341,
+    "competing_groups": 0,
+    "answers_to_score": null,
+    "status": "INDEXED_NOT_YET_PPL_SELECTED",
+    "all_score_inputs_are_eligible_only": true,
+    "no_model_training": true
+  },
+  "episode_identity_guard": {
+    "counts": {},
+    "distinct_candidate_answers": 4547341,
+    "ambiguous_static_task_inputs": 0,
+    "all_original_candidates_covered": true,
+    "status": "COMPLETE",
+    "original_scores_not_rewritten": true
+  },
+  "selected": {
+    "selected": 4547341,
+    "single_eligible_answer": 4547341,
+    "split:train": 4456150,
+    "split:validation": 91191,
+    "shards": 456
+  },
+  "source_archive_bytes": 24395563948,
+  "original_source_payload_bytes": 76188342089,
+  "published_rows": 0,
+  "new_SFT_splits_entity_disjoint": false
 }

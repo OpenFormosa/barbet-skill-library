@@ -167,6 +167,51 @@ API 結果保留完整 trace；CLI 預設輸出較精簡的結果，使用 `--in
 每個 completion 必須與輸入順序對應，包含真正的 token 數與時間。
 核心不依賴 vLLM；測試用 backend 可在無 GPU 環境執行。
 
+## 資料集與關係記憶介面
+
+HF 的 `records` config 保留 messages、工具 schema、完整 native 文字、
+target spans 與來源 metadata。用 `prepare_dataset_request` 建立不包含目標答案的
+請求；不要把整列 `source_refs_json` 放進 prompt，因為其中包含資料建置的計算軌跡。
+
+```python
+import json
+from barbet_inference.dataset_adapter import prepare_dataset_request
+from barbet_inference.relational_dataset import (
+    restore_relational_memory, relation_tool_callbacks,
+)
+
+# row 是一筆已下載的 records 資料；從第一個 supervised assistant 回合開始。
+messages = json.loads(row['messages_json'])
+first_target = next(i for i, m in enumerate(messages)
+                    if m['role'] == 'assistant' and m.get('loss'))
+request = prepare_dataset_request(
+    row, model='your-served-model', target_turn=first_target,
+)
+
+# 僅用於具有 registered_relation_snapshot 的關係記憶資料。
+memory = restore_relational_memory(row)
+handlers = relation_tool_callbacks(row)
+```
+
+預設 `target_turn` 是最後一個 supervised assistant 回合，適合評估給定先前歷史後的
+答案生成；要從頭量測工具選擇與檢索，應像上例指定第一回合。不能把已記錄的未來工具
+觀察先交給模型，再稱為模型自行完成檢索。
+
+`restore_relational_memory` 核對 snapshot 雜湊及有界 facts。
+`relation_tool_callbacks` 只提供 `relation_lookup`，由應用程式明確註冊到
+`ContextAgent` 的 `handlers`，並提供該筆資料的對應 `tools` schema。
+文件內的工具名稱不會自動變成可執行函式。查詢保留方向、完整 URI 與不同終點語意；
+超過預算會報錯，不會回傳裁切後的部分結果。查不到只表示此有限資料沒有匹配紀錄。
+
+應用程式也可用 `memory.verify(public_query, candidate)` 作為 `ContextAgent`
+的 verifier，或搭配 `RefinementLoop` 進行最多三次候選生成。這個 callback 根據
+題目公開的路徑與已註冊 facts 重算，回饋綁定實際候選的 SHA-256，不讀 benchmark
+隱藏答案。它只驗證有限紀錄查詢，不證明來源敘述是現實世界的事實。重複候選、
+耗盡步數、未完成生成與驗證失敗都會保留明確狀態。
+
+目前新增的圖譜與詞典資料是正確查詢和真實 observation 軌跡；沒有錯誤及修復回合的
+列不算 iterative-refinement 樣本。模型是否能學會這些程序，仍須以訓練後的獨立任務測量。
+
 ## 如何解讀輸出
 
 `prediction` 是模型結果；`validation` 可能標記 `format_valid`、`schema_valid`、
