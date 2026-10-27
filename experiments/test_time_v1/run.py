@@ -31,7 +31,7 @@ def canonical(value):
 
 def runtime_hashes():
     paths = sorted((ROOT / 'testtime').glob('*.py'))
-    paths += [ROOT / 'testtime/cards.json', Path(__file__), HERE / 'models.json']
+    paths += [ROOT / 'testtime/cards.json', Path(__file__), HERE / 'models.json', HERE / 'model_integrity.json']
     return {str(p.relative_to(ROOT)): sha(p.read_bytes()) for p in paths}
 
 
