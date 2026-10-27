@@ -1,0 +1,83 @@
+{
+  "comparison": "mini/routed minus mini/bare",
+  "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+  "bootstrap_replicates": 10000,
+  "domains": {
+    "drcd": {
+      "questions": 48,
+      "clusters": 48,
+      "delta_pp": 20.833333333333336,
+      "paired_95ci_pp": [
+        10.416666666666668,
+        33.33333333333333
+      ],
+      "cluster_95ci_pp": [
+        10.416666666666668,
+        33.33333333333333
+      ]
+    },
+    "gsm8k": {
+      "questions": 48,
+      "clusters": 48,
+      "delta_pp": 20.833333333333336,
+      "paired_95ci_pp": [
+        6.25,
+        35.41666666666667
+      ],
+      "cluster_95ci_pp": [
+        6.25,
+        35.41666666666667
+      ]
+    },
+    "mbpp": {
+      "questions": 48,
+      "clusters": 48,
+      "delta_pp": 18.75,
+      "paired_95ci_pp": [
+        2.083333333333333,
+        35.41666666666667
+      ],
+      "cluster_95ci_pp": [
+        2.083333333333333,
+        35.41666666666667
+      ]
+    },
+    "tmmluplus": {
+      "questions": 67,
+      "clusters": 67,
+      "delta_pp": 8.955223880597014,
+      "paired_95ci_pp": [
+        -4.477611940298507,
+        22.388059701492537
+      ],
+      "cluster_95ci_pp": [
+        -5.970149253731343,
+        22.388059701492537
+      ]
+    },
+    "tools": {
+      "questions": 48,
+      "clusters": 3,
+      "delta_pp": 0.0,
+      "paired_95ci_pp": [
+        0.0,
+        0.0
+      ],
+      "cluster_95ci_pp": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "primary_macro": {
+    "delta_pp": 15.104166666666668,
+    "paired_95ci_pp": [
+      8.854166666666668,
+      21.354166666666668
+    ],
+    "cluster_95ci_pp": [
+      8.854166666666668,
+      21.354166666666668
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "policies": {
+    "context_probe": {
+      "skill": true,
+      "input_tokens": 16384
+    }
+  }
+}

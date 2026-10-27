@@ -1,7 +1,7 @@
 {
-  "status": "round_1_launch",
+  "status": "round_2_launch",
   "test_status": "sealed",
-  "dev_initial": [
+  "dev": [
     {
       "model": "mini",
       "policy": "bare",
@@ -409,6 +409,51 @@
     },
     {
       "model": "mini",
+      "policy": "routed",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 11,
+          "accuracy": 0.34375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 21,
+          "accuracy": 0.31343283582089554
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 24,
+          "accuracy": 0.75
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 8,
+          "accuracy": 0.25
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 26,
+          "accuracy": 0.8125
+        }
+      },
+      "primary_macro": 0.5390625,
+      "cost": {
+        "calls": 1.1076923076923078,
+        "prompt_tokens": 881.7538461538461,
+        "output_tokens": 1700.3897435897436,
+        "generation_seconds_amortized": 1.0189509586072885,
+        "retrieval_seconds": 0.005876427640517553,
+        "execution_seconds": 0.014026886492203443
+      },
+      "unclosed_thinking_calls": 32,
+      "length_stopped_calls": 32,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
       "policy": "self_revise",
       "complete": true,
       "items": 195,
@@ -543,6 +588,51 @@
       "qa_support_visible_rate": 1.0
     },
     {
+      "model": "mini",
+      "policy": "stdout",
+      "complete": true,
+      "items": 195,
+      "domains": {
+        "tools": {
+          "n": 32,
+          "correct": 11,
+          "accuracy": 0.34375
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 19,
+          "accuracy": 0.2835820895522388
+        },
+        "gsm8k": {
+          "n": 32,
+          "correct": 16,
+          "accuracy": 0.5
+        },
+        "drcd": {
+          "n": 32,
+          "correct": 9,
+          "accuracy": 0.28125
+        },
+        "mbpp": {
+          "n": 32,
+          "correct": 23,
+          "accuracy": 0.71875
+        }
+      },
+      "primary_macro": 0.4609375,
+      "cost": {
+        "calls": 1.2871794871794873,
+        "prompt_tokens": 1130.6410256410256,
+        "output_tokens": 2139.6,
+        "generation_seconds_amortized": 0.9888611139586339,
+        "retrieval_seconds": 0.005120191799524503,
+        "execution_seconds": 0.033599501561660035
+      },
+      "unclosed_thinking_calls": 32,
+      "length_stopped_calls": 32,
+      "qa_support_visible_rate": 1.0
+    },
+    {
       "model": "qwen",
       "policy": "bare",
       "complete": true,
@@ -588,7 +678,7 @@
       "qa_support_visible_rate": 0.34375
     }
   ],
-  "validation_initial_available": [
+  "validation": [
     {
       "model": "mini",
       "policy": "bare",
@@ -681,6 +771,51 @@
     },
     {
       "model": "mini",
+      "policy": "long",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 26,
+          "accuracy": 0.5416666666666666
+        },
+        "tools": {
+          "n": 48,
+          "correct": 47,
+          "accuracy": 0.9791666666666666
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 28,
+          "accuracy": 0.5833333333333334
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 1,
+          "accuracy": 0.020833333333333332
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 27,
+          "accuracy": 0.40298507462686567
+        }
+      },
+      "primary_macro": 0.53125,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 920.057915057915,
+        "output_tokens": 2368.7876447876447,
+        "generation_seconds_amortized": 1.0547160547097216,
+        "retrieval_seconds": 0.015926553533344195,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 10,
+      "length_stopped_calls": 9,
+      "qa_support_visible_rate": 0.1875
+    },
+    {
+      "model": "mini",
       "policy": "rag_skill",
       "complete": true,
       "items": 259,
@@ -722,6 +857,51 @@
       },
       "unclosed_thinking_calls": 36,
       "length_stopped_calls": 36,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "routed",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 38,
+          "accuracy": 0.7916666666666666
+        },
+        "tools": {
+          "n": 48,
+          "correct": 47,
+          "accuracy": 0.9791666666666666
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 34,
+          "accuracy": 0.7083333333333334
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 11,
+          "accuracy": 0.22916666666666666
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 26,
+          "accuracy": 0.3880597014925373
+        }
+      },
+      "primary_macro": 0.6770833333333334,
+      "cost": {
+        "calls": 1.1274131274131274,
+        "prompt_tokens": 971.942084942085,
+        "output_tokens": 1762.019305019305,
+        "generation_seconds_amortized": 0.9234159031602407,
+        "retrieval_seconds": 0.004709033547221003,
+        "execution_seconds": 0.01699215918779373
+      },
+      "unclosed_thinking_calls": 37,
+      "length_stopped_calls": 38,
       "qa_support_visible_rate": 1.0
     },
     {
@@ -768,6 +948,141 @@
       "unclosed_thinking_calls": 39,
       "length_stopped_calls": 38,
       "qa_support_visible_rate": 0.1875
+    },
+    {
+      "model": "mini",
+      "policy": "state",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 36,
+          "accuracy": 0.75
+        },
+        "tools": {
+          "n": 48,
+          "correct": 23,
+          "accuracy": 0.4791666666666667
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 5,
+          "accuracy": 0.10416666666666667
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 12,
+          "accuracy": 0.25
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 25,
+          "accuracy": 0.373134328358209
+        }
+      },
+      "primary_macro": 0.3958333333333333,
+      "cost": {
+        "calls": 1.4749034749034748,
+        "prompt_tokens": 1629.2239382239381,
+        "output_tokens": 2689.930501930502,
+        "generation_seconds_amortized": 0.8683276356100806,
+        "retrieval_seconds": 0.004573335590624901,
+        "execution_seconds": 0.03670443450622117
+      },
+      "unclosed_thinking_calls": 67,
+      "length_stopped_calls": 67,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "mini",
+      "policy": "stdout",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 34,
+          "accuracy": 0.7083333333333334
+        },
+        "tools": {
+          "n": 48,
+          "correct": 47,
+          "accuracy": 0.9791666666666666
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 24,
+          "accuracy": 0.5
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 13,
+          "accuracy": 0.2708333333333333
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 20,
+          "accuracy": 0.29850746268656714
+        }
+      },
+      "primary_macro": 0.6145833333333334,
+      "cost": {
+        "calls": 1.359073359073359,
+        "prompt_tokens": 1483.5868725868727,
+        "output_tokens": 2451.6988416988415,
+        "generation_seconds_amortized": 0.9015627405444397,
+        "retrieval_seconds": 0.006026710164247793,
+        "execution_seconds": 0.04043632233695174
+      },
+      "unclosed_thinking_calls": 56,
+      "length_stopped_calls": 57,
+      "qa_support_visible_rate": 1.0
+    },
+    {
+      "model": "qwen",
+      "policy": "bare",
+      "complete": true,
+      "items": 259,
+      "domains": {
+        "mbpp": {
+          "n": 48,
+          "correct": 33,
+          "accuracy": 0.6875
+        },
+        "tools": {
+          "n": 48,
+          "correct": 48,
+          "accuracy": 1.0
+        },
+        "gsm8k": {
+          "n": 48,
+          "correct": 34,
+          "accuracy": 0.7083333333333334
+        },
+        "drcd": {
+          "n": 48,
+          "correct": 6,
+          "accuracy": 0.125
+        },
+        "tmmluplus": {
+          "n": 67,
+          "correct": 54,
+          "accuracy": 0.8059701492537313
+        }
+      },
+      "primary_macro": 0.6302083333333334,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 927.8455598455598,
+        "output_tokens": 1895.6216216216217,
+        "generation_seconds_amortized": 1.3356352295568321,
+        "retrieval_seconds": 0.017678660718170373,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 43,
+      "length_stopped_calls": 45,
+      "qa_support_visible_rate": 0.16666666666666666
     }
   ],
   "decisions": [
@@ -796,6 +1111,23 @@
       "hypothesis": "Contract routing preserves bare native tools while retaining skill/RAG and executable coding feedback; a one-number Python stdout interface removes the failed dual JSON/variable contract for arithmetic.",
       "selection_rule": "same preregistered validation promotion gate; no final-test access",
       "warning": "Routed combines dev-selected components; stdout is its single math-interface intervention. Neither is proven yet."
+    },
+    {
+      "round": 1,
+      "stage": "completed",
+      "decision": "Promote routed over bare: validation macro 52.60→67.71; every primary domain non-regressing and retention 29.85→38.81. Reject stdout: 61.46 macro, math 50.0 versus routed 70.83; simplifying the interface alone did not fix program-generation/modeling errors.",
+      "incumbent": "routed",
+      "statistics": "single-seed validation, paired CI recorded separately; final test still sealed"
+    },
+    {
+      "round": 2,
+      "stage": "prelaunch",
+      "candidates": [
+        "tool_json",
+        "literal"
+      ],
+      "hypothesis": "Change only tool serialization to schema-explicit JSON with thinking; separately ask reading answers to copy exact source spans to preserve names/units. Both are compared with routed.",
+      "selection_rule": "unchanged validation gate; no final-test access"
     }
   ],
   "final_results": null
