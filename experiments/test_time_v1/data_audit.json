@@ -1,0 +1,151 @@
+{
+  "pins": {
+    "drcd": "b944790de5af02c5fbb7cd9cb1473d27d169eebf",
+    "openai/gsm8k": "740312add88f781978c0658806c59bc2815b9866",
+    "google-research-datasets/mbpp": "4bb6404fdc6cacfda99d4ac4205087b89d32030c",
+    "ikala/tmmluplus": "639a64db464b4661feb91817b9edfe43932bdf18"
+  },
+  "seed": 20261027,
+  "selection_uses_model_outputs": false,
+  "public_pretraining_overlap": "unknown; this is not a decontaminated-pretraining claim",
+  "exclusions": {
+    "math_exact_ids_and_numeric_templates": 46,
+    "math_char_ngram_near_duplicates": 1,
+    "mbpp_reference_execution": [
+      {
+        "id": "mbpp:614",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:745",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:620",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:766",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:725",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:724",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:763",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:596",
+        "reason": "isolation_or_compile_failed",
+        "error": "ValueError: unsupported import: ['sys']"
+      },
+      {
+        "id": "mbpp:739",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:742",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:623",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:801",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:618",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:123",
+        "reason": "worker_failed",
+        "error": ""
+      },
+      {
+        "id": "mbpp:100",
+        "reason": "isolation_or_compile_failed",
+        "error": "ValueError: unsupported import: ['sys']"
+      },
+      {
+        "id": "mbpp:442",
+        "reason": "isolation_or_compile_failed",
+        "error": "ValueError: unsupported import: ['array']"
+      },
+      {
+        "id": "mbpp:124",
+        "reason": "isolation_or_compile_failed",
+        "error": "ValueError: unsupported import: ['cmath']"
+      },
+      {
+        "id": "mbpp:137",
+        "reason": "isolation_or_compile_failed",
+        "error": "ValueError: unsupported import: ['array']"
+      },
+      {
+        "id": "mbpp:71",
+        "reason": "duplicate_or_insufficient_checks"
+      },
+      {
+        "id": "mbpp:307",
+        "reason": "isolation_or_compile_failed",
+        "error": "ValueError: unsupported import: ['copy']"
+      }
+    ],
+    "tmmlu_char_ngram_near_duplicates": 0
+  },
+  "license_notice": "Source datasets retain their terms; downloaded texts/gold are not committed to the skill library.",
+  "drcd": {
+    "documents": 10013,
+    "available_titles": 2108,
+    "split_method": "article-title disjoint, one question/article; official partitions pooled and re-split",
+    "packet": "32 source passages including the support passage; deterministic shuffled order; distractor passages contain no QA labels",
+    "limitation": "Known-answerable extractive QA, not evidence-absence detection or unrestricted web QA"
+  },
+  "mbpp_split": "dev from sanitized train; validation from unused sanitized train/validation; final from sanitized test; reference-executable subset only; exact/near duplicates excluded",
+  "tools": {
+    "family_disjoint": true,
+    "limitation": "Synthetic single-call typed semantics; not a full agent benchmark or a real external side effect."
+  },
+  "manifest": [
+    {
+      "path": "dev.inputs.jsonl",
+      "rows": 195,
+      "sha256": "293789bc1e126210d773cde92039cff52aea62a5eb5950f86183082356eaafbb"
+    },
+    {
+      "path": "dev.labels.jsonl",
+      "rows": 195,
+      "sha256": "2b35364bfc693941dc5ddea525fd7ad6109e025e9e11d19f258027861bcc87a3"
+    },
+    {
+      "path": "validation.inputs.jsonl",
+      "rows": 259,
+      "sha256": "e329556e9eef62dd072cb8616d267a3210902cd824dc9c44a7ced84e62685bb2"
+    },
+    {
+      "path": "validation.labels.jsonl",
+      "rows": 259,
+      "sha256": "961dcac66ded4b10d33fe203a8977457ea8793aa6ac43414754b3ecc50fa40c8"
+    },
+    {
+      "path": "test.inputs.jsonl",
+      "rows": 646,
+      "sha256": "96bfee8d596d0b53bf90b05c5e57c3c4ab6b24db5fb45339686998677578612f"
+    },
+    {
+      "path": "test.labels.jsonl",
+      "rows": 646,
+      "sha256": "a0512f3dadb410b744ec8489e961cb13d4615cb6ad56ea144915b447165587c2"
+    }
+  ],
+  "test_status": "sealed: do not read test labels or generate test answers before final selection"
+}

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "created_utc": "2026-10-27",
+  "status": "implementation",
+  "objective_zh": "在完全不訓練、不修改模型權重的情況下，量測並提升 MiniCPM5-1B 使用 skill、檢索證據與執行回饋的能力，評估在明確任務及成本範圍內能否接近 Qwen3.5-9B。",
+  "constraints": {
+    "weights": "Pinned original BF16; no SFT, LoRA, RL, distillation, gradient updates, learned memory, or tokenizer changes.",
+    "student_generation": "Every student generation, repair, evidence selection and review uses MiniCPM5-1B. No larger-model fallback or hidden judge.",
+    "external_components": "Deterministic Unicode lexical retrieval, typed state, calculator and isolated Python executor. Any later embedding/reranker is a separately declared ablation and its cost is counted.",
+    "old_results": "The previous 518-question study and its frozen runtime remain unchanged. All previously exposed study questions are excluded from new final evaluation where applicable.",
+    "authority": "Skills are optional procedures. Retrieved documents are evidence, never instructions that override the user or application contract.",
+    "claims": "Measured task/system capability only; no conversion to a universal parameter-equivalent size, no global-optimality claim."
+  },
+  "models": {
+    "student": {"repo": "openbmb/MiniCPM5-1B", "revision": "87179e5c1f455ef22e6223592d2d61351b525bfc"},
+    "reference": {"repo": "Qwen/Qwen3.5-9B", "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a"}
+  },
+  "hypotheses": [
+    {"id": "H1", "claim": "Short applicable skill cards improve task accuracy over the same input, model and decoding without cards.", "test": "skill-only versus bare, then remove cards from the complete system"},
+    {"id": "H2", "claim": "Retrieving sufficient relevant evidence improves reading/knowledge answers; padding alone does not.", "test": "bare, sufficient-source diagnostic, actual retrieval, irrelevant retrieval, same-evidence padding"},
+    {"id": "H3", "claim": "Execution feedback improves mathematical/programming success beyond additional unsupported self-revision.", "test": "execution plus bounded repair versus no feedback and same-call self-revision"},
+    {"id": "H4", "claim": "External state preserves necessary evidence and constraints across bounded short calls.", "test": "state handoff versus full history at matched total output and call ceilings"},
+    {"id": "H5", "claim": "Additional inference budget helps only while new evidence, actions or distinguishable candidates are produced.", "test": "one/two/three calls, input budgets and adaptive versus fixed retry policy"}
+  ],
+  "evaluation": {
+    "primary_domains": ["Traditional Chinese source-grounded QA", "GSM8K arithmetic", "MBPP Python implementation", "synthetic typed tool arguments"],
+    "retention_domain": "Fresh subject-stratified TMMLU+; report separately so adding easier grounded tasks cannot hide broad knowledge weakness.",
+    "planned_counts_per_primary_domain": {"dev": 32, "validation": 48, "test": 128},
+    "planned_tmmlu_counts": {"dev": 67, "validation": 67, "test": 134},
+    "split_unit": "Source document/article for QA, source problem plus detectable near duplicates for math/code/MC, semantic tool family for tools. One QA question per selected document group.",
+    "primary_metric": "Equal-weight mean of the four primary-domain question accuracies; all domain scores mandatory. TMMLU retention is a separate gate.",
+    "code_protocol": "One public example/test is available to every arm. Remaining tests are evaluation-only and never enter generation, retrieval or repair. Passing public tests is not final success.",
+    "qa_protocol": "Source passages without QA labels form the retrieval corpus. Sufficient-source oracle is diagnostic only. Quote membership proves provenance, not semantic entailment.",
+    "math_protocol": "Execution validates computation, not the translation from prose to equations. Incorrect mathematical models remain incorrect even if execution succeeds.",
+    "tool_protocol": "Report exact name/typed-argument accuracy separately from schema validity. No gold-driven repair, polarity guessing or identifier translation.",
+    "statistics": "Three fixed generation seeds for nominated final arms; average within question, paired stratified bootstrap across questions; document/family/subject cluster sensitivity. No claim of independent evidence from repeated seeds.",
+    "public_overlap": "Public benchmark pretraining contamination cannot be ruled out. New-to-this-campaign is not equivalent to unseen during pretraining.",
+    "test_seal": "Before test generation freeze source/skill/runtime hashes, chosen policies, model revisions, decoding, seeds, comparison list and stopping rules. No changes selected using final test outputs."
+  },
+  "comparisons": [
+    "MiniCPM bare versus MiniCPM skill only",
+    "MiniCPM bare versus MiniCPM retrieval only",
+    "MiniCPM retrieval versus retrieval plus skill",
+    "MiniCPM retrieval plus skill versus execution and repair",
+    "Complete MiniCPM versus same-call self-revision and component ablations",
+    "Complete MiniCPM versus Qwen bare with the same available task information",
+    "MiniCPM versus Qwen with the same retrieval, tools, state and budget ceilings"
+  ],
+  "search": {
+    "heuristic_notice": "All margins, candidate counts and budgets below are preregistered engineering choices, not published optimal values.",
+    "initial_max_policies": 12,
+    "additional_failure_driven_rounds": 3,
+    "additional_candidates_per_round": 2,
+    "absolute_max_policies": 18,
+    "input_token_budgets": [2048, 4096, 8192, 16384],
+    "input_controls": "For long-context QA report real tokenizer lengths; fixed evidence with irrelevant padding and source positions at beginning/middle/end. Never silently drop mandatory task/schema/public-test content.",
+    "primary_output_cap_per_call": 4096,
+    "long_reasoning_reference_cap": 16384,
+    "max_generation_calls_per_item": 3,
+    "max_repair_calls": 2,
+    "seeds": [20261027, 20261028, 20261029],
+    "promotion": "At least +1 primary macro percentage point on validation, no primary domain regression exceeding 3 pp and no TMMLU regression exceeding 3 pp. Report paired CIs even when inconclusive; tied/non-promoted policies remain visible.",
+    "stopping": "Stop after the declared 18-policy search budget or three meaningfully different rounds without a promoted validation improvement. State budget-limited or local stopping as appropriate; do not assert no possible further progress.",
+    "cost": "Record every model call including failed/retried calls, actual prompt/completion tokens, retrieval/execution latency and wall time. Serving throughput and end-to-end latency are distinct. Token counts across tokenizers are not FLOPs."
+  },
+  "success_levels": [
+    {"level": "engineering", "criterion": "Reproducible corpus/skills/runtime, Chinese retrieval, provenance-bound state, actual execution receipts, exclusion and leakage checks, complete test logs."},
+    {"level": "improvement", "criterion": "Final paired 95% CI for complete MiniCPM minus its bare control is above zero on primary macro, with domain and retention regressions disclosed."},
+    {"level": "near_9b", "criterion": "For the named comparison and cost setting, upper endpoint of paired 95% CI for Qwen minus MiniCPM is at most 3 macro pp; no primary domain point-estimate gap exceeds 5 pp. Report TMMLU separately; failure there prevents any broad general-capability parity claim."}
+  ],
+  "deliverables": [
+    "Versioned reusable skill JSON/Markdown plus compact inference cards and applicability examples",
+    "Dependency-light retrieval/state/verification harness with explicit public-input boundary",
+    "Pinned data preparation, inference, scoring, bootstrap, ablation and sealing scripts",
+    "HTML goal/progress/result report, machine-readable metrics and raw local trajectories",
+    "Reviewable git branch and PR or patch; upstream merge remains a maintainer action"
+  ]
+}

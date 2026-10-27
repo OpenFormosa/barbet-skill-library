@@ -1,0 +1,20 @@
+[
+  {
+    "date_utc": "2026-10-27",
+    "stage": "before first model generation",
+    "change": "Clarify that 2K/4K/8K/16K input sweeps limit initial task plus evidence; continuations have an explicit 32768-input-token ceiling and all tokens are counted. Output cap is per call. The full-history and compact-state comparisons share the same continuation ceiling.",
+    "reason": "A 4K output followed by real feedback cannot fit back into a 4K total prompt without losing task/history. No mandatory text or hidden truncation is allowed."
+  },
+  {
+    "date_utc": "2026-10-27",
+    "stage": "before first model generation",
+    "change": "The 12 initial policies are in policies.json. Fixed policy budget/position/source-availability sensitivity probes are diagnostic axes, not additional learned prompt candidates; no diagnostic oracle may become the deployment policy.",
+    "reason": "Separate architecture search from controlled context-length tests. All comparison results, including failures and missing runs, remain reported."
+  },
+  {
+    "date_utc": "2026-10-27",
+    "stage": "before first model generation",
+    "change": "Program-only and program-execution use the same JSON interface containing code plus a claimed numerical answer. Execution replaces the claim with the actual computed value; it never changes the code or supplies mathematical gold.",
+    "reason": "Isolate arithmetic execution from the benefit/cost of prompting the model to write a program."
+  }
+]
