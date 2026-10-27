@@ -1,0 +1,9 @@
+test_missing_or_inconsistent_tests_cannot_claim_verified (tests.test_opencode_memory_v1.OpenCodeTests.test_missing_or_inconsistent_tests_cannot_claim_verified) ... ok
+test_physical_source_shards_do_not_change_answer_condition (tests.test_opencode_memory_v1.OpenCodeTests.test_physical_source_shards_do_not_change_answer_condition) ... ok
+test_posthoc_tests_and_judge_never_enter_prompt (tests.test_opencode_memory_v1.OpenCodeTests.test_posthoc_tests_and_judge_never_enter_prompt) ... ok
+test_source_test_failure_wins_over_perfect_source_judge (tests.test_opencode_memory_v1.OpenCodeTests.test_source_test_failure_wins_over_perfect_source_judge) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK
