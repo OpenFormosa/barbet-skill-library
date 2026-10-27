@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "phase": "initial 12 plus first failure-driven round (13–14)",
+  "phase": "16 policies registered; round 2 prelaunch",
   "policies": {
     "bare": {},
     "skill": {
@@ -84,6 +84,34 @@
       },
       "program": true,
       "program_format": "python_stdout"
+    },
+    "tool_json": {
+      "retrieval": true,
+      "skill": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false,
+          "tool_format": "json"
+        }
+      }
+    },
+    "literal": {
+      "retrieval": true,
+      "skill": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        },
+        "short_answer": {
+          "literal_answer": true
+        }
+      }
     }
   }
 }

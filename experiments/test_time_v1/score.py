@@ -151,8 +151,14 @@ def main():
     for (family, policy), paths in runs.items():
         rows, provenance = [], []
         for path in paths:
-            rows += [json.loads(x) for x in path.read_text().splitlines()]
+            part = [json.loads(x) for x in path.read_text().splitlines()]
             metadata = json.loads(path.with_suffix('.runtime.json').read_text())
+            if any(r['run_fingerprint'] != metadata['run_fingerprint'] for r in part):
+                raise RuntimeError('raw trajectory provenance mismatch')
+            completed_path = path.with_suffix('.completed.json')
+            if completed_path.exists() and json.loads(completed_path.read_text())['raw_sha256'] != sha(path.read_bytes()):
+                raise RuntimeError('completed trajectory file changed')
+            rows += part
             provenance.append({'raw': str(path.relative_to(args.work)), 'sha256': sha(path.read_bytes()),
                 'runtime': metadata, 'complete': path.with_suffix('.completed.json').exists()})
         keys = [(r['id'], r['seed']) for r in rows]
@@ -166,6 +172,8 @@ def main():
         # Changes to scorer or raw rows invalidate the cache explicitly.
         score_fingerprint = sha(json.dumps({'scorer': sha(Path(__file__).read_bytes()),
             'worker': sha((ROOT / 'testtime/_worker.py').read_bytes()),
+            'executor': sha((ROOT / 'testtime/execution.py').read_bytes()),
+            'contracts': sha((ROOT / 'testtime/contracts.py').read_bytes()),
             'labels': sha(label_path.read_bytes()), 'raw': [x['sha256'] for x in provenance]}, sort_keys=True).encode())
         out = args.work / 'scores' / args.run_tag / args.split / f'{family}-{policy}.json'
         out.parent.mkdir(parents=True, exist_ok=True)

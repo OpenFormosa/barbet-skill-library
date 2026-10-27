@@ -24,5 +24,22 @@
     "hypothesis": "Contract routing preserves bare native tools while retaining skill/RAG and executable coding feedback; a one-number Python stdout interface removes the failed dual JSON/variable contract for arithmetic.",
     "selection_rule": "same preregistered validation promotion gate; no final-test access",
     "warning": "Routed combines dev-selected components; stdout is its single math-interface intervention. Neither is proven yet."
+  },
+  {
+    "round": 1,
+    "stage": "completed",
+    "decision": "Promote routed over bare: validation macro 52.60→67.71; every primary domain non-regressing and retention 29.85→38.81. Reject stdout: 61.46 macro, math 50.0 versus routed 70.83; simplifying the interface alone did not fix program-generation/modeling errors.",
+    "incumbent": "routed",
+    "statistics": "single-seed validation, paired CI recorded separately; final test still sealed"
+  },
+  {
+    "round": 2,
+    "stage": "prelaunch",
+    "candidates": [
+      "tool_json",
+      "literal"
+    ],
+    "hypothesis": "Change only tool serialization to schema-explicit JSON with thinking; separately ask reading answers to copy exact source spans to preserve names/units. Both are compared with routed.",
+    "selection_rule": "unchanged validation gate; no final-test access"
   }
 ]
