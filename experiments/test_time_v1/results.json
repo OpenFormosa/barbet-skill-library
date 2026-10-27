@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-10-27T01:48:43.841518+00:00",
-  "status": "final_evaluation",
-  "test_status": "selection sealed",
+  "generated_utc": "2026-10-27T02:35:59.213078+00:00",
+  "status": "completed",
+  "test_status": "all sealed comparisons completed; no post-test policy selection",
   "decisions": [
     {
       "round": 0,
@@ -257,8 +257,1357 @@
     "validation_summary_sha256": "e361a43eacbde701559c6fdc16f713eff891fa2abc32b3a351f8bb23e7c1596a",
     "no_post_test_policy_selection": true
   },
-  "comparisons": null,
-  "diagnostics": null,
+  "comparisons": {
+    "selected_minus_bare": {
+      "comparison": "mini/literal minus mini/bare",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 24.479166666666664,
+          "paired_95ci_pp": [
+            18.75,
+            30.46875
+          ],
+          "cluster_95ci_pp": [
+            18.489583333333336,
+            30.46875
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 13.802083333333332,
+          "paired_95ci_pp": [
+            7.552083333333334,
+            20.3125
+          ],
+          "cluster_95ci_pp": [
+            7.552083333333333,
+            20.052083333333336
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 11.197916666666666,
+          "paired_95ci_pp": [
+            5.989583333333334,
+            16.406250000000004
+          ],
+          "cluster_95ci_pp": [
+            5.989583333333334,
+            16.40625
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": 0.4975124378109451,
+          "paired_95ci_pp": [
+            -4.477611940298508,
+            5.4726368159203975
+          ],
+          "cluster_95ci_pp": [
+            -4.726368159203981,
+            5.72139303482587
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 0.0,
+          "paired_95ci_pp": [
+            0.0,
+            0.0
+          ],
+          "cluster_95ci_pp": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 12.369791666666666,
+        "paired_95ci_pp": [
+          9.895833333333332,
+          14.973958333333334
+        ],
+        "cluster_95ci_pp": [
+          9.830729166666668,
+          14.973958333333334
+        ]
+      }
+    },
+    "selected_minus_long": {
+      "comparison": "mini/literal minus mini/long",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 24.21875,
+          "paired_95ci_pp": [
+            18.229166666666664,
+            30.46875
+          ],
+          "cluster_95ci_pp": [
+            18.229166666666664,
+            30.46875
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 5.208333333333334,
+          "paired_95ci_pp": [
+            -1.822916666666666,
+            12.239583333333334
+          ],
+          "cluster_95ci_pp": [
+            -1.822916666666665,
+            12.24609374999991
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 3.3854166666666665,
+          "paired_95ci_pp": [
+            -1.5625,
+            8.333333333333334
+          ],
+          "cluster_95ci_pp": [
+            -1.5625000000000004,
+            8.333333333333334
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": -3.9800995024875614,
+          "paired_95ci_pp": [
+            -8.955223880597014,
+            0.9950248756218907
+          ],
+          "cluster_95ci_pp": [
+            -9.20398009950249,
+            1.243781094527363
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 0.0,
+          "paired_95ci_pp": [
+            0.0,
+            0.0
+          ],
+          "cluster_95ci_pp": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 8.203125,
+        "paired_95ci_pp": [
+          5.533854166666667,
+          10.872395833333334
+        ],
+        "cluster_95ci_pp": [
+          5.598958333333334,
+          10.9375
+        ]
+      }
+    },
+    "qwen_bare_minus_selected": {
+      "comparison": "qwen/bare minus mini/literal",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": -7.812499999999997,
+          "paired_95ci_pp": [
+            -16.927083333333332,
+            1.041666666666668
+          ],
+          "cluster_95ci_pp": [
+            -16.927083333333332,
+            1.041666666666669
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 0.2604166666666664,
+          "paired_95ci_pp": [
+            -7.291666666666666,
+            7.552083333333333
+          ],
+          "cluster_95ci_pp": [
+            -7.291666666666666,
+            7.552083333333333
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 4.6875,
+          "paired_95ci_pp": [
+            -2.0833333333333344,
+            11.718749999999998
+          ],
+          "cluster_95ci_pp": [
+            -2.083333333333333,
+            11.71875
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": 35.82089552238806,
+          "paired_95ci_pp": [
+            28.60696517412935,
+            43.53233830845771
+          ],
+          "cluster_95ci_pp": [
+            27.363184079601993,
+            44.02985074626866
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 53.125,
+          "paired_95ci_pp": [
+            44.53125,
+            61.71875
+          ],
+          "cluster_95ci_pp": [
+            27.34375,
+            80.46875
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 12.565104166666668,
+        "paired_95ci_pp": [
+          8.528645833333334,
+          16.731770833333332
+        ],
+        "cluster_95ci_pp": [
+          5.083622969980315,
+          20.139422879757216
+        ]
+      }
+    },
+    "qwen_long_minus_selected": {
+      "comparison": "qwen/long minus mini/literal",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": -7.552083333333331,
+          "paired_95ci_pp": [
+            -16.666666666666664,
+            1.302083333333335
+          ],
+          "cluster_95ci_pp": [
+            -16.666666666666664,
+            1.3020833333333355
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 16.666666666666668,
+          "paired_95ci_pp": [
+            8.593750000000002,
+            24.739583333333332
+          ],
+          "cluster_95ci_pp": [
+            8.333333333333334,
+            24.739583333333336
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 15.885416666666668,
+          "paired_95ci_pp": [
+            9.895833333333334,
+            22.135416666666664
+          ],
+          "cluster_95ci_pp": [
+            9.895833333333334,
+            22.135416666666664
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": 49.25373134328358,
+          "paired_95ci_pp": [
+            42.28855721393035,
+            56.21890547263683
+          ],
+          "cluster_95ci_pp": [
+            42.288557213930346,
+            56.21890547263681
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 53.125,
+          "paired_95ci_pp": [
+            44.53125,
+            61.71875
+          ],
+          "cluster_95ci_pp": [
+            27.34375,
+            80.46875
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 19.53125,
+        "paired_95ci_pp": [
+          15.494791666666668,
+          23.567708333333336
+        ],
+        "cluster_95ci_pp": [
+          12.053355135658917,
+          27.068230680717054
+        ]
+      }
+    },
+    "qwen_same_minus_selected": {
+      "comparison": "qwen/literal minus mini/literal",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 7.291666666666666,
+          "paired_95ci_pp": [
+            -1.302083333333332,
+            15.885416666666668
+          ],
+          "cluster_95ci_pp": [
+            -1.5624999999999982,
+            15.625
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 21.093750000000004,
+          "paired_95ci_pp": [
+            14.316406250000002,
+            28.125
+          ],
+          "cluster_95ci_pp": [
+            14.0625,
+            28.125
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 21.875,
+          "paired_95ci_pp": [
+            16.40625,
+            27.604166666666675
+          ],
+          "cluster_95ci_pp": [
+            16.145833333333336,
+            27.604166666666668
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": 37.810945273631845,
+          "paired_95ci_pp": [
+            30.348258706467668,
+            45.27363184079603
+          ],
+          "cluster_95ci_pp": [
+            30.34825870646766,
+            45.52238805970149
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 53.125,
+          "paired_95ci_pp": [
+            44.53125,
+            61.71875
+          ],
+          "cluster_95ci_pp": [
+            27.34375,
+            80.46875
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 25.846354166666668,
+        "paired_95ci_pp": [
+          22.0703125,
+          29.622395833333336
+        ],
+        "cluster_95ci_pp": [
+          18.489583333333336,
+          33.24554364502584
+        ]
+      }
+    },
+    "selected_minus_no_card": {
+      "comparison": "mini/literal minus mini/no_card",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 0.2604166666666664,
+          "paired_95ci_pp": [
+            -4.947916666666667,
+            5.46875
+          ],
+          "cluster_95ci_pp": [
+            -4.947916666666667,
+            5.46875
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 14.0625,
+          "paired_95ci_pp": [
+            8.072916666666668,
+            20.052083333333336
+          ],
+          "cluster_95ci_pp": [
+            8.333333333333332,
+            20.052083333333336
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 1.302083333333333,
+          "paired_95ci_pp": [
+            -2.604166666666667,
+            5.468749999999999
+          ],
+          "cluster_95ci_pp": [
+            -2.610677083333328,
+            5.208333333333334
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": 0.2487562189054725,
+          "paired_95ci_pp": [
+            -5.223880597014925,
+            5.72139303482587
+          ],
+          "cluster_95ci_pp": [
+            -5.223880597014926,
+            5.72139303482587
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 0.0,
+          "paired_95ci_pp": [
+            0.0,
+            0.0
+          ],
+          "cluster_95ci_pp": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 3.90625,
+        "paired_95ci_pp": [
+          1.7561848958333344,
+          6.184895833333334
+        ],
+        "cluster_95ci_pp": [
+          1.6927083333333335,
+          6.184895833333333
+        ]
+      }
+    },
+    "selected_minus_no_rag": {
+      "comparison": "mini/literal minus mini/no_rag",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 21.354166666666664,
+          "paired_95ci_pp": [
+            15.104166666666666,
+            27.864583333333332
+          ],
+          "cluster_95ci_pp": [
+            15.104166666666666,
+            27.864583333333332
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": -0.2604166666666668,
+          "paired_95ci_pp": [
+            -5.729166666666666,
+            4.947916666666667
+          ],
+          "cluster_95ci_pp": [
+            -5.46875,
+            4.947916666666667
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": -3.90625,
+          "paired_95ci_pp": [
+            -8.072916666666666,
+            -1.734723475976807e-16
+          ],
+          "cluster_95ci_pp": [
+            -7.8125,
+            -3.469446951953614e-16
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": -1.4925373134328357,
+          "paired_95ci_pp": [
+            -5.472636815920398,
+            2.487562189054727
+          ],
+          "cluster_95ci_pp": [
+            -5.223880597014925,
+            2.2388059701492544
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 0.0,
+          "paired_95ci_pp": [
+            0.0,
+            0.0
+          ],
+          "cluster_95ci_pp": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 4.296874999999999,
+        "paired_95ci_pp": [
+          2.0182291666666656,
+          6.640624999999998
+        ],
+        "cluster_95ci_pp": [
+          2.083333333333333,
+          6.575520833333334
+        ]
+      }
+    },
+    "selected_minus_no_feedback": {
+      "comparison": "mini/literal minus mini/no_feedback",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 1.5625,
+          "paired_95ci_pp": [
+            -1.5624999999999998,
+            4.6875
+          ],
+          "cluster_95ci_pp": [
+            -1.5625,
+            4.6875
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 4.6875,
+          "paired_95ci_pp": [
+            0.5208333333333336,
+            8.854166666666668
+          ],
+          "cluster_95ci_pp": [
+            0.5208333333333336,
+            8.854166666666668
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 12.5,
+          "paired_95ci_pp": [
+            8.59375,
+            16.666666666666668
+          ],
+          "cluster_95ci_pp": [
+            8.59375,
+            16.666666666666668
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": -1.741293532338308,
+          "paired_95ci_pp": [
+            -4.726368159203981,
+            1.2437810945273633
+          ],
+          "cluster_95ci_pp": [
+            -5.223880597014925,
+            1.7412935323383087
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 0.0,
+          "paired_95ci_pp": [
+            0.0,
+            0.0
+          ],
+          "cluster_95ci_pp": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 4.6875,
+        "paired_95ci_pp": [
+          3.0598958333333335,
+          6.380208333333333
+        ],
+        "cluster_95ci_pp": [
+          3.059895833333333,
+          6.380208333333334
+        ]
+      }
+    },
+    "selected_minus_self_review": {
+      "comparison": "mini/literal minus mini/self_review",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 10.677083333333334,
+          "paired_95ci_pp": [
+            5.208333333333334,
+            16.145833333333332
+          ],
+          "cluster_95ci_pp": [
+            5.208333333333334,
+            16.145833333333336
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 13.541666666666668,
+          "paired_95ci_pp": [
+            7.291666666666666,
+            20.052083333333336
+          ],
+          "cluster_95ci_pp": [
+            7.291666666666667,
+            20.052083333333336
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 4.947916666666666,
+          "paired_95ci_pp": [
+            1.3020833333333333,
+            8.854166666666666
+          ],
+          "cluster_95ci_pp": [
+            1.302083333333333,
+            8.854166666666666
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": -3.9800995024875627,
+          "paired_95ci_pp": [
+            -9.20398009950249,
+            1.243781094527364
+          ],
+          "cluster_95ci_pp": [
+            -9.452736318407961,
+            1.2437810945273637
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 18.229166666666668,
+          "paired_95ci_pp": [
+            11.979166666666668,
+            25.0
+          ],
+          "cluster_95ci_pp": [
+            6.299212598425196,
+            31.75853018372703
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 11.848958333333332,
+        "paired_95ci_pp": [
+          8.984375,
+          14.713541666666668
+        ],
+        "cluster_95ci_pp": [
+          8.02370406824147,
+          15.959821428571427
+        ]
+      }
+    },
+    "gates": {
+      "measured_improvement": true,
+      "qwen_bare_minus_selected": {
+        "primary_near_9b": false,
+        "macro_gap_upper_ci_pp": 16.731770833333332,
+        "max_primary_domain_point_gap_pp": 53.125,
+        "knowledge_gap_pp": 35.82089552238806,
+        "knowledge_gap_95ci_pp": [
+          28.60696517412935,
+          43.53233830845771
+        ]
+      },
+      "qwen_long_minus_selected": {
+        "primary_near_9b": false,
+        "macro_gap_upper_ci_pp": 23.567708333333336,
+        "max_primary_domain_point_gap_pp": 53.125,
+        "knowledge_gap_pp": 49.25373134328358,
+        "knowledge_gap_95ci_pp": [
+          42.28855721393035,
+          56.21890547263683
+        ]
+      },
+      "qwen_same_minus_selected": {
+        "primary_near_9b": false,
+        "macro_gap_upper_ci_pp": 29.622395833333336,
+        "max_primary_domain_point_gap_pp": 53.125,
+        "knowledge_gap_pp": 37.810945273631845,
+        "knowledge_gap_95ci_pp": [
+          30.348258706467668,
+          45.27363184079603
+        ]
+      },
+      "broad_general_parameter_equivalence": "Not established by this finite task suite; broad knowledge and same-harness comparison remain mandatory evidence."
+    },
+    "selected_policy": "literal",
+    "analysis_utc": "2026-10-27T02:32:20.364418+00:00"
+  },
+  "diagnostics": {
+    "unit_notice": "Attempt counts include three seeds; unique-question statistics explicitly average/group seeds. No hidden label or final failure was fed back into policy selection.",
+    "reading": {
+      "attempts": 384,
+      "support_visible": 384,
+      "wrong_despite_visible_support": 261,
+      "character_f1": 0.5465483489888882,
+      "limitation": "Strict normalized EM penalizes aliases, omitted units and extra spans as well as semantic errors. F1 is partial overlap, not a human correctness judgment."
+    },
+    "math": {
+      "attempts": 384,
+      "unparseable_final": 141,
+      "final_channel_failure": {
+        "unparseable_attempts": 141,
+        "unclosed_thinking": 76,
+        "length_stopped": 77,
+        "nonempty_final_but_wrong_format": 65
+      },
+      "parseable_but_wrong": 27,
+      "limitation": "A parseable number does not validate the word-problem model."
+    },
+    "code": {
+      "attempts": 384,
+      "public_pass_but_hidden_failure": 25,
+      "failure_statuses": {
+        "execution_failed": 125,
+        "isolation_or_compile_failed": 4
+      },
+      "limitation": "Restricted reference-executable MBPP subset; actual public feedback cannot expose hidden edge cases."
+    },
+    "tools": {
+      "attempts": 384,
+      "schema_valid": 336,
+      "valid_but_semantically_wrong": 156,
+      "wrong_fields": {
+        "distinct": 3,
+        "limit": 189,
+        "factor": 108,
+        "rounded": 51,
+        "record_id": 48,
+        "values": 48
+      },
+      "limitation": "Single-call synthetic family holdout, not full multi-step agent reliability.",
+      "wrong_fields_among_schema_valid_only": {
+        "distinct": 3,
+        "limit": 141,
+        "factor": 60,
+        "rounded": 3
+      },
+      "family_holdout_results": [
+        {
+          "family": "tool-family:invoice",
+          "attempts": 63,
+          "correct": 0,
+          "schema_valid": 15
+        },
+        {
+          "family": "tool-family:log",
+          "attempts": 66,
+          "correct": 15,
+          "schema_valid": 66
+        },
+        {
+          "family": "tool-family:message",
+          "attempts": 63,
+          "correct": 57,
+          "schema_valid": 63
+        },
+        {
+          "family": "tool-family:report",
+          "attempts": 63,
+          "correct": 39,
+          "schema_valid": 63
+        },
+        {
+          "family": "tool-family:sample",
+          "attempts": 63,
+          "correct": 15,
+          "schema_valid": 63
+        },
+        {
+          "family": "tool-family:table",
+          "attempts": 66,
+          "correct": 54,
+          "schema_valid": 66
+        }
+      ]
+    },
+    "knowledge": {
+      "unique_questions": 134,
+      "attempts": 402,
+      "unparseable_final": 101,
+      "valid_letter_but_wrong": 155,
+      "final_channel_failure": {
+        "unparseable_attempts": 101,
+        "unclosed_thinking": 97,
+        "length_stopped": 97,
+        "nonempty_final_but_wrong_format": 4
+      },
+      "all_three_wrong": 57,
+      "all_three_wrong_with_valid_letter_each_time": 25,
+      "some_but_not_all_correct": 55,
+      "all_three_correct": 22,
+      "limitation": "Any-correct across seeds is only a diagnostic oracle, not a deployable selection rule."
+    },
+    "serving": {
+      "unclosed_thinking_calls": 409,
+      "length_stopped_calls": 426,
+      "batch_size": 128,
+      "cost_unit": "Prompt/output tokens across every returned model call; batch seconds are amortized throughput, not per-user latency."
+    },
+    "all_model_call_accounting": [
+      {
+        "model": "mini",
+        "policy": "bare",
+        "all_logged_calls": 1938,
+        "calls_in_completed_trajectories": 1938,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 1883733,
+        "total_output_tokens": 2814855
+      },
+      {
+        "model": "mini",
+        "policy": "long",
+        "all_logged_calls": 1938,
+        "calls_in_completed_trajectories": 1938,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 1883733,
+        "total_output_tokens": 4696516
+      },
+      {
+        "model": "mini",
+        "policy": "literal",
+        "all_logged_calls": 2310,
+        "calls_in_completed_trajectories": 2310,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 2235075,
+        "total_output_tokens": 3768352
+      },
+      {
+        "model": "mini",
+        "policy": "no_card",
+        "all_logged_calls": 2298,
+        "calls_in_completed_trajectories": 2298,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 2153270,
+        "total_output_tokens": 3670211
+      },
+      {
+        "model": "mini",
+        "policy": "no_rag",
+        "all_logged_calls": 2291,
+        "calls_in_completed_trajectories": 2291,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 2912706,
+        "total_output_tokens": 4018952
+      },
+      {
+        "model": "mini",
+        "policy": "no_feedback",
+        "all_logged_calls": 1938,
+        "calls_in_completed_trajectories": 1938,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 1249137,
+        "total_output_tokens": 2922536
+      },
+      {
+        "model": "mini",
+        "policy": "self_review",
+        "all_logged_calls": 5814,
+        "calls_in_completed_trajectories": 5814,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 6919069,
+        "total_output_tokens": 9267924
+      },
+      {
+        "model": "qwen",
+        "policy": "bare",
+        "all_logged_calls": 1938,
+        "calls_in_completed_trajectories": 1938,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 1906212,
+        "total_output_tokens": 3475825
+      },
+      {
+        "model": "qwen",
+        "policy": "long",
+        "all_logged_calls": 1938,
+        "calls_in_completed_trajectories": 1938,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 1906212,
+        "total_output_tokens": 3946916
+      },
+      {
+        "model": "qwen",
+        "policy": "literal",
+        "all_logged_calls": 2118,
+        "calls_in_completed_trajectories": 2118,
+        "extra_returned_calls_from_interrupted_attempts": 0,
+        "total_prompt_tokens": 1641019,
+        "total_output_tokens": 4049962
+      }
+    ],
+    "job_chain": [
+      {
+        "model": "mini",
+        "policy": "bare",
+        "seed": 20261027,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 7,
+        "started_utc": "2026-10-27T02:13:17.351838+00:00",
+        "log": "work/logs/final-mini-bare-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:15:42.801548+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "bare",
+        "seed": 20261028,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 3,
+        "started_utc": "2026-10-27T02:10:42.219802+00:00",
+        "log": "work/logs/final-mini-bare-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:13:32.659414+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "bare",
+        "seed": 20261029,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 4,
+        "started_utc": "2026-10-27T02:11:05.284138+00:00",
+        "log": "work/logs/final-mini-bare-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:14:36.962161+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "long",
+        "seed": 20261027,
+        "weight": 7.199999999999999,
+        "status": "completed",
+        "gpu": 3,
+        "started_utc": "2026-10-27T01:46:28.481493+00:00",
+        "log": "work/logs/final-mini-long-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T01:55:05.860924+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "long",
+        "seed": 20261028,
+        "weight": 7.199999999999999,
+        "status": "completed",
+        "gpu": 4,
+        "started_utc": "2026-10-27T01:46:28.483026+00:00",
+        "log": "work/logs/final-mini-long-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T01:55:04.279870+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "long",
+        "seed": 20261029,
+        "weight": 7.199999999999999,
+        "status": "completed",
+        "gpu": 5,
+        "started_utc": "2026-10-27T01:46:28.484718+00:00",
+        "log": "work/logs/final-mini-long-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T01:55:18.516019+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "literal",
+        "seed": 20261027,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 0,
+        "started_utc": "2026-10-27T02:08:25.926598+00:00",
+        "log": "work/logs/final-mini-literal-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:14:28.408297+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "literal",
+        "seed": 20261028,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 1,
+        "started_utc": "2026-10-27T02:06:58.591906+00:00",
+        "log": "work/logs/final-mini-literal-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:12:57.279493+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "literal",
+        "seed": 20261029,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 2,
+        "started_utc": "2026-10-27T02:05:07.566326+00:00",
+        "log": "work/logs/final-mini-literal-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:12:24.930892+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_card",
+        "seed": 20261027,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 5,
+        "started_utc": "2026-10-27T02:10:20.475309+00:00",
+        "log": "work/logs/final-mini-no_card-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:16:28.337409+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_card",
+        "seed": 20261028,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 7,
+        "started_utc": "2026-10-27T02:15:42.804226+00:00",
+        "log": "work/logs/final-mini-no_card-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:22:24.520429+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_card",
+        "seed": 20261029,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 6,
+        "started_utc": "2026-10-27T02:13:29.728084+00:00",
+        "log": "work/logs/final-mini-no_card-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:19:15.713149+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_rag",
+        "seed": 20261027,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 1,
+        "started_utc": "2026-10-27T02:12:57.280759+00:00",
+        "log": "work/logs/final-mini-no_rag-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:19:16.305884+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_rag",
+        "seed": 20261028,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 2,
+        "started_utc": "2026-10-27T02:12:24.932119+00:00",
+        "log": "work/logs/final-mini-no_rag-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:18:11.811810+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_rag",
+        "seed": 20261029,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 5,
+        "started_utc": "2026-10-27T02:16:28.338896+00:00",
+        "log": "work/logs/final-mini-no_rag-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:22:39.896181+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_feedback",
+        "seed": 20261027,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 3,
+        "started_utc": "2026-10-27T02:13:32.660706+00:00",
+        "log": "work/logs/final-mini-no_feedback-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:16:22.434408+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_feedback",
+        "seed": 20261028,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 4,
+        "started_utc": "2026-10-27T02:14:36.963435+00:00",
+        "log": "work/logs/final-mini-no_feedback-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:17:20.107929+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "no_feedback",
+        "seed": 20261029,
+        "weight": 3.0,
+        "status": "completed",
+        "gpu": 0,
+        "started_utc": "2026-10-27T02:14:28.409782+00:00",
+        "log": "work/logs/final-mini-no_feedback-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:16:46.781659+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "self_review",
+        "seed": 20261027,
+        "weight": 3.9000000000000004,
+        "status": "completed",
+        "gpu": 5,
+        "started_utc": "2026-10-27T01:55:18.517050+00:00",
+        "log": "work/logs/final-mini-self_review-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:03:08.651311+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "self_review",
+        "seed": 20261028,
+        "weight": 3.9000000000000004,
+        "status": "completed",
+        "gpu": 5,
+        "started_utc": "2026-10-27T02:03:08.652396+00:00",
+        "log": "work/logs/final-mini-self_review-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:10:20.472866+00:00"
+      },
+      {
+        "model": "mini",
+        "policy": "self_review",
+        "seed": 20261029,
+        "weight": 3.9000000000000004,
+        "status": "completed",
+        "gpu": 6,
+        "started_utc": "2026-10-27T02:05:45.998603+00:00",
+        "log": "work/logs/final-mini-self_review-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:13:29.726828+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "bare",
+        "seed": 20261027,
+        "weight": 6.0,
+        "status": "completed",
+        "gpu": 6,
+        "started_utc": "2026-10-27T01:46:28.486029+00:00",
+        "log": "work/logs/final-qwen-bare-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T01:55:50.393325+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "bare",
+        "seed": 20261028,
+        "weight": 6.0,
+        "status": "completed",
+        "gpu": 7,
+        "started_utc": "2026-10-27T01:46:28.486590+00:00",
+        "log": "work/logs/final-qwen-bare-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T01:56:06.778501+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "bare",
+        "seed": 20261029,
+        "weight": 6.0,
+        "status": "completed",
+        "gpu": 6,
+        "started_utc": "2026-10-27T01:55:50.394417+00:00",
+        "log": "work/logs/final-qwen-bare-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:05:45.997291+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "long",
+        "seed": 20261027,
+        "weight": 14.399999999999999,
+        "status": "completed",
+        "gpu": 0,
+        "started_utc": "2026-10-27T01:46:28.476470+00:00",
+        "log": "work/logs/final-qwen-long-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:08:25.925397+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "long",
+        "seed": 20261028,
+        "weight": 14.399999999999999,
+        "status": "completed",
+        "gpu": 1,
+        "started_utc": "2026-10-27T01:46:28.477895+00:00",
+        "log": "work/logs/final-qwen-long-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:06:58.590776+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "long",
+        "seed": 20261029,
+        "weight": 14.399999999999999,
+        "status": "completed",
+        "gpu": 2,
+        "started_utc": "2026-10-27T01:46:28.479762+00:00",
+        "log": "work/logs/final-qwen-long-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:05:07.564019+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "literal",
+        "seed": 20261027,
+        "weight": 6.0,
+        "status": "completed",
+        "gpu": 7,
+        "started_utc": "2026-10-27T01:56:06.779586+00:00",
+        "log": "work/logs/final-qwen-literal-20261027.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:13:17.350425+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "literal",
+        "seed": 20261028,
+        "weight": 6.0,
+        "status": "completed",
+        "gpu": 3,
+        "started_utc": "2026-10-27T01:55:05.862057+00:00",
+        "log": "work/logs/final-qwen-literal-20261028.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:10:42.218450+00:00"
+      },
+      {
+        "model": "qwen",
+        "policy": "literal",
+        "seed": 20261029,
+        "weight": 6.0,
+        "status": "completed",
+        "gpu": 4,
+        "started_utc": "2026-10-27T01:55:04.280941+00:00",
+        "log": "work/logs/final-qwen-literal-20261029.log",
+        "returncode": 0,
+        "finished_utc": "2026-10-27T02:11:05.282919+00:00"
+      }
+    ]
+  },
   "engineering": {
     "utc": "2026-10-27T01:41:23.291012+00:00",
     "core_tests": {
@@ -276,7 +1625,18 @@
     "compact_cards": 9,
     "frozen_data_replay": "all six input/label files and corpus content hashes matched in a new directory",
     "weight_integrity": "both pinned model snapshots hashed before final evaluation; no training code or weight writes",
-    "final_model_evidence": "pending; engineering checks do not establish model improvement",
+    "final_model_evidence": {
+      "status": "complete",
+      "final_arms": 10,
+      "completed_jobs": 30,
+      "completed_question_outputs": 19380,
+      "all_returned_model_calls": 24521,
+      "extra_returned_calls": 0,
+      "all_sealed_hashes_unchanged": true,
+      "report": "final_comparisons.json",
+      "near_9b": false,
+      "posthoc_numeric_format_diagnostic": "numeric_diagnostics.json; primary scores unchanged"
+    },
     "final_serving_smoke": {
       "items": 10,
       "batch_size": 128,
@@ -284,7 +1644,8 @@
       "persisted_call_count": 10,
       "trace_call_count": 10,
       "matching": true
-    }
+    },
+    "final_verified_utc": "2026-10-27T02:35:09.403808+00:00"
   },
   "context": {
     "stage": "development diagnostic, one generation seed; not used as final-test evidence",
@@ -687,6 +2048,549 @@
       }
     ]
   },
+  "code_budget": {
+    "method": "Replay prefixes of the final selected code trajectories; same exact initial generations. Reuse recorded final grades for identical question/seed/code bytes; grade each additional artifact once. Actual serving at a smaller call ceiling may differ through BF16 batch effects.",
+    "does_not_select_a_new_policy": true,
+    "unit": "128 held-out code questions, three seeds; public checks only during generation, hidden checks only here",
+    "table": [
+      {
+        "call_ceiling": 1,
+        "items": 384,
+        "unique_questions": 128,
+        "seeds": [
+          20261027,
+          20261028,
+          20261029
+        ],
+        "domains": {
+          "mbpp": {
+            "n": 384,
+            "correct": 214,
+            "accuracy": 0.5572916666666666
+          }
+        },
+        "primary_macro": null,
+        "cost": {
+          "calls": 1.0,
+          "prompt_tokens": 179.890625,
+          "output_tokens": 2248.5130208333335,
+          "generation_seconds_amortized": 0.20387070709830368,
+          "retrieval_seconds": 0.0,
+          "execution_seconds": 0.05521266451493526
+        },
+        "unclosed_thinking_calls": 97,
+        "length_stopped_calls": 101,
+        "qa_support_visible_rate": 0.0,
+        "secondary": {
+          "qa_character_f1": 0.0,
+          "tool_schema_valid_rate": 0.0,
+          "math_numeric_parseable_rate": 0.0,
+          "code_public_pass_before_final_rate": 0.5885416666666666
+        }
+      },
+      {
+        "call_ceiling": 2,
+        "items": 384,
+        "unique_questions": 128,
+        "seeds": [
+          20261027,
+          20261028,
+          20261029
+        ],
+        "domains": {
+          "mbpp": {
+            "n": 384,
+            "correct": 246,
+            "accuracy": 0.640625
+          }
+        },
+        "primary_macro": null,
+        "cost": {
+          "calls": 1.4114583333333333,
+          "prompt_tokens": 1466.2734375,
+          "output_tokens": 3441.5338541666665,
+          "generation_seconds_amortized": 0.7826140268551893,
+          "retrieval_seconds": 0.0,
+          "execution_seconds": 0.08304900384003606
+        },
+        "unclosed_thinking_calls": 166,
+        "length_stopped_calls": 171,
+        "qa_support_visible_rate": 0.0,
+        "secondary": {
+          "qa_character_f1": 0.0,
+          "tool_schema_valid_rate": 0.0,
+          "math_numeric_parseable_rate": 0.0,
+          "code_public_pass_before_final_rate": 0.6927083333333334
+        }
+      },
+      {
+        "call_ceiling": 3,
+        "items": 384,
+        "unique_questions": 128,
+        "seeds": [
+          20261027,
+          20261028,
+          20261029
+        ],
+        "domains": {
+          "mbpp": {
+            "n": 384,
+            "correct": 255,
+            "accuracy": 0.6640625
+          }
+        },
+        "primary_macro": null,
+        "cost": {
+          "calls": 1.71875,
+          "prompt_tokens": 2463.2213541666665,
+          "output_tokens": 4404.9140625,
+          "generation_seconds_amortized": 1.3375033606867264,
+          "retrieval_seconds": 0.0,
+          "execution_seconds": 0.09966571540765774
+        },
+        "unclosed_thinking_calls": 226,
+        "length_stopped_calls": 234,
+        "qa_support_visible_rate": 0.0,
+        "secondary": {
+          "qa_character_f1": 0.0,
+          "tool_schema_valid_rate": 0.0,
+          "math_numeric_parseable_rate": 0.0,
+          "code_public_pass_before_final_rate": 0.7291666666666666
+        }
+      }
+    ],
+    "two_minus_one": {
+      "comparison": "mini/code_prefix_2 minus mini/code_prefix_1",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 8.333333333333334,
+          "paired_95ci_pp": [
+            5.729166666666666,
+            11.197916666666668
+          ],
+          "cluster_95ci_pp": [
+            5.729166666666666,
+            11.197916666666668
+          ]
+        }
+      }
+    },
+    "three_minus_two": {
+      "comparison": "mini/code_prefix_3 minus mini/code_prefix_2",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 2.34375,
+          "paired_95ci_pp": [
+            1.0416666666666665,
+            3.90625
+          ],
+          "cluster_95ci_pp": [
+            1.0416666666666665,
+            3.90625
+          ]
+        }
+      }
+    },
+    "three_minus_one": {
+      "comparison": "mini/code_prefix_3 minus mini/code_prefix_1",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 10.677083333333332,
+          "paired_95ci_pp": [
+            7.8125,
+            13.802083333333334
+          ],
+          "cluster_95ci_pp": [
+            7.8125,
+            13.802083333333334
+          ]
+        }
+      }
+    }
+  },
+  "numeric_format_diagnostic": {
+    "status": "POST-HOC DIAGNOSTIC ONLY; not a preregistered metric or a selected deployment-policy change",
+    "reason": "Observed reversed #### markers and standalone final numbers; separate interface adherence from numerical content.",
+    "method": "If strict parse fails, take only a standalone numeric last final-channel line after removing trailing heading/fence/emphasis markers. Never mine an unfinished thought or use gold to choose among numbers. Apply identically to all models and arms.",
+    "primary_results_unchanged": true,
+    "table": [
+      {
+        "model": "mini",
+        "policy": "bare",
+        "attempts": 384,
+        "strict_correct": 163,
+        "strict_unparseable": 206,
+        "recovered_correct_from_explicit_final": 117,
+        "recovered_wrong_from_explicit_final": 6,
+        "unclosed_thinking": 77,
+        "strict_accuracy": 0.4244791666666667,
+        "diagnostic_accuracy_after_readout": 0.7291666666666666,
+        "diagnostic_macro_with_other_domains_unchanged": 0.4563802083333333
+      },
+      {
+        "model": "mini",
+        "policy": "long",
+        "attempts": 384,
+        "strict_correct": 196,
+        "strict_unparseable": 148,
+        "recovered_correct_from_explicit_final": 119,
+        "recovered_wrong_from_explicit_final": 13,
+        "unclosed_thinking": 10,
+        "strict_accuracy": 0.5104166666666666,
+        "diagnostic_accuracy_after_readout": 0.8203125,
+        "diagnostic_macro_with_other_domains_unchanged": 0.49934895833333337
+      },
+      {
+        "model": "mini",
+        "policy": "literal",
+        "attempts": 384,
+        "strict_correct": 216,
+        "strict_unparseable": 141,
+        "recovered_correct_from_explicit_final": 57,
+        "recovered_wrong_from_explicit_final": 4,
+        "unclosed_thinking": 76,
+        "strict_accuracy": 0.5625,
+        "diagnostic_accuracy_after_readout": 0.7109375,
+        "diagnostic_macro_with_other_domains_unchanged": 0.541015625
+      },
+      {
+        "model": "mini",
+        "policy": "no_card",
+        "attempts": 384,
+        "strict_correct": 162,
+        "strict_unparseable": 208,
+        "recovered_correct_from_explicit_final": 109,
+        "recovered_wrong_from_explicit_final": 8,
+        "unclosed_thinking": 86,
+        "strict_accuracy": 0.421875,
+        "diagnostic_accuracy_after_readout": 0.7057291666666666,
+        "diagnostic_macro_with_other_domains_unchanged": 0.5358072916666666
+      },
+      {
+        "model": "mini",
+        "policy": "no_rag",
+        "attempts": 384,
+        "strict_correct": 217,
+        "strict_unparseable": 138,
+        "recovered_correct_from_explicit_final": 52,
+        "recovered_wrong_from_explicit_final": 1,
+        "unclosed_thinking": 79,
+        "strict_accuracy": 0.5651041666666666,
+        "diagnostic_accuracy_after_readout": 0.7005208333333334,
+        "diagnostic_macro_with_other_domains_unchanged": 0.4947916666666667
+      },
+      {
+        "model": "mini",
+        "policy": "no_feedback",
+        "attempts": 384,
+        "strict_correct": 198,
+        "strict_unparseable": 159,
+        "recovered_correct_from_explicit_final": 58,
+        "recovered_wrong_from_explicit_final": 3,
+        "unclosed_thinking": 92,
+        "strict_accuracy": 0.515625,
+        "diagnostic_accuracy_after_readout": 0.6666666666666666,
+        "diagnostic_macro_with_other_domains_unchanged": 0.49479166666666663
+      },
+      {
+        "model": "mini",
+        "policy": "self_review",
+        "attempts": 384,
+        "strict_correct": 164,
+        "strict_unparseable": 191,
+        "recovered_correct_from_explicit_final": 111,
+        "recovered_wrong_from_explicit_final": 6,
+        "unclosed_thinking": 56,
+        "strict_accuracy": 0.4270833333333333,
+        "diagnostic_accuracy_after_readout": 0.7161458333333334,
+        "diagnostic_macro_with_other_domains_unchanged": 0.4576822916666667
+      },
+      {
+        "model": "qwen",
+        "policy": "bare",
+        "attempts": 384,
+        "strict_correct": 217,
+        "strict_unparseable": 155,
+        "recovered_correct_from_explicit_final": 40,
+        "recovered_wrong_from_explicit_final": 1,
+        "unclosed_thinking": 91,
+        "strict_accuracy": 0.5651041666666666,
+        "diagnostic_accuracy_after_readout": 0.6692708333333334,
+        "diagnostic_macro_with_other_domains_unchanged": 0.6555989583333334
+      },
+      {
+        "model": "qwen",
+        "policy": "long",
+        "attempts": 384,
+        "strict_correct": 280,
+        "strict_unparseable": 84,
+        "recovered_correct_from_explicit_final": 65,
+        "recovered_wrong_from_explicit_final": 4,
+        "unclosed_thinking": 1,
+        "strict_accuracy": 0.7291666666666666,
+        "diagnostic_accuracy_after_readout": 0.8984375,
+        "diagnostic_macro_with_other_domains_unchanged": 0.7415364583333334
+      },
+      {
+        "model": "qwen",
+        "policy": "literal",
+        "attempts": 384,
+        "strict_correct": 297,
+        "strict_unparseable": 76,
+        "recovered_correct_from_explicit_final": 7,
+        "recovered_wrong_from_explicit_final": 0,
+        "unclosed_thinking": 49,
+        "strict_accuracy": 0.7734375,
+        "diagnostic_accuracy_after_readout": 0.7916666666666666,
+        "diagnostic_macro_with_other_domains_unchanged": 0.7669270833333334
+      }
+    ],
+    "diagnostic_selected_minus_bare": {
+      "comparison": "mini/literal minus mini/bare",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 24.479166666666664,
+          "paired_95ci_pp": [
+            18.75,
+            30.46875
+          ],
+          "cluster_95ci_pp": [
+            18.489583333333336,
+            30.46875
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": -1.8229166666666667,
+          "paired_95ci_pp": [
+            -5.468750000000002,
+            2.083333333333333
+          ],
+          "cluster_95ci_pp": [
+            -5.729166666666666,
+            1.8229166666666672
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 11.197916666666666,
+          "paired_95ci_pp": [
+            5.989583333333334,
+            16.406250000000004
+          ],
+          "cluster_95ci_pp": [
+            5.989583333333334,
+            16.40625
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": 0.4975124378109451,
+          "paired_95ci_pp": [
+            -4.477611940298508,
+            5.4726368159203975
+          ],
+          "cluster_95ci_pp": [
+            -4.726368159203981,
+            5.72139303482587
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 0.0,
+          "paired_95ci_pp": [
+            0.0,
+            0.0
+          ],
+          "cluster_95ci_pp": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 8.463541666666666,
+        "paired_95ci_pp": [
+          6.315104166666666,
+          10.677083333333332
+        ],
+        "cluster_95ci_pp": [
+          6.315104166666666,
+          10.7421875
+        ]
+      }
+    },
+    "diagnostic_qwen_same_minus_selected": {
+      "comparison": "qwen/literal minus mini/literal",
+      "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+      "bootstrap_replicates": 10000,
+      "domains": {
+        "drcd": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 7.291666666666666,
+          "paired_95ci_pp": [
+            -1.302083333333332,
+            15.885416666666668
+          ],
+          "cluster_95ci_pp": [
+            -1.5624999999999982,
+            15.625
+          ]
+        },
+        "gsm8k": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 8.072916666666668,
+          "paired_95ci_pp": [
+            1.5625,
+            14.583333333333334
+          ],
+          "cluster_95ci_pp": [
+            1.5625,
+            14.583333333333332
+          ]
+        },
+        "mbpp": {
+          "questions": 128,
+          "clusters": 128,
+          "delta_pp": 21.875,
+          "paired_95ci_pp": [
+            16.40625,
+            27.604166666666675
+          ],
+          "cluster_95ci_pp": [
+            16.145833333333336,
+            27.604166666666668
+          ]
+        },
+        "tmmluplus": {
+          "questions": 134,
+          "clusters": 67,
+          "delta_pp": 37.810945273631845,
+          "paired_95ci_pp": [
+            30.348258706467668,
+            45.27363184079603
+          ],
+          "cluster_95ci_pp": [
+            30.34825870646766,
+            45.52238805970149
+          ]
+        },
+        "tools": {
+          "questions": 128,
+          "clusters": 6,
+          "delta_pp": 53.125,
+          "paired_95ci_pp": [
+            44.53125,
+            61.71875
+          ],
+          "cluster_95ci_pp": [
+            27.34375,
+            80.46875
+          ]
+        }
+      },
+      "primary_macro": {
+        "delta_pp": 22.591145833333336,
+        "paired_95ci_pp": [
+          18.815104166666668,
+          26.302083333333336
+        ],
+        "cluster_95ci_pp": [
+          15.169270833333334,
+          29.953147336075176
+        ]
+      }
+    },
+    "interpretation": "The strict mathematics gain must not be called improved numerical reasoning. Explicit-final readout gives MiniCPM bare 72.92% and selected 71.09%; the primary result includes interface adherence. These post-hoc sensitivity estimates do not promote a new deployment adapter or replace sealed metrics."
+  },
+  "written_analysis_zh": {
+    "status": "封存實驗完成；推論策略與主評分器未在測試後改動",
+    "outcome": [
+      "不訓練可以提升這組任務的系統表現：MiniCPM5-1B 從 38.02% 到 50.39%，增加 12.37 個百分點，題目配對 95% CI 為 +9.90 至 +14.97。這是四類任務等權平均，不是模型的通用能力分數。",
+      "尚未達到 9B：Qwen3.5-9B 基準為 62.96%，使用相同 harness 為 76.24%。相同 harness 的差距為 25.85 個百分點，95% CI 為 22.07 至 29.62。工具與閉卷知識尤其不能用閱讀改善來掩蓋。",
+      "數學分數需要特別解讀。主評分要求合法最終數值格式；事後用相同規則讀取各組已輸出的明確最終數字，MiniCPM 基準為 72.92%，選定方案為 71.09%。所以不能把主評分的數學增幅稱為數值推理提升。只改這個診斷讀值、其他領域不變時，宏觀差距仍為 +8.46 個百分點，配對 95% CI +6.32 至 +10.68。此敏感度分析不取代封存主評分，也不更換部署策略。"
+    ],
+    "what_was_built": [
+      "新增 test-time-evidence-selection、execution-feedback-repair、retrieval-query-refinement、verified-state-handoff 四個技能，技能庫由 60 增至 64；產生九張帶來源版本及雜湊的短卡。不是把全部技能灌進每一題。",
+      "用公開的輸出契約路由：閱讀使用中文詞彙檢索、短卡與原文答案約束；數學使用短卡直接推理；程式使用真實公開測試與最多兩次修復；工具維持原生呼叫介面且不注入工具短卡；選擇題維持閉卷短卡。",
+      "主機持有來源、引句位置、假設、失敗與執行收據。引句必須對得回原文，執行結果由隔離程序回傳，模型自己寫 passed 不算證據。來源存在、schema 合法、公開測試通過，都不是語義正確的充分條件。",
+      "固定模型版本、BF16 權重、資料切分、18 個候選、三個 seed、評分器和最終比較清單；生成程序不能讀取參考答案或隱藏測試。沒有大模型代答、代評或新增訓練。"
+    ],
+    "skill_rag_reasoning": [
+      "Skill 的作用是提醒可執行的小步驟與輸出契約。移除短卡後主指標下降 3.91 個百分點，但數學敏感度分析顯示其中相當一部分是介面遵循。不能由此推論短卡補上了大量世界知識。",
+      "RAG 的主要收益是讓正確來源進入有限工作區。移除檢索後閱讀 EM 從 32.03% 降至 10.68%；選定方案的支持來源可見率為 100%，仍有 261/384 次未符合 EM。這代表後續瓶頸包括抽取、單位、別名及理解，繼續增加召回數不會自動解決。此檢索是在每題含支持來源的 32 份候選文件包內排序，不是開放網路或全庫搜尋成績。",
+      "Reasoning 的預算應花在能改變判斷的回饋。選定方案平均每題 1.19 次呼叫、1,944 個輸出 token；固定三次無外部回饋的自我檢查花費 4,782 個輸出 token，主指標只有 38.54%。更多文字不等於更多可靠資訊。",
+      "真實執行回饋對程式有直接證據：相同生成軌跡只保留前一、二、三次呼叫，正確率依序為 55.73%、64.06%、66.41%。第三次仍有 +2.34 個百分點，因此這次是依預算停止，沒有證明能力已經不能進步。",
+      "外部狀態適合保存必要證據與失敗原因，避免每次重讀完整歷史。本輪已實作且納入候選，但沒有封存的等成本獨立對照能證明狀態壓縮本身是增益來源。長期記憶、多步開放式任務也尚未驗證。"
+    ],
+    "context_length": [
+      "上下文窗可以容納更多資料，實際有效的工作區卻不一定變大。32 題開發診斷中，MiniCPM 只看正確來源的 F1 為 58.64；加入大量無關文字到約 16K 上限後，來源在開頭、中間、結尾時分別為 24.19、22.08、26.47。Qwen 對應約 84.69、90.24、84.94。",
+      "建議把較長的總處理預算用於分段讀取、針對缺口檢索、保留證據及帶回實際失敗，再讓每次模型呼叫只看必要資訊。這是由本輪結果支持的設計方向；不能宣稱任意分段與壓縮演算法已經驗證有效。",
+      "位置診斷只有 32 題、一個 seed，各條件的亂數串流不同，也不是正式測試集。數字支持本設定下的干擾敏感性，不足以估計普遍的位置效應或宣稱 4K 是全域最佳長度。"
+    ],
+    "remaining_failures": [
+      "工具語義綁定：384 次嘗試中 336 次 schema 合法，只有 180 次完全正確；156 次是合法但參數錯。合法呼叫內 limit 錯 141 次、factor 錯 60 次，錯誤可重疊。跨六個未見語義家族時，比驗證集明顯退步，不能只驗證 JSON 就認定可靠。",
+      "閉卷知識：正確率 36.32%，相同 harness 的 Qwen 為 74.13%。402 次嘗試中有 155 次合法選項但答錯，另有 101 次最終輸出不合格式，其中 97 次思考沒有結束。這同時包含知識、判斷與有限預算的問題，不能全部歸因於缺少知識。",
+      "閱讀：支持來源已全部可見，但嚴格 EM 只有 32.03%，字元 F1 為 54.65。EM 與部分字元重疊不能替代人工語義判斷；Qwen 的 EM 較高但 F1 較低，不能將單一指標外推為全面閱讀能力排序。",
+      "數學：141/384 次不符合主數值解析規則；其中 76 次沒有結束思考，65 次有最終文字但格式不符。243 次可解析輸出中有 27 次算錯。事後只讀明確最終數字可恢復 57 個正確答案，卻不能挖取未完成思考中的某個數字來充當答案。",
+      "程式：25 次已通過公開測試，仍未通過隱藏測試。剩餘限制包含邊界條件、規格理解、未完成生成及執行錯誤，公開測試通過不能宣稱完整正確。"
+    ],
+    "next_frozen_weight_cycle_not_yet_validated": [
+      {
+        "priority": 1,
+        "change": "把最終答案序列化獨立為小介面：規範明確的數字與選項輸出，對已完成 final 的無歧義格式做固定轉換；未完成思考保留為未完成。",
+        "validation": "先在新的開發集定義適配規則、固定所有模型共用評分，再用全新保留集比較。此次事後解析不能當成已驗證部署改善。"
+      },
+      {
+        "priority": 2,
+        "change": "工具參數逐欄附原文位置與型別，再由主機檢查字面值與欄位來源；缺失欄位才重問，避免 limit 與清單長度、factor 與其他數字互相混淆。",
+        "validation": "新語義家族測試；另外報 schema、來源對齊及真正語義正確率。原文位置吻合也不等於選對欄位。"
+      },
+      {
+        "priority": 3,
+        "change": "閱讀先抽取與問題欄位相符的短原文，再核對實體、時間、否定、單位與比較對象；只針對缺口追加查詢。",
+        "validation": "分開測全庫召回、支持來源已給定時的利用能力、無答案及相似干擾。增加可複查的語義評分，保留原有 EM/F1。"
+      },
+      {
+        "priority": 4,
+        "change": "依任務調整推論預算：程式遇到真實失敗才修復；數學與閉卷題另測較長輸出、分段提交與多候選。沒有可區分候選的外部依據時，不用自信分數假裝知道誰正確。",
+        "validation": "固定總輸出與呼叫預算，與相同工具及預算的 9B 比較。候選 oracle 命中率與可部署選擇器正確率分開報告。"
+      },
+      {
+        "priority": 5,
+        "change": "為閉卷弱項建立對應領域且帶版本的知識來源，測試足夠證據的檢索與多步組合；既有 DRCD 語料的全庫 RAG 沒有改善廣泛考科。",
+        "validation": "若加入現成 embedding 或 reranker，固定其版本並計入權重、記憶體與延遲；不能把額外模型成本從 1B 系統中隱藏。"
+      }
+    ],
+    "claim_limits": [
+      "停止原因是 18 個候選的預先固定搜尋預算耗盡，並非沒有任何可能進步的方法。最終測試只評估，不用來改選策略。",
+      "三個 seed 先在同一道題內平均，再對題目配對 bootstrap；工具僅六個測試家族，另列家族群聚區間。BF16 batch 組成會使同 seed 的輸出不同，獨立消融不能當成逐 token 相同的軌跡。",
+      "資料是公開 benchmark，不能排除預訓練重疊；程式是參考程式可在隔離環境執行的子集，工具是合成單次呼叫，閱讀有支持來源候選包。結果不能當作官方完整榜單。",
+      "H200 上的攤提 batch 時間表示吞吐成本，不能直接當作手機、量化模型或單一使用者延遲。不同模型 tokenizer 的 token 數也不是等量 FLOPs。"
+    ]
+  },
   "stopping": {
     "selected_policy": "literal",
     "candidate_count": 18,
@@ -1076,31 +2980,106 @@
       "policy": "bare",
       "seed": 20261027,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 7
+      "status": "completed",
+      "gpu": 7,
+      "started_utc": "2026-10-27T02:13:17.351838+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "bare",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-bare-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:15:42.801548+00:00"
     },
     {
       "model": "mini",
       "policy": "bare",
       "seed": 20261028,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 3
+      "status": "completed",
+      "gpu": 3,
+      "started_utc": "2026-10-27T02:10:42.219802+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "bare",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-bare-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:13:32.659414+00:00"
     },
     {
       "model": "mini",
       "policy": "bare",
       "seed": 20261029,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 4
+      "status": "completed",
+      "gpu": 4,
+      "started_utc": "2026-10-27T02:11:05.284138+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "bare",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-bare-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:14:36.962161+00:00"
     },
     {
       "model": "mini",
       "policy": "long",
       "seed": 20261027,
       "weight": 7.199999999999999,
-      "status": "running",
+      "status": "completed",
       "gpu": 3,
       "started_utc": "2026-10-27T01:46:28.481493+00:00",
       "command": [
@@ -1124,14 +3103,16 @@
         "128",
         "--eager"
       ],
-      "log": "work/logs/final-mini-long-20261027.log"
+      "log": "work/logs/final-mini-long-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T01:55:05.860924+00:00"
     },
     {
       "model": "mini",
       "policy": "long",
       "seed": 20261028,
       "weight": 7.199999999999999,
-      "status": "running",
+      "status": "completed",
       "gpu": 4,
       "started_utc": "2026-10-27T01:46:28.483026+00:00",
       "command": [
@@ -1155,14 +3136,16 @@
         "128",
         "--eager"
       ],
-      "log": "work/logs/final-mini-long-20261028.log"
+      "log": "work/logs/final-mini-long-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T01:55:04.279870+00:00"
     },
     {
       "model": "mini",
       "policy": "long",
       "seed": 20261029,
       "weight": 7.199999999999999,
-      "status": "running",
+      "status": "completed",
       "gpu": 5,
       "started_utc": "2026-10-27T01:46:28.484718+00:00",
       "command": [
@@ -1186,134 +3169,511 @@
         "128",
         "--eager"
       ],
-      "log": "work/logs/final-mini-long-20261029.log"
+      "log": "work/logs/final-mini-long-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T01:55:18.516019+00:00"
     },
     {
       "model": "mini",
       "policy": "literal",
       "seed": 20261027,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 0
+      "status": "completed",
+      "gpu": 0,
+      "started_utc": "2026-10-27T02:08:25.926598+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "literal",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-literal-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:14:28.408297+00:00"
     },
     {
       "model": "mini",
       "policy": "literal",
       "seed": 20261028,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 1
+      "status": "completed",
+      "gpu": 1,
+      "started_utc": "2026-10-27T02:06:58.591906+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "literal",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-literal-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:12:57.279493+00:00"
     },
     {
       "model": "mini",
       "policy": "literal",
       "seed": 20261029,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 2
+      "status": "completed",
+      "gpu": 2,
+      "started_utc": "2026-10-27T02:05:07.566326+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "literal",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-literal-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:12:24.930892+00:00"
     },
     {
       "model": "mini",
       "policy": "no_card",
       "seed": 20261027,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 5
+      "status": "completed",
+      "gpu": 5,
+      "started_utc": "2026-10-27T02:10:20.475309+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_card",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_card-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:16:28.337409+00:00"
     },
     {
       "model": "mini",
       "policy": "no_card",
       "seed": 20261028,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 7
+      "status": "completed",
+      "gpu": 7,
+      "started_utc": "2026-10-27T02:15:42.804226+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_card",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_card-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:22:24.520429+00:00"
     },
     {
       "model": "mini",
       "policy": "no_card",
       "seed": 20261029,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 6
+      "status": "completed",
+      "gpu": 6,
+      "started_utc": "2026-10-27T02:13:29.728084+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_card",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_card-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:19:15.713149+00:00"
     },
     {
       "model": "mini",
       "policy": "no_rag",
       "seed": 20261027,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 1
+      "status": "completed",
+      "gpu": 1,
+      "started_utc": "2026-10-27T02:12:57.280759+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_rag",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_rag-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:19:16.305884+00:00"
     },
     {
       "model": "mini",
       "policy": "no_rag",
       "seed": 20261028,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 2
+      "status": "completed",
+      "gpu": 2,
+      "started_utc": "2026-10-27T02:12:24.932119+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_rag",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_rag-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:18:11.811810+00:00"
     },
     {
       "model": "mini",
       "policy": "no_rag",
       "seed": 20261029,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 5
+      "status": "completed",
+      "gpu": 5,
+      "started_utc": "2026-10-27T02:16:28.338896+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_rag",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_rag-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:22:39.896181+00:00"
     },
     {
       "model": "mini",
       "policy": "no_feedback",
       "seed": 20261027,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 3
+      "status": "completed",
+      "gpu": 3,
+      "started_utc": "2026-10-27T02:13:32.660706+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_feedback",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_feedback-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:16:22.434408+00:00"
     },
     {
       "model": "mini",
       "policy": "no_feedback",
       "seed": 20261028,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 4
+      "status": "completed",
+      "gpu": 4,
+      "started_utc": "2026-10-27T02:14:36.963435+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_feedback",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_feedback-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:17:20.107929+00:00"
     },
     {
       "model": "mini",
       "policy": "no_feedback",
       "seed": 20261029,
       "weight": 3.0,
-      "status": "pending",
-      "gpu": 0
+      "status": "completed",
+      "gpu": 0,
+      "started_utc": "2026-10-27T02:14:28.409782+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "no_feedback",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-no_feedback-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:16:46.781659+00:00"
     },
     {
       "model": "mini",
       "policy": "self_review",
       "seed": 20261027,
       "weight": 3.9000000000000004,
-      "status": "pending",
-      "gpu": 5
+      "status": "completed",
+      "gpu": 5,
+      "started_utc": "2026-10-27T01:55:18.517050+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "self_review",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-self_review-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:03:08.651311+00:00"
     },
     {
       "model": "mini",
       "policy": "self_review",
       "seed": 20261028,
       "weight": 3.9000000000000004,
-      "status": "pending",
-      "gpu": 5
+      "status": "completed",
+      "gpu": 5,
+      "started_utc": "2026-10-27T02:03:08.652396+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "self_review",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-self_review-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:10:20.472866+00:00"
     },
     {
       "model": "mini",
       "policy": "self_review",
       "seed": 20261029,
       "weight": 3.9000000000000004,
-      "status": "pending",
-      "gpu": 6
+      "status": "completed",
+      "gpu": 6,
+      "started_utc": "2026-10-27T02:05:45.998603+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "mini",
+        "--split",
+        "test",
+        "--policies",
+        "self_review",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-mini-self_review-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:13:29.726828+00:00"
     },
     {
       "model": "qwen",
       "policy": "bare",
       "seed": 20261027,
       "weight": 6.0,
-      "status": "running",
+      "status": "completed",
       "gpu": 6,
       "started_utc": "2026-10-27T01:46:28.486029+00:00",
       "command": [
@@ -1337,14 +3697,16 @@
         "128",
         "--eager"
       ],
-      "log": "work/logs/final-qwen-bare-20261027.log"
+      "log": "work/logs/final-qwen-bare-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T01:55:50.393325+00:00"
     },
     {
       "model": "qwen",
       "policy": "bare",
       "seed": 20261028,
       "weight": 6.0,
-      "status": "running",
+      "status": "completed",
       "gpu": 7,
       "started_utc": "2026-10-27T01:46:28.486590+00:00",
       "command": [
@@ -1368,22 +3730,49 @@
         "128",
         "--eager"
       ],
-      "log": "work/logs/final-qwen-bare-20261028.log"
+      "log": "work/logs/final-qwen-bare-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T01:56:06.778501+00:00"
     },
     {
       "model": "qwen",
       "policy": "bare",
       "seed": 20261029,
       "weight": 6.0,
-      "status": "pending",
-      "gpu": 6
+      "status": "completed",
+      "gpu": 6,
+      "started_utc": "2026-10-27T01:55:50.394417+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "bare",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-bare-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:05:45.997291+00:00"
     },
     {
       "model": "qwen",
       "policy": "long",
       "seed": 20261027,
       "weight": 14.399999999999999,
-      "status": "running",
+      "status": "completed",
       "gpu": 0,
       "started_utc": "2026-10-27T01:46:28.476470+00:00",
       "command": [
@@ -1407,14 +3796,16 @@
         "128",
         "--eager"
       ],
-      "log": "work/logs/final-qwen-long-20261027.log"
+      "log": "work/logs/final-qwen-long-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:08:25.925397+00:00"
     },
     {
       "model": "qwen",
       "policy": "long",
       "seed": 20261028,
       "weight": 14.399999999999999,
-      "status": "running",
+      "status": "completed",
       "gpu": 1,
       "started_utc": "2026-10-27T01:46:28.477895+00:00",
       "command": [
@@ -1438,14 +3829,16 @@
         "128",
         "--eager"
       ],
-      "log": "work/logs/final-qwen-long-20261028.log"
+      "log": "work/logs/final-qwen-long-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:06:58.590776+00:00"
     },
     {
       "model": "qwen",
       "policy": "long",
       "seed": 20261029,
       "weight": 14.399999999999999,
-      "status": "running",
+      "status": "completed",
       "gpu": 2,
       "started_utc": "2026-10-27T01:46:28.479762+00:00",
       "command": [
@@ -1469,31 +3862,108 @@
         "128",
         "--eager"
       ],
-      "log": "work/logs/final-qwen-long-20261029.log"
+      "log": "work/logs/final-qwen-long-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:05:07.564019+00:00"
     },
     {
       "model": "qwen",
       "policy": "literal",
       "seed": 20261027,
       "weight": 6.0,
-      "status": "pending",
-      "gpu": 7
+      "status": "completed",
+      "gpu": 7,
+      "started_utc": "2026-10-27T01:56:06.779586+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "literal",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261027",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-literal-20261027.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:13:17.350425+00:00"
     },
     {
       "model": "qwen",
       "policy": "literal",
       "seed": 20261028,
       "weight": 6.0,
-      "status": "pending",
-      "gpu": 3
+      "status": "completed",
+      "gpu": 3,
+      "started_utc": "2026-10-27T01:55:05.862057+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "literal",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261028",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-literal-20261028.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:10:42.218450+00:00"
     },
     {
       "model": "qwen",
       "policy": "literal",
       "seed": 20261029,
       "weight": 6.0,
-      "status": "pending",
-      "gpu": 4
+      "status": "completed",
+      "gpu": 4,
+      "started_utc": "2026-10-27T01:55:04.280941+00:00",
+      "command": [
+        "/root/vllm-env/bin/python",
+        "/root/barbet-skill-library/experiments/test_time_v1/run.py",
+        "--model",
+        "qwen",
+        "--split",
+        "test",
+        "--policies",
+        "literal",
+        "--config",
+        "/root/barbet-skill-library/experiments/test_time_v1/final_policies.json",
+        "--seed",
+        "20261029",
+        "--run-tag",
+        "final",
+        "--batch-size",
+        "128",
+        "--max-seqs",
+        "128",
+        "--eager"
+      ],
+      "log": "work/logs/final-qwen-literal-20261029.log",
+      "returncode": 0,
+      "finished_utc": "2026-10-27T02:11:05.282919+00:00"
     }
   ],
   "dev": [
@@ -3495,7 +5965,578 @@
       }
     }
   ],
-  "test": [],
+  "test": [
+    {
+      "model": "mini",
+      "policy": "bare",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 29,
+          "accuracy": 0.07552083333333333
+        },
+        "tools": {
+          "n": 384,
+          "correct": 180,
+          "accuracy": 0.46875
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 163,
+          "accuracy": 0.4244791666666667
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 144,
+          "accuracy": 0.3582089552238806
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 212,
+          "accuracy": 0.5520833333333334
+        }
+      },
+      "primary_macro": 0.38020833333333337,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 971.998452012384,
+        "output_tokens": 1452.453560371517,
+        "generation_seconds_amortized": 0.2270730958619108,
+        "retrieval_seconds": 0.016409796836590867,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 298,
+      "length_stopped_calls": 299,
+      "qa_support_visible_rate": 0.2890625,
+      "secondary": {
+        "qa_character_f1": 0.1778870751857784,
+        "tool_schema_valid_rate": 0.875,
+        "math_numeric_parseable_rate": 0.4635416666666667,
+        "code_public_pass_before_final_rate": 0.0
+      }
+    },
+    {
+      "model": "mini",
+      "policy": "literal",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 123,
+          "accuracy": 0.3203125
+        },
+        "tools": {
+          "n": 384,
+          "correct": 180,
+          "accuracy": 0.46875
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 216,
+          "accuracy": 0.5625
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 146,
+          "accuracy": 0.36318407960199006
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 255,
+          "accuracy": 0.6640625
+        }
+      },
+      "primary_macro": 0.50390625,
+      "cost": {
+        "calls": 1.1919504643962848,
+        "prompt_tokens": 1153.2894736842106,
+        "output_tokens": 1944.454076367389,
+        "generation_seconds_amortized": 0.5427593395932817,
+        "retrieval_seconds": 0.005365304800732709,
+        "execution_seconds": 0.0197480055296907
+      },
+      "unclosed_thinking_calls": 409,
+      "length_stopped_calls": 426,
+      "qa_support_visible_rate": 1.0,
+      "secondary": {
+        "qa_character_f1": 0.5465483489888882,
+        "tool_schema_valid_rate": 0.875,
+        "math_numeric_parseable_rate": 0.6328125,
+        "code_public_pass_before_final_rate": 0.7291666666666666
+      }
+    },
+    {
+      "model": "mini",
+      "policy": "long",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 30,
+          "accuracy": 0.078125
+        },
+        "tools": {
+          "n": 384,
+          "correct": 180,
+          "accuracy": 0.46875
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 196,
+          "accuracy": 0.5104166666666666
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 162,
+          "accuracy": 0.40298507462686567
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 242,
+          "accuracy": 0.6302083333333334
+        }
+      },
+      "primary_macro": 0.421875,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 971.998452012384,
+        "output_tokens": 2423.3828689370484,
+        "generation_seconds_amortized": 0.6924710905254349,
+        "retrieval_seconds": 0.016639862640138996,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 91,
+      "length_stopped_calls": 90,
+      "qa_support_visible_rate": 0.2890625,
+      "secondary": {
+        "qa_character_f1": 0.17996003261186802,
+        "tool_schema_valid_rate": 0.875,
+        "math_numeric_parseable_rate": 0.6145833333333334,
+        "code_public_pass_before_final_rate": 0.0
+      }
+    },
+    {
+      "model": "mini",
+      "policy": "no_card",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 122,
+          "accuracy": 0.3177083333333333
+        },
+        "tools": {
+          "n": 384,
+          "correct": 180,
+          "accuracy": 0.46875
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 162,
+          "accuracy": 0.421875
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 145,
+          "accuracy": 0.36069651741293535
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 250,
+          "accuracy": 0.6510416666666666
+        }
+      },
+      "primary_macro": 0.46484375,
+      "cost": {
+        "calls": 1.1857585139318885,
+        "prompt_tokens": 1111.078431372549,
+        "output_tokens": 1893.813725490196,
+        "generation_seconds_amortized": 0.5203085106050729,
+        "retrieval_seconds": 0.0051268375333556205,
+        "execution_seconds": 0.018223757489408503
+      },
+      "unclosed_thinking_calls": 442,
+      "length_stopped_calls": 453,
+      "qa_support_visible_rate": 1.0,
+      "secondary": {
+        "qa_character_f1": 0.5263400912968829,
+        "tool_schema_valid_rate": 0.875,
+        "math_numeric_parseable_rate": 0.4583333333333333,
+        "code_public_pass_before_final_rate": 0.7369791666666666
+      }
+    },
+    {
+      "model": "mini",
+      "policy": "no_feedback",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 117,
+          "accuracy": 0.3046875
+        },
+        "tools": {
+          "n": 384,
+          "correct": 180,
+          "accuracy": 0.46875
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 198,
+          "accuracy": 0.515625
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 153,
+          "accuracy": 0.3805970149253731
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 207,
+          "accuracy": 0.5390625
+        }
+      },
+      "primary_macro": 0.45703125,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 644.5495356037152,
+        "output_tokens": 1508.0165118679051,
+        "generation_seconds_amortized": 0.20960281228971495,
+        "retrieval_seconds": 0.004869186635618363,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 303,
+      "length_stopped_calls": 304,
+      "qa_support_visible_rate": 1.0,
+      "secondary": {
+        "qa_character_f1": 0.5427239885121194,
+        "tool_schema_valid_rate": 0.875,
+        "math_numeric_parseable_rate": 0.5859375,
+        "code_public_pass_before_final_rate": 0.0
+      }
+    },
+    {
+      "model": "mini",
+      "policy": "no_rag",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 41,
+          "accuracy": 0.10677083333333333
+        },
+        "tools": {
+          "n": 384,
+          "correct": 180,
+          "accuracy": 0.46875
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 217,
+          "accuracy": 0.5651041666666666
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 152,
+          "accuracy": 0.3781094527363184
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 270,
+          "accuracy": 0.703125
+        }
+      },
+      "primary_macro": 0.4609375,
+      "cost": {
+        "calls": 1.1821465428276574,
+        "prompt_tokens": 1502.9442724458204,
+        "output_tokens": 2073.762641898865,
+        "generation_seconds_amortized": 0.49860769388591725,
+        "retrieval_seconds": 0.017009003378135625,
+        "execution_seconds": 0.018286922054655534
+      },
+      "unclosed_thinking_calls": 422,
+      "length_stopped_calls": 437,
+      "qa_support_visible_rate": 0.2578125,
+      "secondary": {
+        "qa_character_f1": 0.15456502829057742,
+        "tool_schema_valid_rate": 0.8776041666666666,
+        "math_numeric_parseable_rate": 0.640625,
+        "code_public_pass_before_final_rate": 0.7786458333333334
+      }
+    },
+    {
+      "model": "mini",
+      "policy": "self_review",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 82,
+          "accuracy": 0.21354166666666666
+        },
+        "tools": {
+          "n": 384,
+          "correct": 110,
+          "accuracy": 0.2864583333333333
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 164,
+          "accuracy": 0.4270833333333333
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 162,
+          "accuracy": 0.40298507462686567
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 236,
+          "accuracy": 0.6145833333333334
+        }
+      },
+      "primary_macro": 0.3854166666666667,
+      "cost": {
+        "calls": 3.0,
+        "prompt_tokens": 3570.2110423116615,
+        "output_tokens": 4782.210526315789,
+        "generation_seconds_amortized": 0.6652506931182247,
+        "retrieval_seconds": 0.004776781469091419,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 757,
+      "length_stopped_calls": 889,
+      "qa_support_visible_rate": 1.0,
+      "secondary": {
+        "qa_character_f1": 0.4846243232004282,
+        "tool_schema_valid_rate": 0.5963541666666666,
+        "math_numeric_parseable_rate": 0.5026041666666666,
+        "code_public_pass_before_final_rate": 0.0
+      }
+    },
+    {
+      "model": "qwen",
+      "policy": "bare",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 93,
+          "accuracy": 0.2421875
+        },
+        "tools": {
+          "n": 384,
+          "correct": 384,
+          "accuracy": 1.0
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 217,
+          "accuracy": 0.5651041666666666
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 290,
+          "accuracy": 0.7213930348258707
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 273,
+          "accuracy": 0.7109375
+        }
+      },
+      "primary_macro": 0.6295572916666666,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 983.5975232198142,
+        "output_tokens": 1793.5113519091847,
+        "generation_seconds_amortized": 0.790467766316375,
+        "retrieval_seconds": 0.020072731453736992,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 287,
+      "length_stopped_calls": 306,
+      "qa_support_visible_rate": 0.296875,
+      "secondary": {
+        "qa_character_f1": 0.2983555553315059,
+        "tool_schema_valid_rate": 1.0,
+        "math_numeric_parseable_rate": 0.5963541666666666,
+        "code_public_pass_before_final_rate": 0.0
+      }
+    },
+    {
+      "model": "qwen",
+      "policy": "literal",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 151,
+          "accuracy": 0.3932291666666667
+        },
+        "tools": {
+          "n": 384,
+          "correct": 384,
+          "accuracy": 1.0
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 297,
+          "accuracy": 0.7734375
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 298,
+          "accuracy": 0.7412935323383084
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 339,
+          "accuracy": 0.8828125
+        }
+      },
+      "primary_macro": 0.7623697916666666,
+      "cost": {
+        "calls": 1.0928792569659442,
+        "prompt_tokens": 846.7590299277606,
+        "output_tokens": 2089.763673890609,
+        "generation_seconds_amortized": 1.4388670115986353,
+        "retrieval_seconds": 0.005907354843721055,
+        "execution_seconds": 0.016998578960573833
+      },
+      "unclosed_thinking_calls": 374,
+      "length_stopped_calls": 393,
+      "qa_support_visible_rate": 1.0,
+      "secondary": {
+        "qa_character_f1": 0.5056648206783811,
+        "tool_schema_valid_rate": 1.0,
+        "math_numeric_parseable_rate": 0.8020833333333334,
+        "code_public_pass_before_final_rate": 0.9348958333333334
+      }
+    },
+    {
+      "model": "qwen",
+      "policy": "long",
+      "complete": true,
+      "items": 1938,
+      "unique_questions": 646,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "drcd": {
+          "n": 384,
+          "correct": 94,
+          "accuracy": 0.24479166666666666
+        },
+        "tools": {
+          "n": 384,
+          "correct": 384,
+          "accuracy": 1.0
+        },
+        "gsm8k": {
+          "n": 384,
+          "correct": 280,
+          "accuracy": 0.7291666666666666
+        },
+        "tmmluplus": {
+          "n": 402,
+          "correct": 344,
+          "accuracy": 0.8557213930348259
+        },
+        "mbpp": {
+          "n": 384,
+          "correct": 316,
+          "accuracy": 0.8229166666666666
+        }
+      },
+      "primary_macro": 0.69921875,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 983.5975232198142,
+        "output_tokens": 2036.5923632610939,
+        "generation_seconds_amortized": 1.7671259999067606,
+        "retrieval_seconds": 0.02002361038905425,
+        "execution_seconds": 0.0
+      },
+      "unclosed_thinking_calls": 2,
+      "length_stopped_calls": 2,
+      "qa_support_visible_rate": 0.296875,
+      "secondary": {
+        "qa_character_f1": 0.30634372979687513,
+        "tool_schema_valid_rate": 1.0,
+        "math_numeric_parseable_rate": 0.78125,
+        "code_public_pass_before_final_rate": 0.0
+      }
+    }
+  ],
   "fixed_dev_gallery": [
     {
       "id": "drcd:1143-9-2",
