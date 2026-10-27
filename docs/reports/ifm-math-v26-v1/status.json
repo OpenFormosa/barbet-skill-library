@@ -29,7 +29,24 @@
   "prior_query_identities": 5104070,
   "unequal_literal_query_holds": 253,
   "all_effort_versions_retained_for_v26": true,
-  "phase": "candidates_complete_ranking_pending",
-  "updated_at": "2026-10-27T15:38:01.582203+00:00",
-  "goal_complete": false
+  "phase": "all_v26_scores_complete_selection_and_export_in_progress",
+  "updated_at": "2026-10-27T15:49:01.229628+00:00",
+  "goal_complete": false,
+  "candidate_index": {
+    "counts": {
+      "seen": 339279,
+      "eligible": 339279
+    },
+    "distinct_answers": 339195,
+    "input_groups": 313153,
+    "competing_groups": 24933,
+    "answers_to_score": 50975,
+    "status": "INDEXED_NOT_YET_PPL_SELECTED",
+    "all_score_inputs_are_eligible_only": true,
+    "no_model_training": true
+  },
+  "actual_scored_answers": 50975,
+  "all_competing_groups_completed": true,
+  "initial_import_failure_before_any_score": true,
+  "runtime_dependencies_modified": false
 }

@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM 數學 v26 標準答案</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM 數學：保留同題候選供 v26 比較</h1><p>完整讀取七個已下載數學來源檔案，共 356,955 列，保留 339,279 個候選答案，尚未計入有效訓練資料。high、medium、low effort 不是獨立題目；不得以來源順序或多數決預選答案。只有完整條件相同、通過品質門檻的候選，才能用固定原生 v26 的答案 token 條件 PPL 選最低者，包含 assistant EOS，排除 prompt 與 observation loss；單一候選另標示沒有比較 PPL。</p><p>排除需要未提供圖形 11,527 列、既有來源問題 5,490 列、首次非通過或已知錯誤問題 16 列、同一正規化問題卻有不同字面輸入 542 列、評測重疊 71 列、特殊分隔符 30 列。圖形關鍵字門檻刻意保守，並不宣稱每一列一定缺圖。不同答案仍需完整 PPL、跨版本任務身份與訓練／驗證集合檢查。</p><p>來源首次診斷數學 18 題有 8 ACCEPT、1 REVISE、9 HOLD；HOLD 是審核輸出未完成，不能當作答案錯誤率。整組 IFM 54 題所有首次非通過問題皆保留隔離，沒有重新評審來求通過。首次來源診斷不等於全資料語義正確保證；此波候選標為來源回應經結構檢查，未經本地逐筆語義驗證。</p><p>記憶只包含使用者原始數學條件，不將教師的 think 或答案放進上下文。完整保留答案作為受監督輸出，沒有執行來源程式或訓練權重。三個轉換回歸測試確認：同題不同答案仍可比較、字面條件不同會隔離、所有首次非通過必須找得到對應問題。</p><p><a href="https://huggingface.co/datasets/IFM/TxT360-3efforts/tree/bfc4a082d11967cd7810fe0b773be87bf54fb32e">固定 IFM 修訂</a>；CC-BY-4.0。來源未提供逐列原始資料集名稱，不補造歸屬。目標仍是至少一千萬筆符合準則的新資料，無模型能力提升結論。</p><pre>{
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM 數學 v26 標準答案</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM 數學：保留同題候選供 v26 比較</h1><p>完整讀取七個已下載數學來源檔案，共 356,955 列，保留 339,279 個候選答案，尚未計入有效訓練資料。high、medium、low effort 不是獨立題目；不得以來源順序或多數決預選答案。只有完整條件相同、通過品質門檻的候選，才能用固定原生 v26 的答案 token 條件 PPL 選最低者，包含 assistant EOS，排除 prompt 與 observation loss；單一候選另標示沒有比較 PPL。</p><p>排除需要未提供圖形 11,527 列、既有來源問題 5,490 列、首次非通過或已知錯誤問題 16 列、同一正規化問題卻有不同字面輸入 542 列、評測重疊 71 列、特殊分隔符 30 列。圖形關鍵字門檻刻意保守，並不宣稱每一列一定缺圖。不同答案仍需完整 PPL、跨版本任務身份與訓練／驗證集合檢查。</p><p>來源首次診斷數學 18 題有 8 ACCEPT、1 REVISE、9 HOLD；HOLD 是審核輸出未完成，不能當作答案錯誤率。整組 IFM 54 題所有首次非通過問題皆保留隔離，沒有重新評審來求通過。首次來源診斷不等於全資料語義正確保證；此波候選標為來源回應經結構檢查，未經本地逐筆語義驗證。</p><p>記憶只包含使用者原始數學條件，不將教師的 think 或答案放進上下文。完整保留答案作為受監督輸出，沒有執行來源程式或訓練權重。三個轉換回歸測試確認：同題不同答案仍可比較、字面條件不同會隔離、所有首次非通過必須找得到對應問題。</p><p><a href="https://huggingface.co/datasets/IFM/TxT360-3efforts/tree/bfc4a082d11967cd7810fe0b773be87bf54fb32e">固定 IFM 修訂</a>；CC-BY-4.0。來源未提供逐列原始資料集名稱，不補造歸屬。目標仍是至少一千萬筆符合準則的新資料，無模型能力提升結論。</p><p>實際評分已完成：339,195 個不同候選答案、313,153 個完整輸入，24,933 組共 50,975 個候選答案全部取得真實原生 v26 分數；尚待獨立核算最低值、完整編譯、首次選取答案診斷與發布。</p><p>第一個啟動程式因誤帶審核專用 jsonschema 相依套件，八個工作程序都在載入模型及建立分數之前失敗。保留原始失敗後，前瞻新增只匯入原始 scorer 的獨立啟動程式，未修改 Python 套件、原始 scorer、候選檔或數值配方。後續數學首次審核使用 8,192 輸出 token 預算，避免沿用先前不足的 2,048 配額；所有舊 HOLD 仍隔離，不重跑。</p><pre>{
   &quot;counts&quot;: {
     &quot;raw_rows_seen&quot;: 356955,
     &quot;candidate_answers&quot;: 339279,
@@ -29,7 +29,24 @@
   &quot;prior_query_identities&quot;: 5104070,
   &quot;unequal_literal_query_holds&quot;: 253,
   &quot;all_effort_versions_retained_for_v26&quot;: true,
-  &quot;phase&quot;: &quot;candidates_complete_ranking_pending&quot;,
-  &quot;updated_at&quot;: &quot;2026-10-27T15:38:01.582203+00:00&quot;,
-  &quot;goal_complete&quot;: false
+  &quot;phase&quot;: &quot;all_v26_scores_complete_selection_and_export_in_progress&quot;,
+  &quot;updated_at&quot;: &quot;2026-10-27T15:49:01.229628+00:00&quot;,
+  &quot;goal_complete&quot;: false,
+  &quot;candidate_index&quot;: {
+    &quot;counts&quot;: {
+      &quot;seen&quot;: 339279,
+      &quot;eligible&quot;: 339279
+    },
+    &quot;distinct_answers&quot;: 339195,
+    &quot;input_groups&quot;: 313153,
+    &quot;competing_groups&quot;: 24933,
+    &quot;answers_to_score&quot;: 50975,
+    &quot;status&quot;: &quot;INDEXED_NOT_YET_PPL_SELECTED&quot;,
+    &quot;all_score_inputs_are_eligible_only&quot;: true,
+    &quot;no_model_training&quot;: true
+  },
+  &quot;actual_scored_answers&quot;: 50975,
+  &quot;all_competing_groups_completed&quot;: true,
+  &quot;initial_import_failure_before_any_score&quot;: true,
+  &quot;runtime_dependencies_modified&quot;: false
 }</pre></html>

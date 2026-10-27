@@ -1,0 +1,7 @@
+test_budget_and_payload_preserved (tests.test_math_audit_transport.MathAuditTransportTests.test_budget_and_payload_preserved) ... ok
+test_private_reasoning_never_saved (tests.test_math_audit_transport.MathAuditTransportTests.test_private_reasoning_never_saved) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
