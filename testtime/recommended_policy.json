@@ -1,0 +1,21 @@
+{
+  "status": "selected on validation; final evidence is reported separately",
+  "name": "literal",
+  "config": {
+    "retrieval": true,
+    "skill": true,
+    "execute": true,
+    "repair": 2,
+    "compact": true,
+    "contract_overrides": {
+      "tool_call": {
+        "skill": false
+      },
+      "short_answer": {
+        "literal_answer": true
+      }
+    }
+  },
+  "scope": "MiniCPM5-1B pinned revision; public output-contract routing; not a universal best policy",
+  "source": "experiments/test_time_v1/selection_decision.json"
+}

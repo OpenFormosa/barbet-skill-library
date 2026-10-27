@@ -117,7 +117,8 @@ def summarize(scores):
     domains = {d: {'n': len(v), 'correct': sum(r['correct'] for r in v),
                   'accuracy': sum(r['correct'] for r in v) / len(v)} for d, v in grouped.items()}
     n = len(scores)
-    return {'items': n, 'domains': domains,
+    return {'items': n, 'unique_questions': len({r['id'] for r in scores}),
+        'seeds': sorted({r['seed'] for r in scores}), 'domains': domains,
         'primary_macro': sum(domains[d]['accuracy'] for d in PRIMARY) / len(PRIMARY) if all(d in domains for d in PRIMARY) else None,
         'cost': {k: sum(r[k] for r in scores) / max(1, n) for k in ['calls', 'prompt_tokens', 'output_tokens',
                   'generation_seconds_amortized', 'retrieval_seconds', 'execution_seconds']},
@@ -140,9 +141,14 @@ def main():
     p.add_argument('--policies', nargs='*')
     p.add_argument('--allow-partial', action='store_true')
     args = p.parse_args()
-    if args.split == 'test' and not (HERE / 'FINAL_SELECTION.json').exists():
-        raise RuntimeError('test scoring requires final selection seal')
+    seal = None
+    if args.split == 'test':
+        seal = json.loads((HERE / 'FINAL_SELECTION.json').read_text())
+        if seal['scorer_sha256'] != sha(Path(__file__).read_bytes()):
+            raise RuntimeError('scorer differs from sealed final evaluation')
     label_path = args.work / f'{args.split}.labels.jsonl'
+    if seal and seal['label_sha256'] != sha(label_path.read_bytes()):
+        raise RuntimeError('evaluation labels differ from the final seal')
     labels = {r['id']: r for r in map(json.loads, label_path.read_text().splitlines())}
     inputs = {r['id']: r for r in map(json.loads, (args.work / f'{args.split}.inputs.jsonl').read_text().splitlines())}
     base = args.work / 'runs' / args.run_tag / args.split
@@ -171,6 +177,9 @@ def main():
             raise RuntimeError('duplicate id/seed across shards')
         expected = {(i, meta['runtime']['seed']) for meta in provenance for i in meta['runtime']['request_ids']}
         complete = set(keys) == expected and all(x['complete'] for x in provenance)
+        required_seeds = seal['seeds'] if seal else ([20261027, 20261028, 20261029] if args.run_tag == 'confirm' else None)
+        if required_seeds:
+            complete = complete and set(keys) == {(i, seed) for i in labels for seed in required_seeds}
         if not complete and not args.allow_partial:
             print(json.dumps({'event': 'skip_incomplete', 'model': family, 'policy': policy}), flush=True)
             continue

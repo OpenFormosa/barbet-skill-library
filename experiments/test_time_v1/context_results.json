@@ -1,0 +1,401 @@
+{
+  "stage": "development diagnostic, one generation seed; not used as final-test evidence",
+  "task_composition": 32,
+  "excluded": [],
+  "randomness_notice": "Condition-specific IDs induce distinct generation RNG streams. Paired question analysis controls task composition, not an identical stochastic token trajectory.",
+  "source_control": "For each budget, the same support and distractor set is used at beginning/middle/end; budgets can select different padding sets.",
+  "table": [
+    {
+      "model": "mini",
+      "condition": "oracle_only",
+      "questions": 32,
+      "accuracy": 0.28125,
+      "accuracy_95ci": [
+        0.125,
+        0.4375
+      ],
+      "character_f1": 0.5864243301883857,
+      "mean_prompt_tokens": 604.75,
+      "mean_output_tokens": 497.71875,
+      "unclosed_calls": 0
+    },
+    {
+      "model": "mini",
+      "condition": "padding_16384_beginning",
+      "questions": 32,
+      "accuracy": 0.0625,
+      "accuracy_95ci": [
+        0.0,
+        0.15625
+      ],
+      "character_f1": 0.2419175314103,
+      "mean_prompt_tokens": 14710.28125,
+      "mean_output_tokens": 1557.1875,
+      "unclosed_calls": 8
+    },
+    {
+      "model": "mini",
+      "condition": "padding_16384_end",
+      "questions": 32,
+      "accuracy": 0.15625,
+      "accuracy_95ci": [
+        0.03125,
+        0.28125
+      ],
+      "character_f1": 0.26469150160064026,
+      "mean_prompt_tokens": 14710.28125,
+      "mean_output_tokens": 2054.375,
+      "unclosed_calls": 10
+    },
+    {
+      "model": "mini",
+      "condition": "padding_16384_middle",
+      "questions": 32,
+      "accuracy": 0.125,
+      "accuracy_95ci": [
+        0.03125,
+        0.25
+      ],
+      "character_f1": 0.22080308970721063,
+      "mean_prompt_tokens": 14710.28125,
+      "mean_output_tokens": 1282.875,
+      "unclosed_calls": 4
+    },
+    {
+      "model": "mini",
+      "condition": "padding_2048_beginning",
+      "questions": 32,
+      "accuracy": 0.25,
+      "accuracy_95ci": [
+        0.125,
+        0.40625
+      ],
+      "character_f1": 0.5218643157501853,
+      "mean_prompt_tokens": 1931.09375,
+      "mean_output_tokens": 879.78125,
+      "unclosed_calls": 1
+    },
+    {
+      "model": "mini",
+      "condition": "padding_2048_end",
+      "questions": 32,
+      "accuracy": 0.3125,
+      "accuracy_95ci": [
+        0.15625,
+        0.46875
+      ],
+      "character_f1": 0.4509769887872293,
+      "mean_prompt_tokens": 1931.09375,
+      "mean_output_tokens": 1075.3125,
+      "unclosed_calls": 1
+    },
+    {
+      "model": "mini",
+      "condition": "padding_2048_middle",
+      "questions": 32,
+      "accuracy": 0.125,
+      "accuracy_95ci": [
+        0.03125,
+        0.25
+      ],
+      "character_f1": 0.3746318142877768,
+      "mean_prompt_tokens": 1931.09375,
+      "mean_output_tokens": 1071.28125,
+      "unclosed_calls": 0
+    },
+    {
+      "model": "mini",
+      "condition": "padding_4096_beginning",
+      "questions": 32,
+      "accuracy": 0.21875,
+      "accuracy_95ci": [
+        0.09375,
+        0.375
+      ],
+      "character_f1": 0.45608912270367136,
+      "mean_prompt_tokens": 3978.53125,
+      "mean_output_tokens": 964.28125,
+      "unclosed_calls": 1
+    },
+    {
+      "model": "mini",
+      "condition": "padding_4096_end",
+      "questions": 32,
+      "accuracy": 0.15625,
+      "accuracy_95ci": [
+        0.03125,
+        0.28125
+      ],
+      "character_f1": 0.2878018509911794,
+      "mean_prompt_tokens": 3978.53125,
+      "mean_output_tokens": 1529.03125,
+      "unclosed_calls": 2
+    },
+    {
+      "model": "mini",
+      "condition": "padding_4096_middle",
+      "questions": 32,
+      "accuracy": 0.28125,
+      "accuracy_95ci": [
+        0.125,
+        0.4375
+      ],
+      "character_f1": 0.445489381204408,
+      "mean_prompt_tokens": 3978.53125,
+      "mean_output_tokens": 1179.0,
+      "unclosed_calls": 1
+    },
+    {
+      "model": "mini",
+      "condition": "padding_8192_beginning",
+      "questions": 32,
+      "accuracy": 0.34375,
+      "accuracy_95ci": [
+        0.1875,
+        0.5
+      ],
+      "character_f1": 0.5401242137162682,
+      "mean_prompt_tokens": 8084.0625,
+      "mean_output_tokens": 1414.8125,
+      "unclosed_calls": 2
+    },
+    {
+      "model": "mini",
+      "condition": "padding_8192_end",
+      "questions": 32,
+      "accuracy": 0.125,
+      "accuracy_95ci": [
+        0.03125,
+        0.25
+      ],
+      "character_f1": 0.3006712494376968,
+      "mean_prompt_tokens": 8084.0625,
+      "mean_output_tokens": 1621.96875,
+      "unclosed_calls": 4
+    },
+    {
+      "model": "mini",
+      "condition": "padding_8192_middle",
+      "questions": 32,
+      "accuracy": 0.125,
+      "accuracy_95ci": [
+        0.03125,
+        0.25
+      ],
+      "character_f1": 0.31275944362204083,
+      "mean_prompt_tokens": 8084.0625,
+      "mean_output_tokens": 1572.21875,
+      "unclosed_calls": 4
+    },
+    {
+      "model": "mini",
+      "condition": "support_absent",
+      "questions": 32,
+      "accuracy": 0.0,
+      "accuracy_95ci": [
+        0.0,
+        0.0
+      ],
+      "character_f1": 0.06324988328664799,
+      "mean_prompt_tokens": 1922.78125,
+      "mean_output_tokens": 1897.65625,
+      "unclosed_calls": 3
+    },
+    {
+      "model": "qwen",
+      "condition": "oracle_only",
+      "questions": 32,
+      "accuracy": 0.6875,
+      "accuracy_95ci": [
+        0.53125,
+        0.84375
+      ],
+      "character_f1": 0.7868742368742369,
+      "mean_prompt_tokens": 548.28125,
+      "mean_output_tokens": 1669.53125,
+      "unclosed_calls": 5
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_16384_beginning",
+      "questions": 32,
+      "accuracy": 0.71875,
+      "accuracy_95ci": [
+        0.5625,
+        0.875
+      ],
+      "character_f1": 0.8469436813186814,
+      "mean_prompt_tokens": 13434.75,
+      "mean_output_tokens": 1772.125,
+      "unclosed_calls": 3
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_16384_end",
+      "questions": 32,
+      "accuracy": 0.75,
+      "accuracy_95ci": [
+        0.59375,
+        0.90625
+      ],
+      "character_f1": 0.8493742368742369,
+      "mean_prompt_tokens": 13434.75,
+      "mean_output_tokens": 2252.90625,
+      "unclosed_calls": 3
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_16384_middle",
+      "questions": 32,
+      "accuracy": 0.78125,
+      "accuracy_95ci": [
+        0.625,
+        0.90625
+      ],
+      "character_f1": 0.9024263518966908,
+      "mean_prompt_tokens": 13434.75,
+      "mean_output_tokens": 1945.78125,
+      "unclosed_calls": 1
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_2048_beginning",
+      "questions": 32,
+      "accuracy": 0.71875,
+      "accuracy_95ci": [
+        0.5625,
+        0.875
+      ],
+      "character_f1": 0.8469436813186814,
+      "mean_prompt_tokens": 1760.375,
+      "mean_output_tokens": 1471.6875,
+      "unclosed_calls": 3
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_2048_end",
+      "questions": 32,
+      "accuracy": 0.71875,
+      "accuracy_95ci": [
+        0.5625,
+        0.875
+      ],
+      "character_f1": 0.8865270146520147,
+      "mean_prompt_tokens": 1760.375,
+      "mean_output_tokens": 1602.4375,
+      "unclosed_calls": 0
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_2048_middle",
+      "questions": 32,
+      "accuracy": 0.6875,
+      "accuracy_95ci": [
+        0.53125,
+        0.84375
+      ],
+      "character_f1": 0.8287226577622919,
+      "mean_prompt_tokens": 1760.375,
+      "mean_output_tokens": 1930.5625,
+      "unclosed_calls": 4
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_4096_beginning",
+      "questions": 32,
+      "accuracy": 0.71875,
+      "accuracy_95ci": [
+        0.5625,
+        0.875
+      ],
+      "character_f1": 0.8313186813186814,
+      "mean_prompt_tokens": 3631.71875,
+      "mean_output_tokens": 1825.65625,
+      "unclosed_calls": 4
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_4096_end",
+      "questions": 32,
+      "accuracy": 0.75,
+      "accuracy_95ci": [
+        0.59375,
+        0.875
+      ],
+      "character_f1": 0.8521520146520146,
+      "mean_prompt_tokens": 3631.71875,
+      "mean_output_tokens": 1819.96875,
+      "unclosed_calls": 3
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_4096_middle",
+      "questions": 32,
+      "accuracy": 0.78125,
+      "accuracy_95ci": [
+        0.625,
+        0.90625
+      ],
+      "character_f1": 0.9205547924297924,
+      "mean_prompt_tokens": 3631.71875,
+      "mean_output_tokens": 1567.34375,
+      "unclosed_calls": 0
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_8192_beginning",
+      "questions": 32,
+      "accuracy": 0.75,
+      "accuracy_95ci": [
+        0.59375,
+        0.90625
+      ],
+      "character_f1": 0.8830013736263737,
+      "mean_prompt_tokens": 7365.8125,
+      "mean_output_tokens": 1389.3125,
+      "unclosed_calls": 1
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_8192_end",
+      "questions": 32,
+      "accuracy": 0.625,
+      "accuracy_95ci": [
+        0.46875,
+        0.78125
+      ],
+      "character_f1": 0.7857333638583639,
+      "mean_prompt_tokens": 7365.8125,
+      "mean_output_tokens": 1873.0,
+      "unclosed_calls": 4
+    },
+    {
+      "model": "qwen",
+      "condition": "padding_8192_middle",
+      "questions": 32,
+      "accuracy": 0.71875,
+      "accuracy_95ci": [
+        0.5625,
+        0.875
+      ],
+      "character_f1": 0.8229319291819291,
+      "mean_prompt_tokens": 7365.8125,
+      "mean_output_tokens": 2016.71875,
+      "unclosed_calls": 3
+    },
+    {
+      "model": "qwen",
+      "condition": "support_absent",
+      "questions": 32,
+      "accuracy": 0.0,
+      "accuracy_95ci": [
+        0.0,
+        0.0
+      ],
+      "character_f1": 0.005842391304347826,
+      "mean_prompt_tokens": 1749.5,
+      "mean_output_tokens": 3329.5,
+      "unclosed_calls": 4
+    }
+  ]
+}

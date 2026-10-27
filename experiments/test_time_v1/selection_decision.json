@@ -1,0 +1,383 @@
+{
+  "selected_policy": "literal",
+  "candidate_count": 18,
+  "selection_data": "259 validation questions, three fixed seeds; no final-test access",
+  "candidate_order": [
+    "bare",
+    "routed",
+    "literal",
+    "focus",
+    "knowledge"
+  ],
+  "decisions": [
+    {
+      "incumbent_before": "bare",
+      "candidate": "routed",
+      "promoted": true,
+      "comparison": {
+        "comparison": "mini/routed minus mini/bare",
+        "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+        "bootstrap_replicates": 10000,
+        "domains": {
+          "drcd": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": 23.611111111111107,
+            "paired_95ci_pp": [
+              15.277777777777777,
+              32.63888888888889
+            ],
+            "cluster_95ci_pp": [
+              15.277777777777777,
+              32.63888888888889
+            ]
+          },
+          "gsm8k": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": 9.722222222222223,
+            "paired_95ci_pp": [
+              -2.083333333333333,
+              20.833333333333336
+            ],
+            "cluster_95ci_pp": [
+              -2.083333333333334,
+              20.833333333333336
+            ]
+          },
+          "mbpp": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": 20.138888888888893,
+            "paired_95ci_pp": [
+              11.111111111111112,
+              29.86111111111111
+            ],
+            "cluster_95ci_pp": [
+              11.111111111111112,
+              29.166666666666668
+            ]
+          },
+          "tmmluplus": {
+            "questions": 67,
+            "clusters": 67,
+            "delta_pp": 6.965174129353232,
+            "paired_95ci_pp": [
+              -1.492537313432835,
+              14.925373134328357
+            ],
+            "cluster_95ci_pp": [
+              -0.9950248756218907,
+              15.422885572139302
+            ]
+          },
+          "tools": {
+            "questions": 48,
+            "clusters": 3,
+            "delta_pp": 0.0,
+            "paired_95ci_pp": [
+              0.0,
+              0.0
+            ],
+            "cluster_95ci_pp": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "primary_macro": {
+          "delta_pp": 13.368055555555555,
+          "paired_95ci_pp": [
+            9.20138888888889,
+            17.534722222222225
+          ],
+          "cluster_95ci_pp": [
+            9.027777777777777,
+            17.53472222222222
+          ]
+        }
+      }
+    },
+    {
+      "incumbent_before": "routed",
+      "candidate": "literal",
+      "promoted": true,
+      "comparison": {
+        "comparison": "mini/literal minus mini/routed",
+        "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+        "bootstrap_replicates": 10000,
+        "domains": {
+          "drcd": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": 4.861111111111111,
+            "paired_95ci_pp": [
+              -3.472222222222223,
+              13.888888888888888
+            ],
+            "cluster_95ci_pp": [
+              -3.4722222222222223,
+              13.888888888888888
+            ]
+          },
+          "gsm8k": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": 6.250000000000002,
+            "paired_95ci_pp": [
+              -2.7777777777777772,
+              15.972222222222223
+            ],
+            "cluster_95ci_pp": [
+              -2.7777777777777772,
+              15.972222222222223
+            ]
+          },
+          "mbpp": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": 4.625929269271485e-16,
+            "paired_95ci_pp": [
+              -6.944444444444445,
+              6.944444444444444
+            ],
+            "cluster_95ci_pp": [
+              -6.944444444444445,
+              6.250000000000002
+            ]
+          },
+          "tmmluplus": {
+            "questions": 67,
+            "clusters": 67,
+            "delta_pp": -2.4875621890547266,
+            "paired_95ci_pp": [
+              -8.45771144278607,
+              3.482587064676617
+            ],
+            "cluster_95ci_pp": [
+              -8.45771144278607,
+              3.482587064676617
+            ]
+          },
+          "tools": {
+            "questions": 48,
+            "clusters": 3,
+            "delta_pp": 0.0,
+            "paired_95ci_pp": [
+              0.0,
+              0.0
+            ],
+            "cluster_95ci_pp": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "primary_macro": {
+          "delta_pp": 2.777777777777778,
+          "paired_95ci_pp": [
+            -0.694444444444445,
+            6.423611111111112
+          ],
+          "cluster_95ci_pp": [
+            -0.8680555555555552,
+            6.423611111111112
+          ]
+        }
+      }
+    },
+    {
+      "incumbent_before": "literal",
+      "candidate": "focus",
+      "promoted": false,
+      "comparison": {
+        "comparison": "mini/focus minus mini/literal",
+        "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+        "bootstrap_replicates": 10000,
+        "domains": {
+          "drcd": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": 4.625929269271485e-16,
+            "paired_95ci_pp": [
+              -8.333333333333332,
+              8.333333333333332
+            ],
+            "cluster_95ci_pp": [
+              -8.333333333333332,
+              8.333333333333332
+            ]
+          },
+          "gsm8k": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": -2.7777777777777786,
+            "paired_95ci_pp": [
+              -12.5,
+              6.25
+            ],
+            "cluster_95ci_pp": [
+              -12.5,
+              6.944444444444444
+            ]
+          },
+          "mbpp": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": -4.166666666666666,
+            "paired_95ci_pp": [
+              -11.805555555555557,
+              2.7777777777777786
+            ],
+            "cluster_95ci_pp": [
+              -11.805555555555554,
+              2.777777777777778
+            ]
+          },
+          "tmmluplus": {
+            "questions": 67,
+            "clusters": 67,
+            "delta_pp": 7.462686567164178,
+            "paired_95ci_pp": [
+              1.492537313432835,
+              13.432835820895525
+            ],
+            "cluster_95ci_pp": [
+              1.4925373134328355,
+              13.432835820895525
+            ]
+          },
+          "tools": {
+            "questions": 48,
+            "clusters": 3,
+            "delta_pp": -2.083333333333333,
+            "paired_95ci_pp": [
+              -6.25,
+              0.0
+            ],
+            "cluster_95ci_pp": [
+              -6.25,
+              0.0
+            ]
+          }
+        },
+        "primary_macro": {
+          "delta_pp": -2.2569444444444446,
+          "paired_95ci_pp": [
+            -6.076388888888888,
+            1.3888888888888886
+          ],
+          "cluster_95ci_pp": [
+            -6.076388888888888,
+            1.3888888888888893
+          ]
+        }
+      }
+    },
+    {
+      "incumbent_before": "literal",
+      "candidate": "knowledge",
+      "promoted": false,
+      "comparison": {
+        "comparison": "mini/knowledge minus mini/literal",
+        "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+        "bootstrap_replicates": 10000,
+        "domains": {
+          "drcd": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": 4.166666666666668,
+            "paired_95ci_pp": [
+              -3.472222222222222,
+              11.805555555555557
+            ],
+            "cluster_95ci_pp": [
+              -3.472222222222222,
+              11.805555555555557
+            ]
+          },
+          "gsm8k": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": -6.944444444444445,
+            "paired_95ci_pp": [
+              -14.583333333333334,
+              0.6944444444444441
+            ],
+            "cluster_95ci_pp": [
+              -14.583333333333334,
+              0.6944444444444441
+            ]
+          },
+          "mbpp": {
+            "questions": 48,
+            "clusters": 48,
+            "delta_pp": -0.6944444444444445,
+            "paired_95ci_pp": [
+              -7.638888888888888,
+              5.555555555555556
+            ],
+            "cluster_95ci_pp": [
+              -7.638888888888888,
+              5.555555555555556
+            ]
+          },
+          "tmmluplus": {
+            "questions": 67,
+            "clusters": 67,
+            "delta_pp": -8.955223880597012,
+            "paired_95ci_pp": [
+              -17.41293532338308,
+              -0.49751243781094534
+            ],
+            "cluster_95ci_pp": [
+              -17.41293532338308,
+              -0.497512437810945
+            ]
+          },
+          "tools": {
+            "questions": 48,
+            "clusters": 3,
+            "delta_pp": 0.0,
+            "paired_95ci_pp": [
+              0.0,
+              0.0
+            ],
+            "cluster_95ci_pp": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "primary_macro": {
+          "delta_pp": -0.8680555555555554,
+          "paired_95ci_pp": [
+            -4.166666666666666,
+            2.4305555555555554
+          ],
+          "cluster_95ci_pp": [
+            -4.166666666666666,
+            2.430555555555555
+          ]
+        }
+      }
+    }
+  ],
+  "stopping_reason": "Declared 18-policy search budget exhausted; local budget stopping, not global optimality.",
+  "final_primary_claim": "Selection is frozen before final generation; no policy swap based on final test.",
+  "selected_config": {
+    "retrieval": true,
+    "skill": true,
+    "execute": true,
+    "repair": 2,
+    "compact": true,
+    "contract_overrides": {
+      "tool_call": {
+        "skill": false
+      },
+      "short_answer": {
+        "literal_answer": true
+      }
+    }
+  }
+}

@@ -58,5 +58,33 @@
     ],
     "hypothesis": "Focus changes only the reading source count from literal: top 4→top 1. Knowledge adds full-corpus lexical retrieval for choice questions; no QA labels and no larger model.",
     "selection_rule": "Use three-seed validation for routed/literal/focus/knowledge to reduce selection driven by one-seed serving variation; preserve the same +1 pp and regression gates. Search stops at 18 policies regardless of final outcome."
+  },
+  {
+    "round": 3,
+    "stage": "three-seed confirmation completed",
+    "selected_policy": "literal",
+    "stopping_reason": "Declared 18-policy search budget exhausted; local budget stopping, not global optimality.",
+    "promotion_results": [
+      {
+        "candidate": "routed",
+        "promoted": true,
+        "macro_delta_pp": 13.368055555555555
+      },
+      {
+        "candidate": "literal",
+        "promoted": true,
+        "macro_delta_pp": 2.777777777777778
+      },
+      {
+        "candidate": "focus",
+        "promoted": false,
+        "macro_delta_pp": -2.2569444444444446
+      },
+      {
+        "candidate": "knowledge",
+        "promoted": false,
+        "macro_delta_pp": -0.8680555555555554
+      }
+    ]
   }
 ]
