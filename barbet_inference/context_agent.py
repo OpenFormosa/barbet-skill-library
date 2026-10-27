@@ -12,6 +12,7 @@ from .backends import Generation
 from .library import SkillLibrary
 from .memory import MemoryItem, MemoryStore, Verification, compose_memory_prompt, canonical
 from .sft import SYSTEM, RESERVED, portable_messages, prepare_tools
+from .tool_contract import undeclared_arguments
 from testtime.native_calls import extract_final, strict_json
 
 
@@ -116,6 +117,8 @@ class ContextAgent:
                         return result('invalid_tool_action')
                     if next(self.validators[name].iter_errors(args),None) is not None:
                         return result('invalid_tool_arguments')
+                    if undeclared_arguments(args,self.validators[name].schema):
+                        return result('unconfirmed_tool_arguments')
                     cid=call.get('id',f'live_{step}_{n}')
                     if not isinstance(cid,str) or not cid or cid in seen_ids:
                         return result('invalid_call_identity')

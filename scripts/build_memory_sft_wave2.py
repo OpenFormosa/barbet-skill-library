@@ -14,6 +14,7 @@ from scripts import build_memory_sft_v2 as base
 from scripts.memory_sft_wave2_adapters import openorca, toucan
 from barbet_inference.sft import Rejected, normalize_messages, augment_system
 from barbet_inference.memory import canonical
+from barbet_inference.tool_contract import trajectory_has_undeclared_arguments
 
 FIRST=base.STATE
 STATE=base.WORK/'reports/memory-harness-v2-wave2'
@@ -175,6 +176,14 @@ def dedup():
     paths=[p for p in sorted((STATE/'normalized').glob('[0-9]*.jsonl')) if not p.name.endswith('.excluded.jsonl')]
     jobs=json.loads((STATE/'normalize-jobs.json').read_text())
     if len(paths)!=len(jobs):raise ValueError('missing normalized source shards')
+    audit=STATE/'semantic-audit-v1/summary.json'
+    if not audit.exists():raise ValueError('first semantic pilot is incomplete')
+    held_ids=set(json.loads(audit.read_text())['excluded_record_ids']);held_queries=set()
+    for path in (STATE/'normalized').glob('pilot-*.jsonl'):
+        if path.name.endswith('.excluded.jsonl'):continue
+        for line in path.open():
+            r=json.loads(line)
+            if r['record_id'] in held_ids:held_queries.add(r['query_hash'])
     parent={}
     def find(x):
         parent.setdefault(x,x);root=x
@@ -203,6 +212,10 @@ def dedup():
         for line in p.open():
             r=json.loads(line);root=find('family:'+r['family_id'])
             if root in conflicts:counts['held_cross_wave_split_bridge']+=1;continue
+            if r['record_id'] in held_ids or r['query_hash'] in held_queries:
+                counts['held_first_semantic_nonaccept_query']+=1;continue
+            if trajectory_has_undeclared_arguments(r['messages'],r['tools']):
+                counts['held_undeclared_root_arguments']+=1;continue
             if r['source_task_key'] in tasks:counts['duplicate_source_task_or_user_sequence']+=1;continue
             identity=json.loads(canonical(r['messages']));ids={}
             for n,m in enumerate(identity):
@@ -224,13 +237,36 @@ def dedup():
     counts['shards']=shard+1;base.save(STATE/'dedup-summary.json',dict(counts));print(canonical(dict(counts)),flush=True)
 
 
+def pilot_compile(workers):
+    configure();inputs=STATE/'pilot-compile-inputs';inputs.mkdir(exist_ok=True)
+    paths=[]
+    for p in sorted((STATE/'normalized').glob('pilot-*.jsonl')):
+        if p.name.endswith('.excluded.jsonl'):continue
+        dest=inputs/p.name;lines=[]
+        for line in p.open():
+            r=json.loads(line);r['split']='train';lines.append(canonical(r)+'\n')
+        text=''.join(lines)
+        if dest.exists() and dest.read_text()!=text:raise ValueError('immutable pilot input conflict')
+        if not dest.exists():dest.write_text(text)
+        paths.append(dest)
+    counts=Counter()
+    with ProcessPoolExecutor(max_workers=workers,initializer=base.init_tokenizer) as pool:
+        for result in pool.map(base.compile_job,paths):counts.update(result['counts'])
+    base.save(STATE/'pilot-compile-summary.json',{'counts':dict(counts),
+        'diagnostic_only':True,'provisional_split':'train only in isolated pilot copies, never publication',
+        'normalized_source_artifacts_unchanged':True})
+    print(canonical(dict(counts)),flush=True)
+
+
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('phase',choices=['prepare','normalize','dedup','compile','audit']);p.add_argument('--workers',type=int,default=24);p.add_argument('--pilot',action='store_true');args=p.parse_args()
     if not 1<=args.workers<=32:raise ValueError('CPU worker bound')
     if args.phase=='prepare':prepare()
     elif args.phase=='normalize':normalize(args.workers,args.pilot)
     elif args.phase=='dedup':dedup()
-    elif args.phase=='compile':configure();base.compile_all(args.workers,args.pilot)
+    elif args.phase=='compile':
+        if args.pilot:pilot_compile(args.workers)
+        else:configure();base.compile_all(args.workers,False)
     else:
         from scripts import audit_memory_sft_v2 as audit
         audit.STATE=STATE;audit.main()

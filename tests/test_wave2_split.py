@@ -20,6 +20,7 @@ class FrozenSplitTests(unittest.TestCase):
             rows=[{'family_id':x,'query_hash':'same-query','template_family_id':'shared'} for x in ['a','b']]
             (p/'normalized/00000.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows))
             (p/'normalize-jobs.json').write_text('[{}]');(p/'normalize-summary.json').write_text('{}')
+            (p/'semantic-audit-v1').mkdir();(p/'semantic-audit-v1/summary.json').write_text('{"excluded_record_ids":[]}')
             with patch.object(wave,'STATE',p),contextlib.redirect_stdout(io.StringIO()):wave.dedup()
             summary=json.loads((p/'dedup-summary.json').read_text())
             self.assertEqual(summary['held_cross_wave_split_bridge'],2)
