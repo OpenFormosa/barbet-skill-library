@@ -1,0 +1,36 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>NI 記憶資料候選</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Natural Instructions：外置記憶資料候選</h1><p>此批仍是候選，合格訓練筆數目前為零。原始下載 756 個官方訓練任務，共 2,417,867 個原始實例；官方 119 個測試任務未納入。</p><p>逐任務 Instance License 與範圍檢查後，保留 298 個任務、831,868 個原始實例。未知或未納入的授權不能由程式庫 Apache 授權代替。排除錯誤答案生成、自由故事生成與未明確分類的任務。</p><p>每筆保留原始任務定義，把至多兩個不同輸入的公開示例及完整目標輸入放入有來源的記憶區塊，目標答案不匯入記憶。前置或後置位置由輸入決定，同一題不複製成兩筆。示例若等於目標輸入則移除，避免直接洩漏答案。</p><p>同一輸入的所有不同參考輸出只列為待選答案，後續必須依固定 v26 的答案 PPL 選一筆。先以既有問題雜湊及 11 種確切 OpenOrca 包裝格式篩掉已知重複，另作本機評測污染檢查。這不是通用語意去重的保證。</p><p>初步輸入轉換涵蓋 3,576 個原始實例，其中 3,480 個任務、9,456 個答案候選留待檢查；92 筆已知重複與 4 筆無效參考輸出排除。首次來源類別診斷正在進行，後續才會完整轉換、PPL 選擇、切分與匯出。程式不執行來源程式碼，沒有模型訓練或能力提升結論。</p><p><a href="https://github.com/allenai/natural-instructions/tree/55a365637381ce7f3748fa2eac7aef1a113bbb82">固定的官方來源</a></p><details><summary>候選檢查記錄</summary><pre>{
+  &quot;phase&quot;: &quot;FIRST_SOURCE_DIAGNOSIS_RUNNING&quot;,
+  &quot;preparation&quot;: {
+    &quot;counts&quot;: {
+      &quot;raw_instances_seen&quot;: 2417867,
+      &quot;licensed_in_scope_instances&quot;: 831868,
+      &quot;held_instances:ni_category_outside_contextual_task_scope&quot;: 50718,
+      &quot;held_instances:ni_instance_license_not_admitted&quot;: 1535281,
+      &quot;prior_query_aliases&quot;: 2592315
+    },
+    &quot;tasks&quot;: 298,
+    &quot;official_test_tasks_excluded&quot;: 119,
+    &quot;upstream_reference_outputs_are_not_prompt_memory&quot;: true,
+    &quot;answer_alternatives_require_minimum_v26_ppl&quot;: true,
+    &quot;counting_status&quot;: &quot;CANDIDATES_ONLY_NOT_ACCEPTED&quot;,
+    &quot;adapter_sha256&quot;: &quot;936e7e96aa959c4a6679b6d397365495c42bc8a9391fcdc2022a288c71183142&quot;,
+    &quot;builder_sha256&quot;: &quot;5b9c39fee8dccdb51e906cc9f29346a5eefadb54f057fce20ae1cf1873b5b4f6&quot;,
+    &quot;model_weights_trained&quot;: false
+  },
+  &quot;pilot&quot;: {
+    &quot;counts&quot;: {
+      &quot;source_instances_seen&quot;: 3576,
+      &quot;candidate_tasks&quot;: 3480,
+      &quot;candidate_answers&quot;: 9456,
+      &quot;held:prior_question_or_known_openorca_wrapper&quot;: 92,
+      &quot;held:ni_invalid_reference_output&quot;: 4
+    },
+    &quot;accepted_training_episodes&quot;: 0,
+    &quot;needs_v26_ranking_and_release_gates&quot;: true
+  },
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;target_total_new_episodes&quot;: 10000000,
+  &quot;goal_complete&quot;: false,
+  &quot;weights_trained&quot;: false,
+  &quot;tests&quot;: &quot;5 source-adapter regressions passed; no whole-corpus semantic approval&quot;
+}</pre></details></html>

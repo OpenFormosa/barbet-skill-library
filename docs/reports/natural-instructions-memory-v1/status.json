@@ -1,0 +1,36 @@
+{
+  "phase": "FIRST_SOURCE_DIAGNOSIS_RUNNING",
+  "preparation": {
+    "counts": {
+      "raw_instances_seen": 2417867,
+      "licensed_in_scope_instances": 831868,
+      "held_instances:ni_category_outside_contextual_task_scope": 50718,
+      "held_instances:ni_instance_license_not_admitted": 1535281,
+      "prior_query_aliases": 2592315
+    },
+    "tasks": 298,
+    "official_test_tasks_excluded": 119,
+    "upstream_reference_outputs_are_not_prompt_memory": true,
+    "answer_alternatives_require_minimum_v26_ppl": true,
+    "counting_status": "CANDIDATES_ONLY_NOT_ACCEPTED",
+    "adapter_sha256": "936e7e96aa959c4a6679b6d397365495c42bc8a9391fcdc2022a288c71183142",
+    "builder_sha256": "5b9c39fee8dccdb51e906cc9f29346a5eefadb54f057fce20ae1cf1873b5b4f6",
+    "model_weights_trained": false
+  },
+  "pilot": {
+    "counts": {
+      "source_instances_seen": 3576,
+      "candidate_tasks": 3480,
+      "candidate_answers": 9456,
+      "held:prior_question_or_known_openorca_wrapper": 92,
+      "held:ni_invalid_reference_output": 4
+    },
+    "accepted_training_episodes": 0,
+    "needs_v26_ranking_and_release_gates": true
+  },
+  "accepted_training_rows": 0,
+  "target_total_new_episodes": 10000000,
+  "goal_complete": false,
+  "weights_trained": false,
+  "tests": "5 source-adapter regressions passed; no whole-corpus semantic approval"
+}
