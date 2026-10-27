@@ -1,0 +1,9 @@
+{
+  "archive": "/root/barbet-skill-library/experiments/test_time_v1/work/artifacts/barbet-test-time-v1.tar.gz",
+  "bytes": 202012467,
+  "sha256": "c7891d433ea9a4c356b744c850c811e0d19818bb43daa1b2d1cb5d0336505eb3",
+  "source_git_sha": "033fae70d18f8b2522ff1a0e334716cde215b879",
+  "evidence_files": 414,
+  "raw_manifest_sha256": "efb10fdcfdd490d48e69e24af3c700c0f4570acc4e079fad4121918ed57301d5",
+  "published_to_github": false
+}
