@@ -97,6 +97,8 @@ def main():
     out+='<h2 id="context">上下文長度、來源與位置</h2><section>'+context_panel(result.get('context'))+'</section><h2 id="failures">哪些能力仍不足</h2><section>'+detail(result.get('diagnostics') or '最終失敗分類尚未完成；開發觀察不冒充封存測試結論。')+'</section>'
     if result.get('code_budget'):
         out+='<details><summary>程式：同一條軌跡在 1／2／3 次呼叫上限的結果與成本</summary>'+detail(result['code_budget'])+'</details>'
+    if result.get('numeric_format_diagnostic'):
+        out+='<details open><summary>事後格式診斷：不改動封存主分數</summary>'+detail(result['numeric_format_diagnostic'])+'</details>'
     out+='<h2 id="goal">完整 Goal 與可重現性</h2><details><summary>事先固定的目標、假設、比較、數量、預算與驗收門檻</summary>'+detail(goal)+'</details>'
     for name in ['amendments','policies','data_audit','model_integrity','data_environment']:
         p=HERE/(name+'.json')
