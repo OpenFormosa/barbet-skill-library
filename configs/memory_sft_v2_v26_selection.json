@@ -1,0 +1,21 @@
+{
+  "version": "memory-sft-v2-v26-answer-selection-v2",
+  "user_instruction": "同一題答案版本不一樣應該選擇v26 ppl最低的答案作為標準",
+  "model": "voidful/barbet-skill",
+  "revision": "67131067ff1825179d5e38e91d499159669e9c66",
+  "weights_sha256": "4705731266f202ef031a2a70db88c777b4799a8b88e1671557b7062d1ecb6730",
+  "tokenizer_sha256": "f84754e42cc4b08d5573a6b7306635e86ed04fff68ee707662d76d7044917176",
+  "native_template_sha256": "351daab22ae42916c38163f02b1699d0dc66aa09ed138c9601ef99a92f727f74",
+  "modeling_sha256": "68101aa44ca98009e2ec1d9bb33c9110e77c76d1bd9d57ef6ddbe0a11e18d541",
+  "loader_sha256": "803661d0387f98619222859e4f1120df212d19272451adf0229d9396b25197e2",
+  "metric": "exp(sum of negative log probabilities / number of supervised assistant answer tokens, including assistant EOS)",
+  "conditioning": "Full causal native-v26 input with the same task, skills, constraints, tools and observations. Never count prompt, memory, tool-observation or padding tokens in the denominator.",
+  "grouping": "Identical task inputs and output contracts; changed tool registries or observations are different conditions. Remove only explicitly enumerated generic OpenOrca teacher-style prompts before scoring, while preserving the user task and skill context. Source prompts that change the requested task remain separate or held.",
+  "eligibility": "Existing license, first-negative hold, contamination, causal chronology, typed-argument and full-budget gates remain in force. PPL ranks eligible answers; it is not a correctness test.",
+  "selection": "Score every distinct eligible answer in a competing-input group, then retain the minimum mean answer NLL. Exact ties use record_id. A failed, missing or nonfinite score holds the group; no silent first-source fallback.",
+  "numerics": "Canonical batch size one, full unpadded sequence, FlashAttention, released BF16 weights plus original FP32 Mamba parameters, sequence-aligned 128-token vocabulary projections, FP32 per-token cross entropy and FP64 summation. No ranking from padded multi-sequence batches after the calibration delta exceeded 0.01 NLL. No change to quality gates or model weights.",
+  "scope": "Reconsider pre-deduplication original answer candidates, including answers formerly removed by source ordering. Preserve sealed previous artifacts and first negative semantic decisions.",
+  "resources": {"no_training": true, "no_paid_compute": true, "weights_already_cached": true, "initial_gpu_workers": 1, "maximum_gpu_workers": 8, "maximum_batch_tokens": 32768, "maximum_sequence_tokens": 131072, "cpu_threads_per_worker": 4},
+  "target_accepted_new_episodes": 10000000,
+  "goal_complete": false
+}

@@ -44,5 +44,25 @@ class CompactionTests(unittest.TestCase):
                 compact.write_checked(pa.table({'x':[2]}),p,wave='w',config='records',split='train')
             self.assertEqual(p.read_bytes(),before)
 
+    def test_openorca_answer_variants_do_not_add_episodes(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);source=root/'source';dest=root/'dest';state=root/'state';state.mkdir()
+            prototype={'split':'train','domain':'reading','source':'Open-Orca/OpenOrca','upstream_source':'Open-Orca/OpenOrca',
+                'license':'mit','verification_tier':'fixture','memory_placement':'chronological','observation_origin':'fixture',
+                'actual_retrieval':False,'recorded_error_followup':False,'assistant_turns':1,'tool_observations':0,
+                'pangolin_tokens':3,'pangolin_supervised_tokens':1,'minicpm_tokens':3,'minicpm_supervised_tokens':1}
+            rows=[{**prototype,'record_id':rid,'family_id':qh,'query_hash':qh,'text':text} for rid,qh,text in
+                  [('a','question-one','first answer'),('b','question-one','answer style variant'),('c','question-two','different task')]]
+            for name in ['records','tokenized','minicpm5_tokenized']:
+                p=source/'data/wave-0002'/name/'train-00000.parquet';p.parent.mkdir(parents=True)
+                values=rows if name=='records' else [{'record_id':r['record_id'],'input_ids':[1,2,3],'labels':[-100,-100,3]} for r in rows]
+                pq.write_table(pa.Table.from_pylist(values),p)
+            with patch.object(compact,'ROOTS',{'wave-0002':source}),patch.object(compact,'DEST',dest),patch.object(compact,'STATE',state):
+                result=compact.job(('wave-0002','train'))
+            self.assertEqual(result['counts']['accepted'],2)
+            self.assertEqual(result['counts']['excluded:duplicate_openorca_query'],1)
+            table=pq.read_table(dest/'data/wave-0002/records/train-00000.parquet')
+            self.assertEqual(table.column('record_id').to_pylist(),['a','c'])
+
 
 if __name__=='__main__':unittest.main()

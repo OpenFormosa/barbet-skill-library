@@ -1,0 +1,21 @@
+{
+  "version": "openorca-exact-generic-style-canonicalization-v1",
+  "source_revision": "e9c87b4abb2609913751f9b26553fdb9c061796c",
+  "remove_exact_generic_teacher_styles": [
+    "Explain how you used the definition to come up with the answer.",
+    "User will you give you a task with some instruction. Your job is follow the instructions as faithfully as you can. While answering think step-by-step and justify your answer.",
+    "You are a helpful assistant, who always provide explanation. Think like you are answering to a five year old.",
+    "You are an AI assistant that follows instruction extremely well. Help as much as you can.",
+    "You are an AI assistant that helps people find information.",
+    "You are an AI assistant that helps people find information. Provide a detailed answer so user don’t need to search outside to understand the answer.",
+    "You are an AI assistant that helps people find information. User will you give you a question. Your task is to answer as faithfully as you can. While answering think step-bystep and justify your answer.",
+    "You are an AI assistant, who knows every language and how to translate one language to another. Given a task, you explain in simple steps what the task is asking, any guidelines that it provides. You solve the task and show how you used the guidelines to solve the task.",
+    "You are an AI assistant. Provide a detailed answer so user don't need to search outside to understand the answer.",
+    "You are an AI assistant. Provide a detailed answer so user don’t need to search outside to understand the answer.",
+    "You are an AI assistant. User will you give you a task. Your goal is to complete the task as faithfully as you can. While performing the task think step-by-step and justify your steps.",
+    "You are an AI assistant. You will be given a task. You must generate a detailed and long answer."
+  ],
+  "preserve_nonmatching_scenario_rules": true,
+  "preserve_all_user_question_constraints": true,
+  "purpose": "Compare answer style variants under one identical skill-and-task condition for v26 PPL selection; never inject an answer into the condition."
+}

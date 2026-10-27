@@ -1,0 +1,86 @@
+{
+  "phase": "V26_SCORER_VALIDATED_CANDIDATE_INDEX_READY",
+  "target_accepted_episodes": 10000000,
+  "goal_complete": false,
+  "candidate_index": {
+    "counts": {
+      "seen": 3588557,
+      "eligible": 3574234,
+      "excluded:first_semantic_hold": 6890,
+      "excluded:unreviewed_search": 5944,
+      "excluded:supplemental_prior_job_hold": 3,
+      "excluded:reserved_literal_tool_delimiter": 6,
+      "excluded:undeclared_function_parameter": 1480
+    },
+    "distinct_answers": 3496073,
+    "input_groups": 2897850,
+    "competing_groups": 479012,
+    "answers_to_score": 1077235,
+    "status": "INDEXED_NOT_YET_PPL_SELECTED",
+    "all_score_inputs_are_eligible_only": true,
+    "no_model_training": true
+  },
+  "calibration": {
+    "policy_sha256": "32868728af4a484921394f2a3e363fb109c5a7621a43620fe5ec54b3b5e6bc8a",
+    "scorer_sha256": "5b85c53e570e1bf7c8bc13e02ce85b3d9513f51a000660fb471994bf155edc60",
+    "results": [
+      {
+        "score": {
+          "status": "scored",
+          "answer_tokens": 6,
+          "nll_sum": 16.221673815984104,
+          "mean_nll": 2.7036123026640175,
+          "ppl": 14.93357901722805,
+          "sequence_tokens": 95,
+          "text_sha256": "a4de64444f5bcf87aa7f26594bfa7a50c3b50d84ad2e74372eb2f0a97da58d45",
+          "input_hash": "cf778cffbf448d7b46515adf3fed09195c2e92260bc9c35eb9c6423df918d420"
+        },
+        "repeat_nll_delta": 0.0,
+        "published_same_kernel_loss": 2.7036123275756836,
+        "reference_nll_delta": 2.491166606333195e-08
+      },
+      {
+        "score": {
+          "status": "scored",
+          "answer_tokens": 20,
+          "nll_sum": 25.143182626181442,
+          "mean_nll": 1.2571591313090722,
+          "ppl": 3.515420440396356,
+          "sequence_tokens": 109,
+          "text_sha256": "6d2f31907b5dae0751d9f53fcc8115f0ccd351f7e61a8abc0333d64b3598d9d8",
+          "input_hash": "cf778cffbf448d7b46515adf3fed09195c2e92260bc9c35eb9c6423df918d420"
+        },
+        "repeat_nll_delta": 0.0,
+        "published_same_kernel_loss": 1.2571591138839722,
+        "reference_nll_delta": 1.742510002955555e-08
+      },
+      {
+        "score": {
+          "status": "scored",
+          "answer_tokens": 10,
+          "nll_sum": 12.706505063364148,
+          "mean_nll": 1.2706505063364149,
+          "ppl": 3.563169673076266,
+          "sequence_tokens": 99,
+          "text_sha256": "a15ff3c7bd138a5b5d3fd1e8a6eff5c54e860fceaadc332c350df5dfd23dbefa",
+          "input_hash": "cf778cffbf448d7b46515adf3fed09195c2e92260bc9c35eb9c6423df918d420"
+        },
+        "repeat_nll_delta": 0.0,
+        "published_same_kernel_loss": 1.2706505060195923,
+        "reference_nll_delta": 3.168225681804415e-10
+      }
+    ],
+    "canonical_batch_size": 1,
+    "weights_trained": false,
+    "all_checks_passed": true,
+    "warm_30_short_fixture_seconds": 0.4135945402085781,
+    "memory_peak_bytes": 2636146176,
+    "failure_diagnostics_preserved": [
+      "v26-ppl-calibration.log",
+      "v26-ppl-calibration-diagnostic-v2.log",
+      "live-calibration-diagnostic-v3.json"
+    ],
+    "scope": "Exact unbatched FlashAttention inference scores, same BF16 vocabulary projection shapes as published loss. Multi-sequence padding is not used. Short-fixture throughput is not a corpus ETA."
+  },
+  "published_minimum_ppl_selected_release": false
+}

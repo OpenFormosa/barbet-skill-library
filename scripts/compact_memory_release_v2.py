@@ -39,7 +39,7 @@ def job(task):
     if report.exists():return json.loads(report.read_text())
     root=ROOTS[wave];names=['records','tokenized','minicpm5_tokenized']
     holds=set(json.loads((FIRST/'postpublication-tool-interface-audit-v2.json').read_text())['record_ids']) if wave=='wave-0001' else set()
-    parts={k:[] for k in names};pending=0;shard=0;files=[];counts=Counter();indices=[]
+    parts={k:[] for k in names};pending=0;shard=0;files=[];counts=Counter();indices=[];orca_queries=set()
     def flush(n):
         nonlocal pending,shard
         values={k:pa.concat_tables(parts[k]) for k in names}
@@ -52,8 +52,17 @@ def job(task):
         tables={k:pq.read_table(root/'data'/wave/k/p.name) for k in names}
         ids=tables['records'].column('record_id').to_pylist()
         if any(t.column('record_id').to_pylist()!=ids for t in tables.values()):raise ValueError('source config alignment failed')
-        keep=[i for i,rid in enumerate(ids) if rid not in holds]
-        counts['seen']+=len(ids);counts['excluded:new_declared_argument_guard']+=len(ids)-len(keep)
+        keep=[]
+        metadata=tables['records'].select(['record_id','source','query_hash']).to_pylist()
+        for i,row in enumerate(metadata):
+            if row['record_id'] in holds:
+                counts['excluded:new_declared_argument_guard']+=1;continue
+            if row['source']=='Open-Orca/OpenOrca':
+                if row['query_hash'] in orca_queries:
+                    counts['excluded:duplicate_openorca_query']+=1;continue
+                orca_queries.add(row['query_hash'])
+            keep.append(i)
+        counts['seen']+=len(ids)
         if not keep:continue
         pick=pa.array(keep,type=pa.int64())
         chosen={k:t.take(pick) for k,t in tables.items()}
@@ -83,7 +92,7 @@ def main():
     STATE.mkdir(parents=True,exist_ok=True)
     if not (SECOND/'public-package-summary.json').exists():raise ValueError('second-wave verification incomplete')
     save(STATE/'policy.json',{'version':'compact-cumulative-v2-0002','rows_per_shard':ROWS,
-        'changes':['Concatenate exact retained rows into larger Parquet shards','Exclude wave-1 unconfirmed root arguments; retain original release in history'],
+        'changes':['Concatenate exact retained rows into larger Parquet shards','Exclude wave-1 unconfirmed root arguments; retain original release in history','Keep one OpenOrca response per normalized query, even when distinct original seed ids repeat the same query; answer/style variants do not add episodes'],
         'training_text_or_label_rewrite':False,'new_model_training':False,'target':10000000,'target_complete':False})
     totals=Counter();files=[];wave_counts={}
     with ProcessPoolExecutor(max_workers=4) as pool:
