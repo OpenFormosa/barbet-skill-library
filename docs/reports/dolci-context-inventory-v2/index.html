@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>Dolci 來源盤點</title><style>body{font:17px/1.7 system-ui;max-width:1080px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Dolci：先計算不同題目與來源契約</h1><p>固定修訂的 15 個實際檔案共 2,152,112 列、3,061,427,649 bytes，全部對照原始 LFS SHA256。初版只識別 JSON 函式呼叫，無法投影 208,000 列；查明工具呼叫其實是文字函式語法，觀察角色是 environment。這是讀取器範圍不足，不是資料錯誤率。</p><p>第二版只讀取原始呼叫文字及環境角色，沒有執行字串或補造工具 schema，保留初版 1,944,112 列的每個原始身份值。完成後 2,151,840 列可投影，272 列仍不符合訊息結尾／欄位格式；不同正規化首題為 1,644,535 個，完整最後條件為 1,654,029 個。這些數字還沒有扣除先前資料集重疊，接受訓練筆數仍是零。</p><p>同題版本相當多：Logic Puzzles 的 159,882 列對應 40,000 題；Verifiable Reasoning 的 310,572 列對應 118,148 題；OpenThoughts3+ Science 的 99,268 列對應 6,208 題。不同答案要共同進入 v26 比較，完全相同的答案只保留一份，不能用原始列數充當新增問題數。</p><p>工具子集可見 221,780 個不同首題、227,268 個最後輸入；全來源投影範圍內有 207,728 列文字函式呼叫、197,178 列工具／環境觀察。仍需完整型別適配、來源 schema 與觀察歸屬、對話前綴去重、首次品質診斷、前後記憶與 PPL 分組。程式題與邏輯題亦須各自驗證，來源名稱不能代替正確性。</p><p><a href="https://huggingface.co/datasets/allenai/Dolci-Instruct-SFT/tree/bd3c8f3a9b2cc5a9682e44b96ddd0bb2ff027221">Dolci 固定來源</a> 標示 ODC-BY；<a href="https://opendatacommons.org/licenses/by/1-0/">授權原文</a> 區分資料庫與各內容的權利，因此尚未對整份混合來源宣告內容授權准入。保留逐列 source_dataset，不把來源的 Apache／MIT 或 ODC-BY 名稱整批改標成同一種授權。</p><p>另外，<a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts3-1.2M/tree/61bcf9d4eb38b30295efc2021227a63cc5bb34c8">OpenThoughts3 原始說明</a> 的 1,200,000 列是 75,000 題各生成 16 次，並非 120 萬個不同問題。本次只固定其 metadata 和 README，沒有下載 28.2 GB 答案或增加接受筆數。所有資料盤點均未訓練模型或證明模型能力提升。</p><pre>{
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>Dolci 來源盤點</title><style>body{font:17px/1.7 system-ui;max-width:1080px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Dolci：先計算不同題目與來源契約</h1><p>固定修訂的 15 個實際檔案共 2,152,112 列、3,061,427,649 bytes，全部對照原始 LFS SHA256。初版只識別 JSON 函式呼叫，無法投影 208,000 列；查明工具呼叫其實是文字函式語法，觀察角色是 environment。這是讀取器範圍不足，不是資料錯誤率。</p><p>第二版只讀取原始呼叫文字及環境角色，沒有執行字串或補造工具 schema，保留初版 1,944,112 列的每個原始身份值。完成後 2,151,840 列可投影，272 列仍不符合訊息結尾／欄位格式；不同正規化首題為 1,644,535 個，完整最後條件為 1,654,029 個。這些數字還沒有扣除先前資料集重疊，接受訓練筆數仍是零。</p><p>同題版本相當多：Logic Puzzles 的 159,882 列對應 40,000 題；Verifiable Reasoning 的 310,572 列對應 118,148 題；OpenThoughts3+ Science 的 99,268 列對應 6,208 題。不同答案要共同進入 v26 比較，完全相同的答案只保留一份，不能用原始列數充當新增問題數。</p><p>工具子集可見 221,780 個不同首題、227,268 個最後輸入；全來源投影範圍內有 207,728 列文字函式呼叫、197,178 列工具／環境觀察。仍需完整型別適配、來源 schema 與觀察歸屬、對話前綴去重、首次品質診斷、前後記憶與 PPL 分組。程式題與邏輯題亦須各自驗證，來源名稱不能代替正確性。</p><p><a href="https://huggingface.co/datasets/allenai/Dolci-Instruct-SFT/tree/bd3c8f3a9b2cc5a9682e44b96ddd0bb2ff027221">Dolci 固定來源</a> 標示 ODC-BY；<a href="https://opendatacommons.org/licenses/by/1-0/">授權原文</a> 區分資料庫與各內容的權利，因此尚未對整份混合來源宣告內容授權准入。保留逐列 source_dataset，不把來源的 Apache／MIT 或 ODC-BY 名稱整批改標成同一種授權。</p><p>另外，<a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts3-1.2M/tree/61bcf9d4eb38b30295efc2021227a63cc5bb34c8">OpenThoughts3 原始說明</a> 的 1,200,000 列是 75,000 題各生成 16 次，並非 120 萬個不同問題。本次只固定其 metadata 和 README，沒有下載 28.2 GB 答案或增加接受筆數。所有資料盤點均未訓練模型或證明模型能力提升。</p><p>新增 512 個固定雜湊挑選的工具題格式診斷：274 題可在保留原始文字、明確工具 schema 與觀察內容下投影；195 題的多工具結果無法唯一對應呼叫而隔離，其餘 43 題分別有非字面參數、型別、工具名稱、呼叫語法或未宣告參數問題。此診斷只解析 AST 中的字面資料，沒有執行來源程式；不以呼叫順序猜測結果歸屬，不補造工具定義，也沒有選定標準答案或新增訓練資料。</p><p>新增四項實際測試檢查字面參數與空白保留、觀察不計算 loss、多呼叫歸屬不明時隔離、缺失工具定義及可執行表達式拒絕。全來源內容授權與語義准入仍待處理。</p><pre>{
   &quot;counts&quot;: {
     &quot;raw_rows&quot;: 2152112,
     &quot;projected_rows&quot;: 2151840,
@@ -404,9 +404,28 @@
   &quot;prior_release_overlap_not_yet_subtracted&quot;: true,
   &quot;source_content_license_admission_not_completed&quot;: true,
   &quot;model_weights_trained&quot;: false,
-  &quot;updated_at&quot;: &quot;2026-10-27T16:17:58.464019+00:00&quot;,
+  &quot;updated_at&quot;: &quot;2026-10-27T16:29:52.582257+00:00&quot;,
   &quot;goal_complete&quot;: false,
   &quot;revision&quot;: &quot;bd3c8f3a9b2cc5a9682e44b96ddd0bb2ff027221&quot;,
   &quot;v1_unprojectable&quot;: 208000,
-  &quot;v1_failure_was_adapter_scope_not_source_quality&quot;: true
+  &quot;v1_failure_was_adapter_scope_not_source_quality&quot;: true,
+  &quot;tool_format_diagnosis&quot;: {
+    &quot;counts&quot;: {
+      &quot;diagnostic_queries&quot;: 512,
+      &quot;structure_projected&quot;: 274,
+      &quot;projected_assistant_turns&quot;: 1240,
+      &quot;projected_observations&quot;: 654,
+      &quot;held:ambiguous_tool_observation&quot;: 195,
+      &quot;held:unsupported_literal_source_call: argument must be a literal JSON-compatible value&quot;: 13,
+      &quot;held:typed_argument_mismatch&quot;: 13,
+      &quot;held:tool_name&quot;: 10,
+      &quot;held:unsupported_literal_source_call: call syntax&quot;: 6,
+      &quot;held:undeclared_source_call_argument&quot;: 1
+    },
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;source_programs_executed&quot;: false,
+    &quot;model_requests&quot;: 0,
+    &quot;source_content_license_admitted&quot;: false,
+    &quot;scope&quot;: &quot;512 deterministically chosen tool-source queries, structural projection only. No semantic accuracy or PPL selection claim.&quot;
+  }
 }</pre></html>

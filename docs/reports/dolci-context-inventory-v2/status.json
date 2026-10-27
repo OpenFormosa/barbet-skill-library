@@ -404,9 +404,28 @@
   "prior_release_overlap_not_yet_subtracted": true,
   "source_content_license_admission_not_completed": true,
   "model_weights_trained": false,
-  "updated_at": "2026-10-27T16:17:58.464019+00:00",
+  "updated_at": "2026-10-27T16:29:52.582257+00:00",
   "goal_complete": false,
   "revision": "bd3c8f3a9b2cc5a9682e44b96ddd0bb2ff027221",
   "v1_unprojectable": 208000,
-  "v1_failure_was_adapter_scope_not_source_quality": true
+  "v1_failure_was_adapter_scope_not_source_quality": true,
+  "tool_format_diagnosis": {
+    "counts": {
+      "diagnostic_queries": 512,
+      "structure_projected": 274,
+      "projected_assistant_turns": 1240,
+      "projected_observations": 654,
+      "held:ambiguous_tool_observation": 195,
+      "held:unsupported_literal_source_call: argument must be a literal JSON-compatible value": 13,
+      "held:typed_argument_mismatch": 13,
+      "held:tool_name": 10,
+      "held:unsupported_literal_source_call: call syntax": 6,
+      "held:undeclared_source_call_argument": 1
+    },
+    "accepted_training_rows": 0,
+    "source_programs_executed": false,
+    "model_requests": 0,
+    "source_content_license_admitted": false,
+    "scope": "512 deterministically chosen tool-source queries, structural projection only. No semantic accuracy or PPL selection claim."
+  }
 }
