@@ -1,0 +1,9 @@
+test_extra_stream_and_decompression_size_lie_stop (tests.test_candidate_archive.CandidateArchiveTests.test_extra_stream_and_decompression_size_lie_stop) ... ok
+test_literal_payload_and_random_access_are_exact (tests.test_candidate_archive.CandidateArchiveTests.test_literal_payload_and_random_access_are_exact) ... ok
+test_old_and_new_loaders_preserve_every_canonical_field (tests.test_candidate_archive.CandidateArchiveTests.test_old_and_new_loaders_preserve_every_canonical_field) ... ok
+test_truncation_checksum_and_pointer_mismatch_stop (tests.test_candidate_archive.CandidateArchiveTests.test_truncation_checksum_and_pointer_mismatch_stop) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK

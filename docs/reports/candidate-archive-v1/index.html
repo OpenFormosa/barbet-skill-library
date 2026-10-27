@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>候選資料無損儲存</title><style>body{font:17px/1.7 system-ui;max-width:1000px;margin:40px auto;padding:24px}pre{white-space:pre-wrap}</style><h1>新批次的無損候選封存格式</h1><p>為了保留所有同題答案供 v26 比較而不耗盡候選資料暫存，新格式將每筆完整 JSON 獨立壓縮，附原文 SHA256、長度與隨機讀取位置。舊資料與固定讀取器維持原樣。四項測試檢查逐 byte 回復、亂序讀取、截斷／壞 checksum／錯誤 pointer，以及解壓長度與額外資料串拒絕。</p><p>實際 86 筆既有來源樣本的全部欄位、native 渲染文字、tokens、labels 與輸入身份逐一相等；929,868 bytes 原文壓縮成 427,813 bytes。這只是本批儲存／渲染等價測量，不能推估全資料壓縮率，沒有重新評分、語義審查、訓練或增加資料筆數。未來新 cohort 必須明確綁定新讀取器及格式，不能沿用舊 loader 身份聲稱沒有變更。</p><pre>{
+  &quot;samples&quot;: 86,
+  &quot;raw_payload_bytes&quot;: 929868,
+  &quot;archive_bytes&quot;: 427813,
+  &quot;archive_sha256&quot;: &quot;a0c6a3257d692b9c7a4830a50ebe341b47d86d9f373c6021372a491e1062f1a1&quot;,
+  &quot;compression_ratio&quot;: 0.4600792800698594,
+  &quot;plan_sha256&quot;: &quot;9da00dfdae507dfbbbdc64d5ef4218a25d0ee69c1ea68e8b8ebd12eb078a78fe&quot;,
+  &quot;all_comparisons_passed&quot;: true,
+  &quot;native_sequence_tokens_compared&quot;: 226399,
+  &quot;native_supervised_tokens_compared&quot;: 103371,
+  &quot;model_requests&quot;: 0,
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;scope&quot;: &quot;Storage and full native rendering equivalence on these original first-diagnostic and 32 additional source records only. No new score, semantic review, training or old-cohort rewrite.&quot;
+}</pre></html>
