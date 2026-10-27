@@ -1,5 +1,5 @@
 {
-  "phase": "FIRST_SOURCE_DIAGNOSIS_RUNNING",
+  "phase": "FULL_CANDIDATES_STAGED_PENDING_GLOBAL_RANKING",
   "preparation": {
     "counts": {
       "raw_instances_seen": 2417867,
@@ -32,5 +32,89 @@
   "target_total_new_episodes": 10000000,
   "goal_complete": false,
   "weights_trained": false,
-  "tests": "5 source-adapter regressions passed; no whole-corpus semantic approval"
+  "tests": "5 source-adapter regressions passed; no whole-corpus semantic approval",
+  "first_source_diagnosis": {
+    "samples": 80,
+    "verdicts": {
+      "ACCEPT": 41,
+      "REJECT": 15,
+      "REVISE": 24
+    },
+    "all_rows_semantically_verified": false,
+    "negative_reviews_not_replayed": true
+  },
+  "full_normalization": {
+    "counts": {
+      "source_instances_seen": 810058,
+      "candidate_tasks": 777140,
+      "candidate_answers": 1085311,
+      "held:prior_question_or_known_openorca_wrapper": 29449,
+      "held:first_source_diagnostic_nonaccept_query": 36,
+      "held:ni_missing_input_or_outputs": 1,
+      "held:ni_invalid_reference_output": 1604,
+      "held:local_evaluation_overlap": 6,
+      "held:topic_reference_requires_unprovided_alias_fact": 1822
+    },
+    "accepted_training_episodes": 0,
+    "needs_v26_ranking_and_release_gates": true,
+    "full_normalization_policy_sha256": "48689de59494afc6f077e26608c4d2a175355fd1e43ca5ea3f963583f4b0f5b0"
+  },
+  "prospective_policy": {
+    "version": "ni-contextual-memory-full-v2",
+    "first_diagnosis_sha256": "d6eabbb64fc7356463edf13a0f8119b88893dfeb284b73ad685c95fdad7c672d",
+    "first_diagnosis_counts": {
+      "ACCEPT": 41,
+      "REJECT": 15,
+      "REVISE": 24
+    },
+    "excluded_task_files": [
+      {
+        "file": "tasks/task167_strategyqa_question_generation.json",
+        "sha256": "582e57b8701441b1aa4f2a7fd15a97a93aa1ae063d95ff97cd7fab412c4808ba",
+        "instances": 2354,
+        "reason": "Requires generating new multi-fact questions beyond the supplied term description; the additional facts are not supplied."
+      },
+      {
+        "file": "tasks/task471_haspart_answer_generation.json",
+        "sha256": "1d2c5d76493ee637ec92a0680be8373af250bcdb57d6a506ad3d01aa98b9be03",
+        "instances": 3095,
+        "reason": "Requires entity-specific part/whole facts from a bare entity name without a supplied fact collection."
+      },
+      {
+        "file": "tasks/task472_haspart_classification.json",
+        "sha256": "b94486e3817c74e41439cc7a6e651018e291c3ef837ded755438a92e49159532",
+        "instances": 5903,
+        "reason": "Requires entity-specific part/whole facts from two entity names without a supplied fact collection."
+      },
+      {
+        "file": "tasks/task897_freebase_qa_topic_question_generation.json",
+        "sha256": "9485225466036af29201c1e375ee4f19e6a1b8d18c2ff5507572d46212482c14",
+        "instances": 3889,
+        "reason": "Requires factual trivia generation from a topic name, without supplied supporting facts."
+      },
+      {
+        "file": "tasks/task898_freebase_qa_answer_generation.json",
+        "sha256": "13ffb6df98e9e1ae7a1c8a389c35be90a4c584e84e2199b878e156844734607a",
+        "instances": 6500,
+        "reason": "Bare factual questions explicitly refer to external resources, but their contents are absent."
+      },
+      {
+        "file": "tasks/task901_freebase_qa_category_question_generation.json",
+        "sha256": "7cd46d47c04071b6076533f52bcf45917e7e4b7790db5c996db78396fc892b32",
+        "instances": 69,
+        "reason": "A category such as film is not evidence for a factual trivia question; external resources are mentioned but not provided."
+      }
+    ],
+    "counts": {
+      "raw_instances_to_stage": 810058,
+      "held_missing_facts_raw_instances": 21810
+    },
+    "topic_extraction_gate": "For task899 only, every reference topic must occur as a normalized complete phrase in the supplied question. Hold the source instance otherwise; do not rewrite references.",
+    "false_positive_review_note": "Some first non-accept reviews contain contradictory praise or ambiguous rubric complaints. They remain held; their counts are not a corpus error-rate estimate.",
+    "script_sha256": "ab91109333a1baa011500cc154d8b899087c8d3dbe9f8b5dec514afa3cdd8db5",
+    "candidate_only": true,
+    "accepted_training_rows": 0,
+    "no_negative_review_replay": true
+  },
+  "updated_at": "2026-10-27T11:56:52.942374+00:00"
 }

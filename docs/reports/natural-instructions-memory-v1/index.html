@@ -1,5 +1,5 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>NI 記憶資料候選</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Natural Instructions：外置記憶資料候選</h1><p>此批仍是候選，合格訓練筆數目前為零。原始下載 756 個官方訓練任務，共 2,417,867 個原始實例；官方 119 個測試任務未納入。</p><p>逐任務 Instance License 與範圍檢查後，保留 298 個任務、831,868 個原始實例。未知或未納入的授權不能由程式庫 Apache 授權代替。排除錯誤答案生成、自由故事生成與未明確分類的任務。</p><p>每筆保留原始任務定義，把至多兩個不同輸入的公開示例及完整目標輸入放入有來源的記憶區塊，目標答案不匯入記憶。前置或後置位置由輸入決定，同一題不複製成兩筆。示例若等於目標輸入則移除，避免直接洩漏答案。</p><p>同一輸入的所有不同參考輸出只列為待選答案，後續必須依固定 v26 的答案 PPL 選一筆。先以既有問題雜湊及 11 種確切 OpenOrca 包裝格式篩掉已知重複，另作本機評測污染檢查。這不是通用語意去重的保證。</p><p>初步輸入轉換涵蓋 3,576 個原始實例，其中 3,480 個任務、9,456 個答案候選留待檢查；92 筆已知重複與 4 筆無效參考輸出排除。首次來源類別診斷正在進行，後續才會完整轉換、PPL 選擇、切分與匯出。程式不執行來源程式碼，沒有模型訓練或能力提升結論。</p><p><a href="https://github.com/allenai/natural-instructions/tree/55a365637381ce7f3748fa2eac7aef1a113bbb82">固定的官方來源</a></p><details><summary>候選檢查記錄</summary><pre>{
-  &quot;phase&quot;: &quot;FIRST_SOURCE_DIAGNOSIS_RUNNING&quot;,
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>NI 記憶資料候選</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Natural Instructions：外置記憶資料候選</h1><p>原始下載 756 個官方訓練任務，2,417,867 個實例；119 個官方測試任務未納入。逐任務檢查 Instance License，沒有用程式庫授權代替資料授權。最初範圍為 298 個任務、831,868 個原始實例。</p><p>首次類別診斷共 80 筆：41 ACCEPT、24 REVISE、15 REJECT。部分非通過意見本身矛盾或含模糊批評，所有首票仍保留隔離；不能將其比例當作真實錯誤率。</p><p>逐一檢查後，六個要求額外事實但未提供證據的任務整體隔離，共 21,810 個原始實例。另對題目主題擷取要求參考實體確實出現在輸入，避免把未提供的別名知識當成閱讀理解。</p><p>完整轉換 292 個任務、810,058 個原始實例，得到 777,140 個候選任務、1,085,311 個答案版本。已隔離 29,449 個既有問題或已知 OpenOrca 包裝重複、36 個首票負面題目、1,604 個無效輸出、1,822 個需要外部別名知識的實例、6 個本機評測重疊與 1 個缺欄位實例。這些是候選計數，尚非正式合格資料。</p><p>任務定義作為指令，完整目標輸入及至多兩個不同輸入的公開示例作為可見記憶；目標答案不放入記憶。同一題只使用一個前置或後置位置，不複製計數。所有不同參考輸出仍待 v26 最低答案 PPL 選擇、全域去重、家族切分、完整 token 與推論預算檢查。沒有模型訓練或新能力測量。</p><p><a href="https://github.com/allenai/natural-instructions/tree/55a365637381ce7f3748fa2eac7aef1a113bbb82">固定官方來源</a></p><details><summary>可重現記錄</summary><pre>{
+  &quot;phase&quot;: &quot;FULL_CANDIDATES_STAGED_PENDING_GLOBAL_RANKING&quot;,
   &quot;preparation&quot;: {
     &quot;counts&quot;: {
       &quot;raw_instances_seen&quot;: 2417867,
@@ -32,5 +32,89 @@
   &quot;target_total_new_episodes&quot;: 10000000,
   &quot;goal_complete&quot;: false,
   &quot;weights_trained&quot;: false,
-  &quot;tests&quot;: &quot;5 source-adapter regressions passed; no whole-corpus semantic approval&quot;
+  &quot;tests&quot;: &quot;5 source-adapter regressions passed; no whole-corpus semantic approval&quot;,
+  &quot;first_source_diagnosis&quot;: {
+    &quot;samples&quot;: 80,
+    &quot;verdicts&quot;: {
+      &quot;ACCEPT&quot;: 41,
+      &quot;REJECT&quot;: 15,
+      &quot;REVISE&quot;: 24
+    },
+    &quot;all_rows_semantically_verified&quot;: false,
+    &quot;negative_reviews_not_replayed&quot;: true
+  },
+  &quot;full_normalization&quot;: {
+    &quot;counts&quot;: {
+      &quot;source_instances_seen&quot;: 810058,
+      &quot;candidate_tasks&quot;: 777140,
+      &quot;candidate_answers&quot;: 1085311,
+      &quot;held:prior_question_or_known_openorca_wrapper&quot;: 29449,
+      &quot;held:first_source_diagnostic_nonaccept_query&quot;: 36,
+      &quot;held:ni_missing_input_or_outputs&quot;: 1,
+      &quot;held:ni_invalid_reference_output&quot;: 1604,
+      &quot;held:local_evaluation_overlap&quot;: 6,
+      &quot;held:topic_reference_requires_unprovided_alias_fact&quot;: 1822
+    },
+    &quot;accepted_training_episodes&quot;: 0,
+    &quot;needs_v26_ranking_and_release_gates&quot;: true,
+    &quot;full_normalization_policy_sha256&quot;: &quot;48689de59494afc6f077e26608c4d2a175355fd1e43ca5ea3f963583f4b0f5b0&quot;
+  },
+  &quot;prospective_policy&quot;: {
+    &quot;version&quot;: &quot;ni-contextual-memory-full-v2&quot;,
+    &quot;first_diagnosis_sha256&quot;: &quot;d6eabbb64fc7356463edf13a0f8119b88893dfeb284b73ad685c95fdad7c672d&quot;,
+    &quot;first_diagnosis_counts&quot;: {
+      &quot;ACCEPT&quot;: 41,
+      &quot;REJECT&quot;: 15,
+      &quot;REVISE&quot;: 24
+    },
+    &quot;excluded_task_files&quot;: [
+      {
+        &quot;file&quot;: &quot;tasks/task167_strategyqa_question_generation.json&quot;,
+        &quot;sha256&quot;: &quot;582e57b8701441b1aa4f2a7fd15a97a93aa1ae063d95ff97cd7fab412c4808ba&quot;,
+        &quot;instances&quot;: 2354,
+        &quot;reason&quot;: &quot;Requires generating new multi-fact questions beyond the supplied term description; the additional facts are not supplied.&quot;
+      },
+      {
+        &quot;file&quot;: &quot;tasks/task471_haspart_answer_generation.json&quot;,
+        &quot;sha256&quot;: &quot;1d2c5d76493ee637ec92a0680be8373af250bcdb57d6a506ad3d01aa98b9be03&quot;,
+        &quot;instances&quot;: 3095,
+        &quot;reason&quot;: &quot;Requires entity-specific part/whole facts from a bare entity name without a supplied fact collection.&quot;
+      },
+      {
+        &quot;file&quot;: &quot;tasks/task472_haspart_classification.json&quot;,
+        &quot;sha256&quot;: &quot;b94486e3817c74e41439cc7a6e651018e291c3ef837ded755438a92e49159532&quot;,
+        &quot;instances&quot;: 5903,
+        &quot;reason&quot;: &quot;Requires entity-specific part/whole facts from two entity names without a supplied fact collection.&quot;
+      },
+      {
+        &quot;file&quot;: &quot;tasks/task897_freebase_qa_topic_question_generation.json&quot;,
+        &quot;sha256&quot;: &quot;9485225466036af29201c1e375ee4f19e6a1b8d18c2ff5507572d46212482c14&quot;,
+        &quot;instances&quot;: 3889,
+        &quot;reason&quot;: &quot;Requires factual trivia generation from a topic name, without supplied supporting facts.&quot;
+      },
+      {
+        &quot;file&quot;: &quot;tasks/task898_freebase_qa_answer_generation.json&quot;,
+        &quot;sha256&quot;: &quot;13ffb6df98e9e1ae7a1c8a389c35be90a4c584e84e2199b878e156844734607a&quot;,
+        &quot;instances&quot;: 6500,
+        &quot;reason&quot;: &quot;Bare factual questions explicitly refer to external resources, but their contents are absent.&quot;
+      },
+      {
+        &quot;file&quot;: &quot;tasks/task901_freebase_qa_category_question_generation.json&quot;,
+        &quot;sha256&quot;: &quot;7cd46d47c04071b6076533f52bcf45917e7e4b7790db5c996db78396fc892b32&quot;,
+        &quot;instances&quot;: 69,
+        &quot;reason&quot;: &quot;A category such as film is not evidence for a factual trivia question; external resources are mentioned but not provided.&quot;
+      }
+    ],
+    &quot;counts&quot;: {
+      &quot;raw_instances_to_stage&quot;: 810058,
+      &quot;held_missing_facts_raw_instances&quot;: 21810
+    },
+    &quot;topic_extraction_gate&quot;: &quot;For task899 only, every reference topic must occur as a normalized complete phrase in the supplied question. Hold the source instance otherwise; do not rewrite references.&quot;,
+    &quot;false_positive_review_note&quot;: &quot;Some first non-accept reviews contain contradictory praise or ambiguous rubric complaints. They remain held; their counts are not a corpus error-rate estimate.&quot;,
+    &quot;script_sha256&quot;: &quot;ab91109333a1baa011500cc154d8b899087c8d3dbe9f8b5dec514afa3cdd8db5&quot;,
+    &quot;candidate_only&quot;: true,
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;no_negative_review_replay&quot;: true
+  },
+  &quot;updated_at&quot;: &quot;2026-10-27T11:56:52.942374+00:00&quot;
 }</pre></details></html>

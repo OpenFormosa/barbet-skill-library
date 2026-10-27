@@ -1,5 +1,5 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>v26 答案選擇</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>v26 答案 PPL：完整候選評分完成</h1><p>一千萬筆新軌跡目標持續進行。479,466 組競爭答案、1,078,143 個答案已完成固定 v26 的條件 PPL 評分，評分失敗為零。目前正在重建並檢查發布資料，尚未把候選數當作合格筆數。</p><p>補查 231,472 筆舊流程僅因同題去重而略過的原始列，恢復 103,988 個合格候選。不同工具或不同外部條件不冒充同一輸入比較；前綴視圖與衝突觀察另外隔離。</p><p>原有 1,077,235 筆數值在來源文字、模型與評分協定完全相同時沿用，新增 908 個競爭答案均實際推論。原始資料庫與數值不改寫。分數只計答案 token 與 EOS，完整因果上下文保留。</p><p>來源與正確性規則先於 PPL；PPL 較低不保證正確。沒有權重訓練，也沒有宣稱已提升模型效能。原始 padding 校準失敗保留，正式逐筆路徑與同路徑 loss 最大差為 2.4912e-8。</p><details><summary>實測 JSON</summary><pre>{
-  &quot;phase&quot;: &quot;ALL_EXTENDED_COMPETING_ANSWERS_SCORED_RELEASE_FINALIZING&quot;,
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>v26 答案選擇</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>v26 最低答案 PPL 選擇</h1><p>完整候選索引含 3,600,061 個不同答案、3,001,384 組完整輸入。479,466 組有多個候選，1,078,143 個競爭答案已全部評分。只在完全相同的可見輸入下比較答案平均 NLL；prompt、觀察、padding 不列入 loss。</p><p>補回原先因同題去重而未進入候選池的 103,988 個合格答案，未將原始品質失敗復活。保留既有評分的數值與來源雜湊，新增 908 個實際推論評分。最後選出 2,742,619 筆，其中 234 筆因完整推論預算超限而隔離；2,742,385 筆完成兩套 tokenizer 編譯，尚須發布封裝。</p><p>新 winner 診斷規劃 32 筆：18 ACCEPT、9 REVISE、3 REJECT、2 HOLD。只有 30 筆完整語意判決；另有一筆模型輸出不完整，以及一筆等待兩個審查槽位逾時且沒有模型回執。所有首票負面與中斷請求均保留，不重試取得通過。部分 reviewer 意見本身矛盾或不明確，這不是整體資料錯誤率。</p><p>一筆 Terminal 軌跡在 SyntaxError 後宣告驗證完成，促成全列檢查：189 筆有最後工具錯誤與完成宣告衝突，發布時保守隔離。後續出現新觀察不代表舊錯誤必然修復。沒有執行來源程式，也沒有訓練權重。</p><p>目前 HF 仍是第一批發布；最低 PPL 重選版本正封裝檢查，一千萬筆目標仍未完成。</p><details><summary>可重現記錄</summary><pre>{
+  &quot;phase&quot;: &quot;SCORED_COMPILED_FIRST_DIAGNOSIS_COMPLETE_PACKAGING&quot;,
   &quot;target_accepted_episodes&quot;: 10000000,
   &quot;goal_complete&quot;: false,
   &quot;candidate_index&quot;: {
@@ -119,5 +119,59 @@
     &quot;new_inference_scores&quot;: 908,
     &quot;failed_groups&quot;: 0
   },
-  &quot;updated_at&quot;: &quot;2026-10-27T10:59:21.465187+00:00&quot;
+  &quot;updated_at&quot;: &quot;2026-10-27T11:56:52.938008+00:00&quot;,
+  &quot;selected&quot;: {
+    &quot;excluded_prefix_or_ambiguous_answers&quot;: 259613,
+    &quot;excluded_source_premise_answers&quot;: 2,
+    &quot;single_eligible_answer&quot;: 2263763,
+    &quot;selected&quot;: 2742619,
+    &quot;domain:reading&quot;: 1379724,
+    &quot;split:train&quot;: 2687200,
+    &quot;minimum_ppl_selected&quot;: 478856,
+    &quot;held_no_complete_unambiguous_answer&quot;: 258534,
+    &quot;domain:tool_use&quot;: 1072536,
+    &quot;split:validation&quot;: 55419,
+    &quot;domain:math&quot;: 251030,
+    &quot;domain:coding&quot;: 39324,
+    &quot;held_actual_condition_bytes_differ&quot;: 102,
+    &quot;held_frozen_fold_bridge&quot;: 129,
+    &quot;domain:search&quot;: 5,
+    &quot;shards&quot;: 1372
+  },
+  &quot;compile&quot;: {
+    &quot;seen&quot;: 2742619,
+    &quot;accepted&quot;: 2742385,
+    &quot;pangolin_tokens&quot;: 12341509606,
+    &quot;minicpm_tokens&quot;: 9345240340,
+    &quot;pangolin_supervised_tokens&quot;: 2410325617,
+    &quot;minicpm_supervised_tokens&quot;: 1538740641,
+    &quot;excluded:context_budget_128k_with_4096_reserve&quot;: 234
+  },
+  &quot;new_winner_diagnosis&quot;: {
+    &quot;counts&quot;: {
+      &quot;ACCEPT&quot;: 18,
+      &quot;HOLD&quot;: 2,
+      &quot;REJECT&quot;: 3,
+      &quot;REVISE&quot;: 9
+    },
+    &quot;valid_semantic_verdicts&quot;: 30,
+    &quot;orchestration_holds&quot;: 1,
+    &quot;planned_samples&quot;: 32,
+    &quot;all_rows_semantically_verified&quot;: false,
+    &quot;first_failures_not_replayed&quot;: true
+  },
+  &quot;terminal_completion_guard&quot;: {
+    &quot;counts&quot;: {
+      &quot;seen&quot;: 2742619,
+      &quot;terminal_source&quot;: 20532,
+      &quot;unresolved_terminal_error_before_completion_claim&quot;: 189
+    },
+    &quot;gate_code_sha256&quot;: &quot;25c4b8e836f24e1388e27f39fad9bb416f40b045cd119a825c46ebed4aaf1568&quot;,
+    &quot;origin&quot;: &quot;First winner diagnostic found a terminal completion claim after a SyntaxError in the last recorded observation.&quot;,
+    &quot;scope&quot;: &quot;Exact source-specific JSON task_complete true plus an explicit exception line in the last run_terminal observation. A conservative unresolved concern, not proof that every printed error invalidates the task.&quot;,
+    &quot;does_not_prove_older_errors_were_resolved&quot;: true,
+    &quot;source_programs_executed&quot;: false,
+    &quot;existing_first_negative_holds_preserved&quot;: true
+  },
+  &quot;public_release_status&quot;: &quot;Wave 1 remains public; this PPL-selected replacement has not been published.&quot;
 }</pre></details></html>

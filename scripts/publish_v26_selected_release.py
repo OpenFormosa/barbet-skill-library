@@ -40,11 +40,14 @@ def prepare():
                      (SELECTED/'selection-policy.json','selection-policy.json')]:shutil.copyfile(src,reports/name)
     shutil.copyfile(SELECTED/'terminal-completion-audit-v1/summary.json',reports/'terminal-completion-quality-scan.json')
     shutil.copyfile(FIRST/'terminal-completion-quality-tests-v1.log',reports/'terminal-completion-quality-tests-v1.log')
+    shutil.copyfile(FIRST/'winner-audit-resume-tests-v1.log',reports/'winner-audit-resume-tests-v1.log')
     audit=json.loads((SELECTED/'semantic-audit-v1/summary.json').read_text())
     scopes={}
     for label,state in [('wave-0001',FIRST),('wave-0002',SECOND),('v26-winner-diagnosis',SELECTED)]:
         a=json.loads((state/'semantic-audit-v1/summary.json').read_text())
         scopes[label]={'samples':len(a['results']),'verdicts':a['counts'],'scope':a['scope'],
+            'valid_semantic_verdicts':a.get('valid_semantic_verdicts',sum(a['counts'].get(v,0) for v in ['ACCEPT','REVISE','REJECT'])),
+            'orchestration_holds':a.get('orchestration_holds',0),
             'first_nonaccept_record_ids':a['excluded_record_ids'],'all_rows_semantically_verified':False}
     base.save(reports/'semantic-audit-scopes.json',scopes)
     for name in ['v26-answer-selection-tests-v3.log','v26-candidate-adapter-tests.log','v26-episode-identity-tests.log',
@@ -104,7 +107,7 @@ Exact dialogue-prefix training views do not add episodes. Same static tasks with
 
 Use the library's `prepare_dataset_request` adapter for answer-free Chat or exact-renderer Completion inputs. Do not feed stored training labels as inference requests. Both served-Qwen request modes and native MiniCPM/Pangolin budgets are measured for every row, with a 4,096-token output reserve and no truncation. These are format/budget checks, not Barbet vLLM backend certification.
 
-Most imported answers retain their explicit upstream verification tier; they have not all been independently semantically verified. The new winner diagnostic reviews {len(audit['results'])} samples, with verdict counts `{json.dumps(audit['counts'],sort_keys=True)}`. First non-accepts and their same-query variants are excluded. This purposive diagnostic is not a whole-corpus accuracy estimate. Historical `recorded_error_followup` only detects error-related words in tool text and does not establish a successful repair. Imported tool observations are recorded or simulated upstream as labeled, not locally re-executed source programs.
+Most imported answers retain their explicit upstream verification tier; they have not all been independently semantically verified. The new winner diagnostic covers {len(audit['results'])} planned samples, with outcome counts `{json.dumps(audit['counts'],sort_keys=True)}` and {audit.get('valid_semantic_verdicts',0)} complete semantic verdicts. Incomplete model output and first-attempt orchestration failures remain HOLD, without replaying those requests or pretending they are model verdicts. First non-accepts and their same-query variants are excluded. This purposive diagnostic is not a whole-corpus accuracy estimate. Historical `recorded_error_followup` only detects error-related words in tool text and does not establish a successful repair. Imported tool observations are recorded or simulated upstream as labeled, not locally re-executed source programs.
 
 A new source-specific guard excludes {c.get('excluded:unresolved_terminal_error_before_completion_claim',0):,} compiled Nemotron Terminal trajectories whose final JSON declares `task_complete: true` while the last `run_terminal` observation contains an explicit Python exception line. The trigger was a first-review case that claimed JSON validation had succeeded despite a recorded `SyntaxError`. This is a conservative unresolved-validation hold; it neither proves that every printed error invalidates a task nor proves that older errors were resolved by a later observation. Diagnostic errors without a completion claim remain eligible under the other gates.
 

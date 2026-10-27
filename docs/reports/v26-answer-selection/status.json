@@ -1,5 +1,5 @@
 {
-  "phase": "ALL_EXTENDED_COMPETING_ANSWERS_SCORED_RELEASE_FINALIZING",
+  "phase": "SCORED_COMPILED_FIRST_DIAGNOSIS_COMPLETE_PACKAGING",
   "target_accepted_episodes": 10000000,
   "goal_complete": false,
   "candidate_index": {
@@ -119,5 +119,59 @@
     "new_inference_scores": 908,
     "failed_groups": 0
   },
-  "updated_at": "2026-10-27T10:59:21.465187+00:00"
+  "updated_at": "2026-10-27T11:56:52.938008+00:00",
+  "selected": {
+    "excluded_prefix_or_ambiguous_answers": 259613,
+    "excluded_source_premise_answers": 2,
+    "single_eligible_answer": 2263763,
+    "selected": 2742619,
+    "domain:reading": 1379724,
+    "split:train": 2687200,
+    "minimum_ppl_selected": 478856,
+    "held_no_complete_unambiguous_answer": 258534,
+    "domain:tool_use": 1072536,
+    "split:validation": 55419,
+    "domain:math": 251030,
+    "domain:coding": 39324,
+    "held_actual_condition_bytes_differ": 102,
+    "held_frozen_fold_bridge": 129,
+    "domain:search": 5,
+    "shards": 1372
+  },
+  "compile": {
+    "seen": 2742619,
+    "accepted": 2742385,
+    "pangolin_tokens": 12341509606,
+    "minicpm_tokens": 9345240340,
+    "pangolin_supervised_tokens": 2410325617,
+    "minicpm_supervised_tokens": 1538740641,
+    "excluded:context_budget_128k_with_4096_reserve": 234
+  },
+  "new_winner_diagnosis": {
+    "counts": {
+      "ACCEPT": 18,
+      "HOLD": 2,
+      "REJECT": 3,
+      "REVISE": 9
+    },
+    "valid_semantic_verdicts": 30,
+    "orchestration_holds": 1,
+    "planned_samples": 32,
+    "all_rows_semantically_verified": false,
+    "first_failures_not_replayed": true
+  },
+  "terminal_completion_guard": {
+    "counts": {
+      "seen": 2742619,
+      "terminal_source": 20532,
+      "unresolved_terminal_error_before_completion_claim": 189
+    },
+    "gate_code_sha256": "25c4b8e836f24e1388e27f39fad9bb416f40b045cd119a825c46ebed4aaf1568",
+    "origin": "First winner diagnostic found a terminal completion claim after a SyntaxError in the last recorded observation.",
+    "scope": "Exact source-specific JSON task_complete true plus an explicit exception line in the last run_terminal observation. A conservative unresolved concern, not proof that every printed error invalidates the task.",
+    "does_not_prove_older_errors_were_resolved": true,
+    "source_programs_executed": false,
+    "existing_first_negative_holds_preserved": true
+  },
+  "public_release_status": "Wave 1 remains public; this PPL-selected replacement has not been published."
 }

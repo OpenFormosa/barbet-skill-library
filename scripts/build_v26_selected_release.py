@@ -95,7 +95,9 @@ def package_all(workers):
         'all_records_and_arrays_reread':True,'all_answer_free_qwen_chat_and_completion_budgets_measured':True,
         'all_training_and_native_minicpm_budgets_with_4096_reserve':True,'all_published_query_folds_preserved':True,
         'all_terminal_completion_holds_absent':True,'terminal_quality_scan_sha256':base.file_sha(STATE/'terminal-completion-audit-v1/summary.json'),
-        'new_winner_audit_scope':{'samples':len(audit_scope['results']),'verdicts':audit_scope['counts'],'all_rows_semantically_verified':False},
+        'new_winner_audit_scope':{'planned_samples':len(audit_scope['results']),'verdicts':audit_scope['counts'],
+            'valid_semantic_verdicts':audit_scope.get('valid_semantic_verdicts',sum(audit_scope['counts'].get(v,0) for v in ['ACCEPT','REVISE','REJECT'])),
+            'orchestration_holds':audit_scope.get('orchestration_holds',0),'all_rows_semantically_verified':False},
         'legacy_active_rows':0,'accepted_episodes_target':10000000,'full_goal_complete':False,'model_weights_trained':False,'model_efficacy_measured':False})
     print(json.dumps({'accepted':totals['accepted'],'unique':unique,'files':len(files)}),flush=True)
 
