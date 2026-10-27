@@ -77,6 +77,26 @@ def gallery(rows):
     return out
 
 
+def written_analysis(value):
+    if not value:
+        return ''
+    labels = [('outcome','實驗結論'),('what_was_built','已完成的 repo 更新'),
+        ('skill_rag_reasoning','Skill、RAG 與 reasoning 的分工'),
+        ('context_length','長上下文應該怎麼用'),('remaining_failures','能力與介面瓶頸'),
+        ('next_frozen_weight_cycle_not_yet_validated','下一輪固定權重候選：尚未驗證'),
+        ('claim_limits','停止原因與結果界線')]
+    out = '<h2 id="analysis">完整中文分析</h2>'
+    for key, label in labels:
+        out += '<section><h3>'+E(label)+'</h3>'
+        for item in value.get(key, []):
+            if isinstance(item, dict):
+                out += '<p><strong>'+E(str(item['priority'])+'. '+item['change'])+'</strong><br>'+E(item['validation'])+'</p>'
+            else:
+                out += '<p>'+E(item)+'</p>'
+        out += '</section>'
+    return out
+
+
 def main():
     result=json.loads((HERE/'results.json').read_text());goal=json.loads((HERE/'goal.json').read_text())
     comparisons=result.get('comparisons') or {};selected=(result.get('stopping') or {}).get('selected_policy','待確認')
@@ -87,6 +107,7 @@ def main():
     css='''body{font:15px/1.65 system-ui,sans-serif;background:#f4f6f8;color:#172534;margin:0}main{max-width:1280px;margin:auto;padding:28px}h1{font-size:30px;line-height:1.35}h2{margin-top:36px}a{color:#1767a4}p{max-width:1050px}.notice{background:#fff3d1;padding:15px;border-left:4px solid #b18115}.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.tile,section,details{background:#fff;padding:18px;border-radius:8px;margin:12px 0}.tile b{display:block;font-size:20px}.tile small{color:#52616b}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:13px}th,td{border:1px solid #dce3e9;padding:8px;text-align:left;vertical-align:top}th{background:#edf2f6;cursor:pointer;white-space:nowrap}.scroll{overflow:auto}.detail{table-layout:fixed;overflow-wrap:anywhere}.detail th{width:25%;white-space:normal}summary{cursor:pointer;font-weight:650}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f6f8;padding:14px;max-height:600px;overflow:auto;font-size:12px}svg{width:100%;height:auto}svg text{font-family:system-ui,sans-serif;font-size:12px}figcaption,footer,.muted{color:#52616b;font-size:13px}figure{margin:12px 0}li{margin:7px 0}nav{display:flex;gap:18px;flex-wrap:wrap}#stale{display:none;background:#fff3d1;padding:12px}footer{padding:20px 0}details details{border:1px solid #dce3e9}@media print{body{background:#fff}main{padding:0}nav,#stale{display:none}.scroll{overflow:visible}table{font-size:10px}}'''
     out='<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>固定權重的小模型 test-time 實驗</title><style>'+css+'</style><main><h1>固定權重的小模型 test-time 實驗</h1><p>MiniCPM5-1B、skill、RAG、可回查狀態與真實執行回饋；以 Qwen3.5-9B 比較明確任務與成本範圍。</p><nav><a href="#outcome">結果</a><a href="#search">搜尋與驗證</a><a href="#context">上下文</a><a href="#failures">失敗分析</a><a href="#goal">完整 Goal</a><a href="#probes">固定案例</a></nav><p class="notice">完全不訓練、不改權重，沒有大模型替小模型生成或評審。主指標是四類任務的等權平均，知識保留另列。這不是所有任務的參數等效換算。</p><div id="stale"></div>'
     out+='<div class="tiles">'+''.join('<div class="tile">'+E(title)+'<b>'+E(value)+'</b><small>'+E(note)+'</small></div>' for title,value,note in [('搜尋上限','18 個候選','固定消融與上下文診斷不參與新策略搜尋。'),('選定設定',selected,'依驗證門檻選擇；封存測試後不換策略。'),('對小模型基準的改善',change,'達標：最終配對 CI 下界大於 0。'),('同工具 9B 差距',gap_text,'接近：差距 CI 上界 ≤3 pp，單項差距 ≤5 pp；知識另需通過。')])+'</div><p class="muted">沒有訓練 loss、step 或收斂 ETA。本研究只有固定權重推論；有限搜尋停止不能推論不存在更好的方法。</p>'
+    out+=written_analysis(result.get('written_analysis_zh'))
     out+='<h2 id="outcome">封存測試與成本</h2><section>'+runs(result.get('test',[]))+cost_plot(result.get('test',[]))+'</section><p>同一題三個 seed 先取平均，再做分層配對 bootstrap；另列文件／工具家族／科目的群聚敏感度。不能把重複 seed 當三倍獨立題數。攤提 batch 時間是吞吐成本，不是單一使用者延遲。</p>'
     if result.get('job_chain'):
         jobs=result['job_chain'];complete=sum(j['status']=='completed' for j in jobs)

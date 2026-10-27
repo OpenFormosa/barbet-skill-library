@@ -1,0 +1,305 @@
+{
+  "status": "POST-HOC DIAGNOSTIC ONLY; not a preregistered metric or a selected deployment-policy change",
+  "reason": "Observed reversed #### markers and standalone final numbers; separate interface adherence from numerical content.",
+  "method": "If strict parse fails, take only a standalone numeric last final-channel line after removing trailing heading/fence/emphasis markers. Never mine an unfinished thought or use gold to choose among numbers. Apply identically to all models and arms.",
+  "primary_results_unchanged": true,
+  "table": [
+    {
+      "model": "mini",
+      "policy": "bare",
+      "attempts": 384,
+      "strict_correct": 163,
+      "strict_unparseable": 206,
+      "recovered_correct_from_explicit_final": 117,
+      "recovered_wrong_from_explicit_final": 6,
+      "unclosed_thinking": 77,
+      "strict_accuracy": 0.4244791666666667,
+      "diagnostic_accuracy_after_readout": 0.7291666666666666,
+      "diagnostic_macro_with_other_domains_unchanged": 0.4563802083333333
+    },
+    {
+      "model": "mini",
+      "policy": "long",
+      "attempts": 384,
+      "strict_correct": 196,
+      "strict_unparseable": 148,
+      "recovered_correct_from_explicit_final": 119,
+      "recovered_wrong_from_explicit_final": 13,
+      "unclosed_thinking": 10,
+      "strict_accuracy": 0.5104166666666666,
+      "diagnostic_accuracy_after_readout": 0.8203125,
+      "diagnostic_macro_with_other_domains_unchanged": 0.49934895833333337
+    },
+    {
+      "model": "mini",
+      "policy": "literal",
+      "attempts": 384,
+      "strict_correct": 216,
+      "strict_unparseable": 141,
+      "recovered_correct_from_explicit_final": 57,
+      "recovered_wrong_from_explicit_final": 4,
+      "unclosed_thinking": 76,
+      "strict_accuracy": 0.5625,
+      "diagnostic_accuracy_after_readout": 0.7109375,
+      "diagnostic_macro_with_other_domains_unchanged": 0.541015625
+    },
+    {
+      "model": "mini",
+      "policy": "no_card",
+      "attempts": 384,
+      "strict_correct": 162,
+      "strict_unparseable": 208,
+      "recovered_correct_from_explicit_final": 109,
+      "recovered_wrong_from_explicit_final": 8,
+      "unclosed_thinking": 86,
+      "strict_accuracy": 0.421875,
+      "diagnostic_accuracy_after_readout": 0.7057291666666666,
+      "diagnostic_macro_with_other_domains_unchanged": 0.5358072916666666
+    },
+    {
+      "model": "mini",
+      "policy": "no_rag",
+      "attempts": 384,
+      "strict_correct": 217,
+      "strict_unparseable": 138,
+      "recovered_correct_from_explicit_final": 52,
+      "recovered_wrong_from_explicit_final": 1,
+      "unclosed_thinking": 79,
+      "strict_accuracy": 0.5651041666666666,
+      "diagnostic_accuracy_after_readout": 0.7005208333333334,
+      "diagnostic_macro_with_other_domains_unchanged": 0.4947916666666667
+    },
+    {
+      "model": "mini",
+      "policy": "no_feedback",
+      "attempts": 384,
+      "strict_correct": 198,
+      "strict_unparseable": 159,
+      "recovered_correct_from_explicit_final": 58,
+      "recovered_wrong_from_explicit_final": 3,
+      "unclosed_thinking": 92,
+      "strict_accuracy": 0.515625,
+      "diagnostic_accuracy_after_readout": 0.6666666666666666,
+      "diagnostic_macro_with_other_domains_unchanged": 0.49479166666666663
+    },
+    {
+      "model": "mini",
+      "policy": "self_review",
+      "attempts": 384,
+      "strict_correct": 164,
+      "strict_unparseable": 191,
+      "recovered_correct_from_explicit_final": 111,
+      "recovered_wrong_from_explicit_final": 6,
+      "unclosed_thinking": 56,
+      "strict_accuracy": 0.4270833333333333,
+      "diagnostic_accuracy_after_readout": 0.7161458333333334,
+      "diagnostic_macro_with_other_domains_unchanged": 0.4576822916666667
+    },
+    {
+      "model": "qwen",
+      "policy": "bare",
+      "attempts": 384,
+      "strict_correct": 217,
+      "strict_unparseable": 155,
+      "recovered_correct_from_explicit_final": 40,
+      "recovered_wrong_from_explicit_final": 1,
+      "unclosed_thinking": 91,
+      "strict_accuracy": 0.5651041666666666,
+      "diagnostic_accuracy_after_readout": 0.6692708333333334,
+      "diagnostic_macro_with_other_domains_unchanged": 0.6555989583333334
+    },
+    {
+      "model": "qwen",
+      "policy": "long",
+      "attempts": 384,
+      "strict_correct": 280,
+      "strict_unparseable": 84,
+      "recovered_correct_from_explicit_final": 65,
+      "recovered_wrong_from_explicit_final": 4,
+      "unclosed_thinking": 1,
+      "strict_accuracy": 0.7291666666666666,
+      "diagnostic_accuracy_after_readout": 0.8984375,
+      "diagnostic_macro_with_other_domains_unchanged": 0.7415364583333334
+    },
+    {
+      "model": "qwen",
+      "policy": "literal",
+      "attempts": 384,
+      "strict_correct": 297,
+      "strict_unparseable": 76,
+      "recovered_correct_from_explicit_final": 7,
+      "recovered_wrong_from_explicit_final": 0,
+      "unclosed_thinking": 49,
+      "strict_accuracy": 0.7734375,
+      "diagnostic_accuracy_after_readout": 0.7916666666666666,
+      "diagnostic_macro_with_other_domains_unchanged": 0.7669270833333334
+    }
+  ],
+  "diagnostic_selected_minus_bare": {
+    "comparison": "mini/literal minus mini/bare",
+    "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+    "bootstrap_replicates": 10000,
+    "domains": {
+      "drcd": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": 24.479166666666664,
+        "paired_95ci_pp": [
+          18.75,
+          30.46875
+        ],
+        "cluster_95ci_pp": [
+          18.489583333333336,
+          30.46875
+        ]
+      },
+      "gsm8k": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": -1.8229166666666667,
+        "paired_95ci_pp": [
+          -5.468750000000002,
+          2.083333333333333
+        ],
+        "cluster_95ci_pp": [
+          -5.729166666666666,
+          1.8229166666666672
+        ]
+      },
+      "mbpp": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": 11.197916666666666,
+        "paired_95ci_pp": [
+          5.989583333333334,
+          16.406250000000004
+        ],
+        "cluster_95ci_pp": [
+          5.989583333333334,
+          16.40625
+        ]
+      },
+      "tmmluplus": {
+        "questions": 134,
+        "clusters": 67,
+        "delta_pp": 0.4975124378109451,
+        "paired_95ci_pp": [
+          -4.477611940298508,
+          5.4726368159203975
+        ],
+        "cluster_95ci_pp": [
+          -4.726368159203981,
+          5.72139303482587
+        ]
+      },
+      "tools": {
+        "questions": 128,
+        "clusters": 6,
+        "delta_pp": 0.0,
+        "paired_95ci_pp": [
+          0.0,
+          0.0
+        ],
+        "cluster_95ci_pp": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "primary_macro": {
+      "delta_pp": 8.463541666666666,
+      "paired_95ci_pp": [
+        6.315104166666666,
+        10.677083333333332
+      ],
+      "cluster_95ci_pp": [
+        6.315104166666666,
+        10.7421875
+      ]
+    }
+  },
+  "diagnostic_qwen_same_minus_selected": {
+    "comparison": "qwen/literal minus mini/literal",
+    "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+    "bootstrap_replicates": 10000,
+    "domains": {
+      "drcd": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": 7.291666666666666,
+        "paired_95ci_pp": [
+          -1.302083333333332,
+          15.885416666666668
+        ],
+        "cluster_95ci_pp": [
+          -1.5624999999999982,
+          15.625
+        ]
+      },
+      "gsm8k": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": 8.072916666666668,
+        "paired_95ci_pp": [
+          1.5625,
+          14.583333333333334
+        ],
+        "cluster_95ci_pp": [
+          1.5625,
+          14.583333333333332
+        ]
+      },
+      "mbpp": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": 21.875,
+        "paired_95ci_pp": [
+          16.40625,
+          27.604166666666675
+        ],
+        "cluster_95ci_pp": [
+          16.145833333333336,
+          27.604166666666668
+        ]
+      },
+      "tmmluplus": {
+        "questions": 134,
+        "clusters": 67,
+        "delta_pp": 37.810945273631845,
+        "paired_95ci_pp": [
+          30.348258706467668,
+          45.27363184079603
+        ],
+        "cluster_95ci_pp": [
+          30.34825870646766,
+          45.52238805970149
+        ]
+      },
+      "tools": {
+        "questions": 128,
+        "clusters": 6,
+        "delta_pp": 53.125,
+        "paired_95ci_pp": [
+          44.53125,
+          61.71875
+        ],
+        "cluster_95ci_pp": [
+          27.34375,
+          80.46875
+        ]
+      }
+    },
+    "primary_macro": {
+      "delta_pp": 22.591145833333336,
+      "paired_95ci_pp": [
+        18.815104166666668,
+        26.302083333333336
+      ],
+      "cluster_95ci_pp": [
+        15.169270833333334,
+        29.953147336075176
+      ]
+    }
+  },
+  "interpretation": "The strict mathematics gain must not be called improved numerical reasoning. Explicit-final readout gives MiniCPM bare 72.92% and selected 71.09%; the primary result includes interface adherence. These post-hoc sensitivity estimates do not promote a new deployment adapter or replace sealed metrics."
+}

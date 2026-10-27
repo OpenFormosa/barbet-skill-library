@@ -37,7 +37,9 @@ curl -fLsS "https://raw.githubusercontent.com/OpenFormosa/barbet-skill-library/$
 
 ## 固定權重的 test-time 實驗
 
-新增的可選 [`testtime/`](testtime/) 元件支援中文詞彙檢索、按需短操作卡、帶來源的狀態與隔離 Python 執行。完整 [goal 與實驗規格](experiments/test_time_v1/goal.json)、[HTML 進度與結果](docs/test-time-study.html) 將工程驗證、模型提升與接近 9B 分開記錄。此工作不訓練、不修改權重，也不更動已發布 HF 樣本；目前能力結論以報告中的實測狀態為準。
+新增的可選 [`testtime/`](testtime/) 元件支援中文詞彙檢索、按需短操作卡、帶來源的狀態與隔離 Python 執行。完整 [goal 與實驗規格](experiments/test_time_v1/goal.json)、[中文分析與實驗結果](docs/test-time-study.html) 將工程驗證、模型提升與接近 9B 分開記錄。此工作不訓練、不修改權重，也不更動已發布 HF 樣本。
+
+本輪已完成 18 個候選搜尋與 646 題、三個 seed、十組設定的封存測試。MiniCPM5-1B 的四領域主指標由 38.02% 提升至 50.39%（+12.37 個百分點，配對 95% CI +9.90 至 +14.97）；相同 harness 的 Qwen3.5-9B 為 76.24%，尚未接近 9B。主評分包含輸出格式遵循；數學的事後格式診斷未顯示數值推理提升。完整消融、成本、失敗分類與限制見報告及[重現說明](experiments/test_time_v1/README.md)。
 
 短卡是有來源版本與雜湊的獨立表示，不應一次載入全部技能。請用目標模型 tokenizer 量測長度；來源引句吻合、schema 合法或公開測試通過，都不等於完整任務正確。模型評測的隱藏答案及測試只交給 scorer。
 

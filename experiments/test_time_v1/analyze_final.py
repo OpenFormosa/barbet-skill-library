@@ -93,6 +93,15 @@ def main():
         'some_but_not_all_correct': sum(any(v) and not all(v) for v in mc.values()),
         'all_three_correct': sum(all(v) for v in mc.values()),
         'limitation': 'Any-correct across seeds is only a diagnostic oracle, not a deployable selection rule.'}
+    tool_families = defaultdict(list)
+    for row in domains['tools']:
+        tool_families[row['group']].append(row)
+    diagnostics['tools']['wrong_fields_among_schema_valid_only'] = dict(Counter(
+        k for r in domains['tools'] if r['schema_valid'] for k in r['wrong_arguments']))
+    diagnostics['tools']['family_holdout_results'] = [
+        {'family': family, 'attempts': len(rows), 'correct': sum(r['correct'] for r in rows),
+         'schema_valid': sum(r['schema_valid'] for r in rows)}
+        for family, rows in sorted(tool_families.items())]
     diagnostics['serving'] = {'unclosed_thinking_calls': sum(r['unclosed_thinking_calls'] for r in scores),
         'length_stopped_calls': sum(r['length_stopped_calls'] for r in scores),
         'batch_size': seal['serving']['batch_size'],

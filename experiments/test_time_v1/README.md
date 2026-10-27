@@ -2,8 +2,19 @@
 
 The complete preregistered goal is [goal.json](goal.json); the readable plan and
 current evidence are rendered in [the HTML report](../../docs/test-time-study.html).
-This experiment makes **no weight updates**. Development and validation are in
-progress; the report distinguishes these from the sealed final evaluation.
+This experiment makes **no weight updates**. The 18-policy search and all 30
+sealed final jobs are complete: 646 held-out questions, three seeds, ten arms.
+MiniCPM's selected harness improves the registered four-domain macro from
+38.02% to 50.39% (+12.37 pp, paired 95% CI +9.90 to +14.97), while the same
+harness with Qwen3.5-9B reaches 76.24%. This establishes a task-system gain,
+not 9B equivalence. See `final_comparisons.json` and `final_diagnostics.json`.
+
+The strict mathematics metric includes final-format adherence. A separately
+labeled post-hoc readout diagnostic recovers already-emitted standalone final
+numbers for every arm; it does not read unfinished thoughts or change the
+sealed scorer. This diagnostic gives MiniCPM bare 72.92% and selected 71.09%
+on mathematics, so the strict math gain is **not evidence of better numerical
+reasoning**. `numeric_diagnostics.json` preserves that sensitivity analysis.
 
 The deployment boundary accepts only a question, visible sources, tool schemas,
 public examples and resource limits. Reference answers, hidden tests, subject
@@ -62,3 +73,21 @@ distinct random streams, so position effects include sampling variation.
 Raw local artifacts are under `work/runs/`, `work/scores/`, `work/logs/` and
 `work/context_probe/`. Reports expose question-level booleans and costs without
 redistributing the passage corpus or hidden benchmark checks.
+
+Final analysis can be regenerated after all sealed jobs complete:
+
+```bash
+python experiments/test_time_v1/score.py --split test --run-tag final
+python experiments/test_time_v1/analyze_final.py
+python experiments/test_time_v1/code_budget_analysis.py
+python experiments/test_time_v1/numeric_diagnostics.py
+python experiments/test_time_v1/collect_results.py
+python experiments/test_time_v1/render_report.py
+```
+
+The analysis commands require NumPy. Code-budget analysis replays prefixes of
+the exact same frozen trajectories; it makes no new model calls. Three calls
+improve code accuracy over two, so stopping at the registered budget is not a
+claim that further improvement is impossible. BF16 batch composition can
+change sampled outputs even with the same seed; independent policy arms are
+not bitwise paired generations. Reported costs include every returned call.

@@ -5,9 +5,11 @@ Only an already-emitted final channel may be read. No number is extracted from
 unfinished thinking, a question, a gold answer, or an ambiguous prose line.
 """
 import json
+import copy
 from pathlib import Path
 import re
-from score import number
+from score import number, summarize
+from compare import paired
 
 HERE = Path(__file__).resolve().parent
 
@@ -31,11 +33,14 @@ def main():
     labels = {r['id']: r for r in map(json.loads, (work / 'test.labels.jsonl').read_text().splitlines())}
     seal = json.loads((HERE / 'FINAL_SELECTION.json').read_text())
     table = []
+    diagnostic_reports = {}
     for family, policy in seal['comparisons']:
         report = json.loads((work / 'scores/final/test' / f'{family}-{policy}.json').read_text())
         if not report['complete']:
             raise RuntimeError('all comparisons must complete before diagnostic reporting')
         scores = {(r['id'], r['seed']): r for r in report['scores'] if r['domain'] == 'gsm8k'}
+        diagnostic = copy.deepcopy(report)
+        diagnostic_scores = {(r['id'], r['seed']): r for r in diagnostic['scores']}
         count = {'model': family, 'policy': policy, 'attempts': len(scores),
             'strict_correct': sum(r['correct'] for r in scores.values()),
             'strict_unparseable': sum(not r['numeric_parseable'] for r in scores.values()),
@@ -54,13 +59,19 @@ def main():
                 if readout is not None:
                     correct = abs(readout - number(labels[row['id']]['gold'])) <= 1e-9
                     count['recovered_correct_from_explicit_final' if correct else 'recovered_wrong_from_explicit_final'] += 1
+                    diagnostic_scores[key]['correct'] = bool(correct)
         count['strict_accuracy'] = count['strict_correct'] / count['attempts']
         count['diagnostic_accuracy_after_readout'] = (count['strict_correct'] + count['recovered_correct_from_explicit_final']) / count['attempts']
+        count['diagnostic_macro_with_other_domains_unchanged'] = summarize(diagnostic['scores'])['primary_macro']
+        diagnostic_reports[family, policy] = diagnostic
         table.append(count)
     result = {'status': 'POST-HOC DIAGNOSTIC ONLY; not a preregistered metric or a selected deployment-policy change',
         'reason': 'Observed reversed #### markers and standalone final numbers; separate interface adherence from numerical content.',
         'method': 'If strict parse fails, take only a standalone numeric last final-channel line after removing trailing heading/fence/emphasis markers. Never mine an unfinished thought or use gold to choose among numbers. Apply identically to all models and arms.',
-        'primary_results_unchanged': True, 'table': table}
+        'primary_results_unchanged': True, 'table': table,
+        'diagnostic_selected_minus_bare': paired(diagnostic_reports['mini', 'bare'], diagnostic_reports['mini', 'literal']),
+        'diagnostic_qwen_same_minus_selected': paired(diagnostic_reports['mini', 'literal'], diagnostic_reports['qwen', 'literal']),
+        'interpretation': 'The strict mathematics gain must not be called improved numerical reasoning. Explicit-final readout gives MiniCPM bare 72.92% and selected 71.09%; the primary result includes interface adherence. These post-hoc sensitivity estimates do not promote a new deployment adapter or replace sealed metrics.'}
     (HERE / 'numeric_diagnostics.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(table, ensure_ascii=False, indent=2))
 

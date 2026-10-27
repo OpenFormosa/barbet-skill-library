@@ -27,6 +27,7 @@ def main():
         'context': maybe('context_results.json'),
         'code_budget': maybe('code_budget_results.json'),
         'numeric_format_diagnostic': maybe('numeric_diagnostics.json'),
+        'written_analysis_zh': maybe('conclusions_zh.json'),
         'stopping': maybe('selection_decision.json'),
         'job_chain': maybe('work/final_job_schedule.json', {}).get('jobs', [])}
     for key, tag, split in [('dev', 'main', 'dev'), ('validation', 'main', 'validation'),

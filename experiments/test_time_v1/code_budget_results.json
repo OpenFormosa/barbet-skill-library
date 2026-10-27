@@ -1,0 +1,172 @@
+{
+  "method": "Replay prefixes of the final selected code trajectories; same exact initial generations. Reuse recorded final grades for identical question/seed/code bytes; grade each additional artifact once. Actual serving at a smaller call ceiling may differ through BF16 batch effects.",
+  "does_not_select_a_new_policy": true,
+  "unit": "128 held-out code questions, three seeds; public checks only during generation, hidden checks only here",
+  "table": [
+    {
+      "call_ceiling": 1,
+      "items": 384,
+      "unique_questions": 128,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "mbpp": {
+          "n": 384,
+          "correct": 214,
+          "accuracy": 0.5572916666666666
+        }
+      },
+      "primary_macro": null,
+      "cost": {
+        "calls": 1.0,
+        "prompt_tokens": 179.890625,
+        "output_tokens": 2248.5130208333335,
+        "generation_seconds_amortized": 0.20387070709830368,
+        "retrieval_seconds": 0.0,
+        "execution_seconds": 0.05521266451493526
+      },
+      "unclosed_thinking_calls": 97,
+      "length_stopped_calls": 101,
+      "qa_support_visible_rate": 0.0,
+      "secondary": {
+        "qa_character_f1": 0.0,
+        "tool_schema_valid_rate": 0.0,
+        "math_numeric_parseable_rate": 0.0,
+        "code_public_pass_before_final_rate": 0.5885416666666666
+      }
+    },
+    {
+      "call_ceiling": 2,
+      "items": 384,
+      "unique_questions": 128,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "mbpp": {
+          "n": 384,
+          "correct": 246,
+          "accuracy": 0.640625
+        }
+      },
+      "primary_macro": null,
+      "cost": {
+        "calls": 1.4114583333333333,
+        "prompt_tokens": 1466.2734375,
+        "output_tokens": 3441.5338541666665,
+        "generation_seconds_amortized": 0.7826140268551893,
+        "retrieval_seconds": 0.0,
+        "execution_seconds": 0.08304900384003606
+      },
+      "unclosed_thinking_calls": 166,
+      "length_stopped_calls": 171,
+      "qa_support_visible_rate": 0.0,
+      "secondary": {
+        "qa_character_f1": 0.0,
+        "tool_schema_valid_rate": 0.0,
+        "math_numeric_parseable_rate": 0.0,
+        "code_public_pass_before_final_rate": 0.6927083333333334
+      }
+    },
+    {
+      "call_ceiling": 3,
+      "items": 384,
+      "unique_questions": 128,
+      "seeds": [
+        20261027,
+        20261028,
+        20261029
+      ],
+      "domains": {
+        "mbpp": {
+          "n": 384,
+          "correct": 255,
+          "accuracy": 0.6640625
+        }
+      },
+      "primary_macro": null,
+      "cost": {
+        "calls": 1.71875,
+        "prompt_tokens": 2463.2213541666665,
+        "output_tokens": 4404.9140625,
+        "generation_seconds_amortized": 1.3375033606867264,
+        "retrieval_seconds": 0.0,
+        "execution_seconds": 0.09966571540765774
+      },
+      "unclosed_thinking_calls": 226,
+      "length_stopped_calls": 234,
+      "qa_support_visible_rate": 0.0,
+      "secondary": {
+        "qa_character_f1": 0.0,
+        "tool_schema_valid_rate": 0.0,
+        "math_numeric_parseable_rate": 0.0,
+        "code_public_pass_before_final_rate": 0.7291666666666666
+      }
+    }
+  ],
+  "two_minus_one": {
+    "comparison": "mini/code_prefix_2 minus mini/code_prefix_1",
+    "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+    "bootstrap_replicates": 10000,
+    "domains": {
+      "mbpp": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": 8.333333333333334,
+        "paired_95ci_pp": [
+          5.729166666666666,
+          11.197916666666668
+        ],
+        "cluster_95ci_pp": [
+          5.729166666666666,
+          11.197916666666668
+        ]
+      }
+    }
+  },
+  "three_minus_two": {
+    "comparison": "mini/code_prefix_3 minus mini/code_prefix_2",
+    "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+    "bootstrap_replicates": 10000,
+    "domains": {
+      "mbpp": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": 2.34375,
+        "paired_95ci_pp": [
+          1.0416666666666665,
+          3.90625
+        ],
+        "cluster_95ci_pp": [
+          1.0416666666666665,
+          3.90625
+        ]
+      }
+    }
+  },
+  "three_minus_one": {
+    "comparison": "mini/code_prefix_3 minus mini/code_prefix_1",
+    "method": "mean within question over matching seeds, paired stratified question bootstrap; percentile 95% CI; cluster sensitivity separately",
+    "bootstrap_replicates": 10000,
+    "domains": {
+      "mbpp": {
+        "questions": 128,
+        "clusters": 128,
+        "delta_pp": 10.677083333333332,
+        "paired_95ci_pp": [
+          7.8125,
+          13.802083333333334
+        ],
+        "cluster_95ci_pp": [
+          7.8125,
+          13.802083333333334
+        ]
+      }
+    }
+  }
+}
