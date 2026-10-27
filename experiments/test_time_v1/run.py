@@ -74,6 +74,8 @@ def main():
             raise RuntimeError('test seal does not match inputs/runtime')
         if args.seed not in seal['seeds']:
             raise RuntimeError('unregistered final seed')
+        if any(getattr(args, key) != value for key, value in seal['serving'].items()):
+            raise RuntimeError('serving settings differ from the final seal')
         for name, value in specs.items():
             if seal['policies'].get(name) != value or [args.model, name] not in seal['comparisons']:
                 raise RuntimeError('policy/model pair is not in final selection')
@@ -156,7 +158,9 @@ def main():
     print(json.dumps({'event': 'loaded', 'model': args.model, 'seconds': load_seconds}), flush=True)
     for policy, out, pending, fingerprint in jobs:
         started = time.monotonic()
-        with out.open('a') as stream:
+        call_path = args.work / 'call_logs' / args.run_tag / args.split / args.model / policy.name / out.name
+        call_path.parent.mkdir(parents=True, exist_ok=True)
+        with out.open('a') as stream, call_path.open('a') as call_stream:
             for offset in range(0, len(pending), args.batch_size):
                 episodes = [Episode(r, policy, documents, cards, tokenizer, args.model, args.seed, knowledge_index)
                             for r in pending[offset:offset + args.batch_size]]
@@ -172,6 +176,17 @@ def main():
                     seconds = time.monotonic() - batch_started
                     for episode, output, (ids, _, _) in zip(active, outputs, rendered):
                         generated = output.outputs[0]
+                        # Persist every returned model call before host execution
+                        # or a later repair can fail. Restarted incomplete batches
+                        # remain visible here rather than vanishing from cost.
+                        call_stream.write(json.dumps({'id': episode.request.id,
+                            'run_fingerprint': fingerprint, 'seed': args.seed,
+                            'call_index': len(episode.trace) + 1,
+                            'prompt': episode.rendered_prompt, 'raw': generated.text,
+                            'prompt_tokens': len(ids), 'output_tokens': len(generated.token_ids),
+                            'finish_reason': generated.finish_reason,
+                            'batch_seconds': seconds, 'batch_size': len(active)}, ensure_ascii=False) + '\n')
+                        call_stream.flush()
                         episode.accept(generated.text, prompt_tokens=len(ids), output_tokens=len(generated.token_ids),
                             finish_reason=generated.finish_reason, batch_seconds=seconds,
                             batch_size=len(active), terminal_strings=terminal)

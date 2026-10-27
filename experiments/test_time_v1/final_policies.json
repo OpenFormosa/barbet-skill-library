@@ -1,0 +1,131 @@
+{
+  "policies": {
+    "bare": {},
+    "long": {
+      "output_tokens": 16384
+    },
+    "literal": {
+      "retrieval": true,
+      "skill": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        },
+        "short_answer": {
+          "literal_answer": true
+        }
+      }
+    },
+    "no_card": {
+      "retrieval": true,
+      "skill": false,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        },
+        "short_answer": {
+          "literal_answer": true
+        }
+      }
+    },
+    "no_rag": {
+      "retrieval": false,
+      "skill": true,
+      "execute": true,
+      "repair": 2,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        },
+        "short_answer": {
+          "literal_answer": true
+        }
+      },
+      "knowledge_retrieval": false
+    },
+    "no_feedback": {
+      "retrieval": true,
+      "skill": true,
+      "execute": false,
+      "repair": 0,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        },
+        "short_answer": {
+          "literal_answer": true
+        }
+      }
+    },
+    "self_review": {
+      "retrieval": true,
+      "skill": true,
+      "execute": false,
+      "repair": 0,
+      "compact": true,
+      "contract_overrides": {
+        "tool_call": {
+          "skill": false
+        },
+        "short_answer": {
+          "literal_answer": true
+        }
+      },
+      "self_revise": 2
+    }
+  },
+  "comparison_pairs": [
+    [
+      "mini",
+      "bare"
+    ],
+    [
+      "mini",
+      "long"
+    ],
+    [
+      "mini",
+      "literal"
+    ],
+    [
+      "mini",
+      "no_card"
+    ],
+    [
+      "mini",
+      "no_rag"
+    ],
+    [
+      "mini",
+      "no_feedback"
+    ],
+    [
+      "mini",
+      "self_review"
+    ],
+    [
+      "qwen",
+      "bare"
+    ],
+    [
+      "qwen",
+      "long"
+    ],
+    [
+      "qwen",
+      "literal"
+    ]
+  ],
+  "notice": "Frozen evaluation-only removals/control; not additional searched candidates and never selected using final test.",
+  "no_card_scope": "Remove optional cards; retain the selected public output-format contract, e.g. literal answer copying.",
+  "no_rag_scope": "Use original source-packet order at the same input cap; disable optional global knowledge retrieval.",
+  "self_review_scope": "Same maximum three calls, unsupported review instead of external execution feedback; report actual cost differences."
+}

@@ -1,0 +1,27 @@
+{
+  "utc": "2026-10-27T01:41:23.291012+00:00",
+  "core_tests": {
+    "passed": 57,
+    "command": "python scripts/build.py --check",
+    "evidence": [
+      "----------------------------------------------------------------------",
+      "Ran 57 tests in 2.852s",
+      "",
+      "OK",
+      "SKILL_LIBRARY_VALID 64 CHECK"
+    ]
+  },
+  "generated_skills": 64,
+  "compact_cards": 9,
+  "frozen_data_replay": "all six input/label files and corpus content hashes matched in a new directory",
+  "weight_integrity": "both pinned model snapshots hashed before final evaluation; no training code or weight writes",
+  "final_model_evidence": "pending; engineering checks do not establish model improvement",
+  "final_serving_smoke": {
+    "items": 10,
+    "batch_size": 128,
+    "max_seqs": 128,
+    "persisted_call_count": 10,
+    "trace_call_count": 10,
+    "matching": true
+  }
+}
