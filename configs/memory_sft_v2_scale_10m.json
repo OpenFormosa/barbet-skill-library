@@ -1,0 +1,24 @@
+{
+  "version": "memory-harness-sft-v2-scale-10m",
+  "supersedes_size_target_only": "memory_sft_v2.json",
+  "user_instruction": "資料量至少翻10倍 1千萬筆為目標",
+  "target_accepted_new_episodes": 10000000,
+  "historical_published_baseline_rows": 8159,
+  "minimum_growth_over_historical_baseline": 10,
+  "counting": "Distinct accepted, deduplicated episodes in the active new release. Also report independent query identities, conservative source families, actual supervised turns and tokens. Repeated copies, memory-position variants and formatting-only views cannot satisfy the 10M target.",
+  "quality_gates_unchanged": true,
+  "publication": "Publish verified waves to the same authorized HF dataset while continuing toward the full target; keep old v1 data out of active configs. Do not report the 10M goal complete at an intermediate wave.",
+  "source_expansion": "Prioritize licensed contextual QA/RAG, executable or source-verified coding, tool/action trajectories, and basic logical/numerical tasks. Importing static trajectories does not prove local environment execution or a model capability gain.",
+  "resources": {
+    "new_raw_cache_cap_bytes": 137438953472,
+    "new_processed_cap_bytes": 549755813888,
+    "minimum_free_disk_bytes": 107374182400,
+    "bounded_source_streaming_allowed": true,
+    "raw_eviction": "Only new source-cache files with pinned upstream revision, full-file hash, completed derived export verification and explicit receipt; never delete historical evidence or unverified source bytes.",
+    "max_cpu_workers": 32,
+    "teacher_workers": 2,
+    "publisher_workers": 1,
+    "no_model_training": true,
+    "no_paid_compute": true
+  }
+}

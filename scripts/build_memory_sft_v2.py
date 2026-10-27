@@ -414,15 +414,50 @@ def dedup():
     db.execute('DELETE FROM seen')
     counts = Counter()
     files = sorted((STATE/'normalized').glob('[0-9]*.jsonl'))
+    files = [p for p in files if not p.name.endswith('.excluded.jsonl')]
+    # Supplemental prepublication exclusions include source-only rejected jobs
+    # which never reached plan.json. Earlier normalizer receipts stay immutable.
+    extra = set()
+    for p in (WORK/'data/expansion/skill-prefill-v1').glob('*/prospective.json'):
+        j=json.loads(p.read_text())
+        for r in j.get('items',[]) if isinstance(j,dict) else []:
+            for k in ('source_question','source_query','source_instruction'):
+                if isinstance(r.get(k),str):extra.add(sha(norm(r[k])))
+    parent = {}
+    def find(x):
+        parent.setdefault(x,x)
+        root=x
+        while parent[root]!=root:root=parent[root]
+        while parent[x]!=x:
+            nxt=parent[x];parent[x]=root;x=nxt
+        return root
+    def union(a,b):
+        a,b=find(a),find(b)
+        if a!=b:parent[max(a,b)]=min(a,b)
+    for path in files:
+        for line in path.open():
+            row=json.loads(line)
+            union('family:'+row['family_id'],'query:'+row['query_hash'])
+    save(STATE/'split-union-policy.json',{'grouping':'Connected components of source family and exact normalized original query across every selected source, before split assignment.',
+        'supplemental_prior_query_count':len(extra),'normalized_files':len(files)})
     writer, shard, shard_rows = None, -1, 0
     (STATE/'selected').mkdir(exist_ok=True)
     for path in files:
-        if path.name.endswith('.excluded.jsonl'):
-            continue
         for line in path.open():
             row = json.loads(line)
+            if row['query_hash'] in extra:
+                counts['supplemental_prior_job_exclusion']+=1
+                continue
+            # Ephemeral provider call IDs do not make a new trajectory.
+            identity=json.loads(canonical(row['messages']))
+            ids={}
+            for n,m in enumerate(identity):
+                for k,c in enumerate(m.get('tool_calls',[])):
+                    ids[c['id']]=f'call_{n}_{k}';c['id']=ids[c['id']]
+                if 'tool_call_id' in m:m['tool_call_id']=ids[m['tool_call_id']]
+            dedup_key=sha(canonical({'messages':identity,'tools':row['tools']}))
             try:
-                db.execute('INSERT INTO seen VALUES (?,?)',(row['dedup_key'],row['record_id']))
+                db.execute('INSERT INTO seen VALUES (?,?)',(dedup_key,row['record_id']))
             except sqlite3.IntegrityError:
                 counts['exact_duplicate_episodes'] += 1
                 continue
@@ -430,7 +465,10 @@ def dedup():
                 if writer:writer.close()
                 shard += 1;shard_rows = 0
                 writer = (STATE/'selected'/f'{shard:05d}.jsonl').open('w')
-            writer.write(line);shard_rows+=1;counts['selected']+=1
+            row['source_family_id']=row['family_id']
+            row['family_id']=sha(find('family:'+row['family_id']))
+            row['split']='validation' if int(row['family_id'][:12],16)%100<2 else 'train'
+            writer.write(canonical(row)+'\n');shard_rows+=1;counts['selected']+=1
         db.commit()
     if writer:writer.close()
     db.close()
