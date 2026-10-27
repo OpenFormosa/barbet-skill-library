@@ -1,0 +1,20 @@
+{
+  "version": "memory-harness-sft-v2-scale-10m-resources-v3",
+  "supersedes_resources_for_unstarted_cohorts_only": "memory_sft_v2_scale_10m_resources_v2.json",
+  "target_accepted_new_episodes": 10000000,
+  "user_authorization": "Expand compliant new data to 10M episodes and publish the rebuilt dataset, retaining the frozen v26 answer-selection rule.",
+  "reason": "The 1021-row structured-relation export probe measures 10999 bytes per row for lossless candidates plus all three exact exported configs, projecting about 50.09 GB for the full source anchor pool. Reserve additional indexed identity, fold and request-budget evidence without materializing another uncompressed selected JSONL corpus. Raise only the prospective processed cap by 32 GiB; keep the 100 GiB free-space floor, all immutable history, existing resource policies and quality gates.",
+  "resources": {
+    "new_raw_cache_cap_bytes": 137438953472,
+    "new_processed_cap_bytes": 652835028992,
+    "minimum_free_disk_bytes": 107374182400,
+    "bounded_source_streaming_allowed": true,
+    "raw_eviction": "No historical evidence or unverified source bytes may be removed. Any future eviction needs its own pinned-source and verified-export receipt.",
+    "max_cpu_workers": 32,
+    "teacher_workers": 2,
+    "publisher_workers": 1,
+    "no_model_training": true,
+    "no_paid_compute": true
+  },
+  "unchanged": ["native v26 minimum conditional answer PPL for alternative answers", "explicit unscored singleton status", "all first holds", "full text and exact token arrays", "no memory-position duplicate counting"]
+}
