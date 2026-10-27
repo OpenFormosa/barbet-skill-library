@@ -1,0 +1,18 @@
+test_prefix_holds_observation_ambiguity_and_alternatives_match_old_pipeline (tests.test_framed_candidate_io.FramedCandidateIOTests.test_prefix_holds_observation_ambiguity_and_alternatives_match_old_pipeline) ... /usr/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=2484364) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+{"indexed_files": 1, "total": 1, "counts": {"seen": 5, "eligible": 5}}
+{"counts": {"seen": 5, "eligible": 5}, "distinct_answers": 5, "input_groups": 4, "competing_groups": 1, "answers_to_score": 2, "status": "INDEXED_NOT_YET_PPL_SELECTED", "all_score_inputs_are_eligible_only": true, "no_model_training": true}
+/usr/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=2484364) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  self.pid = os.fork()
+{"guarded_files": 1, "total": 1}
+{"counts": {"same_task_different_observation_conditions": 2, "strict_dialogue_prefix_view": 1}, "distinct_candidate_answers": 5, "ambiguous_static_task_inputs": 1, "all_original_candidates_covered": true, "status": "COMPLETE", "original_scores_not_rewritten": true}
+{"indexed_files": 1, "total": 1, "counts": {"seen": 5, "eligible": 5}}
+{"counts": {"seen": 5, "eligible": 5}, "distinct_answers": 5, "input_groups": 4, "competing_groups": 1, "answers_to_score": 2, "status": "INDEXED_NOT_YET_PPL_SELECTED", "all_score_inputs_are_eligible_only": true, "no_model_training": true}
+{"guarded_files": 1, "total": 1}
+{"counts": {"same_task_different_observation_conditions": 2, "strict_dialogue_prefix_view": 1}, "distinct_candidate_answers": 5, "ambiguous_static_task_inputs": 1, "all_original_candidates_covered": true, "status": "COMPLETE", "original_scores_not_rewritten": true}
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.394s
+
+OK

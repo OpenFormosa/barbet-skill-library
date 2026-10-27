@@ -1,6 +1,6 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM 數學 v26 選答</title><style>body{font:17px/1.7 system-ui;max-width:1080px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM 數學：最低 v26 PPL 選答與品質隔離</h1><p>已完成 356,955 列來源檢查，保留 339,279 個候選答案；去除完全重複後為 339,195 個版本、313,153 個完整輸入組。所有 24,933 個需比較組別中的 50,975 個答案均完成固定 native v26 評分，採用未裁切的完整輸入、batch size 1 與 assistant-only 條件 PPL。沒有修改模型權重、tokenizer、renderer 或數值計算。</p><p>最後 24 題首次抽查為 19 ACCEPT、4 REVISE、1 REJECT；全部 5 題非通過題目隔離，不換次低答案。另隔離 191 題缺少字詞證據的填字題，以及 1 題收費條件推出負人數的買羊題。最終 312,956 題通過三組資料格式、完整 tokens／labels 回讀、answer-free Chat／Completion 預算及來源家族切分檢查，目前等待發布。</p><p>剩餘資料包括 24,925 題實際 PPL 比較選出者、288,031 題只有一個合格答案者。後者沒有虛構 PPL。PPL 不能當正確率；獨立精確算術檢查僅涵蓋其明確整數計算語法的 3 題，不表示全庫已逐題驗算。</p><p>拒絕的圖論答案宣稱最少 199 人。另行建構 50 與 99 個頂點的二部圖，逐邊檢查得到 149 頂點、3,725 邊，度數 1 至 99 均出現且沒有三角形，足以推翻 199。檢查器是自行撰寫的有限反例，沒有執行來源答案程式，也沒有用新答案替換原題。其餘非通過答案含錯誤代數步驟、錯誤根積驗證及證明缺口。</p><p>原始來源抽查及首次 native 啟動匯入失敗證據全部保留。該啟動失敗在模型載入及計分前發生，後續獨立入口保留原數值程式與環境。不同抽查題目與不同審核 token 預算不能當受控改善實驗。</p><p><a href="https://huggingface.co/datasets/IFM/TxT360-3efforts/tree/bfc4a082d11967cd7810fe0b773be87bf54fb32e">固定來源</a> 標示 CC-BY-4.0，原題作為因果上可見的前／後記憶；獨立 think 欄位不輸入訓練。來源未提供逐列原始資料集名稱，這項限制保留在 attribution。資料建置並未證明模型能力或大模型等效性，1,000 萬筆目標持續進行。</p><pre>{
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM 數學 v26 選答</title><style>body{font:17px/1.7 system-ui;max-width:1080px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM 數學：最低 v26 PPL 選答與品質隔離</h1><p>已完成 356,955 列來源檢查，保留 339,279 個候選答案；去除完全重複後為 339,195 個版本、313,153 個完整輸入組。所有 24,933 個需比較組別中的 50,975 個答案均完成固定 native v26 評分，採用未裁切的完整輸入、batch size 1 與 assistant-only 條件 PPL。沒有修改模型權重、tokenizer、renderer 或數值計算。</p><p>最後 24 題首次抽查為 19 ACCEPT、4 REVISE、1 REJECT；全部 5 題非通過題目隔離，不換次低答案。另隔離 191 題缺少字詞證據的填字題，以及 1 題收費條件推出負人數的買羊題。最終 312,956 題通過三組資料格式、完整 tokens／labels 回讀、answer-free Chat／Completion 預算及來源家族切分檢查，已發布並完成全檔匿名 SHA256 回讀。</p><p>剩餘資料包括 24,925 題實際 PPL 比較選出者、288,031 題只有一個合格答案者。後者沒有虛構 PPL。PPL 不能當正確率；獨立精確算術檢查僅涵蓋其明確整數計算語法的 3 題，不表示全庫已逐題驗算。</p><p>拒絕的圖論答案宣稱最少 199 人。另行建構 50 與 99 個頂點的二部圖，逐邊檢查得到 149 頂點、3,725 邊，度數 1 至 99 均出現且沒有三角形，足以推翻 199。檢查器是自行撰寫的有限反例，沒有執行來源答案程式，也沒有用新答案替換原題。其餘非通過答案含錯誤代數步驟、錯誤根積驗證及證明缺口。</p><p>原始來源抽查及首次 native 啟動匯入失敗證據全部保留。該啟動失敗在模型載入及計分前發生，後續獨立入口保留原數值程式與環境。不同抽查題目與不同審核 token 預算不能當受控改善實驗。</p><p><a href="https://huggingface.co/datasets/IFM/TxT360-3efforts/tree/bfc4a082d11967cd7810fe0b773be87bf54fb32e">固定來源</a> 標示 CC-BY-4.0，原題作為因果上可見的前／後記憶；獨立 think 欄位不輸入訓練。來源未提供逐列原始資料集名稱，這項限制保留在 attribution。資料建置並未證明模型能力或大模型等效性，1,000 萬筆目標持續進行。</p><p>公開累計 4,762,377 筆新資料、4,610,696 個不同首題、4,221,515 個來源家族。完整匿名回讀 1,517 檔、55,297,406,383 bytes；<a href="https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/0037e535bc259a61922209c1ed301cbda1908768">固定發布版本</a>。同題競爭選出的最低 PPL 答案 565,962 筆，單一合格答案 4,196,415 筆。1,000 萬筆目標未完成。</p><pre>{
   &quot;wave&quot;: &quot;wave-0007&quot;,
-  &quot;status&quot;: &quot;LOCAL_VERIFIED_NOT_YET_PUBLISHED&quot;,
+  &quot;status&quot;: &quot;PUBLISHED_AND_ANONYMOUSLY_VERIFIED&quot;,
   &quot;counts&quot;: {
     &quot;seen&quot;: 313153,
     &quot;accepted&quot;: 312956,
@@ -195,5 +195,23 @@
     &quot;held_question_not_replaced&quot;: true,
     &quot;scope&quot;: &quot;Counterexample disproves the source minimum 199. This receipt does not certify all math data or substitute a new training answer.&quot;
   },
-  &quot;updated_at&quot;: &quot;2026-10-27T16:39:10.126370+00:00&quot;
+  &quot;updated_at&quot;: &quot;2026-10-27T16:39:10.126370+00:00&quot;,
+  &quot;publication&quot;: {
+    &quot;dataset&quot;: &quot;OpenFormosa/barbet-long-context-sft&quot;,
+    &quot;data_commit&quot;: &quot;73d82bf210fa515a293ac8c36e7d338bed0225e6&quot;,
+    &quot;parent&quot;: &quot;ebf7697df6d5a62fc16c21577cecc5a89eb3dc4e&quot;,
+    &quot;active_new_episodes&quot;: 4762377,
+    &quot;active_legacy_rows&quot;: 0,
+    &quot;accepted_episode_target&quot;: 10000000,
+    &quot;goal_complete&quot;: false,
+    &quot;anonymous_full_file_sha256_readback&quot;: true,
+    &quot;verified_files&quot;: 1517,
+    &quot;verified_bytes&quot;: 55297406383,
+    &quot;new_declared_argument_holds_removed&quot;: 6872,
+    &quot;library_commit&quot;: &quot;442493019c77b178e03d2a3d9d7988da670718c2&quot;,
+    &quot;model_efficacy_measured&quot;: false,
+    &quot;readback_sha256&quot;: &quot;3aa6fd07ebde754ec5a8ac2ab19583a1a132bc586d369fc1d8cafcf2a9191f73&quot;,
+    &quot;answer_selection&quot;: &quot;minimum eligible conditional answer PPL under frozen native Barbet v26&quot;,
+    &quot;final_head&quot;: &quot;0037e535bc259a61922209c1ed301cbda1908768&quot;
+  }
 }</pre></html>

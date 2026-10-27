@@ -1,6 +1,6 @@
 {
   "wave": "wave-0007",
-  "status": "LOCAL_VERIFIED_NOT_YET_PUBLISHED",
+  "status": "PUBLISHED_AND_ANONYMOUSLY_VERIFIED",
   "counts": {
     "seen": 313153,
     "accepted": 312956,
@@ -195,5 +195,23 @@
     "held_question_not_replaced": true,
     "scope": "Counterexample disproves the source minimum 199. This receipt does not certify all math data or substitute a new training answer."
   },
-  "updated_at": "2026-10-27T16:39:10.126370+00:00"
+  "updated_at": "2026-10-27T16:39:10.126370+00:00",
+  "publication": {
+    "dataset": "OpenFormosa/barbet-long-context-sft",
+    "data_commit": "73d82bf210fa515a293ac8c36e7d338bed0225e6",
+    "parent": "ebf7697df6d5a62fc16c21577cecc5a89eb3dc4e",
+    "active_new_episodes": 4762377,
+    "active_legacy_rows": 0,
+    "accepted_episode_target": 10000000,
+    "goal_complete": false,
+    "anonymous_full_file_sha256_readback": true,
+    "verified_files": 1517,
+    "verified_bytes": 55297406383,
+    "new_declared_argument_holds_removed": 6872,
+    "library_commit": "442493019c77b178e03d2a3d9d7988da670718c2",
+    "model_efficacy_measured": false,
+    "readback_sha256": "3aa6fd07ebde754ec5a8ac2ab19583a1a132bc586d369fc1d8cafcf2a9191f73",
+    "answer_selection": "minimum eligible conditional answer PPL under frozen native Barbet v26",
+    "final_head": "0037e535bc259a61922209c1ed301cbda1908768"
+  }
 }

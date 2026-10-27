@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>候選資料無損儲存</title><style>body{font:17px/1.7 system-ui;max-width:1000px;margin:40px auto;padding:24px}pre{white-space:pre-wrap}</style><h1>新批次的無損候選封存格式</h1><p>為了保留所有同題答案供 v26 比較而不耗盡候選資料暫存，新格式將每筆完整 JSON 獨立壓縮，附原文 SHA256、長度與隨機讀取位置。舊資料與固定讀取器維持原樣。四項測試檢查逐 byte 回復、亂序讀取、截斷／壞 checksum／錯誤 pointer，以及解壓長度與額外資料串拒絕。</p><p>實際 86 筆既有來源樣本的全部欄位、native 渲染文字、tokens、labels 與輸入身份逐一相等；929,868 bytes 原文壓縮成 427,813 bytes。這只是本批儲存／渲染等價測量，不能推估全資料壓縮率，沒有重新評分、語義審查、訓練或增加資料筆數。未來新 cohort 必須明確綁定新讀取器及格式，不能沿用舊 loader 身份聲稱沒有變更。</p><pre>{
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>候選資料無損儲存</title><style>body{font:17px/1.7 system-ui;max-width:1000px;margin:40px auto;padding:24px}pre{white-space:pre-wrap}</style><h1>新批次的無損候選封存格式</h1><p>為了保留所有同題答案供 v26 比較而不耗盡候選資料暫存，新格式將每筆完整 JSON 獨立壓縮，附原文 SHA256、長度與隨機讀取位置。舊資料與固定讀取器維持原樣。四項測試檢查逐 byte 回復、亂序讀取、截斷／壞 checksum／錯誤 pointer，以及解壓長度與額外資料串拒絕。</p><p>實際 86 筆既有來源樣本的全部欄位、native 渲染文字、tokens、labels 與輸入身份逐一相等；929,868 bytes 原文壓縮成 427,813 bytes。這只是本批儲存／渲染等價測量，不能推估全資料壓縮率，沒有重新評分、語義審查、訓練或增加資料筆數。未來新 cohort 必須明確綁定新讀取器及格式，不能沿用舊 loader 身份聲稱沒有變更。</p><p>新／舊完整索引及 episode guard 也在相同 86 筆資料上逐項比對，candidate 身份、完整輸入分組與排除表均相等。這些真實樣本沒有前綴／觀察歧異；另以 5 筆自行建立的慣例測試確認新舊流程都隔離 1 個對話前綴、2 個不同觀察條件，並將另外 2 個答案歸為同一競爭組。儲存讀取器與索引配接器均有獨立 hash 綁定，不將新格式冒稱成舊 JSONL loader。</p><p>後續尚未開始的批次使用版本化 processed cap 576 GiB，較原本增加 64 GiB；raw cap、CPU／GPU工作上限及 100 GiB 磁碟保留門檻不變。新 coding 候選階段另事先保留 20 GiB、每個 shard 有固定上限，並逐 byte 驗證所有解壓紀錄。舊資源規範、歷史資料及審查證據不修改或刪除。</p><pre>{
   &quot;samples&quot;: 86,
   &quot;raw_payload_bytes&quot;: 929868,
   &quot;archive_bytes&quot;: 427813,
@@ -10,5 +10,44 @@
   &quot;native_supervised_tokens_compared&quot;: 103371,
   &quot;model_requests&quot;: 0,
   &quot;accepted_training_rows&quot;: 0,
-  &quot;scope&quot;: &quot;Storage and full native rendering equivalence on these original first-diagnostic and 32 additional source records only. No new score, semantic review, training or old-cohort rewrite.&quot;
+  &quot;scope&quot;: &quot;Storage and full native rendering equivalence on these original first-diagnostic and 32 additional source records only. No new score, semantic review, training or old-cohort rewrite.&quot;,
+  &quot;index_identity_equivalence&quot;: {
+    &quot;checks&quot;: {
+      &quot;all_candidate_metadata_except_storage_positions&quot;: {
+        &quot;equal&quot;: true,
+        &quot;rows&quot;: 86
+      },
+      &quot;all_input_groups&quot;: {
+        &quot;equal&quot;: true,
+        &quot;rows&quot;: 86
+      },
+      &quot;all_episode_conditions&quot;: {
+        &quot;equal&quot;: true,
+        &quot;rows&quot;: 86
+      },
+      &quot;all_prefixes&quot;: {
+        &quot;equal&quot;: true,
+        &quot;rows&quot;: 0
+      },
+      &quot;all_structural_holds&quot;: {
+        &quot;equal&quot;: true,
+        &quot;rows&quot;: 0
+      }
+    },
+    &quot;all_checks_passed&quot;: true,
+    &quot;plan_sha256&quot;: &quot;55368e7a845dbe2130d7c3e0a91972eded2c63862fcdbf946788d180642a75ae&quot;,
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;model_requests&quot;: 0,
+    &quot;scores_created&quot;: 0,
+    &quot;scope&quot;: &quot;Unchanged full index and episode-identity algorithms on the 86 prior storage-probe rows with explicit old/new byte readers. No semantic reevaluation or training admission.&quot;
+  },
+  &quot;synthetic_identity_regression&quot;: {
+    &quot;actual_tests&quot;: 1,
+    &quot;fixtures&quot;: 5,
+    &quot;prefix_holds&quot;: 1,
+    &quot;different_observation_holds&quot;: 2,
+    &quot;competing_groups&quot;: 1,
+    &quot;answers_to_score&quot;: 2,
+    &quot;models_called&quot;: 0
+  }
 }</pre></html>

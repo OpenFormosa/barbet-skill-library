@@ -10,5 +10,44 @@
   "native_supervised_tokens_compared": 103371,
   "model_requests": 0,
   "accepted_training_rows": 0,
-  "scope": "Storage and full native rendering equivalence on these original first-diagnostic and 32 additional source records only. No new score, semantic review, training or old-cohort rewrite."
+  "scope": "Storage and full native rendering equivalence on these original first-diagnostic and 32 additional source records only. No new score, semantic review, training or old-cohort rewrite.",
+  "index_identity_equivalence": {
+    "checks": {
+      "all_candidate_metadata_except_storage_positions": {
+        "equal": true,
+        "rows": 86
+      },
+      "all_input_groups": {
+        "equal": true,
+        "rows": 86
+      },
+      "all_episode_conditions": {
+        "equal": true,
+        "rows": 86
+      },
+      "all_prefixes": {
+        "equal": true,
+        "rows": 0
+      },
+      "all_structural_holds": {
+        "equal": true,
+        "rows": 0
+      }
+    },
+    "all_checks_passed": true,
+    "plan_sha256": "55368e7a845dbe2130d7c3e0a91972eded2c63862fcdbf946788d180642a75ae",
+    "accepted_training_rows": 0,
+    "model_requests": 0,
+    "scores_created": 0,
+    "scope": "Unchanged full index and episode-identity algorithms on the 86 prior storage-probe rows with explicit old/new byte readers. No semantic reevaluation or training admission."
+  },
+  "synthetic_identity_regression": {
+    "actual_tests": 1,
+    "fixtures": 5,
+    "prefix_holds": 1,
+    "different_observation_holds": 2,
+    "competing_groups": 1,
+    "answers_to_score": 2,
+    "models_called": 0
+  }
 }
