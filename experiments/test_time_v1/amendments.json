@@ -16,5 +16,11 @@
     "stage": "before first model generation",
     "change": "Program-only and program-execution use the same JSON interface containing code plus a claimed numerical answer. Execution replaces the claim with the actual computed value; it never changes the code or supplies mathematical gold.",
     "reason": "Isolate arithmetic execution from the benefit/cost of prompting the model to write a program."
+  },
+  {
+    "date_utc": "2026-10-27",
+    "stage": "after round 2 validation; before any final test",
+    "change": "Repeat validation for incumbent routed and reading/knowledge contenders across all three preregistered seeds. The primary numerical promotion and stopping rules do not change.",
+    "reason": "Identical prompt/seed produced different outputs when batch composition changed. Unchanged-contract deltas are serving/sampling variation, not a causal effect of the edited component. vLLM 0.23.0 GDN backend does not advertise batch-invariant support; retain the same ordinary BF16 backend for both models rather than silently changing only the student."
   }
 ]

@@ -123,7 +123,12 @@ def summarize(scores):
                   'generation_seconds_amortized', 'retrieval_seconds', 'execution_seconds']},
         'unclosed_thinking_calls': sum(r['unclosed_thinking_calls'] for r in scores),
         'length_stopped_calls': sum(r['length_stopped_calls'] for r in scores),
-        'qa_support_visible_rate': sum(r.get('support_visible', False) for r in scores) / max(1, len(grouped['drcd']))}
+        'qa_support_visible_rate': sum(r.get('support_visible', False) for r in scores) / max(1, len(grouped['drcd'])),
+        'secondary': {
+            'qa_character_f1': sum(r.get('character_f1', 0) for r in scores) / max(1, len(grouped['drcd'])),
+            'tool_schema_valid_rate': sum(r.get('schema_valid', False) for r in scores) / max(1, len(grouped['tools'])),
+            'math_numeric_parseable_rate': sum(r.get('numeric_parseable', False) for r in scores) / max(1, len(grouped['gsm8k'])),
+            'code_public_pass_before_final_rate': sum(r.get('public_pass_before_scoring', False) for r in scores) / max(1, len(grouped['mbpp']))}}
 
 
 def main():

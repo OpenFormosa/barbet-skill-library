@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 from testtime.contracts import PublicRequest
 from testtime.harness import Episode, Policy
-from testtime.retrieval import Document
+from testtime.retrieval import Document, LexicalIndex
 
 
 def sha(value):
@@ -88,6 +88,10 @@ def main():
     if len({r.id for r in requests}) != len(requests):
         raise ValueError('duplicate request id')
     documents = {d['id']: Document(**d) for d in map(json.loads, corpus_path.read_text().splitlines())}
+    index_started = time.monotonic()
+    needs_index = any(p.knowledge_retrieval or any(v.get('knowledge_retrieval') for v in p.contract_overrides.values()) for p in policies)
+    knowledge_index = LexicalIndex(list(documents.values())) if needs_index else None
+    index_seconds = time.monotonic() - index_started
     cards = {c['id']: c for c in json.loads((ROOT / 'testtime/cards.json').read_text())['cards']}
     from transformers import AutoTokenizer
     import torch
@@ -103,6 +107,7 @@ def main():
     base = {'model': model, 'family': args.model, 'split': args.split, 'seed': args.seed,
         'input_sha256': input_hash, 'corpus_sha256': corpus_hash, 'runtime_hashes': hashes,
         'packages': packages, 'cuda_runtime': torch.version.cuda,
+        'python': sys.version, 'batch_invariant_requested': os.environ.get('VLLM_BATCH_INVARIANT', '0'),
         'device_visibility': os.environ.get('CUDA_VISIBLE_DEVICES'),
         'max_model_len': args.max_model_len, 'batch_size': args.batch_size, 'max_seqs': args.max_seqs,
         'eager': args.eager, 'shard': args.shard, 'shards': args.shards,
@@ -153,7 +158,7 @@ def main():
         started = time.monotonic()
         with out.open('a') as stream:
             for offset in range(0, len(pending), args.batch_size):
-                episodes = [Episode(r, policy, documents, cards, tokenizer, args.model, args.seed)
+                episodes = [Episode(r, policy, documents, cards, tokenizer, args.model, args.seed, knowledge_index)
                             for r in pending[offset:offset + args.batch_size]]
                 while any(not e.done for e in episodes):
                     active = [e for e in episodes if not e.done]
@@ -179,6 +184,7 @@ def main():
                     'elapsed_seconds': time.monotonic() - started}), flush=True)
         out.with_suffix('.completed.json').write_text(json.dumps({'new_items': len(pending),
             'wall_seconds': time.monotonic() - started, 'engine_load_seconds': load_seconds,
+            'one_time_knowledge_index_seconds': index_seconds,
             'raw_sha256': sha(out.read_bytes()), 'run_fingerprint': fingerprint,
             'completed_utc': dt.datetime.now(dt.timezone.utc).isoformat()}, indent=2) + '\n')
 
