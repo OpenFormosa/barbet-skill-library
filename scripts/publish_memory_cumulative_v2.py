@@ -126,7 +126,7 @@ def publish():
     operations += [CommitOperationDelete(p,is_folder=False) for p in paths if '/' not in p and p not in {'.gitattributes','README.md'}]
     operations += [CommitOperationAdd(f['path'],DEST/f['path']) for f in plan['manifest']]
     result=api.create_commit(DATASET,repo_type='dataset',operations=operations,parent_commit=plan['parent_commit'],num_threads=4,
-        commit_message='Publish cumulative memory SFT waves with stricter function arguments and compact exact arrays')
+        commit_message=plan.get('commit_message','Publish cumulative memory SFT waves with stricter function arguments and compact exact arrays'))
     save(STATE/'publication-data-commit.json',{'commit':result.oid,'parent':plan['parent_commit'],'plan_sha256':file_sha(STATE/'publication-plan.json')})
     print(json.dumps({'commit':result.oid,'accepted':plan['accepted']}),flush=True)
 
@@ -146,7 +146,8 @@ def verify():
         'active_legacy_rows':0,'accepted_episode_target':10000000,'goal_complete':False,'anonymous_full_file_sha256_readback':True,
         'verified_files':len(checks),'verified_bytes':sum(f['bytes'] for f in checks),
         'new_declared_argument_holds_removed':json.loads((STATE/'summary.json').read_text())['counts'].get('excluded:new_declared_argument_guard',0),
-        'library_commit':plan['library_commit'],'model_efficacy_measured':False,'readback_sha256':file_sha(STATE/'anonymous-readback/summary.json')}
+        'library_commit':plan['library_commit'],'model_efficacy_measured':False,'readback_sha256':file_sha(STATE/'anonymous-readback/summary.json'),
+        'answer_selection':plan.get('answer_selection','source-wave selection; no v26 ranking claimed')}
     save(DEST/'PUBLICATION.json',report);api=HfApi()
     metadata_receipt=STATE/'publication-metadata-commit.json'
     if metadata_receipt.exists():
@@ -162,7 +163,7 @@ def verify():
     final_folder=STATE/'anonymous-readback/metadata';final_folder.mkdir(exist_ok=True)
     verify_file({'path':'PUBLICATION.json','bytes':(DEST/'PUBLICATION.json').stat().st_size,'sha256':file_sha(DEST/'PUBLICATION.json')},final_head,final_folder)
     save(STATE/'publication-final-commit.json',{**report,'final_head':final_head})
-    save(FIRST/'GOAL_PROGRESS.json',{'target':10000000,'published_eligible_new_episodes':plan['accepted'],'phase':'two_waves_published_continuing_expansion','goal_complete':False,'final_head':final_head})
+    save(FIRST/'GOAL_PROGRESS.json',{'target':10000000,'published_eligible_new_episodes':plan['accepted'],'phase':plan.get('goal_phase','two_waves_published_continuing_expansion'),'goal_complete':False,'final_head':final_head})
     print(json.dumps({'head':final_head,'accepted':plan['accepted'],'goal_complete':False}),flush=True)
 
 
