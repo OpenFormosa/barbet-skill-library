@@ -25,7 +25,8 @@ def main():
         'diagnostics': maybe('final_diagnostics.json'),
         'engineering': maybe('engineering_results.json'),
         'context': maybe('context_results.json'),
-        'stopping': maybe('selection_decision.json')}
+        'stopping': maybe('selection_decision.json'),
+        'job_chain': maybe('work/final_job_schedule.json', {}).get('jobs', [])}
     for key, tag, split in [('dev', 'main', 'dev'), ('validation', 'main', 'validation'),
                              ('validation_confirm', 'confirm', 'validation'), ('test', 'final', 'test')]:
         path = HERE / 'work/scores' / tag / f'{split}-summary.json'
