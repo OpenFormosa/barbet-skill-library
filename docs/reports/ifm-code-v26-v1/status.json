@@ -1,5 +1,5 @@
 {
-  "phase": "complete_native_v26_selection_and_scope_filter; publication_pending",
+  "phase": "published_and_anonymously_verified",
   "raw_rows": 1865716,
   "candidate_answers": 159640,
   "distinct_answers": 159639,
@@ -20,11 +20,35 @@
   "static_scope_held_queries": 1423,
   "combined_query_holds": 1432,
   "expected_package_rows": 147718,
-  "public_rows_so_far": 4762377,
-  "public_proof_head": "0037e535bc259a61922209c1ed301cbda1908768",
+  "public_rows_so_far": 4910095,
+  "public_proof_head": "fb77a686ec974196278dab3891227d918951dde1",
   "all_retained_answers_and_scores_unchanged": true,
   "source_programs_executed": false,
   "model_weights_trained": false,
   "corpus_semantic_accuracy_measured": false,
-  "goal_complete": false
+  "goal_complete": false,
+  "public_release": {
+    "dataset": "OpenFormosa/barbet-long-context-sft",
+    "data_commit": "6831cb6d552f2aba796e2534903e1268f8eeaeaa",
+    "parent": "0037e535bc259a61922209c1ed301cbda1908768",
+    "active_new_episodes": 4910095,
+    "active_legacy_rows": 0,
+    "accepted_episode_target": 10000000,
+    "goal_complete": false,
+    "anonymous_full_file_sha256_readback": true,
+    "verified_files": 1650,
+    "verified_bytes": 58978657588,
+    "new_declared_argument_holds_removed": 6872,
+    "library_commit": "dc2c778be03e5d16c731fd2120db92400d5c8c07",
+    "model_efficacy_measured": false,
+    "readback_sha256": "07135a25c959ebc1d7b14153e3c41f406f8863e9215e7bd18a73f13621055c92",
+    "answer_selection": "minimum eligible conditional answer PPL under frozen native Barbet v26",
+    "final_head": "fb77a686ec974196278dab3891227d918951dde1"
+  },
+  "published_new_rows": 147718,
+  "cumulative_unique_counts": {
+    "record_id": 4910095,
+    "query_hash": 4758414,
+    "family_id": 4369082
+  }
 }

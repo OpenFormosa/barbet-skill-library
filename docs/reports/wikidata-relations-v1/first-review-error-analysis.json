@@ -1,0 +1,740 @@
+{
+  "driver_sha256": "b399679af38a6202dc8c8d0a64b463d6b1d1739d894cb0dd000a73791c2837a0",
+  "first_audit_sha256": "f04e7a9afacb806e68f880506f909fe9d70d800cc08f7a703727913b28cb9b19",
+  "pre_review_independent_sql_proofs_sha256": "0e88eb3c9db9d053e187c8d6df7fb08c282139184e183748cc7a91f0be1bfdf0",
+  "all_actual_request_samples_compared": 36,
+  "cases": [
+    {
+      "record_id": "50f5819135ae7988a4b604f60adbe4efb789f4112aa135a483fd7b7027fa5506",
+      "query_hash": "a6b5f44858917f4b80b27e5d8cc98b526ef745cbe15762eb5aac407b828aca83",
+      "source_anchor_id": "Q5345170",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The assistant's evidence_ids list is incomplete. The prompt requires the sorted union of all matching record IDs traversed at every step. The assistant omitted the P106 records (train:14986066, train:",
+        "2941694) from the evidence_ids array, although they were correctly identified in the reasoning process implied by the count. The final JSON output only contains the P425 records."
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "count": 3,
+        "evidence_ids": [
+          "train:11106936",
+          "train:14087133",
+          "train:14517680",
+          "train:14986066",
+          "train:2941694"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P106"
+              },
+              {
+                "direction": "out",
+                "relation": "P425"
+              }
+            ],
+            "start": "Q5345170"
+          }
+        ],
+        "operation": "count"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "c925e85467ff6fe710ff57fd2fdd8db8f71ae0e0ba0168b4f1b2a54e72747a15",
+      "query_hash": "5cac4a8fa7583f14b51547ebad3455acf4a78c409a77951d1682cec779c187b0",
+      "source_anchor_id": "Q6650257",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The assistant's response is correct based on the provided single record. The count of distinct endpoint entity IDs (Q145) is 1. The evidence_ids list contains the ID of the traversed record. No errors"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "count": 1,
+        "evidence_ids": [
+          "train:17572662"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P17"
+              }
+            ],
+            "start": "Q6650257"
+          }
+        ],
+        "operation": "count"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "8269398c693b488dc943de133d763aa1cf1ef156ed6cc13ee1edf3aadb829330",
+      "query_hash": "bc136954b9e9d94d56d363ccb4b4c96532916dd2baaab89ac17cc2bfe95a7b13",
+      "source_anchor_id": "Q6819109",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The assistant's answer is correct based on the provided single record. The count of distinct endpoint entity IDs reached is 1 (Q30). The evidence_ids correctly lists the ID of the traversed record. No"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "count": 1,
+        "evidence_ids": [
+          "train:15253237"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P17"
+              }
+            ],
+            "start": "Q6819109"
+          }
+        ],
+        "operation": "count"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "ee5f559623324f6ad6448093596e3a6ee2716d346110515e82f6e4f15e47f3e3",
+      "query_hash": "b8bd688f6c65f4ac9ab477eb50b9c9249db3c9726b7d17b1b77fd6e765de5d58",
+      "source_anchor_id": "Q2340263",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The assistant's answer is correct based on the strict interpretation of the path. However, I need to double check if 'count' refers to the number of distinct entities in the final set or the number of"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "count": 1,
+        "evidence_ids": [
+          "train:17152744",
+          "train:5986969"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P31"
+              },
+              {
+                "direction": "out",
+                "relation": "P17"
+              }
+            ],
+            "start": "Q2340263"
+          }
+        ],
+        "operation": "count"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "170ecf79340d86ae2499e4a5f1fd11ce230ace84d566ed9d699a2de401a1eadf",
+      "query_hash": "4c4f56624e56b4bd91557380b84a8ba7ea38ba28d223cd01498e84e2ae19199d",
+      "source_anchor_id": "Q1418124",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The assistant's count is 1, which is correct (only Q82794 is the final endpoint).",
+        "The assistant's evidence_ids are correct (train:15402511, train:5923191).",
+        "The JSON format matches the output contract."
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "count": 1,
+        "evidence_ids": [
+          "train:15402511",
+          "train:5923191"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P279"
+              },
+              {
+                "direction": "out",
+                "relation": "P279"
+              }
+            ],
+            "start": "Q1418124"
+          }
+        ],
+        "operation": "count"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "07c81b84afdc76f4e74db881e42377c787d9f7f91e1176a8d61ae682756e67c5",
+      "query_hash": "899a07a5e3698ebc8380c7d598b5fa710ed4239196af35ee40aeb1053c92168f",
+      "source_anchor_id": "Q1195065",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The final assistant response is truncated and incomplete. It ends mid-sentence in the evidence_ids array ('train:14363275, train:'). The JSON object is not closed, making it invalid and unusable."
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q2526255",
+          "Q3282637",
+          "Q36180"
+        ],
+        "evidence_ids": [
+          "train:14363275",
+          "train:15097685",
+          "train:19340617",
+          "train:20298133",
+          "train:2483775",
+          "train:6106391",
+          "train:7993354",
+          "train:8158573"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P57"
+              },
+              {
+                "direction": "out",
+                "relation": "P106"
+              }
+            ],
+            "start": "Q1195065"
+          },
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P86"
+              },
+              {
+                "direction": "out",
+                "relation": "P106"
+              }
+            ],
+            "start": "Q1195065"
+          }
+        ],
+        "operation": "difference"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "0391e86c7a0b2ea19901502275a6a849c0e5387e1139dd87f0e5e486852e3676",
+      "query_hash": "94457d440bf7d7aac012f3ed4c8bfefd2932ba98cb2ab3978952ed5dc8c79548",
+      "source_anchor_id": "Q5360791",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The evidence_ids list is incomplete. It misses the P1343 records traversed from Q5 (Set B branch) that do not match Set A. Specifically, train:1827518 (krugosvet) and train:19632453 (Catholic Enc) are"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q602358"
+        ],
+        "evidence_ids": [
+          "train:13361589",
+          "train:18166111",
+          "train:1827518",
+          "train:19632453",
+          "train:3767290",
+          "train:4525090",
+          "train:8207904",
+          "train:9707992"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P106"
+              },
+              {
+                "direction": "out",
+                "relation": "P1343"
+              }
+            ],
+            "start": "Q5360791"
+          },
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P31"
+              },
+              {
+                "direction": "out",
+                "relation": "P1343"
+              }
+            ],
+            "start": "Q5360791"
+          }
+        ],
+        "operation": "intersection"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "33c593efa8019da801d769c16e8d25e5b8169d0e21b5e5cfbc6c233416c7829f",
+      "query_hash": "fd92e8e771a1a5f729310665939f2b94187252422e01bae5986b8d238a123bc2",
+      "source_anchor_id": "Q4411943",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "evidence_ids is incomplete. The prompt requires the union of all matching record IDs traversed at every step of every branch. Branch A ends with two P264 records from Q5001136: train:16414652 (Nineton"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q7038555"
+        ],
+        "evidence_ids": [
+          "train:1314852",
+          "train:15381802",
+          "train:16414652",
+          "train:18297143",
+          "train:785213"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P156"
+              },
+              {
+                "direction": "out",
+                "relation": "P264"
+              }
+            ],
+            "start": "Q4411943"
+          },
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P175"
+              },
+              {
+                "direction": "out",
+                "relation": "P264"
+              }
+            ],
+            "start": "Q4411943"
+          }
+        ],
+        "operation": "intersection"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "bf6c8bd9dda4bb8bdc703e48c77c897c4df03424b187cb985dc107fdea6e6ce0",
+      "query_hash": "758b16286ad623814f77daf02943119fbccd5d8244a3b5e5d4159f40ec5df67d",
+      "source_anchor_id": "Q6768318",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "Lexicographical sorting error in evidence_ids. The string 'train:20015969' starts with '2', and 'train:827803' starts with '8'. In ASCII/Unicode, '2' (50) is less than '8' (56). Therefore, 'train:2001"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q30"
+        ],
+        "evidence_ids": [
+          "train:20015969",
+          "train:827803"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P69"
+              },
+              {
+                "direction": "out",
+                "relation": "P17"
+              }
+            ],
+            "start": "Q6768318"
+          }
+        ],
+        "operation": "project"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "4e4f7031497c3f450f8720988fa93587972556e98367d0189c729b3a8d1bd622",
+      "query_hash": "65818f5b201c3bd9a59c965bd6e7502c94b3fd33ceaa0f92da90f11295056a27",
+      "source_anchor_id": "Q3056941",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The final answer_ids array is missing the intermediate entity Q557183. The prompt asks to 'Return the distinct endpoint entity IDs when you start at... then follow... then follow...'. This implies the"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q36"
+        ],
+        "evidence_ids": [
+          "train:12572127",
+          "train:2131776"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P131"
+              },
+              {
+                "direction": "out",
+                "relation": "P17"
+              }
+            ],
+            "start": "Q3056941"
+          }
+        ],
+        "operation": "project"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "6bb1c25a0a4c3028d6e327214f317383f688b6fc88cb8f49ac5a553e7b1199ba",
+      "query_hash": "740231e73de4ba89e608a981b72eb566c5e85e9a2cbd174d044c3b755a1f8dde",
+      "source_anchor_id": "Q1384454",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The assistant's answer_ids include Q482980 (Auther) and Q36180 (Writter) which are occupations of Jane Lapotaire (Q445808). This is correct.",
+        "The assistant's answer_ids include Q33999 (Television actor) which is occupation of Powell, Robert (Q504982). This is correct.",
+        "The assistant's answer_ids do NOT include any occupation for Robert Stephens (Q691648) or Alex Scott (Q4717762). Checking data: Robert Stephens has no P106. Alex Scott has train:17076946 (P106, Q33999",
+        "Wait, Alex Scott (Q4717762) HAS an occupation record: train:17076946 {subject: Q4717762, relation: P106, object: Q33999}. The assistant included Q33999 in answer_ids. This is correct as it's a union. "
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q33999",
+          "Q36180",
+          "Q482980"
+        ],
+        "evidence_ids": [
+          "train:14407466",
+          "train:1681211",
+          "train:17076946",
+          "train:18976765",
+          "train:20190372",
+          "train:6024652",
+          "train:7409096",
+          "train:956725"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P161"
+              },
+              {
+                "direction": "out",
+                "relation": "P106"
+              }
+            ],
+            "start": "Q1384454"
+          }
+        ],
+        "operation": "project"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "87e6d48ade76bfa852a7980c35c3d1bf8fd32eccf2b2427dd80ac04c8c51aae9",
+      "query_hash": "f723ff1290500884b6f28312dd83c497687b118e2ce80de49bf00f76025a8b48",
+      "source_anchor_id": "Q16845667",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "Lexicographical sorting error in answer_ids. The assistant output [Q145, Q174193]. Comparing strings: 'Q145' vs 'Q174193'. Index 0: Q=Q. Index 1: 1=1. Index 2: 4 vs 7. 4 < 7. So Q145 comes before Q174"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q145",
+          "Q174193"
+        ],
+        "evidence_ids": [
+          "train:17463235",
+          "train:1834408",
+          "train:2678780"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P166"
+              },
+              {
+                "direction": "out",
+                "relation": "P17"
+              }
+            ],
+            "start": "Q16845667"
+          }
+        ],
+        "operation": "project"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "fbda1fe300c20ecf083e95e3cede48254362ddd103980b63665aaa1bc7901d55",
+      "query_hash": "f3fab54bce92234d7dfba94c2ee747d4f4723cf9de7cc170dab266bacb415557",
+      "source_anchor_id": "Q2484498",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "Missing evidence ID: The assistant omitted 'train:12288254' from the evidence_ids list. This record represents the first step of Set A (Q2484498 followed by Q7647268 via P156) and is explicitly part"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q131578",
+          "Q45981"
+        ],
+        "evidence_ids": [
+          "train:15194",
+          "train:16567065",
+          "train:16719989",
+          "train:1947190",
+          "train:9324938"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P156"
+              },
+              {
+                "direction": "out",
+                "relation": "P136"
+              }
+            ],
+            "start": "Q2484498"
+          },
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P155"
+              },
+              {
+                "direction": "out",
+                "relation": "P136"
+              }
+            ],
+            "start": "Q2484498"
+          }
+        ],
+        "operation": "union"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "2dbbdd74ea3f8c5408f7eef7d48fc590feb5a6a9518d89eed6e1b7f8b9e85095",
+      "query_hash": "7faa743dd5fddf18d1460379cbe406d6cfa0845c23c9f5bbb8d143b9debf199c",
+      "source_anchor_id": "Q2165976",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "The evidence_ids list in the final assistant message is missing 'train:19632453'. This record was returned in the tool observation for relation_3 (P1343 from Q5) and represents a valid traversal step.",
+        "The prompt requires evidence_ids to be the sorted union of all matching record IDs traversed at every step. The assistant omitted one of the three records found in the final step."
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q2627728",
+          "Q2657718",
+          "Q302556",
+          "Q602358"
+        ],
+        "evidence_ids": [
+          "train:15166334",
+          "train:18166111",
+          "train:1827518",
+          "train:19632453",
+          "train:19992240",
+          "train:4324456",
+          "train:8127060",
+          "train:8809301"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P1303"
+              },
+              {
+                "direction": "out",
+                "relation": "P1343"
+              }
+            ],
+            "start": "Q2165976"
+          },
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P31"
+              },
+              {
+                "direction": "out",
+                "relation": "P1343"
+              }
+            ],
+            "start": "Q2165976"
+          }
+        ],
+        "operation": "union"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    },
+    {
+      "record_id": "0a4ab580a342bd8a54fca2120ac7d5ab5d180888e728d6abfa2afe21867360a9",
+      "query_hash": "73c9651afb9590d2af9f0c5a79cb89cd8a5e01774cd128d5c5ca3e9737661eb1",
+      "source_anchor_id": "Q13560432",
+      "first_verdict_preserved": "REVISE",
+      "first_issues": [
+        "Evidence IDs are incorrect. The assistant included train:11904210 (yale cabaret country) and train:12564107 (Jennifer educated at yale cabaret). These are not part of the specified paths (P69->P17 or"
+      ],
+      "actual_review_request_contains_complete_original_messages": true,
+      "target_is_valid_complete_json": true,
+      "target_evidence_equals_all_saved_traversal_ids": true,
+      "pre_review_independent_sql_target_equal": true,
+      "exact_target": {
+        "answer_ids": [
+          "Q145",
+          "Q30"
+        ],
+        "evidence_ids": [
+          "train:10203719",
+          "train:11904210",
+          "train:12564107",
+          "train:4726343",
+          "train:4849164",
+          "train:516636"
+        ]
+      },
+      "query": {
+        "branches": [
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P69"
+              },
+              {
+                "direction": "out",
+                "relation": "P17"
+              }
+            ],
+            "start": "Q13560432"
+          },
+          {
+            "path": [
+              {
+                "direction": "out",
+                "relation": "P166"
+              },
+              {
+                "direction": "out",
+                "relation": "P17"
+              }
+            ],
+            "start": "Q13560432"
+          }
+        ],
+        "operation": "union"
+      },
+      "status": "held; independent finite-record calculation agrees with target, but first nonaccept is not replayed or rewritten"
+    }
+  ],
+  "interpretation": "A non-accept count is not an error-rate estimate. Several critiques contradict the literal saved targets or assert correctness while choosing REVISE. Exact finite-record calculation is separately verified; no claim that source-world facts or general semantic quality were proved.",
+  "model_requests": 0,
+  "first_dispositions_unchanged": true,
+  "answers_rewritten": 0
+}

@@ -1,5 +1,5 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM coding v26 選答</title><style>body{font:17px/1.7 system-ui;max-width:1000px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM coding：最低 v26 PPL 標準答案</h1><p>38 個來源檔案的 1,865,716 列已完整檢查；159,639 個不同合格答案，組成 149,150 組完整相同輸入。10,245 組多答案的 20,734 個候選全部實際以固定 native v26、batch size 1、未裁切輸入、僅 supervised assistant tokens（含 assistant EOS）計分。PPL 最低者保留，單一版本明確未評分。</p><p>首次新答案抽查 14 ACCEPT、8 REVISE、2 REJECT；十題全部隔離。全列靜態掃描另外隔離 1,423 題，聯集 1,432 題，預計公開 147,718 題。不替換次低版本、不重寫問題或答案、不重跑首次語意評審。</p><p>已獨立確認路徑公式改錯（第一個範例應為 19，而來源公式得 100）及詞頻範例重複字典鍵的問題。另有評審把預期輸出誤讀為實際執行；該指控未獲獨立確認，首次隔離仍保留。全列靜態訊號包括額外 Python fence 無法解析、重複常數鍵與無觀察的過去式執行聲明；某些引述片段或刻意展示重複鍵也會被保守排除，不應當成全體錯誤率。</p><p>原靜態掃描在處理 Markdown 縮排時，於全列掃描前的斷言失敗；原紀錄未修改，後繼版本加入 dedent，六項回歸測試通過。所有來源程式未執行，所有能力提升未測量；目前公開累計與新批次發布狀態分開記錄。</p><pre>{
-  &quot;phase&quot;: &quot;complete_native_v26_selection_and_scope_filter; publication_pending&quot;,
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM coding v26 選答</title><style>body{font:17px/1.7 system-ui;max-width:1000px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM coding：最低 v26 PPL 標準答案</h1><p>38 個來源檔案的 1,865,716 列已完整檢查；159,639 個不同合格答案，組成 149,150 組完整相同輸入。10,245 組多答案的 20,734 個候選全部實際以固定 native v26、batch size 1、未裁切輸入、僅 supervised assistant tokens（含 assistant EOS）計分。PPL 最低者保留，單一版本明確未評分。</p><p>首次新答案抽查 14 ACCEPT、8 REVISE、2 REJECT；十題全部隔離。全列靜態掃描另外隔離 1,423 題，聯集 1,432 題，已公開 147,718 題。不替換次低版本、不重寫問題或答案、不重跑首次語意評審。</p><p>已獨立確認路徑公式改錯（第一個範例應為 19，而來源公式得 100）及詞頻範例重複字典鍵的問題。另有評審把預期輸出誤讀為實際執行；該指控未獲獨立確認，首次隔離仍保留。全列靜態訊號包括額外 Python fence 無法解析、重複常數鍵與無觀察的過去式執行聲明；某些引述片段或刻意展示重複鍵也會被保守排除，不應當成全體錯誤率。</p><p>原靜態掃描在處理 Markdown 縮排時，於全列掃描前的斷言失敗；原紀錄未修改，後繼版本加入 dedent，六項回歸測試通過。所有來源程式未執行，所有能力提升未測量；目前公開累計與新批次發布狀態分開記錄。</p><p>完整公開回讀驗證：1,650 個檔案、58,978,657,588 bytes 全部 SHA256 相符。累計 4,910,095 筆新 episodes、4,758,414 個不同正規化題目。首次傳輸有一檔停滯，原紀錄保留；限定時間的匿名傳輸補完該檔，不重跑語意審核。資料 commit：6831cb6d552f2aba796e2534903e1268f8eeaeaa；最終證據 commit：fb77a686ec974196278dab3891227d918951dde1。</p><pre>{
+  &quot;phase&quot;: &quot;published_and_anonymously_verified&quot;,
   &quot;raw_rows&quot;: 1865716,
   &quot;candidate_answers&quot;: 159640,
   &quot;distinct_answers&quot;: 159639,
@@ -20,11 +20,35 @@
   &quot;static_scope_held_queries&quot;: 1423,
   &quot;combined_query_holds&quot;: 1432,
   &quot;expected_package_rows&quot;: 147718,
-  &quot;public_rows_so_far&quot;: 4762377,
-  &quot;public_proof_head&quot;: &quot;0037e535bc259a61922209c1ed301cbda1908768&quot;,
+  &quot;public_rows_so_far&quot;: 4910095,
+  &quot;public_proof_head&quot;: &quot;fb77a686ec974196278dab3891227d918951dde1&quot;,
   &quot;all_retained_answers_and_scores_unchanged&quot;: true,
   &quot;source_programs_executed&quot;: false,
   &quot;model_weights_trained&quot;: false,
   &quot;corpus_semantic_accuracy_measured&quot;: false,
-  &quot;goal_complete&quot;: false
+  &quot;goal_complete&quot;: false,
+  &quot;public_release&quot;: {
+    &quot;dataset&quot;: &quot;OpenFormosa/barbet-long-context-sft&quot;,
+    &quot;data_commit&quot;: &quot;6831cb6d552f2aba796e2534903e1268f8eeaeaa&quot;,
+    &quot;parent&quot;: &quot;0037e535bc259a61922209c1ed301cbda1908768&quot;,
+    &quot;active_new_episodes&quot;: 4910095,
+    &quot;active_legacy_rows&quot;: 0,
+    &quot;accepted_episode_target&quot;: 10000000,
+    &quot;goal_complete&quot;: false,
+    &quot;anonymous_full_file_sha256_readback&quot;: true,
+    &quot;verified_files&quot;: 1650,
+    &quot;verified_bytes&quot;: 58978657588,
+    &quot;new_declared_argument_holds_removed&quot;: 6872,
+    &quot;library_commit&quot;: &quot;dc2c778be03e5d16c731fd2120db92400d5c8c07&quot;,
+    &quot;model_efficacy_measured&quot;: false,
+    &quot;readback_sha256&quot;: &quot;07135a25c959ebc1d7b14153e3c41f406f8863e9215e7bd18a73f13621055c92&quot;,
+    &quot;answer_selection&quot;: &quot;minimum eligible conditional answer PPL under frozen native Barbet v26&quot;,
+    &quot;final_head&quot;: &quot;fb77a686ec974196278dab3891227d918951dde1&quot;
+  },
+  &quot;published_new_rows&quot;: 147718,
+  &quot;cumulative_unique_counts&quot;: {
+    &quot;record_id&quot;: 4910095,
+    &quot;query_hash&quot;: 4758414,
+    &quot;family_id&quot;: 4369082
+  }
 }</pre></html>

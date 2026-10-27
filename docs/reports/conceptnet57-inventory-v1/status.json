@@ -1,0 +1,41 @@
+{
+  "counts": {
+    "raw_rows": 34074917,
+    "outside_both_english_concepts": 30651913,
+    "both_english_rows": 3423004,
+    "inventory_eligible_assertions": 3423003,
+    "held:bounded_fact_contract": 1
+  },
+  "row_license_counts": {
+    "cc:by-sa/4.0": 2728725,
+    "cc:by/4.0": 694279
+  },
+  "source_dataset_counts": {
+    "/d/wiktionary/fr": 104892,
+    "/d/wiktionary/en": 2492328,
+    "/d/verbosity": 162297,
+    "/d/conceptnet/4/en": 226284,
+    "/d/dbpedia/en": 99184,
+    "/d/wordnet/3.1": 218061,
+    "/d/wiktionary/de": 31720,
+    "/d/opencyc": 88237
+  },
+  "subjects": 1410296,
+  "objects": 712262,
+  "entities": 1787371,
+  "subject_degree_counts": {
+    "above_32": 3991,
+    "nine_to_32": 39930,
+    "one": 820583,
+    "two_to_eight": 545792
+  },
+  "duplicate_literal_triple_groups": 0,
+  "duplicate_source_assertion_uri_groups": 0,
+  "database_sha256": "58b80e8d3d5f726ee4fa2f535af6bebee4cb46e258b4673aac59b7039bc0aa25",
+  "database_bytes": 1501945856,
+  "policy_sha256": "023cdbe29e23967a971989f2cc054fcc2c16ea35f462631bb1690cdb5956f546",
+  "complete_source_stream_sha256": "40ad6e34b1bf86b013e46645fcb20e9b9c74091614c8b914c3c42f55c117afd2",
+  "accepted_training_rows": 0,
+  "model_requests": 0,
+  "semantic_task_diagnosis_and_exact_export_gates_still_required": true
+}

@@ -1,0 +1,12 @@
+test_conflicting_evidence_ids_and_source_duplicates_are_rejected (tests.test_relational_memory.RelationalMemoryTests.test_conflicting_evidence_ids_and_source_duplicates_are_rejected) ... ok
+test_count_is_distinct_and_absence_is_snapshot_scoped (tests.test_relational_memory.RelationalMemoryTests.test_count_is_distinct_and_absence_is_snapshot_scoped) ... ok
+test_extra_query_fields_and_retrieved_instructions_do_not_change_tools (tests.test_relational_memory.RelationalMemoryTests.test_extra_query_fields_and_retrieved_instructions_do_not_change_tools) ... ok
+test_inverse_relation_and_difference_direction (tests.test_relational_memory.RelationalMemoryTests.test_inverse_relation_and_difference_direction) ... ok
+test_join_deduplicates_endpoints_but_keeps_both_paths (tests.test_relational_memory.RelationalMemoryTests.test_join_deduplicates_endpoints_but_keeps_both_paths) ... ok
+test_overflow_does_not_return_incomplete_memory (tests.test_relational_memory.RelationalMemoryTests.test_overflow_does_not_return_incomplete_memory) ... ok
+test_real_verifier_rejects_wrong_count_and_duplicate_json_keys (tests.test_relational_memory.RelationalMemoryTests.test_real_verifier_rejects_wrong_count_and_duplicate_json_keys) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.002s
+
+OK

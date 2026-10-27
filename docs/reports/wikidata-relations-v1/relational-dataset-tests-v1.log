@@ -1,0 +1,8 @@
+test_changed_fact_cannot_reuse_old_snapshot_proof (tests.test_relational_dataset.RelationalDatasetTests.test_changed_fact_cannot_reuse_old_snapshot_proof) ... ok
+test_metadata_does_not_register_arbitrary_tool (tests.test_relational_dataset.RelationalDatasetTests.test_metadata_does_not_register_arbitrary_tool) ... ok
+test_portable_dataset_field_restores_actual_callback (tests.test_relational_dataset.RelationalDatasetTests.test_portable_dataset_field_restores_actual_callback) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK

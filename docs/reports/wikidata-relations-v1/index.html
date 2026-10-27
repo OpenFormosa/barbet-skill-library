@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>可回查的關係記憶資料</title><style>body{font:17px/1.7 system-ui;max-width:1100px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Wikidata5M：外部記憶、關係檢索與可驗證答案</h1><p>從原作者的 inductive graph 和實體／關係別名檔建立來源庫，只使用原始訓練關係。原始訓練、驗證、測試實體完全不重疊。此研究範圍是 CC0 結構化資料，未下載或重新授權 Wikipedia 文章內容。</p><p>原檔缺少 4,840 個訓練實體名稱及 3 個關係名稱；原完整覆蓋檢查因此失敗，紀錄保留。後繼版本沒有補造名稱，排除相關 14,968 條關係，逐列重比原始資料，剩 20,481,546 條可用關係。所有數字都仍是來源庫，未計入訓練集。</p><p>題型依提供紀錄進行方向正確的一至兩跳查詢、不同終點計數、聯集、交集與差集。每個實體最多一題，不把前後記憶位置或不同答案樣式算成新題。查不到只表示該有限資料庫沒有紀錄，不能當成真實世界否定。有限集合程式與獨立 SQLite 分別計算標準答案；執行的是我們的資料查詢器，從未執行下載來源程式。</p><p>首次 36 題全部通過獨立 SQL 答案比對；Qwen 評審為 21 ACCEPT、15 REVISE，15 題保留隔離。核對完整實際請求與答案後，多個評審指控與實際 JSON 矛盾，例如已有證據 ID 卻稱缺漏，或聲稱正確但選 REVISE。此抽查比例不是資料錯誤率，也不是模型提升證據。</p><p>新增可攜的工具狀態只放入 metadata，不改首批任何模型輸入、答案、tokens 或 labels。36 題逐一驗證相同，32 次實際查詢觀察都可由下載資料重建。應用程式需明確註冊只讀 relation_lookup；文件文字不能自動註冊工具。候選驗證綁定答案 SHA256，錯誤會回傳可定位的範圍，超預算不截斷。</p><p>1,024 個固定抽樣來源實體的儲存探測得到 1,021 筆可編譯資料，完整文字、兩種 tokenizer 陣列及壓縮候選合計約每筆 11 KB；對全池的 50.09 GB 外推只是估計，仍須預留去重、切分與發布證據空間。完整擴充及 HF 發布尚未執行。</p><p>來源：<a href="https://deepgraphlearning.github.io/project/wikidata5m">原作者專案</a>；<a href="https://www.wikidata.org/wiki/Wikidata:Licensing">Wikidata 結構化資料政策</a>。</p><pre>{
+  &quot;phase&quot;: &quot;first_diagnosis_complete; full_training_export_not_started&quot;,
+  &quot;original_train_entities&quot;: 4579609,
+  &quot;original_train_triples&quot;: 20496514,
+  &quot;usable_training_entities&quot;: 4574732,
+  &quot;usable_training_triples&quot;: 20481546,
+  &quot;facts_excluded_for_missing_source_labels&quot;: 14968,
+  &quot;inductive_split_entity_intersections&quot;: {
+    &quot;train_valid&quot;: 0,
+    &quot;train_test&quot;: 0,
+    &quot;valid_test&quot;: 0
+  },
+  &quot;bounded_two_hop_anchor_capacity&quot;: 4311781,
+  &quot;specific_two_hop_anchor_capacity&quot;: 3493253,
+  &quot;relation_pair_signatures&quot;: 38386,
+  &quot;first_diagnostic_rows&quot;: 36,
+  &quot;first_semantic_review&quot;: {
+    &quot;ACCEPT&quot;: 21,
+    &quot;REVISE&quot;: 15
+  },
+  &quot;first_nonaccept_anchor_holds&quot;: 15,
+  &quot;first_36_exact_SQL_targets_equal&quot;: true,
+  &quot;first_36_actual_reviewer_payloads_complete&quot;: true,
+  &quot;metadata_only_restoration_equivalence_rows&quot;: 36,
+  &quot;actual_tool_observations_restored_identically&quot;: 32,
+  &quot;export_storage_probe&quot;: {
+    &quot;rows&quot;: 1021,
+    &quot;bytes_per_row&quot;: 10999.003917727718,
+    &quot;projection_bytes&quot;: 50089782812
+  },
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;model_weights_trained&quot;: false,
+  &quot;model_capability_gain_measured&quot;: false,
+  &quot;one_task_per_anchor_and_no_memory_position_duplicates&quot;: true
+}</pre></html>

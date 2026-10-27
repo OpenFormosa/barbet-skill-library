@@ -1,0 +1,41 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>ConceptNet 公開來源盤點</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap}</style><h1>ConceptNet 5.7 原始公開來源</h1><p>原作者 assertions 5.7.0 壓縮檔 497,963,447 bytes 完整下載並驗證 gzip CRC，解壓 34,074,917 列逐 byte 雜湊相符。僅盤點兩端皆為英語概念的 3,423,004 列；1 列超出有界 fact 欄位長度，剩 3,423,003 條，沒有重複 literal triple 或 assertion URI。</p><p>逐列保留來源 URI、sense、關係方向與否定關係、原始 metadata、權重和來源貢獻者。列授權為 CC-BY-SA 4.0 或 CC-BY 4.0，不改寫為單一寬鬆授權。資料包含廣義 RelatedTo 與詞形關係；後續需控制這類集中，不能把原始 1,410,296 個 subject URI 直接稱為獨立高難度題目，也不能把不同 sense/詞形視圖自動重複計數。</p><p>目前新增訓練資料 0 筆，尚待題型契約、去重、來源歸屬、首次診斷與精確匯出檢查。來源紀錄的存在也不代表已獨立證明真實世界事實。</p><p><a href="https://github.com/commonsense/conceptnet5/wiki/Downloads">原作者下載頁</a>；<a href="https://github.com/commonsense/conceptnet5/wiki/Copying-and-sharing-ConceptNet">原作者授權與歸屬說明</a>。</p><pre>{
+  &quot;counts&quot;: {
+    &quot;raw_rows&quot;: 34074917,
+    &quot;outside_both_english_concepts&quot;: 30651913,
+    &quot;both_english_rows&quot;: 3423004,
+    &quot;inventory_eligible_assertions&quot;: 3423003,
+    &quot;held:bounded_fact_contract&quot;: 1
+  },
+  &quot;row_license_counts&quot;: {
+    &quot;cc:by-sa/4.0&quot;: 2728725,
+    &quot;cc:by/4.0&quot;: 694279
+  },
+  &quot;source_dataset_counts&quot;: {
+    &quot;/d/wiktionary/fr&quot;: 104892,
+    &quot;/d/wiktionary/en&quot;: 2492328,
+    &quot;/d/verbosity&quot;: 162297,
+    &quot;/d/conceptnet/4/en&quot;: 226284,
+    &quot;/d/dbpedia/en&quot;: 99184,
+    &quot;/d/wordnet/3.1&quot;: 218061,
+    &quot;/d/wiktionary/de&quot;: 31720,
+    &quot;/d/opencyc&quot;: 88237
+  },
+  &quot;subjects&quot;: 1410296,
+  &quot;objects&quot;: 712262,
+  &quot;entities&quot;: 1787371,
+  &quot;subject_degree_counts&quot;: {
+    &quot;above_32&quot;: 3991,
+    &quot;nine_to_32&quot;: 39930,
+    &quot;one&quot;: 820583,
+    &quot;two_to_eight&quot;: 545792
+  },
+  &quot;duplicate_literal_triple_groups&quot;: 0,
+  &quot;duplicate_source_assertion_uri_groups&quot;: 0,
+  &quot;database_sha256&quot;: &quot;58b80e8d3d5f726ee4fa2f535af6bebee4cb46e258b4673aac59b7039bc0aa25&quot;,
+  &quot;database_bytes&quot;: 1501945856,
+  &quot;policy_sha256&quot;: &quot;023cdbe29e23967a971989f2cc054fcc2c16ea35f462631bb1690cdb5956f546&quot;,
+  &quot;complete_source_stream_sha256&quot;: &quot;40ad6e34b1bf86b013e46645fcb20e9b9c74091614c8b914c3c42f55c117afd2&quot;,
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;model_requests&quot;: 0,
+  &quot;semantic_task_diagnosis_and_exact_export_gates_still_required&quot;: true
+}</pre></html>

@@ -1,0 +1,35 @@
+{
+  "phase": "first_diagnosis_complete; full_training_export_not_started",
+  "original_train_entities": 4579609,
+  "original_train_triples": 20496514,
+  "usable_training_entities": 4574732,
+  "usable_training_triples": 20481546,
+  "facts_excluded_for_missing_source_labels": 14968,
+  "inductive_split_entity_intersections": {
+    "train_valid": 0,
+    "train_test": 0,
+    "valid_test": 0
+  },
+  "bounded_two_hop_anchor_capacity": 4311781,
+  "specific_two_hop_anchor_capacity": 3493253,
+  "relation_pair_signatures": 38386,
+  "first_diagnostic_rows": 36,
+  "first_semantic_review": {
+    "ACCEPT": 21,
+    "REVISE": 15
+  },
+  "first_nonaccept_anchor_holds": 15,
+  "first_36_exact_SQL_targets_equal": true,
+  "first_36_actual_reviewer_payloads_complete": true,
+  "metadata_only_restoration_equivalence_rows": 36,
+  "actual_tool_observations_restored_identically": 32,
+  "export_storage_probe": {
+    "rows": 1021,
+    "bytes_per_row": 10999.003917727718,
+    "projection_bytes": 50089782812
+  },
+  "accepted_training_rows": 0,
+  "model_weights_trained": false,
+  "model_capability_gain_measured": false,
+  "one_task_per_anchor_and_no_memory_position_duplicates": true
+}
