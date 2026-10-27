@@ -1,0 +1,21 @@
+{
+  "phase": "FIX_TESTED_REPAIR_PREPARING",
+  "first_failed_publication_tree": {
+    "commit": "edaf59251f7b7280b40cf440d22988e0124638dc",
+    "current_head": "edaf59251f7b7280b40cf440d22988e0124638dc",
+    "expected_files": 598,
+    "actual_files": 596,
+    "missing": [
+      "recipe/memory_sft_v2.json",
+      "recipe/memory_sft_v2_scale_10m.json"
+    ],
+    "extra": [],
+    "missing_training_payload_files": [],
+    "first_readback_failure_preserved": true
+  },
+  "unchanged_add_client_behavior_confirmed_in_installed_code": true,
+  "fix": "Delete only obsolete paths or subtrees with no retained planned file. Preserve shared ancestors.",
+  "tests_passed": 7,
+  "training_payload_mutated": false,
+  "all_files_at_repaired_revision_verified": false
+}

@@ -62,6 +62,9 @@ def finalize():
         'held_source_queries': sorted(holds), 'all_original_candidate_files_and_scores_preserved': True})
     from scripts import finalize_v26_answer_selection as selector
     selector.SCORE = SCORE; selector.STATE = STATE; selector.OUT = OUT; selector.SECOND = FROZEN
+    # New waves can be compiled directly at publication shard size. The prior
+    # release keeps its original 2,000-row shards and immutable compact copies.
+    selector.ROWS_PER_SHARD = 20000
     selector.EXTRA_SOURCE_QUERY_HOLDS = holds; selector.EXTRA_SOURCE_QUERY_HOLD_RECEIPT = combined
     selector.main()
     base.save(STATE / 'release-scope.json', {

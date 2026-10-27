@@ -1,0 +1,44 @@
+{
+  "phase": "INVENTORY_AND_FIRST_PILOT_READY_NOT_ACCEPTED",
+  "inventory": {
+    "counts": {
+      "raw_rows": 5000000,
+      "held:source_test_failure_or_missing_status": 3358695,
+      "source_gate_eligible_answers": 1092700,
+      "held:source_judge_score_below_four_or_invalid": 548600,
+      "held:literal_reserved_delimiter": 5
+    },
+    "raw_distinct_normalized_questions": 4870635,
+    "questions_with_a_source_gate_eligible_answer": 1035432,
+    "distinct_source_gate_eligible_answers": 1083674,
+    "question_aliases_with_unequal_literal_inputs": 3389,
+    "scope": "Full main source; before legacy/evaluation/cross-source exclusion, semantic diagnosis, v26 ranking, splits or token budgets. Upstream test execution not rerun or independently confirmed.",
+    "accepted_training_rows": 0,
+    "source_programs_executed": false
+  },
+  "pilot": {
+    "diagnostic_samples": 48,
+    "counts": {
+      "pilot_source_rows_seen": 25600,
+      "held:source_test_failure_or_missing_status": 17163,
+      "held:source_judge_score_below_four_or_invalid": 2833,
+      "held:unequal_condition_alias": 159,
+      "held:local_evaluation_overlap": 2
+    },
+    "cohorts": {
+      "generic/self-instruct": 12,
+      "algorithmic/self-instruct": 12,
+      "generic/evol-instruct": 12,
+      "algorithmic/evol-instruct": 12
+    },
+    "source_gate_distinct_questions_before_further_holds": 1035432,
+    "unequal_literal_condition_query_holds": 3389,
+    "adapter_sha256": "13bc194aac21a2635a30b96c72e0b122e0f9da83dadd7862a29278e5b3b06400",
+    "driver_sha256": "26c3089c8189268874015923e6ec8cae14581155ea1b940525cdb567da151fdf",
+    "accepted_training_rows": 0,
+    "weights_trained": false
+  },
+  "accepted_training_rows": 0,
+  "adapter_tests_passed": 4,
+  "goal_complete": false
+}

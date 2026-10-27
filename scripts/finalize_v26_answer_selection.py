@@ -16,6 +16,7 @@ STATE=base.WORK/'reports/memory-harness-v2-v26-selected'
 OUT=base.WORK/'exports/memory-harness-v2-v26-selected'
 EXTRA_SOURCE_QUERY_HOLDS=set()
 EXTRA_SOURCE_QUERY_HOLD_RECEIPT=None
+ROWS_PER_SHARD=2000
 
 
 def eligible_source_conditions(pointers):
@@ -64,6 +65,7 @@ def strict_condition(row):
 
 
 def main():
+    if not 1<=ROWS_PER_SHARD<=20000:raise ValueError('selected shard row bound')
     STATE.mkdir(parents=True,exist_ok=True);OUT.mkdir(parents=True,exist_ok=True)
     if (STATE/'dedup-summary.json').exists():raise ValueError('selection already frozen')
     db=sqlite3.connect(STATE/'selection.sqlite');db.row_factory=sqlite3.Row
@@ -133,7 +135,7 @@ def main():
         else:
             row['source_refs']['answer_selection']={'method':'only_eligible_answer','competitors':1,'ppl_measured':False}
             counts['single_eligible_answer']+=1
-        if writer is None or size>=2000:
+        if writer is None or size>=ROWS_PER_SHARD:
             if writer:writer.close()
             shard+=1;size=0;writer=(STATE/'selected'/f'{shard:05d}.jsonl').open('w')
         writer.write(canonical(row)+'\n');size+=1;counts['selected']+=1
@@ -143,6 +145,7 @@ def main():
     counts['shards']=shard+1
     base.save(STATE/'dedup-summary.json',dict(counts))
     base.save(STATE/'selection-policy.json',{'version':'v26-minimum-answer-ppl-cumulative-0003','same_actual_condition_bytes_required':True,
+        'rows_per_selected_shard':ROWS_PER_SHARD,
         'all_frozen_folds_preserved':True,'cross_split_component_bridges_held':len(conflicts),'all_first_negative_holds_preserved':True,
         'target_new_episodes':10000000,'goal_complete':False,'public_ppl_selected_data_not_yet_published':True,
         'additional_source_premise_hold_receipt_sha256':base.file_sha(EXTRA_SOURCE_QUERY_HOLD_RECEIPT) if EXTRA_SOURCE_QUERY_HOLD_RECEIPT else None})

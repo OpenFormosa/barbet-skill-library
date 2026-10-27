@@ -1,0 +1,44 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>程式資料預檢</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>OpenCodeInstruct：完整來源盤點</h1><p>50 個固定來源檔案均已核對原始 LFS SHA256，共 5,000,000 筆、4,870,635 個不同正規化問題。未執行任何來源程式。</p><p>3,358,695 筆有來源測試失敗或缺少通過狀態；548,600 筆的來源評審分數低於四分或不符合契約；5 筆含原生保留分隔符。保留 1,092,700 個候選答案，去掉相同完整輸入和答案的重複後為 1,083,674 個，涵蓋 1,035,432 個不同題目。這些都還不是合格訓練筆數。</p><p>另有 3,389 個正規化問題包含不同字面輸入，先隔離，避免把空白或大小寫變體當新題目或跨不同條件比較 PPL。來源測試通過只標示為上游記錄，沒有本機重跑或獨立正確性保證。</p><p>完整原始程式題與原有範例放入可見記憶。事後生成的 unit tests、評審評語與分數不放入 prompt。來源檔名與列號只放在 provenance，避免同題分散於不同檔案時改變評分條件。四個回歸測試通過；48 筆首次來源診斷已準備，等待獨立推論時段。</p><p><a href="https://huggingface.co/datasets/nvidia/OpenCodeInstruct/tree/8f3ba5bafe4d6e8db46082cf7ae6741bc370604d">固定原始來源</a></p><pre>{
+  &quot;phase&quot;: &quot;INVENTORY_AND_FIRST_PILOT_READY_NOT_ACCEPTED&quot;,
+  &quot;inventory&quot;: {
+    &quot;counts&quot;: {
+      &quot;raw_rows&quot;: 5000000,
+      &quot;held:source_test_failure_or_missing_status&quot;: 3358695,
+      &quot;source_gate_eligible_answers&quot;: 1092700,
+      &quot;held:source_judge_score_below_four_or_invalid&quot;: 548600,
+      &quot;held:literal_reserved_delimiter&quot;: 5
+    },
+    &quot;raw_distinct_normalized_questions&quot;: 4870635,
+    &quot;questions_with_a_source_gate_eligible_answer&quot;: 1035432,
+    &quot;distinct_source_gate_eligible_answers&quot;: 1083674,
+    &quot;question_aliases_with_unequal_literal_inputs&quot;: 3389,
+    &quot;scope&quot;: &quot;Full main source; before legacy/evaluation/cross-source exclusion, semantic diagnosis, v26 ranking, splits or token budgets. Upstream test execution not rerun or independently confirmed.&quot;,
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;source_programs_executed&quot;: false
+  },
+  &quot;pilot&quot;: {
+    &quot;diagnostic_samples&quot;: 48,
+    &quot;counts&quot;: {
+      &quot;pilot_source_rows_seen&quot;: 25600,
+      &quot;held:source_test_failure_or_missing_status&quot;: 17163,
+      &quot;held:source_judge_score_below_four_or_invalid&quot;: 2833,
+      &quot;held:unequal_condition_alias&quot;: 159,
+      &quot;held:local_evaluation_overlap&quot;: 2
+    },
+    &quot;cohorts&quot;: {
+      &quot;generic/self-instruct&quot;: 12,
+      &quot;algorithmic/self-instruct&quot;: 12,
+      &quot;generic/evol-instruct&quot;: 12,
+      &quot;algorithmic/evol-instruct&quot;: 12
+    },
+    &quot;source_gate_distinct_questions_before_further_holds&quot;: 1035432,
+    &quot;unequal_literal_condition_query_holds&quot;: 3389,
+    &quot;adapter_sha256&quot;: &quot;13bc194aac21a2635a30b96c72e0b122e0f9da83dadd7862a29278e5b3b06400&quot;,
+    &quot;driver_sha256&quot;: &quot;26c3089c8189268874015923e6ec8cae14581155ea1b940525cdb567da151fdf&quot;,
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;weights_trained&quot;: false
+  },
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;adapter_tests_passed&quot;: 4,
+  &quot;goal_complete&quot;: false
+}</pre></html>

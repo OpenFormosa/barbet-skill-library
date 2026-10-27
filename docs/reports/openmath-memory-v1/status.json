@@ -1,5 +1,5 @@
 {
-  "phase": "FIRST_SOURCE_DIAGNOSIS_RUNNING",
+  "phase": "FIRST_DIAGNOSIS_COMPLETE_NO_ACCEPTED_ROWS",
   "pilot": {
     "main_split_raw_rows": 13972791,
     "diagnostic_rows": 48,
@@ -53,5 +53,18 @@
   "goal_complete": false,
   "weights_trained": false,
   "tests": "3 adapter regressions passed",
-  "updated_at": "2026-10-27T12:21:34.123399+00:00"
+  "updated_at": "2026-10-27T12:21:34.123399+00:00",
+  "first_diagnosis": {
+    "counts": {
+      "ACCEPT": 35,
+      "HOLD": 8,
+      "REJECT": 3,
+      "REVISE": 2
+    },
+    "planned_samples": 48,
+    "complete_semantic_verdicts": 40,
+    "all_first_nonaccepts_held": true,
+    "nonaccepts_are_not_all_confirmed_errors": true
+  },
+  "prospective_full_adapter_requirement": "Physical source shard/row attribution must stay outside prompt conditions; use a stable repository-revision memory source before full candidate normalization. No OpenMath PPL run has started."
 }

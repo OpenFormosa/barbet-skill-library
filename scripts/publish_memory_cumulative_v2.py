@@ -15,6 +15,31 @@ from scripts.verify_memory_publication_v2 import verify_file
 DATASET='OpenFormosa/barbet-long-context-sft'
 
 
+def replacement_deletions(existing, planned):
+    """Never delete an ancestor of a file that remains in the desired tree.
+
+    huggingface_hub removes unchanged Add operations before committing. Deleting
+    their parent folder would therefore remove files that the client skipped as
+    no-ops. Only obsolete files/subtrees may be removed.
+    """
+    wanted=set(planned)|{'.gitattributes'}
+    directories=set()
+    for path in wanted:
+        parts=path.split('/')
+        directories.update('/'.join(parts[:n]) for n in range(1,len(parts)))
+    deletes=set()
+    for path in set(existing)-wanted:
+        parts=path.split('/');obsolete=None
+        for n in range(1,len(parts)):
+            prefix='/'.join(parts[:n])
+            if prefix not in directories:obsolete=prefix;break
+        deletes.add((obsolete,True) if obsolete else (path,False))
+    for path,folder in deletes:
+        if path in wanted or (folder and any(p.startswith(path+'/') for p in wanted)):
+            raise ValueError('deletion would remove a planned retained file')
+    return [CommitOperationDelete(path,is_folder=folder) for path,folder in sorted(deletes)]
+
+
 def prepare():
     if (STATE/'SUPERSEDED.json').exists():raise ValueError('superseded by user v26 minimum-PPL selection')
     if (STATE/'publication-data-commit.json').exists():raise ValueError('cannot repackage committed data')
@@ -121,9 +146,7 @@ def publish():
     for f in plan['manifest']:
         if file_sha(DEST/f['path'])!=f['sha256']:raise ValueError('planned bytes changed')
     paths=api.list_repo_files(DATASET,repo_type='dataset',revision=plan['parent_commit'])
-    prefixes=sorted({p.split('/')[0] for p in paths if '/' in p})
-    operations=[CommitOperationDelete(p,is_folder=True) for p in prefixes]
-    operations += [CommitOperationDelete(p,is_folder=False) for p in paths if '/' not in p and p not in {'.gitattributes','README.md'}]
+    operations=replacement_deletions(paths,{f['path'] for f in plan['manifest']})
     operations += [CommitOperationAdd(f['path'],DEST/f['path']) for f in plan['manifest']]
     result=api.create_commit(DATASET,repo_type='dataset',operations=operations,parent_commit=plan['parent_commit'],num_threads=4,
         commit_message=plan.get('commit_message','Publish cumulative memory SFT waves with stricter function arguments and compact exact arrays'))
@@ -134,6 +157,11 @@ def publish():
 def verify():
     plan=json.loads((STATE/'publication-plan.json').read_text());data=json.loads((STATE/'publication-data-commit.json').read_text());revision=data['commit']
     if file_sha(STATE/'publication-plan.json')!=data['plan_sha256']:raise ValueError('plan changed')
+    expected_tree={f['path'] for f in plan['manifest']}|{'.gitattributes'}
+    actual_tree=set(HfApi(token=False).list_repo_files(DATASET,repo_type='dataset',revision=revision))
+    if actual_tree!=expected_tree:
+        save(STATE/'publication-tree-preflight-failure.json',{'commit':revision,'missing':sorted(expected_tree-actual_tree),'extra':sorted(actual_tree-expected_tree)})
+        raise ValueError('public tree differs before byte readback')
     folder=STATE/'anonymous-readback/files';folder.mkdir(parents=True,exist_ok=True);checks=[]
     with ThreadPoolExecutor(max_workers=16) as pool:
         tasks=[pool.submit(verify_file,f,revision,folder) for f in plan['manifest']]

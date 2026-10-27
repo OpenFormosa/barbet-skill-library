@@ -1,0 +1,21 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>發布流程修復</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>發布流程修復：兩個未變更的 recipe 設定檔</h1><p>初次公開提交 edaf5925 的訓練資料、兩套 token/label 陣列及預算證明完整；匿名核對時發現少了 recipe/memory_sft_v2.json 與 recipe/memory_sft_v2_scale_10m.json。其他 595 個計畫內檔案皆有實際匿名 SHA256 回執。</p><p>根因是發布程式先刪除整個根目錄，再加入新樹。已安裝的 huggingface_hub 會在送出提交前略過內容與遠端相同的 Add 操作，導致這兩個原本不需改動的設定檔被刪除卻未重新加入。</p><p>修正後只刪除已過時且不包含任何應保留檔案的子目錄或檔案。五項發布測試包含這個實際重現案例；兩項修復範圍測試禁止把訓練檔案遺失宣稱為 metadata 修復。</p><p>原提交、失敗紀錄與全部首次回執保留。修復以新提交補回兩個檔案並附上事故說明及測試證明，接著重新讀回新提交的所有檔案。尚未完成這一步前，不宣稱整份發布已驗證。</p><pre>{
+  &quot;phase&quot;: &quot;FIX_TESTED_REPAIR_PREPARING&quot;,
+  &quot;first_failed_publication_tree&quot;: {
+    &quot;commit&quot;: &quot;edaf59251f7b7280b40cf440d22988e0124638dc&quot;,
+    &quot;current_head&quot;: &quot;edaf59251f7b7280b40cf440d22988e0124638dc&quot;,
+    &quot;expected_files&quot;: 598,
+    &quot;actual_files&quot;: 596,
+    &quot;missing&quot;: [
+      &quot;recipe/memory_sft_v2.json&quot;,
+      &quot;recipe/memory_sft_v2_scale_10m.json&quot;
+    ],
+    &quot;extra&quot;: [],
+    &quot;missing_training_payload_files&quot;: [],
+    &quot;first_readback_failure_preserved&quot;: true
+  },
+  &quot;unchanged_add_client_behavior_confirmed_in_installed_code&quot;: true,
+  &quot;fix&quot;: &quot;Delete only obsolete paths or subtrees with no retained planned file. Preserve shared ancestors.&quot;,
+  &quot;tests_passed&quot;: 7,
+  &quot;training_payload_mutated&quot;: false,
+  &quot;all_files_at_repaired_revision_verified&quot;: false
+}</pre></html>
