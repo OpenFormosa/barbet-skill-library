@@ -1,0 +1,57 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>OpenMath 記憶資料預檢</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>OpenMath：先計算真正題數，再檢查答案</h1><p>固定的主訓練分割共有 13,972,791 個題目與解答配對。完整讀取 32 個檔案後，以相同 NFKC、大小寫與空白規則去重，只有 606,883 個不同題目。這個數量仍未扣除品質失敗、舊來源或評測重疊；合格訓練筆數目前為零。</p><p>來源的增廣 GSM8K 有 73,633 題，增廣 MATH 有 518,759 題，原始 GSM8K 訓練題有 7,426 題，原始 MATH 訓練題有 7,435 題。分類間仍有重疊，因此分類題數不能直接相加當總數。數量較小的 train_1M、train_2M、train_5M 是重疊視圖，不重複匯入。</p><p>官方說明指出，增廣題目的 expected_answer 是多數決答案。初步直接驗算已確認兩個錯誤：三位數立方尾碼為 125 的整數共有 22 個，總和為 11,990，來源標記 2,000；只由 1 與 4 組成且數字和為 12 的最大整數為 111111111111，來源卻標記 441111。這兩題所有版本先隔離，沒有改寫標準答案後重新入庫。</p><p>轉換將完整題目放入可見記憶，保留公開解答作為候選，expected_answer 不放入 prompt。同題只有一個由輸入決定的位置，前後位置不增加筆數。後續需對全部合格解答做固定 v26 的最低答案 PPL 選擇；多數決與低 PPL 均不是正確性證明。</p><p>48 筆首次診斷正在執行，每種來源各 12 個不同題目，選自每檔前 512 列。這是來源診斷，不是隨機全資料正確率估計。未執行來源程式，未訓練模型。</p><p><a href="https://huggingface.co/datasets/nvidia/OpenMathInstruct-2/tree/469216e3f46f4dacf476b382e192485ea51a143e">固定來源</a></p><details><summary>計數與驗證記錄</summary><pre>{
+  &quot;phase&quot;: &quot;FIRST_SOURCE_DIAGNOSIS_RUNNING&quot;,
+  &quot;pilot&quot;: {
+    &quot;main_split_raw_rows&quot;: 13972791,
+    &quot;diagnostic_rows&quot;: 48,
+    &quot;diagnostic_categories&quot;: {
+      &quot;augmented_gsm8k&quot;: 12,
+      &quot;math&quot;: 12,
+      &quot;augmented_math&quot;: 12,
+      &quot;gsm8k&quot;: 12
+    },
+    &quot;pilot_screening_counts&quot;: {
+      &quot;raw_pilot_rows&quot;: 16384,
+      &quot;held:independently_confirmed_incorrect_majority_label&quot;: 3,
+      &quot;held:prior_or_evaluation_overlap&quot;: 124,
+      &quot;held:invalid_openmath_fields&quot;: 5,
+      &quot;held:literal_reserved_delimiter&quot;: 1
+    },
+    &quot;all_source_files_rehashed&quot;: true,
+    &quot;driver_sha256&quot;: &quot;25e83ef2a351afe943dec6e2911c13374683f28cda6514ef7e79f208f2615092&quot;,
+    &quot;accepted_training_rows&quot;: 0,
+    &quot;all_alternative_answers_require_v26_ranking&quot;: true,
+    &quot;majority_vote_is_not_independent_ground_truth&quot;: true,
+    &quot;weights_trained&quot;: false
+  },
+  &quot;problem_inventory&quot;: {
+    &quot;raw_problem_solution_pairs&quot;: 13972791,
+    &quot;distinct_normalized_problems&quot;: 606883,
+    &quot;by_category&quot;: {
+      &quot;augmented_gsm8k&quot;: {
+        &quot;distinct_problems&quot;: 73633,
+        &quot;raw_solutions&quot;: 2111683
+      },
+      &quot;augmented_math&quot;: {
+        &quot;distinct_problems&quot;: 518759,
+        &quot;raw_solutions&quot;: 8938549
+      },
+      &quot;gsm8k&quot;: {
+        &quot;distinct_problems&quot;: 7426,
+        &quot;raw_solutions&quot;: 458822
+      },
+      &quot;math&quot;: {
+        &quot;distinct_problems&quot;: 7435,
+        &quot;raw_solutions&quot;: 2463737
+      }
+    },
+    &quot;scope&quot;: &quot;Complete main train split only. Exact NFKC/casefold/whitespace question identity, not semantic or cross-source deduplication. Before any quality or contamination filters.&quot;,
+    &quot;accepted_training_rows&quot;: 0
+  },
+  &quot;confirmed_incorrect_reference_query_holds&quot;: 2,
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;target_total_new_episodes&quot;: 10000000,
+  &quot;goal_complete&quot;: false,
+  &quot;weights_trained&quot;: false,
+  &quot;tests&quot;: &quot;3 adapter regressions passed&quot;,
+  &quot;updated_at&quot;: &quot;2026-10-27T12:21:34.123399+00:00&quot;
+}</pre></details></html>

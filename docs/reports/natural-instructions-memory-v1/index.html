@@ -1,5 +1,5 @@
-<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>NI 記憶資料候選</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Natural Instructions：外置記憶資料候選</h1><p>原始下載 756 個官方訓練任務，2,417,867 個實例；119 個官方測試任務未納入。逐任務檢查 Instance License，沒有用程式庫授權代替資料授權。最初範圍為 298 個任務、831,868 個原始實例。</p><p>首次類別診斷共 80 筆：41 ACCEPT、24 REVISE、15 REJECT。部分非通過意見本身矛盾或含模糊批評，所有首票仍保留隔離；不能將其比例當作真實錯誤率。</p><p>逐一檢查後，六個要求額外事實但未提供證據的任務整體隔離，共 21,810 個原始實例。另對題目主題擷取要求參考實體確實出現在輸入，避免把未提供的別名知識當成閱讀理解。</p><p>完整轉換 292 個任務、810,058 個原始實例，得到 777,140 個候選任務、1,085,311 個答案版本。已隔離 29,449 個既有問題或已知 OpenOrca 包裝重複、36 個首票負面題目、1,604 個無效輸出、1,822 個需要外部別名知識的實例、6 個本機評測重疊與 1 個缺欄位實例。這些是候選計數，尚非正式合格資料。</p><p>任務定義作為指令，完整目標輸入及至多兩個不同輸入的公開示例作為可見記憶；目標答案不放入記憶。同一題只使用一個前置或後置位置，不複製計數。所有不同參考輸出仍待 v26 最低答案 PPL 選擇、全域去重、家族切分、完整 token 與推論預算檢查。沒有模型訓練或新能力測量。</p><p><a href="https://github.com/allenai/natural-instructions/tree/55a365637381ce7f3748fa2eac7aef1a113bbb82">固定官方來源</a></p><details><summary>可重現記錄</summary><pre>{
-  &quot;phase&quot;: &quot;FULL_CANDIDATES_STAGED_PENDING_GLOBAL_RANKING&quot;,
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>NI 記憶資料候選</title><style>body{font:17px/1.8 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Natural Instructions：外置記憶資料候選</h1><p>原始下載 756 個官方訓練任務，2,417,867 個實例；119 個官方測試任務未納入。逐任務檢查 Instance License，沒有用程式庫授權代替資料授權。最初範圍為 298 個任務、831,868 個原始實例。</p><p>首次類別診斷共 80 筆：41 ACCEPT、24 REVISE、15 REJECT。部分非通過意見本身矛盾或含模糊批評，所有首票仍保留隔離；不能將其比例當作真實錯誤率。</p><p>逐一檢查後，六個要求額外事實但未提供證據的任務整體隔離，共 21,810 個原始實例。另對題目主題擷取要求參考實體確實出現在輸入，避免把未提供的別名知識當成閱讀理解。</p><p>完整轉換 292 個任務、810,058 個原始實例，得到 777,140 個候選任務、1,085,311 個答案版本。已隔離 29,449 個既有問題或已知 OpenOrca 包裝重複、36 個首票負面題目、1,604 個無效輸出、1,822 個需要外部別名知識的實例、6 個本機評測重疊與 1 個缺欄位實例。這些是候選計數，尚非正式合格資料。</p><p>任務定義作為指令，完整目標輸入及至多兩個不同輸入的公開示例作為可見記憶；目標答案不放入記憶。同一題只使用一個前置或後置位置，不複製計數。所有不同參考輸出仍待 v26 最低答案 PPL 選擇、全域去重、家族切分、完整 token 與推論預算檢查。沒有模型訓練或新能力測量。</p><p><a href="https://github.com/allenai/natural-instructions/tree/55a365637381ce7f3748fa2eac7aef1a113bbb82">固定官方來源</a></p><p>後續全列索引確認 56,396 組有多份答案，總共需評分 364,567 個競爭答案。另隔離 8 個同時作為公開示例與目標的題目，避免示例答案跨進驗證資料。已凍結上一批 9,625,791 個家族別名，未勝出的答案所帶的別名也保留其切分約束。</p><details><summary>計數與驗證記錄</summary><pre>{
+  &quot;phase&quot;: &quot;ALL_REFERENCE_CANDIDATES_INDEXED_FIRST_REVIEWS_AND_PPL_USE_SEPARATE_GPU_WINDOWS&quot;,
   &quot;preparation&quot;: {
     &quot;counts&quot;: {
       &quot;raw_instances_seen&quot;: 2417867,
@@ -116,5 +116,20 @@
     &quot;accepted_training_rows&quot;: 0,
     &quot;no_negative_review_replay&quot;: true
   },
-  &quot;updated_at&quot;: &quot;2026-10-27T11:56:52.942374+00:00&quot;
+  &quot;updated_at&quot;: &quot;2026-10-27T11:56:52.942374+00:00&quot;,
+  &quot;candidate_index&quot;: {
+    &quot;counts&quot;: {
+      &quot;seen&quot;: 1085311,
+      &quot;eligible&quot;: 1085311
+    },
+    &quot;distinct_answers&quot;: 1085311,
+    &quot;input_groups&quot;: 777140,
+    &quot;competing_groups&quot;: 56396,
+    &quot;answers_to_score&quot;: 364567,
+    &quot;status&quot;: &quot;INDEXED_NOT_YET_PPL_SELECTED&quot;,
+    &quot;all_score_inputs_are_eligible_only&quot;: true,
+    &quot;no_model_training&quot;: true
+  },
+  &quot;worked_example_target_query_holds&quot;: 8,
+  &quot;frozen_prior_aliases&quot;: 9625791
 }</pre></details></html>

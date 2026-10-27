@@ -1,0 +1,57 @@
+{
+  "phase": "FIRST_SOURCE_DIAGNOSIS_RUNNING",
+  "pilot": {
+    "main_split_raw_rows": 13972791,
+    "diagnostic_rows": 48,
+    "diagnostic_categories": {
+      "augmented_gsm8k": 12,
+      "math": 12,
+      "augmented_math": 12,
+      "gsm8k": 12
+    },
+    "pilot_screening_counts": {
+      "raw_pilot_rows": 16384,
+      "held:independently_confirmed_incorrect_majority_label": 3,
+      "held:prior_or_evaluation_overlap": 124,
+      "held:invalid_openmath_fields": 5,
+      "held:literal_reserved_delimiter": 1
+    },
+    "all_source_files_rehashed": true,
+    "driver_sha256": "25e83ef2a351afe943dec6e2911c13374683f28cda6514ef7e79f208f2615092",
+    "accepted_training_rows": 0,
+    "all_alternative_answers_require_v26_ranking": true,
+    "majority_vote_is_not_independent_ground_truth": true,
+    "weights_trained": false
+  },
+  "problem_inventory": {
+    "raw_problem_solution_pairs": 13972791,
+    "distinct_normalized_problems": 606883,
+    "by_category": {
+      "augmented_gsm8k": {
+        "distinct_problems": 73633,
+        "raw_solutions": 2111683
+      },
+      "augmented_math": {
+        "distinct_problems": 518759,
+        "raw_solutions": 8938549
+      },
+      "gsm8k": {
+        "distinct_problems": 7426,
+        "raw_solutions": 458822
+      },
+      "math": {
+        "distinct_problems": 7435,
+        "raw_solutions": 2463737
+      }
+    },
+    "scope": "Complete main train split only. Exact NFKC/casefold/whitespace question identity, not semantic or cross-source deduplication. Before any quality or contamination filters.",
+    "accepted_training_rows": 0
+  },
+  "confirmed_incorrect_reference_query_holds": 2,
+  "accepted_training_rows": 0,
+  "target_total_new_episodes": 10000000,
+  "goal_complete": false,
+  "weights_trained": false,
+  "tests": "3 adapter regressions passed",
+  "updated_at": "2026-10-27T12:21:34.123399+00:00"
+}

@@ -1,5 +1,5 @@
 {
-  "phase": "FULL_CANDIDATES_STAGED_PENDING_GLOBAL_RANKING",
+  "phase": "ALL_REFERENCE_CANDIDATES_INDEXED_FIRST_REVIEWS_AND_PPL_USE_SEPARATE_GPU_WINDOWS",
   "preparation": {
     "counts": {
       "raw_instances_seen": 2417867,
@@ -116,5 +116,20 @@
     "accepted_training_rows": 0,
     "no_negative_review_replay": true
   },
-  "updated_at": "2026-10-27T11:56:52.942374+00:00"
+  "updated_at": "2026-10-27T11:56:52.942374+00:00",
+  "candidate_index": {
+    "counts": {
+      "seen": 1085311,
+      "eligible": 1085311
+    },
+    "distinct_answers": 1085311,
+    "input_groups": 777140,
+    "competing_groups": 56396,
+    "answers_to_score": 364567,
+    "status": "INDEXED_NOT_YET_PPL_SELECTED",
+    "all_score_inputs_are_eligible_only": true,
+    "no_model_training": true
+  },
+  "worked_example_target_query_holds": 8,
+  "frozen_prior_aliases": 9625791
 }
