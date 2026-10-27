@@ -152,6 +152,10 @@ class HarnessAPITests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'registered tools'):
             make_request('Call tool', 'tool_call')
 
+    def test_unexecuted_checks_cannot_be_presented_as_public_test_success(self):
+        with self.assertRaisesRegex(ValueError, 'only for the python contract'):
+            make_request('2 + 3 = ?', 'number', public_tests=['assert False'])
+
     def test_unsupported_schema_cannot_silently_bypass_validation(self):
         tools = [{'name': 'f', 'parameters': {'type': 'object', 'properties': {
             'x': {'type': 'integer', 'minimum': 5}}}}]

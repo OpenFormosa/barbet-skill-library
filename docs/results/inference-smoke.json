@@ -1,7 +1,7 @@
 {
   "created_utc": "2026-10-27T03:27:38.340060+00:00",
   "scope": "Application integration smoke checks on authored examples, not a benchmark or a claim of semantic correctness. Raw model outputs are retained below, including imperfect wording.",
-  "unit_tests": 80,
+  "unit_tests": 81,
   "skill_definitions": 64,
   "compact_cards": 9,
   "wheel_install": "Passed outside the source checkout: bundled skills, CLI, policy and actual isolated worker.",
