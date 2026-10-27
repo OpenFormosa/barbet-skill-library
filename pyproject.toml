@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "barbet-skill-library"
+version = "0.1.0"
+description = "Versioned skills and a frozen-weight inference harness"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+dependencies = []
+
+[project.optional-dependencies]
+tokenizer = ["transformers==5.12.1", "jinja2>=3.1.0,<4"]
+vllm = ["vllm==0.23.0", "transformers==5.12.1", "jinja2>=3.1.0,<4"]
+
+[project.scripts]
+barbet-infer = "barbet_inference.cli:main"
+
+[project.urls]
+Repository = "https://github.com/OpenFormosa/barbet-skill-library"
+
+[tool.setuptools]
+packages = ["barbet_inference", "barbet_inference.skill_data", "testtime"]
+package-dir = {"barbet_inference.skill_data" = "skills"}
+
+[tool.setuptools.package-data]
+"barbet_inference" = ["profiles.json"]
+"barbet_inference.skill_data" = ["*/skill.json", "*/SKILL.md"]
+"testtime" = ["cards.json", "recommended_policy.json"]

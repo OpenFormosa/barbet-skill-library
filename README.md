@@ -35,6 +35,28 @@ curl -fLsS "https://raw.githubusercontent.com/OpenFormosa/barbet-skill-library/$
 
 事實回答修訂更新了 `factual-question-resolution` v2、`concept-explanation` v2 與 `grounded-evidence-answer` v4，並提供具體屬性查詢的窄路由，供應用程式放在寬鬆概念規則之前。適用例、來源／閉卷資料改造與已知題保留的驗證方式見 [`docs/factual-calibration.md`](docs/factual-calibration.md)。這些更新須另行固定版本與測量模型效果。
 
+## Harness 與 inference
+
+這個 repo 也提供可安裝的 [`barbet_inference`](barbet_inference/)：Python API、
+`barbet-infer` CLI、本機 vLLM 與 vLLM 相容 HTTP 後端。可直接輸入問題、
+指定技能、讀取自己的文件，並使用公開測試進行有限次修復，不需要 benchmark 答案檔。
+
+在 repo 目錄及獨立 Python 環境中安裝後即可使用：
+
+```bash
+pip install -e '.[vllm]'
+barbet-infer run --family mini \
+  --prompt '每箱 12 瓶，買 3 箱共有多少瓶？' --contract number \
+  --output outputs/answer.jsonl --trace outputs/calls.jsonl
+```
+
+`barbet-infer list-skills` 列出可用技能；`prepare` 可先檢視 prompt、來源與 token 預算。
+不指定技能時使用按需短卡，`--skill NAME` 可選用完整技能；支援 JSON/JSONL 批次請求。
+寫作、翻譯與一般文字生成可選 `--contract text`，不會套用短答案限制。
+完整的安裝、HTTP、Python API、資料格式、執行環境與輸出意義見
+[使用說明](docs/inference.md)，五種任務的自訂輸入見 [examples/inference](examples/inference/)。
+安裝套件包含全部 64 個技能與短卡。預設模型版本固定，不訓練、不使用大模型 fallback。
+
 ## 固定權重的 test-time 實驗
 
 新增的可選 [`testtime/`](testtime/) 元件支援中文詞彙檢索、按需短操作卡、帶來源的狀態與隔離 Python 執行。完整 [goal 與實驗規格](experiments/test_time_v1/goal.json)、[中文分析與實驗結果](docs/test-time-study.html) 將工程驗證、模型提升與接近 9B 分開記錄。此工作不訓練、不修改權重，也不更動已發布 HF 樣本。

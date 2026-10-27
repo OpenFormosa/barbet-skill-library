@@ -22,3 +22,7 @@ jobs:
         run: python scripts/build.py --check
       - name: Validate compact inference cards
         run: python scripts/build_inference_cards.py --check
+      - name: Build and verify installable inference package
+        run: |
+          python -m pip install build
+          python scripts/check_install.py
