@@ -92,7 +92,7 @@ def prepare():
     notice += [f'- [{sid}](https://huggingface.co/datasets/{sid}/tree/{rev}) — revision `{rev}`.' for sid,rev in sorted(source_repos.items())]
     notice+=['','The active data include MIT, Apache-2.0, CC-BY-4.0 and CC-BY-SA-4.0 subsets; filter the per-row license before use. Held or reference-only sources are not thereby redistributed. No UltraData-SFT-Agent artifacts are rehosted.']
     (PUBLIC/'NOTICE.md').write_text('\n'.join(notice)+'\n')
-    yaml=['---','pretty_name: Barbet Memory, Skills and Tool SFT v2','license: other','license_name: mixed-upstream-licenses','license_link: NOTICE.md','task_categories:','- text-generation','language:','- en','- zh','tags:','- retrieval-augmented-generation','- tool-use','- agent','- long-context','configs:']
+    yaml=['---','pretty_name: Barbet Memory, Skills and Tool SFT v2','license: other','license_name: mixed-upstream-licenses',f'license_link: https://huggingface.co/datasets/{DATASET}/blob/main/NOTICE.md','task_categories:','- text-generation','language:','- en','- zh','tags:','- retrieval-augmented-generation','- tool-use','- agent','- long-context','configs:']
     for config in ['records','tokenized','minicpm5_tokenized']:
         yaml += [f'- config_name: {config}']
         if config=='records':yaml += ['  default: true']

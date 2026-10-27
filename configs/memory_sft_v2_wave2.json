@@ -1,0 +1,16 @@
+{
+  "version": "memory-harness-sft-v2-wave2-v1",
+  "prospective": true,
+  "sources": [
+    {"repo": "Open-Orca/OpenOrca", "revision": "e9c87b4abb2609913751f9b26553fdb9c061796c", "license": "mit", "selection": "Provided-context text transformations or self-contained logical/numerical tasks; retain input and original public response. No closed-book trivia, no gold answer inserted into memory. Prefer GPT4 file before GPT3.5; at most one episode per original source id."},
+    {"repo": "Agent-Ark/Toucan-1.5M", "revision": "0df3cf37f2abefb380370cfb02eabea2a35ae782", "license": "apache-2.0", "selection": "Core Kimi-K2/OSS/Qwen3 only; exclude overlapping SFT view. Require original completeness=5, overall>=4, conciseness>=3, order_correctness=true, desired_tools_used_percentage=1, question_quality>=4. Upstream rubric is not local semantic validation."}
+  ],
+  "tool_adapter": "Preserve named legacy function calls and observations with explicit stable ids. Coalesce adjacent assistant action fragments before responses. Never infer response pairing when multiple pending calls have the same name. Drop only empty private-reasoning-only messages. Replace only exact recognized boilerplate tool declaration blocks whose schemas equal the explicit full tool list.",
+  "counting": "One OpenOrca trajectory per source id; one Toucan trajectory per full user-turn sequence. Canonical tool-id-insensitive episode dedup. All first-wave attempted queries and first holds remain excluded. Multiple tokenizer views do not add episodes.",
+  "splits": "Freeze wave-1 accepted query/source-family aliases. New components linking conflicting frozen folds are held. Remaining new components receive deterministic family splits before tokenization.",
+  "quality": "Use unchanged causal/tool-schema/loss/budget gates, pinned source hashes and full artifact readback. Filter all first semantic non-accept records without repeat-until-pass. New sampled controls and reviews are diagnostic, not all-row correctness claims.",
+  "goal": {"accepted_new_episode_target": 10000000, "intermediate_wave_completes_goal": false},
+  "resource_policy": "memory_sft_v2_scale_10m.json",
+  "no_model_training": true,
+  "no_source_program_execution": true
+}
