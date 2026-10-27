@@ -17,8 +17,8 @@ from scripts.recover_v26_publication_metadata_v1 import STATE as PARENT, DEST as
 from scripts.prune_v26_query_aliases_v1 import STATE as PARENT_INDEX
 from scripts.package_natural_instructions_scope_v2 import STATE as NI, SOURCE, PUBLIC, CONFIG as NI_SCOPE
 
-STATE = NI / 'cumulative-publication-v1'
-DEST = base.WORK / 'exports/memory-harness-v2-cumulative-0004'
+STATE = NI / 'cumulative-publication-v2'
+DEST = base.WORK / 'exports/memory-harness-v2-cumulative-0004-v2'
 FIRST = base.WORK / 'reports/memory-harness-v2'
 
 
@@ -39,7 +39,7 @@ def make_card(counts, unique, code, source_audit, winner_audit):
     return f'''---
 license: other
 license_name: mixed-source-licenses
-license_link: NOTICE.md
+license_link: https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/blob/main/NOTICE.md
 task_categories:
 - text-generation
 language:
