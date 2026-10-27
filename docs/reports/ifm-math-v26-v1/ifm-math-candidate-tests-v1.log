@@ -1,0 +1,8 @@
+test_all_first_nonaccepts_need_query_coverage (tests.test_ifm_math_candidates.IFMMathCandidateTests.test_all_first_nonaccepts_need_query_coverage) ... ok
+test_distinct_effort_answers_remain_comparable_and_not_preselected (tests.test_ifm_math_candidates.IFMMathCandidateTests.test_distinct_effort_answers_remain_comparable_and_not_preselected) ... ok
+test_literal_aliases_held_but_identical_versions_not (tests.test_ifm_math_candidates.IFMMathCandidateTests.test_literal_aliases_held_but_identical_versions_not) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.024s
+
+OK

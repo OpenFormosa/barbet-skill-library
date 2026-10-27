@@ -1,0 +1,35 @@
+{
+  "counts": {
+    "raw_rows_seen": 356955,
+    "candidate_answers": 339279,
+    "held:external_math_figure_not_rendered": 11527,
+    "held:prior_source_or_wrapper_query": 5490,
+    "held:first_nonaccept_or_known_bad_query": 16,
+    "held:same_normalized_query_different_literal_input": 542,
+    "held:local_evaluation_overlap": 71,
+    "held:literal_reserved_delimiter": 30
+  },
+  "candidate_bytes": 3270287196,
+  "full_normalization_policy_sha256": "12a04ddb30d9475950970fd0515187820b0a1a0502da4917d9c9ef728217cedf",
+  "accepted_training_rows": 0,
+  "needs_v26_ranking_and_release_gates": true,
+  "source_programs_executed": false,
+  "weights_trained": false,
+  "source_first_audit_counts": {
+    "ACCEPT": 33,
+    "HOLD": 9,
+    "REJECT": 1,
+    "REVISE": 11
+  },
+  "source_math_first_audit_counts": {
+    "ACCEPT": 8,
+    "REVISE": 1,
+    "HOLD": 9
+  },
+  "prior_query_identities": 5104070,
+  "unequal_literal_query_holds": 253,
+  "all_effort_versions_retained_for_v26": true,
+  "phase": "candidates_complete_ranking_pending",
+  "updated_at": "2026-10-27T15:38:01.582203+00:00",
+  "goal_complete": false
+}

@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>IFM 數學 v26 標準答案</title><style>body{font:17px/1.7 system-ui;max-width:1050px;margin:40px auto;padding:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>IFM 數學：保留同題候選供 v26 比較</h1><p>完整讀取七個已下載數學來源檔案，共 356,955 列，保留 339,279 個候選答案，尚未計入有效訓練資料。high、medium、low effort 不是獨立題目；不得以來源順序或多數決預選答案。只有完整條件相同、通過品質門檻的候選，才能用固定原生 v26 的答案 token 條件 PPL 選最低者，包含 assistant EOS，排除 prompt 與 observation loss；單一候選另標示沒有比較 PPL。</p><p>排除需要未提供圖形 11,527 列、既有來源問題 5,490 列、首次非通過或已知錯誤問題 16 列、同一正規化問題卻有不同字面輸入 542 列、評測重疊 71 列、特殊分隔符 30 列。圖形關鍵字門檻刻意保守，並不宣稱每一列一定缺圖。不同答案仍需完整 PPL、跨版本任務身份與訓練／驗證集合檢查。</p><p>來源首次診斷數學 18 題有 8 ACCEPT、1 REVISE、9 HOLD；HOLD 是審核輸出未完成，不能當作答案錯誤率。整組 IFM 54 題所有首次非通過問題皆保留隔離，沒有重新評審來求通過。首次來源診斷不等於全資料語義正確保證；此波候選標為來源回應經結構檢查，未經本地逐筆語義驗證。</p><p>記憶只包含使用者原始數學條件，不將教師的 think 或答案放進上下文。完整保留答案作為受監督輸出，沒有執行來源程式或訓練權重。三個轉換回歸測試確認：同題不同答案仍可比較、字面條件不同會隔離、所有首次非通過必須找得到對應問題。</p><p><a href="https://huggingface.co/datasets/IFM/TxT360-3efforts/tree/bfc4a082d11967cd7810fe0b773be87bf54fb32e">固定 IFM 修訂</a>；CC-BY-4.0。來源未提供逐列原始資料集名稱，不補造歸屬。目標仍是至少一千萬筆符合準則的新資料，無模型能力提升結論。</p><pre>{
+  &quot;counts&quot;: {
+    &quot;raw_rows_seen&quot;: 356955,
+    &quot;candidate_answers&quot;: 339279,
+    &quot;held:external_math_figure_not_rendered&quot;: 11527,
+    &quot;held:prior_source_or_wrapper_query&quot;: 5490,
+    &quot;held:first_nonaccept_or_known_bad_query&quot;: 16,
+    &quot;held:same_normalized_query_different_literal_input&quot;: 542,
+    &quot;held:local_evaluation_overlap&quot;: 71,
+    &quot;held:literal_reserved_delimiter&quot;: 30
+  },
+  &quot;candidate_bytes&quot;: 3270287196,
+  &quot;full_normalization_policy_sha256&quot;: &quot;12a04ddb30d9475950970fd0515187820b0a1a0502da4917d9c9ef728217cedf&quot;,
+  &quot;accepted_training_rows&quot;: 0,
+  &quot;needs_v26_ranking_and_release_gates&quot;: true,
+  &quot;source_programs_executed&quot;: false,
+  &quot;weights_trained&quot;: false,
+  &quot;source_first_audit_counts&quot;: {
+    &quot;ACCEPT&quot;: 33,
+    &quot;HOLD&quot;: 9,
+    &quot;REJECT&quot;: 1,
+    &quot;REVISE&quot;: 11
+  },
+  &quot;source_math_first_audit_counts&quot;: {
+    &quot;ACCEPT&quot;: 8,
+    &quot;REVISE&quot;: 1,
+    &quot;HOLD&quot;: 9
+  },
+  &quot;prior_query_identities&quot;: 5104070,
+  &quot;unequal_literal_query_holds&quot;: 253,
+  &quot;all_effort_versions_retained_for_v26&quot;: true,
+  &quot;phase&quot;: &quot;candidates_complete_ranking_pending&quot;,
+  &quot;updated_at&quot;: &quot;2026-10-27T15:38:01.582203+00:00&quot;,
+  &quot;goal_complete&quot;: false
+}</pre></html>
