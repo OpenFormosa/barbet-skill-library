@@ -25,12 +25,18 @@ def main():
         'diagnostics': maybe('final_diagnostics.json'),
         'engineering': maybe('engineering_results.json'),
         'context': maybe('context_results.json'),
+        'code_budget': maybe('code_budget_results.json'),
         'stopping': maybe('selection_decision.json'),
         'job_chain': maybe('work/final_job_schedule.json', {}).get('jobs', [])}
     for key, tag, split in [('dev', 'main', 'dev'), ('validation', 'main', 'validation'),
                              ('validation_confirm', 'confirm', 'validation'), ('test', 'final', 'test')]:
         path = HERE / 'work/scores' / tag / f'{split}-summary.json'
         result[key] = json.loads(path.read_text()) if path.exists() else []
+    if (result['comparisons'] and result['final_selection']
+            and len(result['test']) == len(result['final_selection']['comparisons'])
+            and all(r['complete'] for r in result['test'])):
+        result['status'] = 'completed'
+        result['test_status'] = 'all sealed comparisons completed; no post-test policy selection'
     # Stable preselected development gallery, never hand-picked after seeing a win.
     probes = maybe('probe_selection.json', {'ids': {}})['ids']
     ids = {i for group in probes.values() for i in group}
