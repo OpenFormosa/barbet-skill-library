@@ -145,7 +145,6 @@ def metadata(plan):
         if key in summary['counts'] and value!=summary['counts'][key] and value>1000: replacement[f'{value:,}']=f'{summary["counts"][key]:,}'
     for key,value in old['unique_counts'].items(): replacement[f'{value:,}']=f'{summary["unique_counts"][key]:,}'
     text=__import__('re').sub('|'.join(__import__('re').escape(k) for k in sorted(replacement,key=len,reverse=True)),lambda m:replacement[m[0]],text)
-    text = text.replace('## Continuation protocol', '| OpenFormosa/taiwan-civic-v1 | 933 |\n\n## Continuation protocol') if False else text
     source_header = '| Source | Episodes |'
     if source_header in text:
         start = text.index(source_header); end = text.index('\n\n', start)
