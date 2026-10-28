@@ -18,7 +18,7 @@ def prepare_dataset_request(row, *, model, mode='chat', target_turn=None, max_to
         native=portable_messages(history,tools)
         return {'model':model,'messages':[{k:v for k,v in m.items() if k!='loss'} for m in native],
                 'max_tokens':max_tokens,'temperature':0,'chat_template_kwargs':{'enable_thinking':False}}
-    if mode not in {'pangolin_completion','minicpm_completion'}:
+    if mode not in {'barbet_completion','pangolin_completion','minicpm_completion'}:
         raise ValueError('unknown request mode')
     mini=mode=='minicpm_completion'
     spans=json.loads(row['mini_target_spans_json' if mini else 'target_spans_json'])
