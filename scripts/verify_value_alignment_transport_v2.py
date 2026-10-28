@@ -21,7 +21,7 @@ def fetch_attributes(revision,tree):
     response.raise_for_status();raw=response.content
     blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
     info=tree['.gitattributes']
-    if info['blob_id']!=blob or info['size']!=len(raw):raise ValueError('Anonymous attributes differ from the pinned Git object')
+    if info['blob_id']!=blob or info['bytes']!=len(raw):raise ValueError('Anonymous attributes differ from the pinned Git object')
     return raw
 
 
