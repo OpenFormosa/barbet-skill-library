@@ -29,6 +29,18 @@ class BarbetTrainingTests(unittest.TestCase):
     def test_no_silent_truncation(self):
         with self.assertRaises(ValueError): BarbetSFTCollator(max_length=2)([self.row([10])])
 
+    def test_packed_bos_boundaries_and_stale_lengths_rejected(self):
+        a = self.row([10]); packed = {'input_ids': a['input_ids'] * 2, 'labels': a['labels'] * 2}
+        with self.assertRaises(ValueError): BarbetSFTCollator()([packed])
+        a['total_tokens'] = 100
+        with self.assertRaises(ValueError): BarbetSFTCollator()([a])
+
+    def test_tensor_input_preserves_exact_targets(self):
+        import torch
+        row = self.row([10, 11]); tensors = {k: torch.tensor(v) for k, v in row.items()}
+        batch = BarbetSFTCollator()([tensors])
+        self.assertEqual(batch['labels'].tolist()[0], row['labels'])
+
     def test_barbet_completion_keeps_exact_prefix_without_future_observation(self):
         messages = [{'role': 'user', 'content': 'Look up the record.', 'loss': False},
                     {'role': 'assistant', 'content': 'Calling lookup.', 'loss': True},
