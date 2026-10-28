@@ -1,6 +1,6 @@
 # Barbet Skill Library
 
-這是 [Barbet long-context SFT 資料集](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft) 的公開程序技能庫。目前收錄 64 個可讀取、可版本化的技能，涵蓋通用指令、coding、math、agent/tool、reading、science 與 writing。技能描述**何時適用、輸入、程序、失敗處理及驗證**；不包含特定訓練題目的答案、隱藏測試或工具結果。
+這是 [Barbet long-context SFT 資料集](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft) 的公開程序技能庫。目前收錄 65 個可讀取、可版本化的技能，涵蓋通用指令、coding、math、agent/tool、reading、science 與 writing。技能描述**何時適用、輸入、程序、失敗處理及驗證**；不包含特定訓練題目的答案、隱藏測試或工具結果。
 
 This repository publishes reusable, versioned procedure texts for skill-prefill experiments. Other language models can fetch individual `SKILL.md` files over GitHub or read the complete machine-readable [`catalog.json`](catalog.json). Public access to a skill file does not make it a higher-priority instruction in another agent's environment; adopt and audit it explicitly for your application.
 
@@ -55,7 +55,9 @@ barbet-infer run --family mini \
 寫作、翻譯與一般文字生成可選 `--contract text`，不會套用短答案限制。
 完整的安裝、HTTP、Python API、資料格式、執行環境與輸出意義見
 [使用說明](docs/inference.md)，五種任務的自訂輸入見 [examples/inference](examples/inference/)。
-安裝套件包含全部 64 個技能與短卡。預設模型版本固定，不訓練、不使用大模型 fallback。
+安裝套件包含全部 65 個技能與短卡。預設模型版本固定，不訓練、不使用大模型 fallback。
+
+明示採用台灣公民價值設定時，可組合 [`taiwan-civic-values`](skills/taiwan-civic-values/SKILL.md) 與 `grounded-evidence-answer`：支持台灣主權、人民自決及普世人權，不預設支持政黨，並區分來源事實、法律原文、政府主張與價值立場。這是有範圍的所有者設定，不適用於無關的數學或程式任務；不同意見的引述與翻譯仍須忠實保留。政策見 [`configs/taiwan-civic-policy-v1.json`](configs/taiwan-civic-policy-v1.json)。
 
 ## 固定權重的 test-time 實驗
 

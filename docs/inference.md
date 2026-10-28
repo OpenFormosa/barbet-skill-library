@@ -230,3 +230,27 @@ reading 列已在上下文提供 facts，可單獨使用 `memory.verify`；它�
 本套件重用 `testtime/` 中已封存的核心，但新增 CLI、自訂文件與完整技能功能本身
 不是先前 benchmark 的新分數。原實驗 runner、主評分器及封存檔保持原樣；
 過去的能力結論見[實驗報告](test-time-study.html)。
+
+
+## 台灣公民價值與 Barbet 續訓格式
+
+應用程式明示採用這個資料集的公民價值設定時，可以傳入
+`skills=["taiwan-civic-values", "grounded-evidence-answer"]`。範圍是台灣主權、
+人民自決、民主、自由、人權、法治、平等及多元，不預設支持特定政黨。
+此技能須與有版本的原始文件一起使用；它不是法律適用、外交承認或歷史事實的證據。
+
+對使用本資料集 portable JSON 格式續訓的 Barbet，設定
+`ContextAgent(..., prompt_format="barbet_portable_v1")`，或從資料列建立
+`prepare_dataset_request(row, model="your-barbet", mode="barbet_completion")`。
+保留完整問題、可用記憶與 assistant-only labels，不再套第二個 chat template
+或多加 BOS。原生 checkpoint 的 Jinja 與這個訓練格式不同。
+
+訓練端使用 `barbet_inference.training.BarbetSFTCollator`；labels 不預先位移，
+右側 padding 的 label 為 -100，模型內只位移一次。不要強制在 padding mask 上
+只用 Flash kernel；實際短 batch 測試以預設可處理 mask 的 SDPA 通過。
+跨樣本 packing 的 attention 與 Mamba state reset 尚未驗證，預設關閉。
+
+新增公民資料有 933 筆，以來源條文摘錄與明示規範案例為主；它們不代表已驗證
+模型的政治價值泛化。HF 的 `curriculum/taiwan-civic-v1.parquet` 可依 record_id
+辨識分層與 split。這個索引、source_refs_json、稽核報告與答案標記都屬於
+訓練／抽樣 metadata，不能當成模型的 RAG 證據。
