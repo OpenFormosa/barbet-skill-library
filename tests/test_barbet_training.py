@@ -4,6 +4,8 @@ from barbet_inference.training import BarbetSFTCollator
 from barbet_inference.readiness_quality import continuation_content_holds
 from barbet_inference.dataset_adapter import prepare_dataset_request
 from barbet_inference.sft import pangolin_render
+from barbet_inference.context_agent import ContextAgent
+from types import SimpleNamespace
 
 
 class BarbetTrainingTests(unittest.TestCase):
@@ -42,6 +44,24 @@ class BarbetTrainingTests(unittest.TestCase):
         self.assertEqual(actual['prompt'], text[:spans[0][0]])
         self.assertNotIn('FUTURE_OBSERVATION_42', actual['prompt'])
         self.assertFalse(actual['add_special_tokens'])
+
+    def test_barbet_agent_uses_exported_protocol_instead_of_checkpoint_template(self):
+        class Tokenizer:
+            def encode(self, text, add_special_tokens):
+                self.text = text
+                self.add_special_tokens = add_special_tokens
+                return [1] * len(text)
+            def apply_chat_template(self, *args, **kwargs):
+                raise AssertionError('Checkpoint native template must not replace training protocol')
+        tokenizer = Tokenizer()
+        backend = SimpleNamespace(tokenizer=tokenizer, max_model_len=10000)
+        agent = ContextAgent(backend, output_tokens=10, prompt_format='barbet_portable_v1')
+        messages = [{'role': 'system', 'content': 'Use evidence.'},
+                    {'role': 'user', 'content': 'Find the value.'}]
+        ids = agent._tokens(messages)
+        self.assertEqual(tokenizer.text, pangolin_render(messages)[0] + '<|assistant_channel|>')
+        self.assertFalse(tokenizer.add_special_tokens)
+        self.assertEqual(len(ids), len(tokenizer.text))
 
     def test_calendar_proof_is_independent_of_observation(self):
         def check(text):

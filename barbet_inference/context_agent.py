@@ -11,7 +11,7 @@ import json
 from .backends import Generation
 from .library import SkillLibrary
 from .memory import MemoryItem, MemoryStore, Verification, compose_memory_prompt, canonical
-from .sft import SYSTEM, RESERVED, portable_messages, prepare_tools
+from .sft import SYSTEM, RESERVED, portable_messages, prepare_tools, pangolin_render
 from .tool_contract import undeclared_arguments
 from testtime.native_calls import extract_final, strict_json
 
@@ -38,13 +38,16 @@ def parse_action(text):
 class ContextAgent:
     def __init__(self, backend, *, library=None, skills=(), tools=(), handlers=None,
                  memory=(), verifier=None, output_tokens=4096, max_steps=8,
-                 max_refinements=2, top_k=4, memory_placement='back'):
+                 max_refinements=2, top_k=4, memory_placement='back', prompt_format='native'):
         if not 1 <= max_steps <= 64 or not 0 <= max_refinements <= 2:
             raise ValueError('invalid iteration budget')
         if not isinstance(output_tokens, int) or output_tokens < 1:
             raise ValueError('invalid output budget')
         if memory_placement not in {'front','back'}:
             raise ValueError('invalid memory placement')
+        if prompt_format not in {'native', 'barbet_portable_v1'}:
+            raise ValueError('unknown prompt format')
+        self.prompt_format = prompt_format
         self.backend, self.library = backend, library or SkillLibrary()
         self.skills = list(skills)
         self.tools, self.validators = prepare_tools(list(tools))
@@ -61,8 +64,16 @@ class ContextAgent:
         native = [{k:v for k,v in m.items() if k != 'loss'} for m in portable_messages(messages,self.tools)]
         if any(RESERVED.search(m['content']) for m in native):
             raise ValueError('reserved native delimiter in live content; supply a quoted safe representation')
-        ids = self.backend.tokenizer.apply_chat_template(native, tools=[], tokenize=True,
-            add_generation_prompt=True, enable_thinking=False)
+        if self.prompt_format == 'barbet_portable_v1':
+            if any('<pad>' in m['content'] for m in native):
+                raise ValueError('literal native PAD in live source content')
+            text, _ = pangolin_render(messages, self.tools)
+            ids = self.backend.tokenizer.encode(text + '<|assistant_channel|>', add_special_tokens=False)
+            if hasattr(ids, 'ids'):
+                ids = ids.ids
+        else:
+            ids = self.backend.tokenizer.apply_chat_template(native, tools=[], tokenize=True,
+                add_generation_prompt=True, enable_thinking=False)
         if hasattr(ids, 'get'):
             ids = ids['input_ids']
         if ids and isinstance(ids[0],list):
