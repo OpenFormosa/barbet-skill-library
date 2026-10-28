@@ -69,7 +69,7 @@ barbet-infer run --family mini \
 
 ## 記憶、技能與 harness 訓練資料
 
-已完成 [HF 發布與完整回讀驗證](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/8bf1c59d4f1af11d8f6d28031e0065899f016018)：**10,328,696 筆合格新 episode**、**10,177,015 個不同標準化首問**、**9,787,683 個任務家族**，現役舊資料為 0，達到至少一千萬筆的資料目標。全部 5,521 個檔案已匿名下載並核對 SHA-256。問題數、家族、assistant 回合、工具觀察與有效訓練 tokens 分開統計；多答案、前後記憶位置與對話前綴不增加獨立題數。完整來源、長度分布、PPL 規則、驗證範圍與限制見 [繁體中文完整報告](docs/reports/memory-harness-10m-v1/index.html)。
+[HF 現行版本](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/d82521e2c6aa16377b014c4e6d1af6b746bd5c04) 以 **Barbet** 為訓練目標：**10,328,696 筆新 episode**、**10,177,015 個不同標準化首問**、**9,787,683 個任務家族**，現役舊資料為 0。預設 config 是 `tokenized`，使用與 Barbet v26 相同的 tokenizer；`records` 提供原始互動與來源。MiniCPM tokenized config 已移除，減少約 21.6 GB。載入與 labels 說明見 [Barbet 專用訓練格式](docs/reports/barbet-only-v1/index.html) 和 [訓練資料設定](configs/barbet_training_data_v1.json)。此次以已完整回讀的父版本、保留檔案的 Git 物件一致性及新 metadata 的匿名雜湊核對組合驗證；原始來源、驗收與限制見 [一千萬筆完整報告](docs/reports/memory-harness-10m-v1/index.html)。
 
 **同一完整輸入有多個合格答案時，以固定 native Barbet v26 的最低條件答案 PPL 為標準。** 全部競爭答案必須實際計分；只有一個答案時明確標示未量測。首次未通過的題目持續隔離，不改選次低答案。低 PPL 不代表答案正確。已發布 coding 資料的範圍與限制見 [IFM coding 報告](docs/reports/ifm-code-v26-v1/index.html)。
 

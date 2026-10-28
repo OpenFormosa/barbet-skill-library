@@ -1,0 +1,20 @@
+{
+  "dataset": "OpenFormosa/barbet-long-context-sft",
+  "config": "tokenized",
+  "model_family": "Barbet",
+  "tokenizer_sha256": "f84754e42cc4b08d5573a6b7306635e86ed04fff68ee707662d76d7044917176",
+  "model_reference_revision": "67131067ff1825179d5e38e91d499159669e9c66",
+  "fields": [
+    "input_ids",
+    "labels"
+  ],
+  "ignore_index": -100,
+  "labels_are_unshifted": true,
+  "trainer_causal_shift_count": 1,
+  "max_full_tokens": 126976,
+  "output_reserve_tokens": 4096,
+  "retokenization_required": false,
+  "additional_chat_template_required": false,
+  "minicpm_tokenizer_required": false,
+  "dataset_revision": "d82521e2c6aa16377b014c4e6d1af6b746bd5c04"
+}

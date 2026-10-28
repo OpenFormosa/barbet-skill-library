@@ -169,6 +169,8 @@ API 結果保留完整 trace；CLI 預設輸出較精簡的結果，使用 `--in
 
 ## 資料集與關係記憶介面
 
+Barbet 訓練請使用 HF 預設的 `tokenized` config，直接保留 `input_ids` 與 assistant-only `labels`；MiniCPM tokenized config 已移除。載入範例與 masking 說明見 [Barbet 訓練格式](reports/barbet-only-v1/index.html)。以下 `records` adapter 用於建立推論請求。
+
 HF 的 `records` config 保留 messages、工具 schema、完整 native 文字、
 target spans 與來源 metadata。用 `prepare_dataset_request` 建立不包含目標答案的
 請求；不要把整列 `source_refs_json` 放進 prompt，因為其中包含資料建置的計算軌跡。
