@@ -19,7 +19,19 @@ def supplemented(plan):
     check = release.read(release.STATE / 'independent-record-check.json')
     if not check['all_checks_passed'] or check['counts']['all_records_exact_render_and_full_arrays'] != 933:
         raise ValueError('New cohort verification incomplete')
-    ORIGINAL_METADATA(plan)
+    # The Barbet-only export holds metadata deltas, not inherited NOTICE bytes.
+    # Resolve the unchanged notice through its manifest-verified ancestor; no
+    # historical export or frozen row-subset driver is modified.
+    previous_dest = release.prior.parent.DEST
+    ancestor = release.prior.parent.parent.DEST
+    expected_notice = next(f for f in plan['manifest'] if f['path'] == 'NOTICE.md')
+    if release.sha(ancestor / 'NOTICE.md') != expected_notice['sha256']:
+        raise ValueError('Inherited source notice changed')
+    try:
+        release.prior.parent.DEST = ancestor
+        ORIGINAL_METADATA(plan)
+    finally:
+        release.prior.parent.DEST = previous_dest
     removed = {rid for job in plan['jobs'] for rid in job['removed_ids']}
     source = release.prior.audit.STATE / 'refinement-recorded-evidence-v1.parquet'
     table = pq.read_table(source)
@@ -37,6 +49,22 @@ def supplemented(plan):
     release.save(release.DEST / release.FOLDER / 'current-refinement-evidence.json', refinement)
     recipe_path = release.DEST / 'recipe/barbet-training-v2.json'; recipe = release.read(recipe_path)
     recipe['refinement_evidence_sidecar'] = relative
+    curriculum = []
+    cohort = release.read(release.STATE / 'new-cohort-summary.json')
+    for item in cohort['files']:
+        if '/records/' not in item['path']: continue
+        for row in pq.read_table(release.DEST / item['path'], columns=['record_id', 'split', 'family_id', 'source_refs_json', 'pangolin_supervised_tokens']).to_pylist():
+            refs = json.loads(row.pop('source_refs_json'))
+            row['civic_stratum'] = refs['verification_tier']; curriculum.append(row)
+    index_path = release.DEST / 'curriculum/taiwan-civic-v1.parquet'; index_path.parent.mkdir(exist_ok=True)
+    index = pa.Table.from_pylist(curriculum); pq.write_table(index, index_path, compression='zstd')
+    if len(index) != 933 or not pq.read_table(index_path).equals(index): raise ValueError('Civic curriculum index mismatch')
+    cumulative = release.read(release.STATE / 'summary.json')['counts']
+    civic_share = cohort['counts']['pangolin_supervised_tokens'] / cumulative['pangolin_supervised_tokens']
+    recipe.update(civic_record_id_sidecar='curriculum/taiwan-civic-v1.parquet',
+        civic_raw_supervised_token_share=civic_share,
+        civic_sampling_weights='Uncalibrated: set only in a separately evaluated pilot; 12 authored normative cases are not broad alignment coverage',
+        civic_id_sidecar_is_sampling_metadata_not_model_visible_evidence=True)
     release.save(recipe_path, recipe)
     code = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=release.prior.parent.base.REPO, text=True).strip()
     release.save(release.DEST / release.FOLDER / 'metadata-supplement-binding.json', {
@@ -44,6 +72,7 @@ def supplemented(plan):
         'frozen_payload_driver_sha256': plan['driver_sha256'],
         'new_cohort_check_sha256': release.sha(release.STATE / 'independent-record-check.json'),
         'current_refinement_sidecar_sha256': release.sha(target),
+        'civic_sampling_index_sha256': release.sha(index_path),
         'no_row_target_score_split_or_mask_rewritten_by_metadata_supplement': True})
     release.save(release.DEST / release.FOLDER / 'independent-record-check.json', check)
     with (release.DEST / 'README.md').open('a') as handle:
@@ -52,6 +81,12 @@ def supplemented(plan):
             'The previous evidence file/report is preserved as historical provenance; '
             'its counts describe the parent revision. These tags are recorded upstream '
             'signals, not locally verified repairs or an RL reward.\n')
+        handle.write(f'\nThe civic cohort is only {100*civic_share:.6f}% of cumulative supervised tokens '
+            'under raw corpus sampling. `curriculum/taiwan-civic-v1.parquet` identifies all 933 civic '
+            'records and their source-extractive/explicitly normative strata for transparent sampling. '
+            'It is metadata, not RAG evidence. Sampling weights are uncalibrated; twelve normative '
+            'cases do not establish broad value generalization and should not be multiplied to claim '
+            'additional independent data.\n')
     s = release.read(release.STATE / 'summary.json'); c = s['counts']; u = s['unique_counts']
     content = f'''<!doctype html><html lang="zh-Hant"><meta charset="utf-8">
 <title>台灣公民價值與 v26 續訓資料查核</title>
