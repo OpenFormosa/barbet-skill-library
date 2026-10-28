@@ -71,7 +71,11 @@ barbet-infer run --family mini \
 
 ## 記憶、技能與 harness 訓練資料
 
-[HF 現行版本](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/d82521e2c6aa16377b014c4e6d1af6b746bd5c04) 以 **Barbet** 為訓練目標：**10,328,696 筆新 episode**、**10,177,015 個不同標準化首問**、**9,787,683 個任務家族**，現役舊資料為 0。預設 config 是 `tokenized`，使用與 Barbet v26 相同的 tokenizer；`records` 提供原始互動與來源。MiniCPM tokenized config 已移除，減少約 21.6 GB。載入與 labels 說明見 [Barbet 專用訓練格式](docs/reports/barbet-only-v1/index.html) 和 [訓練資料設定](configs/barbet_training_data_v1.json)。此次以已完整回讀的父版本、保留檔案的 Git 物件一致性及新 metadata 的匿名雜湊核對組合驗證；原始來源、驗收與限制見 [一千萬筆完整報告](docs/reports/memory-harness-10m-v1/index.html)。
+[HF 現行版本](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/22a71567375bfec610056f560f8786014c346d9f) 以 **Barbet** 為訓練目標：**10,321,901 筆新 episode**、**10,170,472 個標準化首問**、**9,780,247 個任務家族**，現役舊資料為 0。預設 `tokenized` 使用與 v26 相同的 Barbet tokenizer 和 assistant-only labels；另提供 `records`，不需要 MiniCPM tokenizer。固定版本與 collator 設定見 [續訓設定 v2](configs/barbet_training_data_v2.json)，先前完整格式與 PPL 查核見 [v26 品質報告](docs/reports/v26-continuation-readiness-v1/index.html)。
+
+本輪先移除品質待審整題的 7,552 筆，再隔離政治主題待審的 176 筆、加入 933 筆公民資料，沒有以次低 PPL 答案替補。新資料包含 22 部台灣法規的 920 個條文檢索題、12 個明示價值案例及 1 個有日期與機關歸屬的官方引述；採用台灣主權、人民自決及普世人權，不預設支持政黨。法規摘錄不等於目前個案適用，政治詞彙分流不等於全語料的語義或價值認證。來源、授權、切分、前後 memory 及限制見 [公民資料與品質完整報告](docs/reports/taiwan-civic-v1/index.html)。
+
+新批次全部 933 筆完成原始來源對照、完整 tokens/labels 重建及 ContextAgent 答案前綴一致性檢查；library 共 65 個技能，完整檢查 274 個測試通過。這批僅占全資料約 **0.0031% 的監督 tokens**；HF 的 `curriculum/taiwan-civic-v1.parquet` 提供分層抽樣索引，但抽樣權重與模型效果尚未校準。發布採固定 staging 完整匿名 SHA-256 回讀、保留陣列逐項相等與既有 Git 物件驗證鏈；不是重新下載所有歷史資料。未更新模型權重，也未宣稱政治價值或能力已提升。
 
 **同一完整輸入有多個合格答案時，以固定 native Barbet v26 的最低條件答案 PPL 為標準。** 全部競爭答案必須實際計分；只有一個答案時明確標示未量測。首次未通過的題目持續隔離，不改選次低答案。低 PPL 不代表答案正確。已發布 coding 資料的範圍與限制見 [IFM coding 報告](docs/reports/ifm-code-v26-v1/index.html)。
 
