@@ -1,0 +1,9 @@
+{
+  "completed_requests": 369,
+  "prompt_tokens": 1549997,
+  "completion_tokens": 44073,
+  "controls": 12,
+  "target_reviews": 357,
+  "remote_paid_api_calls": 0,
+  "model_training": false
+}

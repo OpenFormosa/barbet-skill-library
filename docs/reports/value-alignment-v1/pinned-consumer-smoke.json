@@ -1,0 +1,18 @@
+{
+  "revision": "b88f4ff7171bb6fb8c1b775ae21de814ea2123fb",
+  "anonymous_datasets_streaming_load_passed": true,
+  "configs": [
+    "tokenized",
+    "records"
+  ],
+  "paired_rows": 3,
+  "record_ids": [
+    "f9737729c9c3da5aac7a6e54d8ed30ae53c24af184d8a773134f7516d6cda019",
+    "072764c30591d54054100e287e14e24ca3c90db7c53984168ea7ccfeb9bd0e1d",
+    "f13a2bd539d0fc578ea7768449f313fa7f6f88bb66950a6e31f903edc09f78e4"
+  ],
+  "full_native_array_lengths_and_assistant_masks_match": true,
+  "no_PAD_in_content": true,
+  "served_tokenizer_or_model_weights_loaded": false,
+  "scope": "Pinned public consumer wiring smoke; not a semantic or model alignment evaluation"
+}

@@ -71,11 +71,13 @@ barbet-infer run --family mini \
 
 ## 記憶、技能與 harness 訓練資料
 
-[HF 現行版本](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/22a71567375bfec610056f560f8786014c346d9f) 以 **Barbet** 為訓練目標：**10,321,901 筆新 episode**、**10,170,472 個標準化首問**、**9,780,247 個任務家族**，現役舊資料為 0。預設 `tokenized` 使用與 v26 相同的 Barbet tokenizer 和 assistant-only labels；另提供 `records`，不需要 MiniCPM tokenizer。固定版本與 collator 設定見 [續訓設定 v2](configs/barbet_training_data_v2.json)，先前完整格式與 PPL 查核見 [v26 品質報告](docs/reports/v26-continuation-readiness-v1/index.html)。
+[HF 現行版本](https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/b88f4ff7171bb6fb8c1b775ae21de814ea2123fb) 以 **Barbet** 為訓練目標：**10,018,967 筆新 episode**、**9,882,350 個標準化首問**、**9,533,685 個任務家族**，現役舊資料為 0。預設 `tokenized` 提供 v26 相同的 Barbet tokenizer 與 assistant-only labels，另有 `records`，不需要 MiniCPM tokenizer。固定版本與 collator 見 [續訓設定 v2](configs/barbet_training_data_v2.json)。
 
-本輪先移除品質待審整題的 7,552 筆，再隔離政治主題待審的 176 筆、加入 933 筆公民資料，沒有以次低 PPL 答案替補。新資料包含 22 部台灣法規的 920 個條文檢索題、12 個明示價值案例及 1 個有日期與機關歸屬的官方引述；採用台灣主權、人民自決及普世人權，不預設支持政黨。法規摘錄不等於目前個案適用，政治詞彙分流不等於全語料的語義或價值認證。來源、授權、切分、前後 memory 及限制見 [公民資料與品質完整報告](docs/reports/taiwan-civic-v1/index.html)。
+本輪對 10,321,901 筆現役資料的實際對話、情境指令及工具定義做全量主題分流，找到 535,398 筆候選。逐筆驗證 241,552 筆有限來源 ID／計數查詢及 920 筆法律摘錄的完整契約，再核對系統指令與完整資料身份。12 個正反審核控制通過；357 筆固定語境樣本的初次判定為 ACCEPT 345, REJECT 7, REVISE 5。敏感待審及未通過資料整題隔離，共新增移除 302,934 筆、288,122 個 query，沒有以次低 PPL 答案替補。待審隔離不表示每筆都錯誤，樣本結果不是全語料錯誤率。
 
-新批次全部 933 筆完成原始來源對照、完整 tokens/labels 重建及 ContextAgent 答案前綴一致性檢查；library 共 65 個技能，完整檢查 274 個測試通過。這批僅占全資料約 **0.0031% 的監督 tokens**；HF 的 `curriculum/taiwan-civic-v1.parquet` 提供分層抽樣索引，但抽樣權重與模型效果尚未校準。發布採固定 staging 完整匿名 SHA-256 回讀、保留陣列逐項相等與既有 Git 物件驗證鏈；不是重新下載所有歷史資料。未更新模型權重，也未宣稱政治價值或能力已提升。
+[價值政策](configs/value-alignment-policy-v1.json) 明示支持台灣主權、人民自決、民主、自由、人權、法治、平等與多元，不預設政黨，保障和平異議與對台灣政府的批評，也尊重中國人民及所有群體。忠實引文、翻譯、歷史與不同意見不因立場而改寫。品質與價值納入門檻優先於 v26 PPL。完整範圍、首次判定及限制見 [價值對齊資料查核報告](docs/reports/value-alignment-v1/index.html)。
+
+現役公民資料 933 筆，原始監督 token 占比約 **0.003235%**；現役抽樣索引與 refinement 索引均已排除本輪隔離 ID。保留資料的完整 tokens/labels、答案、來源、分割及既有分數完全不變。發布使用固定 staging 匿名 SHA-256 回讀與既有物件驗證鏈。這不是所有一千萬筆的逐筆語義價值認證，也不是模型對齊成效；本輪未訓練或更改權重。先前的 [v26 品質報告](docs/reports/v26-continuation-readiness-v1/index.html) 與 [公民資料報告](docs/reports/taiwan-civic-v1/index.html) 保留為歷史證據。
 
 **同一完整輸入有多個合格答案時，以固定 native Barbet v26 的最低條件答案 PPL 為標準。** 全部競爭答案必須實際計分；只有一個答案時明確標示未量測。首次未通過的題目持續隔離，不改選次低答案。低 PPL 不代表答案正確。已發布 coding 資料的範圍與限制見 [IFM coding 報告](docs/reports/ifm-code-v26-v1/index.html)。
 

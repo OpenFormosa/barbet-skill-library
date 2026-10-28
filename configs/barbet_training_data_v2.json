@@ -36,14 +36,19 @@
   ],
   "exclude_audit_and_source_refs_from_prompt": true,
   "recorded_error_followup_is_heuristic": true,
-  "refinement_evidence_sidecar": "proofs/taiwan-civic-v1/refinement-recorded-evidence-v1.parquet",
+  "refinement_evidence_sidecar": "proofs/value-alignment-v1/refinement-recorded-evidence-v1.parquet",
   "refinement_evidence_is_not_a_reward_or_verified_repair": true,
   "civic_policy": "CIVIC_POLICY.json",
   "civic_source_filter": "OpenFormosa/taiwan-civic-v1",
   "civic_efficacy_measured": false,
-  "civic_record_id_sidecar": "curriculum/taiwan-civic-v1.parquet",
-  "civic_raw_supervised_token_share": 3.071505928462506e-05,
+  "civic_record_id_sidecar": "curriculum/value-alignment-v1/civic-records.parquet",
+  "civic_raw_supervised_token_share": 3.234608116619492e-05,
   "civic_sampling_weights": "Uncalibrated: set only in a separately evaluated pilot; 12 authored normative cases are not broad alignment coverage",
   "civic_id_sidecar_is_sampling_metadata_not_model_visible_evidence": true,
-  "dataset_revision": "22a71567375bfec610056f560f8786014c346d9f"
+  "value_alignment_policy": "VALUE_ALIGNMENT_POLICY.json",
+  "value_alignment_report": "reports/value-alignment-v1/report.html",
+  "value_alignment_gate": "Sensitive inputs/targets require contextual acceptance or an exact source-bound contract; unknown and first nonaccept queries excluded",
+  "value_alignment_exhaustive_semantic_certification": false,
+  "value_alignment_efficacy_measured": false,
+  "dataset_revision": "b88f4ff7171bb6fb8c1b775ae21de814ea2123fb"
 }

@@ -1,0 +1,40 @@
+{
+  "new_held_queries": 288122,
+  "prior_held_queries": 7476,
+  "candidate_rows": 535398,
+  "candidate_dispositions": {
+    "HELD_PENDING_CONTEXTUAL_REVIEW": 292921,
+    "CONTEXTUAL_ACCEPT": 96,
+    "HELD_FIRST_NONACCEPT": 5,
+    "PROVEN_SOURCE_BOUND_CONTRACT": 242376
+  },
+  "candidate_queries_retained_rows": 242466,
+  "semantic_first_reviews": 357,
+  "semantic_counts": {
+    "ACCEPT": 345,
+    "REJECT": 7,
+    "REVISE": 5
+  },
+  "semantic_negative_categories": {
+    "REJECT": 7,
+    "REVISE": 5
+  },
+  "screen_negative_sample": {
+    "original_message_screen_sample": 256,
+    "remaining_screen_negative_after_registry_scan": 256,
+    "results": {
+      "ACCEPT": 249,
+      "REJECT": 3,
+      "REVISE": 4
+    }
+  },
+  "new_query_hold_is_not_a_claim_all_rows_are_wrong": true,
+  "query_wide_no_runner_up_substitution": true,
+  "no_exhaustive_semantic_alignment_guarantee": true,
+  "driver_sha256": "49cdde04b017d5d1144926875b5ec6ae6484f4097fd5aefe1be9f59f7d7c9f7e",
+  "decision_index_sha256": "65816bb9b27c672956a1528cb2d141e2b480dcdaa16441c5f8f13dca96b6a442",
+  "semantic_summary_sha256": "d230747bb133ed4dfc14bc3a0081ac1ae8c505dc399dfe03ee6804938f7d08b0",
+  "contract_summary_sha256": "09b6b8f9f476a6426f717d76b01906b5c24ec9793cc153f7f34f4d7fdcbd4358",
+  "system_binding_summary_sha256": "5eb1176bd6a81114f68383829426af5297c8364b7d822ee558a243a872a5f376",
+  "policy_sha256": "4308b8c490f652fa38405b9e31432ac84ddc2cac942574b26557cdb87b3242b4"
+}
