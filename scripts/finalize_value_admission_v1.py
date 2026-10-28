@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import pyarrow as pa
 import pyarrow.parquet as pq
+from barbet_inference.value_admission import disposition
 from scripts import audit_value_alignment_v1 as audit
 from scripts import publish_taiwan_civic_v1 as civic
 
@@ -37,10 +38,9 @@ def main():
     decisions=[];holds=set(negatives.values())
     for r in candidates:
         rid=r['record_id']
-        if rid in negatives:status='HELD_FIRST_NONACCEPT'
-        elif rid in proofs:status='PROVEN_SOURCE_BOUND_CONTRACT'
-        elif rid in positives:status='CONTEXTUAL_ACCEPT'
-        else:status='HELD_PENDING_CONTEXTUAL_REVIEW'
+        verdict='HOLD' if rid in negatives else ('ACCEPT' if rid in positives else None)
+        status=disposition(query_held=False,sensitive=True,contextual_verdict=verdict,bound_contract=rid in proofs)
+        status=status.replace('HOLD_','HELD_',1)
         if status.startswith('HELD'):holds.add(r['query_hash'])
         decisions.append({'record_id':rid,'query_hash':r['query_hash'],'source':r['source'],'status':status})
     # Non-hit sample failures and any failed mandatory civic case also hold the
