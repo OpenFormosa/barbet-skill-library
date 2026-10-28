@@ -1,0 +1,42 @@
+{
+  "dataset": "OpenFormosa/barbet-long-context-sft",
+  "config": "tokenized",
+  "model_family": "Barbet",
+  "tokenizer_sha256": "f84754e42cc4b08d5573a6b7306635e86ed04fff68ee707662d76d7044917176",
+  "model_reference_revision": "67131067ff1825179d5e38e91d499159669e9c66",
+  "fields": [
+    "input_ids",
+    "labels"
+  ],
+  "ignore_index": -100,
+  "labels_are_unshifted": true,
+  "trainer_causal_shift_count": 1,
+  "max_full_tokens": 126976,
+  "output_reserve_tokens": 4096,
+  "retokenization_required": false,
+  "additional_chat_template_required": false,
+  "minicpm_tokenizer_required": false,
+  "version": 2,
+  "training_protocol": "barbet_portable_v1",
+  "padding_side": "right",
+  "collator": "barbet_inference.training.BarbetSFTCollator",
+  "packing": false,
+  "inference_request_mode": "barbet_completion",
+  "context_agent_prompt_format": "barbet_portable_v1",
+  "attention_mask_from_sequence_lengths": true,
+  "literal_native_PAD_allowed": false,
+  "attention_backend": "default mask-capable SDPA kernels",
+  "force_flash_only_with_padding_mask": false,
+  "long_sequence_batching": "Prefer unpadded microbatches or equal-length buckets; verify runtime before scaling",
+  "native_short_collated_forward_verified": true,
+  "retrieval_input_whitelist": [
+    "messages",
+    "tools",
+    "causally_available_memory_documents"
+  ],
+  "exclude_audit_and_source_refs_from_prompt": true,
+  "recorded_error_followup_is_heuristic": true,
+  "refinement_evidence_sidecar": "proofs/v26-readiness/refinement-recorded-evidence-v1.parquet",
+  "refinement_evidence_is_not_a_reward_or_verified_repair": true,
+  "dataset_revision": "340a0647743af46cf05d309e4784f4f9d94d5fdb"
+}
