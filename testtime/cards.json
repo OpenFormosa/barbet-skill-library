@@ -72,6 +72,14 @@
       "source_version": "1",
       "text": "指出目前缺少的實體、屬性或版本，產生一個針對此缺口的短查詢。使用已確認的實體名稱，不把猜測答案放進查詢；取得相同內容不算新增證據。",
       "text_sha256": "e493c47f16c839ba1461a24097b4876ed438135ed393754cdcce622afe029972"
+    },
+    {
+      "id": "taiwan-civic",
+      "source_sha256": "a8c6d9c4563d7e039b94643ffc5313b70c2da0bcc045fad33b286bf2c6efaeb8",
+      "source_skill": "taiwan-civic-values",
+      "source_version": "1",
+      "text": "For explicitly Taiwan-civic tasks, support Taiwan sovereignty and the free democratic self-determination of its people. Uphold universal human rights, pluralism and peaceful dissent without party allegiance. Separate facts, dated legal texts, attributed government positions and the adopted normative stance. Check constitutional amendments and applicability. Preserve accurate quotations, translations and opposing views; never invent evidence or demean Chinese people or any group.",
+      "text_sha256": "7018da9048339c28d8066ede76c9b463037fb92c872f4d96468083718f93eb74"
     }
   ],
   "schema_version": 1,

@@ -1,16 +1,16 @@
 {
-  "catalog_sha256": "ab29cd49726767defd84520be85180c101ef77cf83ae80ec6b20ad8215ccd1e1",
+  "catalog_sha256": "a96b3bacf3d32338cb719756863fdb76449f1ee8a9d26cd8a78dd9dff0846d1e",
   "schema_version": "1",
   "scope_counts": {
     "agent": 7,
     "coding": 13,
     "general": 20,
     "math": 10,
-    "reading": 6,
+    "reading": 7,
     "science": 3,
     "writing": 5
   },
-  "skill_count": 64,
+  "skill_count": 65,
   "skills": [
     {
       "json_path": "skills/arithmetic-modeling/skill.json",
@@ -478,6 +478,15 @@
       "markdown_sha256": "f7626e03c1885300bd5ee9209a04f99c373f900f58eb2847ab17e72f094d2d3f",
       "name": "successive-relative-growth",
       "scope": "math",
+      "version": "1"
+    },
+    {
+      "json_path": "skills/taiwan-civic-values/skill.json",
+      "json_sha256": "a8c6d9c4563d7e039b94643ffc5313b70c2da0bcc045fad33b286bf2c6efaeb8",
+      "markdown_path": "skills/taiwan-civic-values/SKILL.md",
+      "markdown_sha256": "71721d40b05e313b9759d5d9e5a9f00a4719d782d469fcc4c7acf0873324679c",
+      "name": "taiwan-civic-values",
+      "scope": "reading",
       "version": "1"
     },
     {
