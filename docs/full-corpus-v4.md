@@ -14,6 +14,7 @@
 6. 上傳後匿名下載完整 bytes，比對 SHA-256，才釋放本次新產生的本地 Parquet。原始來源與 immutable receipts 保留。
 7. 獨立掃描全部新 records，統計各來源、領域、品質範圍、split、長度與 supervised-token exposure；完整總帳和所有來源／發布 receipts 必須一致。
 8. 對全部輸出的 QA／Natural Instructions 再從固定來源重建實際可見題目、任務定義、示例、完整文件與檢索觀察，避免只核對 gold 答案卻忽略錯置的輸入。這仍是來源忠實性檢查，不是學生學習效果。
+9. 對全部有限圖任務，另核對可見題目的操作、方向、明確實體 ID，及 inline 文件中的邊是否與獨立計算的註冊狀態一致。私有 query 正確、可見條件或資料錯置的控制必須失敗；顯示名稱和世界事實不因此被獨立認證。
 
 ## 三種品質範圍
 
@@ -24,6 +25,10 @@
 `reference_only` 只通過完整工程與來源追溯檢查，答案語義未獨立驗證。它另版提供，不自動進入訓練。完整處理不等於把全部舊答案再次核准。
 
 所有品質範圍分別提供 records／tokenized configs。預設 config 是完整 `corpus` 處置表，避免不小心把整個未平衡來源池當成 TRAIN。records 和 tokenized 是同一批題的兩種表示，不是兩倍資料量。
+
+完整來源匯出的 `root_task_id` 保守沿用舊 `family_id` 分組；同篇文章的不同題可能共享這個值，因此不能拿它當獨立問題數，也不能每個 family 只保留一題來冒充按題去重。獨立問題使用 `source`＋`query_hash`／`parent_record_id` 追蹤；切分仍維持整個 family 在同一 split。既有 v3 自創語義資料維持自己的 root 契約。
+
+`input_view_changed`／`skill_prefill_updated` 是走過重建／refresh 路徑的相容旗標，不是逐 byte 改變的證明。另有完整原始來源普查，比對實際 system 文字，分開計數自然閱讀改寫、確實改變的 skill、原本已相同的 skill，以及原樣保留的多候選輸入。重新套用相同 skill 不會被算成新問題或實際文字改變。
 
 ## 推論介面
 
@@ -44,11 +49,15 @@ Qwen tokenizer 只作 portable transport 檢查；Barbet 訓練仍使用 Pangoli
 
 `full_corpus.py` 保持凍結。`full_corpus_ranked.py` 只在 SQuAD 分支條件增加 singleton 限制，讓 ranked 輸入走原樣保留路徑。三個真實來源控制證明：原錯誤可重現、修正後原輸入／IDs／labels 不變、原 singleton 和其他來源輸出不變。修正與保留的首輪 receipt 清單另有 hash-bound amendment；未覆寫或放寬原 gate。
 
+額外來源重建也保留一個驗證器差異：舊 BM25 對 Python set 的浮點加總順序會使同分文件交換排列。真實 Hotpot 案例的文件集合、文字、題目與呼叫參數完全一致，兩個交換項目的穩定 `math.fsum` 分數均為 `7.919089446610025`。v2 checker 僅允許穩定分數**完全相等**的既有文件交換位置；選中集合、引述或分數不同仍拒絕。不修改原答案或工具回傳；152 個原先通過嚴格重建的 receipts 保留，先前失敗和控制證據另版保存。
+
+後續另一個真實案例落在 top-16 邊界：歷史工具回傳與目前重播分別取到不同的第 16 項，但穩定分數同為 `5.173923329321871`。v3 checker 允許這種邊界同分替代，要求每一筆歷史回傳逐欄等於固定來源文件、每個位置分數完全相等、不同成員只出現在 cutoff 同分群，且所有標註支持證據仍可見。沒有使用浮點 tolerance 放寬分數，也沒有改動歷史工具結果或訓練輸入；保留兩次較嚴格 checker 的成功與失敗紀錄。
+
 執行器最多 128 CPU workers、條件式預取下一組最多 64 分片、單一 remote publisher，保留至少 50 GiB 磁碟空間。沒有租用運算、呼叫付費 API 或啟動訓練。
 
 ## 驗證與發布
 
-- 全部單元測試：334 passed，另 112 subtests passed。既有 fork 測試產生 34 個 Python deprecation warnings。
+- 全部單元測試：343 passed，另 112 subtests passed。既有 fork 測試產生 34 個 Python deprecation warnings。
 - 真實 served `/tokenize`：四個 Chat／Completion ID 控制通過；沒有生成答案或訓練。服務已停止。
 - `collect_complete_release` 必須核對所有來源、資料／tokenized 配對、完整處置數、獨立統計與逐檔匿名回讀。
 - 發布最後仍檢查固定 revision 的完整遠端樹身分，以及每個 config／split 的匿名實際載入。這是介面控制，不用來替代已執行的全量 row 檢查。

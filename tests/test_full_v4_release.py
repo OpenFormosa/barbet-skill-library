@@ -23,6 +23,11 @@ def fixture_release(tmp_path):
     save_new(tmp_path/'statistics/one.json',{'source_receipt_sha256':sha_file(tmp_path/'receipts/one.json')})
     save_new(tmp_path/'source-visibility/one.json',{'source_receipt_sha256':sha_file(tmp_path/'receipts/one.json')})
     save_new(tmp_path/'source-visibility-summary.json',{'source_shards':1,'source_counts':{},'all_exported_QA_NI_visible_prefixes_reconstructed':True})
+    save_new(tmp_path/'graph-visibility/one.json',{'source_receipt_sha256':sha_file(tmp_path/'receipts/one.json')})
+    save_new(tmp_path/'graph-visibility-summary.json',{'source_shards':1,'source_counts':{},'all_exported_graph_queries_and_visible_state_checked':True})
+    save_new(tmp_path/'actual-changes/one.json',{'source_receipt_sha256':sha_file(tmp_path/'receipts/one.json')})
+    save_new(tmp_path/'actual-changes-summary.json',{'source_shards':1,'all_exported_rows_classified':True,
+        'counts':{'exported_rows':2,'actual_serialized_text_changed':1,'actual_serialized_text_identical':1}})
     save_new(tmp_path/'publication/groups/one.json',{'all_anonymous_hashes_match':True,'verified_count':5,'files':files})
     save_new(tmp_path/'publication/readback/one.json',{'verified':[
         {'path':f['remote'],'sha256':f['sha256'],'bytes':f['bytes'],'anonymous':True} for f in files]})
@@ -68,3 +73,5 @@ def test_exposure_policy_never_calls_source_fidelity_training_success():
     assert not policy['automatic_reference_only_admission']
     assert not policy['proposed_general_semantic_supervised_token_mix']['validated']
     assert policy['measured_exposure_groups'][0]['supervised_tokens']==10
+    assert policy['max_views_per_parent_record_per_pass']==1
+    assert policy['do_not_count_legacy_family_ids_as_independent_question_roots']

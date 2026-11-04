@@ -33,18 +33,25 @@ def main():
     for name in ['processing-summary', 'statistics-summary', 'split-preflight', 'live-tokenizer-controls',
                  'actual-source-integration-controls-v2', 'transport-server-stopped',
                  'resource-amendment-before-full-run', 'initial-attempt-closure',
-                 'ranked-input-amendment', 'ranked-input-controls', 'source-visibility-summary']:
+                 'ranked-input-amendment', 'ranked-input-controls', 'source-visibility-summary',
+                 'source-visibility-tie-amendment', 'actual-retrieval-tie-control',
+                 'source-visibility-cutoff-amendment', 'actual-retrieval-cutoff-control',
+                 'graph-visibility-summary','actual-graph-visibility-controls','actual-changes-summary']:
         write(name + '.json', read_json(STATE / (name + '.json')))
     write('processing-plan.json', read_json(STATE / 'plan.json'))
     write('exposure-policy.json', exposure_policy(statistics))
     write('source-processing-receipts.json', [read_json(p) for p in sorted((STATE / 'receipts').glob('*.json'))])
     write('anonymous-data-readback.json', [read_json(p) for p in sorted((STATE / 'publication/readback').glob('*.json'))])
     write('source-visible-prefix-receipts.json', [read_json(p) for p in sorted((STATE / 'source-visibility').glob('*.json'))])
+    write('graph-visible-query-receipts.json', [read_json(p) for p in sorted((STATE / 'graph-visibility').glob('*.json'))])
+    write('actual-text-change-receipts.json', [read_json(p) for p in sorted((STATE / 'actual-changes').glob('*.json'))])
     for name in ['semantic_v3_sources.lock.json', 'semantic_v3_environment.lock.json',
                  'semantic_v3_model_manifest.json', 'taiwan-civic-policy-v1.json',
                  'value-alignment-policy-v1.json', 'source_tool_contract_holds_v1.json']:
         write(name, read_json(REPO / 'configs' / name))
-    for name in ['unit-tests-complete-v2.log', 'request-adapter-tests.log', 'visibility-and-release-tests.log']:
+    for name in ['unit-tests-complete-v5.log', 'request-adapter-tests.log', 'visibility-and-release-tests.log',
+                 'source-visibility-v3-controls.log','final-exposure-policy-tests.log','graph-visibility-tests.log',
+                 'final-accounting-tests.log']:
         path = STATE / name
         if not path.exists(): raise FileNotFoundError(path)
         add(path, 'full-v4/metadata/' + name)
@@ -62,6 +69,7 @@ def main():
             config_counts.append({'status': status, 'split': split, 'rows': n})
     write('configuration-counts.json', config_counts)
     c = summary['counts']
+    changes=read_json(STATE/'actual-changes-summary.json')['counts']
     rows = '\n'.join(f"| `{status}` | {next(r['rows'] for r in config_counts if r['status']==status and r['split']=='train'):,} | {next(r['rows'] for r in config_counts if r['status']==status and r['split']=='validation'):,} |"
                      for status in ['verified', 'source_reference', 'reference_only'])
     card = f'''# Barbet long-context SFT — full corpus reprocessing v4
@@ -75,6 +83,10 @@ This branch preserves `main` at [{MAIN}](https://huggingface.co/datasets/OpenFor
 {rows}
 
 Each status has separate `full_v4_STATUS_records` and `full_v4_STATUS_tokenized` configurations. These are two representations of the **same** examples. The default `full_v4_dispositions` config has a `corpus` split accounting for all {c['active_rows_processed']:,} parents; it is not a training set. **`reference_only` is excluded from automatic training admission.** No mixture of the other statuses has been validated as a healthy training curriculum.
+
+In full-v4 records, `root_task_id` conservatively preserves the inherited `family_id` split group. This may group multiple questions sharing an article or passage; it is not an independent-question count. Use `source` + `query_hash` / `parent_record_id` for individual question identity and keep the inherited family together for splitting. The authored v3 semantic config retains its separate root contract.
+
+The compatibility fields `input_view_changed` and `skill_prefill_updated` mark the transformation/refresh path, which can be idempotent. A separate complete original-source census found **{changes['actual_serialized_text_changed']:,} serialized texts actually changed** and **{changes['actual_serialized_text_identical']:,} remained byte-identical**. Of the skill refreshes, {changes.get('skill_refresh_already_byte_identical',0):,} already matched the current library. These are reprocessed existing questions, not newly invented independent tasks. See [actual text-change census](full-v4/metadata/actual-changes-summary.json).
 
 ```python
 from datasets import load_dataset
@@ -93,8 +105,9 @@ data = load_dataset(
 - {c.get('natural_views_replaced',0):,} SQuAD learner views use the previously accepted natural source-only answer renderer, with front/back evidence and optional skills. Source gold answers and source splits are retained. This is not new source content.
 - All {c.get('decision_points',0):,} accepted assistant decisions have answer-free Chat and exact-renderer Completion prefix hashes and measured token budgets. Complete native Pangolin sequences use at most 131,072 tokens. Every inference prefix reserves 4,096 output tokens under both Pangolin and the actual Qwen served tokenizer; no truncation. Qwen tokenization is only a transport check. **Barbet training uses Pangolin; no MiniCPM tokenizer is used.**
 - {c.get('tool_reexecutions',0):,} finite-graph lookup calls were actually reexecuted from public state. A separate graph algorithm checked final answers. Source programs, arbitrary code and remote actions were not executed.
+- Every finite-graph row additionally binds the evaluated operation, direction and explicit entity IDs to the actual visible question. Inline edge records must match the registered state and actual memory rendering exactly; tool observations were checked by reexecution. Display labels and current-world facts are not independently certified. [Complete graph-input audit](full-v4/metadata/graph-visibility-summary.json).
 - All exported QA and Natural Instructions visible questions, definitions, examples, passages and actual retrieval observations were additionally reconstructed from pinned source documents. See the [complete source-visible prefix audit](full-v4/metadata/source-visibility-summary.json). This checks source fidelity beyond final-answer matching.
-- 334 program tests and 112 subtests passed. Historical fork tests emitted 34 Python deprecation warnings; these are disclosed in the test log.
+- 343 program tests and 112 subtests passed. Historical fork tests emitted 34 Python deprecation warnings; these are disclosed in the test log.
 - All pre-existing holds remain excluded. New holds have parent IDs and reasons. Root/query/source split checks found no conflicts in the complete active corpus. This does not assert semantic-neighbor decontamination against unavailable remote DEV outputs.
 
 ## Verification scope matters

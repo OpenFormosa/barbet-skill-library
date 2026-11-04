@@ -112,6 +112,29 @@ def collect_complete_release(state):
     for path in visibility_paths:
         if read_json(path)['source_receipt_sha256'] != sha_file(state / 'receipts' / path.name):
             raise ValueError('Model-visible context source receipt changed')
+    graph = read_json(state / 'graph-visibility-summary.json')
+    expected_graph = {k[len('verified:'):]:v for k,v in sources.items()
+                      if k.startswith(('verified:Wikidata5M/','verified:ConceptNet/'))}
+    if (graph['source_shards'] != len(expected) or not graph['all_exported_graph_queries_and_visible_state_checked']
+            or graph['source_counts'] != expected_graph):
+        raise ValueError('Graph visible operation/state coverage is incomplete')
+    graph_paths = list((state / 'graph-visibility').glob('*.json'))
+    if len(graph_paths) != len(expected):raise ValueError('Missing graph input audit receipt')
+    for path in graph_paths:
+        if read_json(path)['source_receipt_sha256'] != sha_file(state / 'receipts' / path.name):
+            raise ValueError('Graph visibility source receipt changed')
+    changes = read_json(state / 'actual-changes-summary.json')
+    if changes['source_shards'] != len(expected) or not changes['all_exported_rows_classified']:
+        raise ValueError('Actual text-change census is incomplete')
+    cc = changes['counts']
+    if (cc['exported_rows'] != counts['exported'] or
+            cc['actual_serialized_text_changed'] + cc['actual_serialized_text_identical'] != counts['exported']):
+        raise ValueError('Actual text changes do not account for all exported rows')
+    changes_paths = list((state / 'actual-changes').glob('*.json'))
+    if len(changes_paths) != len(expected):raise ValueError('Missing actual-change census receipt')
+    for path in changes_paths:
+        if read_json(path)['source_receipt_sha256'] != sha_file(state / 'receipts' / path.name):
+            raise ValueError('Actual-change census source receipt changed')
     return summary, statistics, list(files.values())
 
 
@@ -149,7 +172,10 @@ def exposure_policy(statistics):
         'do_not_uniformly_sample_the_full_pool': True,
         'reason': 'Source and operation exposure remain imbalanced; most verified rows are finite graph tasks.',
         'proposed_general_semantic_supervised_token_mix': {'general': 0.5, 'semantic': 0.5, 'validated': False},
-        'max_exposures_per_root_per_pass': 1,
+        'max_views_per_parent_record_per_pass': 1,
+        'root_task_id_semantics': 'conservative inherited family/split group; may contain several distinct questions',
+        'distinct_question_identity': ['source', 'query_hash'],
+        'do_not_count_legacy_family_ids_as_independent_question_roots': True,
         'unmet_recipe_requirements': [
             'independently verified general math, coding and natural-instruction content coverage',
             'student learnability, unseen-composition transfer and same-checkpoint retention evidence'],
