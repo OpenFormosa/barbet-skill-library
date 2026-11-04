@@ -13,6 +13,7 @@
 5. 寫出固定 schema 的 Parquet，再從落盤資料逐筆重算 token arrays。每筆 parent 都有處置紀錄。
 6. 上傳後匿名下載完整 bytes，比對 SHA-256，才釋放本次新產生的本地 Parquet。原始來源與 immutable receipts 保留。
 7. 獨立掃描全部新 records，統計各來源、領域、品質範圍、split、長度與 supervised-token exposure；完整總帳和所有來源／發布 receipts 必須一致。
+8. 對全部輸出的 QA／Natural Instructions 再從固定來源重建實際可見題目、任務定義、示例、完整文件與檢索觀察，避免只核對 gold 答案卻忽略錯置的輸入。這仍是來源忠實性檢查，不是學生學習效果。
 
 ## 三種品質範圍
 
@@ -47,7 +48,7 @@ Qwen tokenizer 只作 portable transport 檢查；Barbet 訓練仍使用 Pangoli
 
 ## 驗證與發布
 
-- 全部單元測試：332 passed，另 112 subtests passed。既有 fork 測試產生 34 個 Python deprecation warnings。
+- 全部單元測試：334 passed，另 112 subtests passed。既有 fork 測試產生 34 個 Python deprecation warnings。
 - 真實 served `/tokenize`：四個 Chat／Completion ID 控制通過；沒有生成答案或訓練。服務已停止。
 - `collect_complete_release` 必須核對所有來源、資料／tokenized 配對、完整處置數、獨立統計與逐檔匿名回讀。
 - 發布最後仍檢查固定 revision 的完整遠端樹身分，以及每個 config／split 的匿名實際載入。這是介面控制，不用來替代已執行的全量 row 檢查。

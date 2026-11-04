@@ -33,17 +33,18 @@ def main():
     for name in ['processing-summary', 'statistics-summary', 'split-preflight', 'live-tokenizer-controls',
                  'actual-source-integration-controls-v2', 'transport-server-stopped',
                  'resource-amendment-before-full-run', 'initial-attempt-closure',
-                 'ranked-input-amendment', 'ranked-input-controls']:
+                 'ranked-input-amendment', 'ranked-input-controls', 'source-visibility-summary']:
         write(name + '.json', read_json(STATE / (name + '.json')))
     write('processing-plan.json', read_json(STATE / 'plan.json'))
     write('exposure-policy.json', exposure_policy(statistics))
     write('source-processing-receipts.json', [read_json(p) for p in sorted((STATE / 'receipts').glob('*.json'))])
     write('anonymous-data-readback.json', [read_json(p) for p in sorted((STATE / 'publication/readback').glob('*.json'))])
+    write('source-visible-prefix-receipts.json', [read_json(p) for p in sorted((STATE / 'source-visibility').glob('*.json'))])
     for name in ['semantic_v3_sources.lock.json', 'semantic_v3_environment.lock.json',
                  'semantic_v3_model_manifest.json', 'taiwan-civic-policy-v1.json',
                  'value-alignment-policy-v1.json', 'source_tool_contract_holds_v1.json']:
         write(name, read_json(REPO / 'configs' / name))
-    for name in ['unit-tests-final.log', 'request-adapter-tests.log']:
+    for name in ['unit-tests-complete-v2.log', 'request-adapter-tests.log', 'visibility-and-release-tests.log']:
         path = STATE / name
         if not path.exists(): raise FileNotFoundError(path)
         add(path, 'full-v4/metadata/' + name)
@@ -92,6 +93,8 @@ data = load_dataset(
 - {c.get('natural_views_replaced',0):,} SQuAD learner views use the previously accepted natural source-only answer renderer, with front/back evidence and optional skills. Source gold answers and source splits are retained. This is not new source content.
 - All {c.get('decision_points',0):,} accepted assistant decisions have answer-free Chat and exact-renderer Completion prefix hashes and measured token budgets. Complete native Pangolin sequences use at most 131,072 tokens. Every inference prefix reserves 4,096 output tokens under both Pangolin and the actual Qwen served tokenizer; no truncation. Qwen tokenization is only a transport check. **Barbet training uses Pangolin; no MiniCPM tokenizer is used.**
 - {c.get('tool_reexecutions',0):,} finite-graph lookup calls were actually reexecuted from public state. A separate graph algorithm checked final answers. Source programs, arbitrary code and remote actions were not executed.
+- All exported QA and Natural Instructions visible questions, definitions, examples, passages and actual retrieval observations were additionally reconstructed from pinned source documents. See the [complete source-visible prefix audit](full-v4/metadata/source-visibility-summary.json). This checks source fidelity beyond final-answer matching.
+- 334 program tests and 112 subtests passed. Historical fork tests emitted 34 Python deprecation warnings; these are disclosed in the test log.
 - All pre-existing holds remain excluded. New holds have parent IDs and reasons. Root/query/source split checks found no conflicts in the complete active corpus. This does not assert semantic-neighbor decontamination against unavailable remote DEV outputs.
 
 ## Verification scope matters

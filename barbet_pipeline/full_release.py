@@ -98,6 +98,20 @@ def collect_complete_release(state):
     for path in stat_paths:
         if read_json(path)['source_receipt_sha256'] != sha_file(state / 'receipts' / path.name):
             raise ValueError('Statistics source receipt changed')
+    visibility = read_json(state / 'source-visibility-summary.json')
+    if (visibility['source_shards'] != len(expected) or
+            not visibility['all_exported_QA_NI_visible_prefixes_reconstructed']):
+        raise ValueError('Complete QA/NI model-visible context audit is missing')
+    for source in ['rajpurkar/squad_v2','hotpotqa/hotpot_qa','allenai/natural-instructions']:
+        required = sum(sources[status + ':' + source] for status in ['verified','source_reference'])
+        if visibility['source_counts'].get(source,0) != required:
+            raise ValueError('QA/NI visible context coverage mismatch: ' + source)
+    visibility_paths = list((state / 'source-visibility').glob('*.json'))
+    if len(visibility_paths) != len(expected):
+        raise ValueError('Missing model-visible context receipt')
+    for path in visibility_paths:
+        if read_json(path)['source_receipt_sha256'] != sha_file(state / 'receipts' / path.name):
+            raise ValueError('Model-visible context source receipt changed')
     return summary, statistics, list(files.values())
 
 

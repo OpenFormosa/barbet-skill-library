@@ -21,6 +21,8 @@ def fixture_release(tmp_path):
     save_new(tmp_path/'processing-summary.json',{'counts':counts,'by_source':receipt['by_source'],'source_shards':1})
     save_new(tmp_path/'statistics-summary.json',{'source_shards':1,'counts':{'rows':2,'input_tokens':20,'supervised_tokens':4,'decision_points':2}})
     save_new(tmp_path/'statistics/one.json',{'source_receipt_sha256':sha_file(tmp_path/'receipts/one.json')})
+    save_new(tmp_path/'source-visibility/one.json',{'source_receipt_sha256':sha_file(tmp_path/'receipts/one.json')})
+    save_new(tmp_path/'source-visibility-summary.json',{'source_shards':1,'source_counts':{},'all_exported_QA_NI_visible_prefixes_reconstructed':True})
     save_new(tmp_path/'publication/groups/one.json',{'all_anonymous_hashes_match':True,'verified_count':5,'files':files})
     save_new(tmp_path/'publication/readback/one.json',{'verified':[
         {'path':f['remote'],'sha256':f['sha256'],'bytes':f['bytes'],'anonymous':True} for f in files]})
