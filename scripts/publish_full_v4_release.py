@@ -9,6 +9,7 @@ from barbet_pipeline.common import read_json, save_new, sha_file
 from barbet_pipeline.full_corpus import STATE, REPO as CODE
 from barbet_pipeline.full_publication import BRANCH, MAIN, REPO
 from barbet_pipeline.full_release import collect_complete_release
+from barbet_pipeline.gpu_release import collect_complete_gpu_release
 from barbet_pipeline.anonymous_readback_ranged import verify_remote
 
 
@@ -43,8 +44,13 @@ def verify_tree(api, head, items):
 
 def main():
     summary,statistics,data=collect_complete_release(STATE)
+    gpu_summary,gpu_files=collect_complete_gpu_release(STATE,data)
     package=STATE/'release-package';metadata=read_json(package/'upload-plan.json')['items']
     manifest=read_json(package/'release-manifest.json')
+    if not manifest.get('all_exported_rows_gpu_measured') or manifest.get('gpu_measurement_rows')!=summary['counts']['exported']:
+        raise ValueError('Complete frozen-student GPU measurements are required for this release')
+    if not {x['remote'] for x in gpu_files}.issubset({x['remote'] for x in metadata}):
+        raise ValueError('GPU measurement files are absent from the exact publication plan')
     if manifest['source_active_rows']!=10018967 or not manifest['all_sources_processed']:
         raise ValueError('Full processing is required before final publication')
     ledger=STATE/'publication/final';api=HfApi()
@@ -82,6 +88,8 @@ def main():
             'all_configurations_and_splits_anonymously_load':True,'implementation_commit':manifest['implementation_commit'],
             'manifest_sha256':sha_file(package/'release-manifest.json'),'preserved_main':MAIN,
             'private_oracles_and_heldout_not_published':True,'training_ready':False,'model_training':'NOT_RUN',
+            'gpu_measured_rows':gpu_summary['totals']['rows'],'all_exported_ids_gpu_scored_exactly_once':True,
+            'gpu_scoring_is_not_learning_transfer_retention_validation':True,
             'source_processing_complete_is_not_model_capability_success':True})
     if completion_uploaded.exists():final=read_json(completion_uploaded)['head']
     else:

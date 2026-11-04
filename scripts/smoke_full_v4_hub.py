@@ -31,6 +31,12 @@ for config in front['configs']:
             identities[(status,split,'tokenized')]=row['record_id']
         elif name=='full_v4_dispositions':
             assert split=='corpus' and row['parent_record_id'] and row['status']
+        elif name=='full_v4_gpu_measurements':
+            from barbet_pipeline.gpu_release import validate_measurement
+            validate_measurement(row)
+            assert row['split']==split and row['parent_record_id'] and row['source']
+            assert row['model_revision']=='67131067ff1825179d5e38e91d499159669e9c66'
+            assert row['automatic_training_admission'] is False
         else:assert name in {'semantic_v3_records','semantic_v3_tokenized'} and row['record_id']
         controls.append({'configuration':name,'split':split,'first_row_loaded':True,'anonymous':True})
         del row,iterator,ds;gc.collect()
