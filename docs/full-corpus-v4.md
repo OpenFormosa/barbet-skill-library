@@ -78,3 +78,5 @@ Qwen tokenizer 只作 portable transport 檢查；Barbet 訓練仍使用 Pangoli
 全量來源的前 576 個分片完成時，原 urllib 回讀連線缺少總傳輸時限，部分下載長時間停滯。實際 37,469,408-byte 檔案的獨立 curl 控制於 2.87 秒完成且 SHA-256 相同。停止本任務的閒置 coordinator 與 128 個 worker，保存 576 份來源 receipt、49 組成功回讀與所有既有遠端 commits，再由 `run_full_corpus_v4_bounded.py` 續接。
 
 新的 `anonymous_readback` 逐次使用全新暫存檔，限制連線、低速與總時限，遵守 Retry-After，不把部分下載接入下一次 hash。8 個正負控制通過。實際資料轉換、source acceptance、匿名完整 byte hash 門檻都未改動。舊程式與失敗 log 保留，新 transport amendment 固定新程式 SHA。
+
+後續回讀以全域最多 8 條匿名連線處理大於 16 MiB 檔案的 8 MiB ranges；每段必須回傳精確的 HTTP 206 Content-Range，再依原始 byte 順序計算整檔 SHA-256。真實 37,293,940-byte 檔案控制於 3.34 秒完成。另 7 個控制覆蓋錯誤 range、拼接順序、續接與變造 proof。`full_publication_streamed` 持續派送尚未完成的檔案，避免每 32 檔的最慢一檔阻擋下一批；每檔與每批成功 proof 都可續接。來源處理程式不變。

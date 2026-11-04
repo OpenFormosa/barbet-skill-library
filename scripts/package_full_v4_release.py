@@ -37,7 +37,8 @@ def main():
                  'source-visibility-tie-amendment', 'actual-retrieval-tie-control',
                  'source-visibility-cutoff-amendment', 'actual-retrieval-cutoff-control',
                  'graph-visibility-summary','actual-graph-visibility-controls','actual-changes-summary',
-                 'bounded-readback-interruption','bounded-readback-amendment','bounded-readback-control']:
+                 'bounded-readback-interruption','bounded-readback-amendment','bounded-readback-control',
+                 'ranged-readback-interruption','ranged-readback-amendment','ranged-readback-control']:
         write(name + '.json', read_json(STATE / (name + '.json')))
     write('processing-plan.json', read_json(STATE / 'plan.json'))
     write('exposure-policy.json', exposure_policy(statistics))
@@ -52,7 +53,7 @@ def main():
         write(name, read_json(REPO / 'configs' / name))
     for name in ['unit-tests-complete-v5.log', 'request-adapter-tests.log', 'visibility-and-release-tests.log',
                  'source-visibility-v3-controls.log','final-exposure-policy-tests.log','graph-visibility-tests.log',
-                 'final-accounting-tests.log','anchored-config-tests.log','bounded-readback-tests.log']:
+                 'final-accounting-tests.log','anchored-config-tests.log','bounded-readback-tests.log','ranged-readback-tests.log']:
         path = STATE / name
         if not path.exists(): raise FileNotFoundError(path)
         add(path, 'full-v4/metadata/' + name)
@@ -108,7 +109,7 @@ data = load_dataset(
 - {c.get('tool_reexecutions',0):,} finite-graph lookup calls were actually reexecuted from public state. A separate graph algorithm checked final answers. Source programs, arbitrary code and remote actions were not executed.
 - Every finite-graph row additionally binds the evaluated operation, direction and explicit entity IDs to the actual visible question. Inline edge records must match the registered state and actual memory rendering exactly; tool observations were checked by reexecution. Display labels and current-world facts are not independently certified. [Complete graph-input audit](full-v4/metadata/graph-visibility-summary.json).
 - All exported QA and Natural Instructions visible questions, definitions, examples, passages and actual retrieval observations were additionally reconstructed from pinned source documents. See the [complete source-visible prefix audit](full-v4/metadata/source-visibility-summary.json). This checks source fidelity beyond final-answer matching.
-- 343 corpus program tests and 112 subtests passed, plus 8 bounded-transfer controls. Historical fork tests emitted 34 Python deprecation warnings; these are disclosed in the test log.
+- 343 corpus program tests and 112 subtests passed, plus 15 bounded-transfer, range and resumable-publication controls. Historical fork tests emitted 34 Python deprecation warnings; these are disclosed in the test log.
 - All pre-existing holds remain excluded. New holds have parent IDs and reasons. Root/query/source split checks found no conflicts in the complete active corpus. This does not assert semantic-neighbor decontamination against unavailable remote DEV outputs.
 
 ## Verification scope matters
