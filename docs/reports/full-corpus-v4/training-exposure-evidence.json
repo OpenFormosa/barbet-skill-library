@@ -1,0 +1,156 @@
+{
+  "schema": "barbet-train-exposure-evidence-v1",
+  "split": "train",
+  "all_train_rows_measured": true,
+  "totals": {
+    "rows": 9817667,
+    "input_tokens": 29570896855,
+    "supervised_tokens": 3872323168
+  },
+  "by_quality_scope": {
+    "reference_only": {
+      "rows": 3722424,
+      "input_tokens": 12915043760,
+      "supervised_tokens": 3454355358
+    },
+    "source_reference": {
+      "rows": 608930,
+      "input_tokens": 1535759209,
+      "supervised_tokens": 7562488
+    },
+    "verified": {
+      "rows": 5486313,
+      "input_tokens": 15120093886,
+      "supervised_tokens": 410405322
+    }
+  },
+  "by_source_and_scope": {
+    "reference_only|Agent-Ark/Toucan-1.5M": {
+      "rows": 197952,
+      "input_tokens": 1464386425,
+      "supervised_tokens": 454366841
+    },
+    "reference_only|IFM/TxT360-3efforts": {
+      "rows": 449057,
+      "input_tokens": 1457964625,
+      "supervised_tokens": 856459500
+    },
+    "reference_only|Open-Orca/OpenOrca": {
+      "rows": 1056085,
+      "input_tokens": 1934765556,
+      "supervised_tokens": 164108666
+    },
+    "reference_only|microsoft/orca-math-word-problems-200k": {
+      "rows": 187340,
+      "input_tokens": 290973487,
+      "supervised_tokens": 80487346
+    },
+    "reference_only|nvidia/Nemotron-SFT-Agentic-v2": {
+      "rows": 720604,
+      "input_tokens": 4400477585,
+      "supervised_tokens": 1117467700
+    },
+    "reference_only|nvidia/OpenCodeInstruct": {
+      "rows": 1010824,
+      "input_tokens": 2025887258,
+      "supervised_tokens": 444945324
+    },
+    "reference_only|voidful/agent-sft": {
+      "rows": 100562,
+      "input_tokens": 1340588824,
+      "supervised_tokens": 336519981
+    },
+    "source_reference|OpenFormosa/taiwan-civic-v1": {
+      "rows": 12,
+      "input_tokens": 22890,
+      "supervised_tokens": 382
+    },
+    "source_reference|allenai/natural-instructions": {
+      "rows": 608918,
+      "input_tokens": 1535736319,
+      "supervised_tokens": 7562106
+    },
+    "verified|ConceptNet/5.7-original-lexical-english": {
+      "rows": 850189,
+      "input_tokens": 1736473875,
+      "supervised_tokens": 72076869
+    },
+    "verified|OpenFormosa/taiwan-civic-v1": {
+      "rows": 908,
+      "input_tokens": 2703704,
+      "supervised_tokens": 126294
+    },
+    "verified|Wikidata5M/original-inductive-train": {
+      "rows": 4456147,
+      "input_tokens": 12854487455,
+      "supervised_tokens": 333560325
+    },
+    "verified|hotpotqa/hotpot_qa": {
+      "rows": 67810,
+      "input_tokens": 431955890,
+      "supervised_tokens": 3137802
+    },
+    "verified|rajpurkar/squad_v2": {
+      "rows": 111259,
+      "input_tokens": 94472962,
+      "supervised_tokens": 1504032
+    }
+  },
+  "by_inherited_domain_tag": {
+    "coding": {
+      "rows": 1217192,
+      "input_tokens": 4121396733,
+      "supervised_tokens": 1360165159
+    },
+    "math": {
+      "rows": 541125,
+      "input_tokens": 1050183914,
+      "supervised_tokens": 363346222
+    },
+    "reading": {
+      "rows": 5309064,
+      "input_tokens": 14904202631,
+      "supervised_tokens": 302373713
+    },
+    "search": {
+      "rows": 1,
+      "input_tokens": 16468,
+      "supervised_tokens": 601
+    },
+    "tool_use": {
+      "rows": 2750285,
+      "input_tokens": 9495097109,
+      "supervised_tokens": 1846437473
+    }
+  },
+  "finite_graph": {
+    "rows": 5306336,
+    "input_tokens": 14590961330,
+    "supervised_tokens": 405637194
+  },
+  "non_graph_with_verification_or_source_reference": {
+    "rows": 788907,
+    "input_tokens": 2064891765,
+    "supervised_tokens": 12330616
+  },
+  "reference_only_supervised_fraction": 0.8920627768224535,
+  "finite_graph_supervised_fraction_all_train": 0.10475292903032829,
+  "finite_graph_supervised_fraction_of_verified_plus_source_reference": 0.9704986467737791,
+  "interpretation": [
+    "reference_only marks an independent-verification gap; it does not mean every target is wrong.",
+    "Source fidelity and finite-graph semantic correctness are distinct verification scopes.",
+    "Inherited math/coding/reading/tool labels do not establish semantic difficulty or independent correctness.",
+    "A single global NLL is dominated by sources with more supervised tokens and cannot certify a balanced course.",
+    "No row is removed, promoted or reselected by this report; validation/DEV/TEST scores do not select TRAIN."
+  ],
+  "curriculum_constraints": {
+    "uniform_full_corpus_sampling_validated": false,
+    "uniform_scoped_subset_sampling_validated": false,
+    "reference_only_automatic_training_admission": false,
+    "fifty_fifty_general_semantic_mix_validated": false,
+    "protect_verified_semantic_pairs_and_value_aligned_civic_examples_from_score_only_dropping": true,
+    "broad_general_math_coding_instruction_verification_and_retention_evidence_still_required": true
+  },
+  "statistics_sha256": "e5f7aec70fcf410c807ec3949dd3b40015430db9f6b6b22fbb9520fbe3f0458e",
+  "implementation_sha256": "c63ca82752e21abb7feabe5bdf50a874728f7018faaf8d242d1aeb43a725ca6f"
+}

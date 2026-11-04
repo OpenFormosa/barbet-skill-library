@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-11-04T12:57:37.526379+00:00",
+  "completed_files": 56,
+  "completed_rows": 842230,
+  "input_tokens": 3722905907,
+  "supervised_tokens": 1233493855,
+  "joined_files": 56,
+  "workers": [
+    [
+      0,
+      "running",
+      true
+    ],
+    [
+      1,
+      "running",
+      true
+    ],
+    [
+      2,
+      "running",
+      true
+    ],
+    [
+      3,
+      "running",
+      true
+    ],
+    [
+      4,
+      "running",
+      true
+    ],
+    [
+      5,
+      "running",
+      true
+    ],
+    [
+      6,
+      "running",
+      true
+    ],
+    [
+      7,
+      "running",
+      true
+    ]
+  ],
+  "recently_written_outputs": 8,
+  "free_gib": 88.2,
+  "gpu_complete": false,
+  "publication_complete": false,
+  "worker_errors": [],
+  "kind": "live_progress_snapshot_not_completion_receipt",
+  "total_rows": 10018961,
+  "total_files": 1643,
+  "total_input_tokens": 30174631335,
+  "total_supervised_tokens": 3951574820,
+  "model_revision": "67131067ff1825179d5e38e91d499159669e9c66",
+  "plan_sha256": "77f10a986c4e2556da7f0352dcc44a2ba3c27a79a6183b9dfc752fd391b983f6",
+  "interpretation": "Teacher-forced frozen-model measurements; not accuracy, learnability, transfer, retention or completed release."
+}
