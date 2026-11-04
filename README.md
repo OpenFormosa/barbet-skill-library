@@ -4,6 +4,8 @@
 
 This repository publishes reusable, versioned procedure texts for skill-prefill experiments. Other language models can fetch individual `SKILL.md` files over GitHub or read the complete machine-readable [`catalog.json`](catalog.json). Public access to a skill file does not make it a higher-priority instruction in another agent's environment; adopt and audit it explicitly for your application.
 
+2026-11-04 的資料重整候選版已建立 [`barbet_pipeline`](barbet_pipeline/)：包含語義對照資料工廠、真實確定性工具、Pangolin assistant-only labels、獨立 oracle 與原生 Barbet adapter。公開候選版包含 114,125 筆自然閱讀與 6,915 筆語義 learner views，並另外為原 10,018,967 筆來源建立課程索引。使用方式、品質證據及尚未通過的訓練門檻見 [資料重整說明](docs/semantic-curriculum-v3.md) 與 [完整 HTML 報告](docs/reports/semantic-curriculum-v3/final.html)。資料正確性驗證不代表模型已學會；此輪沒有新訓練或能力分數。
+
 ## 讀取與組合
 
 每個 [`skills/`](skills/) 子目錄包含可編輯的 `skill.json` 和由它生成的 `SKILL.md`。例如：

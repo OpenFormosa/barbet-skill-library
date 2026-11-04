@@ -34,12 +34,13 @@ def reprocess_reading(work, output, tokenizer_path):
           'driver_sha256':sha_file(Path(__file__)),'exporter_sha256':sha_file(Path(__file__).with_name('export.py')),
           'expected_rows':114126,'new_independent_natural_questions':0,
           'identity_version':'pinned_upstream_task_id_v2_not_question_hash',
+          'memory_version':'v3_preserves_inherited_front_back_placement',
           'prior_failed_attempt':'reading-natural/first-failure.json'}
     save_new(output/'plan.json',plan)
     tokenizer=load_tokenizer(tokenizer_path)
     counts=Counter(); files=[]; buffers={}; indices=Counter(); seen=set(); title_splits={}; exclusions=[]
     accounted=0
-    columns=['record_id','family_id','query_hash','split','source','source_refs_json']
+    columns=['record_id','family_id','query_hash','split','source','source_refs_json','memory_placement']
     for job in jobs:
         if sha_file(job['local'])!=job['sha256']:raise ValueError('Original release input hash changed')
         excluded=set(job['excluded_indices']);row_index=0
@@ -66,10 +67,11 @@ def reprocess_reading(work, output, tokenizer_path):
                 with_skill=int(root[:2],16)%2==0
                 public={'task':q['question']+'\nAnswer in English using only the supplied passage. If it does not support an answer, state that the passage is insufficient.',
                     'context':[{'id':'source-passage','title':title,'revision':source['revision'],'text':q['context']}],
-                    'skills':[library_card('grounded-evidence-answer')] if with_skill else [],'tools':[]}
+                    'skills':[library_card('grounded-evidence-answer')] if with_skill else [],'tools':[],
+                    'memory_placement':old['memory_placement']}
                 messages=actor_messages(public)
                 messages.append({'role':'assistant','content':answer if answer is not None else 'The supplied passage does not provide enough information to answer this question.','loss':True})
-                metadata={'record_id':digest(['reading-natural-v3',rid]),'root_task_id':root,
+                metadata={'record_id':digest(['reading-natural-v3-front-back',rid,old['memory_placement']]),'root_task_id':root,
                     'source_group_id':old['family_id'],'semantic_family_id':'source_only_reading',
                     'program_graph_id':'answer_from_visible_passage' if answer is not None else 'recognize_unsupported_question',
                     'surface_template_id':'upstream_natural_question_'+digest(q['question']),
@@ -87,6 +89,7 @@ def reprocess_reading(work, output, tokenizer_path):
                     exclusions.append({'record_id':rid,'reason':str(exc)});continue
                 rr,tt=buffers.setdefault(split,([],[]));rr.append(r);tt.append(t)
                 counts['rows']+=1;counts['split:'+split]+=1;counts['skill_view:'+str(with_skill)]+=1
+                counts['memory_placement:'+old['memory_placement']]+=1
                 counts['answerable:'+str(answer is not None)]+=1
                 counts['input_tokens']+=r['pangolin_tokens'];counts['supervised_tokens']+=r['pangolin_supervised_tokens']
                 if len(rr)>=1024:

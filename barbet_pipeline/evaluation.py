@@ -59,7 +59,8 @@ def paired_condition_score(rows):
         g[r["variant"]] = r["correct"]
     if not groups or any(not {"original", "counterfactual", "invariance"} <= set(g) for g in groups.values()):
         raise ValueError("Incomplete semantic pair")
-    return {"groups": len(groups), "all_three_correct": sum(all(g.values()) for g in groups.values()),
+    return {"groups": len(groups), "all_three_correct": sum(all(g[v] for v in ['original','counterfactual','invariance']) for g in groups.values()),
+            "all_views_correct": sum(all(g.values()) for g in groups.values()),
             "pair_correct": sum(g["original"] and g["counterfactual"] for g in groups.values())}
 
 

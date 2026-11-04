@@ -104,6 +104,14 @@ class BoundaryAndMetricsTest(unittest.TestCase):
         self.assertEqual(risk_coverage([{"confidence": .9, "correct": False}])[-1]["risk"], 1)
         self.assertFalse(evaluation_record(condition="O4", raw_proposal={}, host_decision={}, execution_receipt={}, semantic_correct=True, naturally_ended=True)["eligible_for_main_score"])
 
+    def test_extra_faded_view_does_not_change_three_view_metric(self):
+        rows = [{"counterfactual_group_id": "r", "variant": v, "correct": True}
+                for v in ["original", "counterfactual", "invariance"]]
+        rows.append({"counterfactual_group_id": "r", "variant": "faded_binding", "correct": False})
+        result = paired_condition_score(rows)
+        self.assertEqual(result["all_three_correct"], 1)
+        self.assertEqual(result["all_views_correct"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,6 +1,6 @@
 {
   "schema_version": "barbet-semantic-curriculum-v3",
-  "status": "IMPLEMENTATION_IN_PROGRESS_NOT_TRAINED",
+  "status": "CANDIDATE_DATA_VALIDATED_TRAINING_NOT_RUN",
   "dataset": "OpenFormosa/barbet-long-context-sft",
   "parent_dataset_revision": "b88f4ff7171bb6fb8c1b775ae21de814ea2123fb",
   "historical_skill_revision": "f65d8fa5b083cb52489796c159c2d9ba955b78de",
@@ -71,5 +71,18 @@
     "transfer_NOT_RUN",
     "retention_NOT_RUN"
   ],
-  "additional_reprocessing": "114125 admitted SQuAD tasks exported as source-only natural answers; 1 over-budget view held, no truncation"
+  "additional_reprocessing": "114125 admitted SQuAD tasks exported as source-only natural answers; 1 over-budget view held, no truncation",
+  "actual_semantic_course": {
+    "train_roots": 2000,
+    "train_rows": 6286,
+    "train_supervised_tokens_one_pass": 462008,
+    "dev_roots": 200,
+    "dev_rows": 629,
+    "private_calibration_roots": 200,
+    "private_test_roots": 200,
+    "public_total_including_natural_reading": 121040,
+    "faded_binding_is_extra_view_not_new_root": true,
+    "replay_performed": false,
+    "unseen_program_composition_created": false
+  }
 }

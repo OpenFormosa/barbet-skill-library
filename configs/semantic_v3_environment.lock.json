@@ -9,5 +9,22 @@
   },
   "slurm_available": false,
   "gpu": "8 x NVIDIA H200 NVL",
-  "training_jobs_started": 0
+  "training_jobs_started": 0,
+  "barbet_native_environment": {
+    "torch": "2.11.0",
+    "transformers": "5.14.1",
+    "triton": "3.6.0",
+    "mamba-ssm": "2.3.2.post1",
+    "causal-conv1d": "1.6.2.post1",
+    "flash-attn_distribution": null,
+    "tokenizers": "0.22.2"
+  },
+  "qwen_teacher_environment": {
+    "torch": "2.13.0+cu130",
+    "transformers": "5.15.1",
+    "vllm": "0.1.dev20073+g8e685d198",
+    "ray": "2.58.0",
+    "triton": "3.7.1",
+    "tokenizers": "0.22.2"
+  }
 }

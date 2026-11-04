@@ -47,7 +47,13 @@ def make_root(split, ordinal):
              'source_id': 'SRC-' + root_id[12:20] + '-' + str(i),
              'destination_id': 'DST-' + root_id[20:28] + '-' + str(i),
              'optional': [None, False, 0, '0', '00017', True][i]} for i, n in enumerate(values)]
-    spec = {'kind': kind, 'rows': rows, 'table_id': table_id, 'field': field}
+    if kind in {'ordering','rule_version'}:
+        # Ties affect the selected rank, not just unrelated middle rows.
+        ranked_values=[threshold-9,threshold-9,threshold-2,threshold+3,threshold+11,threshold+11]
+        rng.shuffle(ranked_values)
+        for row,value in zip(rows,ranked_values):row[field]=str(value)
+    spec = {'kind': kind, 'rows': rows, 'table_id': table_id, 'field': field,
+            'memory_placement':'front' if ordinal%2 else 'back'}
     if kind == 'comparison':
         spec.update(operation='gt' if ordinal % 2 else 'lt', threshold=str(threshold))
     elif kind == 'ordering':
@@ -59,7 +65,11 @@ def make_root(split, ordinal):
             r[field] = str(30 * (1 + rng.randrange(30)))
         spec.update(row_id=rows[ordinal % len(rows)]['id'], from_unit='cm', to_unit='m')
     elif kind == 'rule_version':
-        spec.update(operation='nth_smallest', k=2, skill_id='priority_' + root_id[:6], effective_version='v1')
+        first='nth_smallest' if rng.randrange(2) else 'nth_largest'
+        rules={'v1':first,'v2':'nth_largest' if first=='nth_smallest' else 'nth_smallest'}
+        active='v1' if rng.randrange(2) else 'v2'
+        spec.update(operation=rules[active], k=2, skill_id='priority_' + root_id[:6],
+                    effective_version=active,rule_definitions=rules)
     elif kind == 'evidence_state':
         spec.update(state=['present', 'retrievable', 'missing_rule', 'conflicting_rules', 'unavailable'][ordinal % 5],
                     answer='ZONE-' + root_id[:6], document_id='doc_' + root_id[:10])
@@ -79,13 +89,15 @@ def make_root(split, ordinal):
     elif kind == 'units':
         changed['to_unit'] = 'mm'
     elif kind == 'rule_version':
-        changed.update(operation='nth_largest', effective_version='v2')
+        active='v2' if spec['effective_version']=='v1' else 'v1'
+        changed.update(operation=spec['rule_definitions'][active], effective_version=active)
     elif kind == 'evidence_state':
         changed['state'] = 'missing_rule' if spec['state'] in {'present', 'retrievable'} else 'present'
     else:
         changed['status'] = 'running' if spec['status'] == 'completed' else 'completed'
     invariant = copy.deepcopy(spec)
     invariant['rows'] = list(reversed(invariant['rows']))
+    invariant['memory_placement'] = 'back' if spec['memory_placement']=='front' else 'front'
     proof = require_discriminating(spec, changed, invariant)
     variants = {'original': spec, 'counterfactual': changed, 'invariance': invariant}
     return {'root_task_id': root_id, 'split': split, 'ordinal': ordinal, 'semantic_family_id': kind,
@@ -150,7 +162,7 @@ def public_world(spec, frame):
         skills.append(library_card('comparison-by-dimensions' if kind=='comparison' else 'ordered-top-k'))
         if kind == 'rule_version':
             sid = spec['skill_id']
-            for version, op in [('v1','nth_smallest'),('v2','nth_largest')]:
+            for version, op in spec['rule_definitions'].items():
                 skills.append({'id':sid,'version':version,'text':f'Fictional procedure: use {op} with k=2 on column {spec["field"]}. Ties: ID ascending. This definition applies only when this version is declared effective.'})
             context.append({'id':'active-rule','title':'Effective version declaration','revision':'1',
                             'text':f'The currently effective version of {sid} is {spec["effective_version"]}. Other versions are inactive.'})
@@ -191,7 +203,7 @@ def public_world(spec, frame):
                        'text':f'This is a versioned local simulator, not an external job. Operation ID: {op}. Query its current observable status.'})
         skills.append(library_card('external-state-grounding'))
     public = {'task':instantiate_question(frame,spec), 'context':context, 'skills':skills,
-              'tools':[tool_schema(n) for n in names]}
+              'tools':[tool_schema(n) for n in names], 'memory_placement':spec['memory_placement']}
     runtime = Executor(tables=tables, evidence=evidence, skills={s['id']+'@'+s['version']:s for s in skills}, ledger=ledger)
     return public, runtime
 

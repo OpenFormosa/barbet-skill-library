@@ -11,10 +11,20 @@ from barbet_pipeline.export import learner_row,write_shard,validate_shard,load_t
 from barbet_pipeline.harness import run_public_episode
 from barbet_pipeline.diagnostics import oracle_conditions
 from barbet_pipeline.common import canonical
+from barbet_pipeline.visibility import actor_messages
 from barbet_inference.backends import Completion
 
 
 class FactoryTests(unittest.TestCase):
+    def test_faded_binding_requires_visible_name_and_field_resolution(self):
+        from barbet_pipeline.faded_binding import faded_task
+        r=make_root('train',2)
+        frame='請從 {table} 找出顯示名稱為 {entity} 的記錄，依欄位說明回傳它的 {attribute}，保留 JSON 型別。'
+        spec,public,messages,executor=faded_task(r,frame)
+        self.assertNotIn(spec['row_id'],public['task']);self.assertNotIn(spec['field'],public['task'])
+        self.assertTrue(verify_execution(spec,executor.receipts[0]['output']))
+        wrong={'table_id':spec['table_id'],'row_id':next(x['id'] for x in spec['rows'] if x['id']!=spec['row_id']),'field':spec['field']}
+        self.assertFalse(verify_execution(spec,executor.call('resolve_value',wrong)))
     def test_all_information_states_and_semantic_pairs_execute(self):
         kinds=set();states=set();operations=set()
         for i in range(210):
@@ -42,6 +52,19 @@ class FactoryTests(unittest.TestCase):
         self.assertEqual(p['task'],q['task']);self.assertEqual(p['skills'],q['skills'])
         self.assertNotEqual(p['context'],q['context'])
 
+    def test_version_label_does_not_predict_operation_across_roots(self):
+        combinations=set()
+        for i in range(4,350,7):
+            s=make_root('train',i)['variants']['original']
+            combinations.add((s['effective_version'],s['operation']))
+        self.assertEqual(len(combinations),4)
+
+    def test_ties_affect_selected_rank(self):
+        spec=make_root('train',1)['variants']['original']
+        selected=solve(spec)[0]
+        value=next(r[spec['field']] for r in spec['rows'] if r['id']==selected)
+        self.assertEqual(sum(r[spec['field']]==value for r in spec['rows']),2)
+
     def test_roots_and_source_groups_disjoint_across_splits(self):
         seen=set();sources=set()
         for split in ['train','dev','calibration','sealed_test']:
@@ -49,6 +72,15 @@ class FactoryTests(unittest.TestCase):
                 r=make_root(split,i)
                 self.assertNotIn(r['root_task_id'],seen);seen.add(r['root_task_id'])
                 self.assertNotIn(r['source_group_id'],sources);sources.add(r['source_group_id'])
+
+    def test_memory_position_flip_preserves_answer_without_dropping_context(self):
+        r=make_root('train',0);frame=wording_contract(r)['reference_request']
+        a,_=public_world(r['variants']['original'],frame)
+        b,_=public_world(r['variants']['invariance'],frame)
+        self.assertNotEqual(a['memory_placement'],b['memory_placement'])
+        x=actor_messages(a)[1]['content'];y=actor_messages(b)[1]['content']
+        self.assertTrue(x.startswith(a['task']));self.assertTrue(y.endswith(b['task']))
+        self.assertEqual(solve(r['variants']['original']),solve(r['variants']['invariance']))
 
     def test_wording_cannot_convert_or_duplicate_slots(self):
         c=wording_contract(make_root('train',0))
