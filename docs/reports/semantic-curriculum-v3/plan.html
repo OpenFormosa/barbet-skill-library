@@ -1,0 +1,9 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>Barbet 語義課程 v3：實作登錄</title><style>body{font:17px/1.8 system-ui;max-width:1100px;margin:32px auto;padding:24px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:10px;text-align:left}code{overflow-wrap:anywhere}.state{padding:14px;background:#fff3cf}</style>
+<h1>Barbet 語義課程 v3</h1><p class="state">2026-11-04 登錄：實作與資料重整中。尚未訓練，尚未取得能力、遷移或保留增益。</p>
+<p>依使用者完整規格，將現役資料庫重新分級為可追溯的來源素材與經限定驗證的課程。新增語義對照、規則依賴、證據不足、參數綁定及真實工具回執。舊版資料與歷史拒絕決定保留。</p>
+<table><tr><th>工作</th><th>驗收</th><th>初始狀態</th></tr><tr><td>Inventory</td><td>固定來源、tokenizer、權重與程式；未知項明列</td><td>進行中</td></tr><tr><td>全現役資料重整</td><td>10,018,967 列逐列可追溯；來源、語義家族、驗證範圍與課程用途分開</td><td>待執行</td></tr><tr><td>工具與評分</td><td>獨立語義 oracle、公開/私有隔離、負例控制、狀態回執</td><td>待執行</td></tr><tr><td>資料工廠</td><td>2,000 TRAIN 根任務試作；對照答案確實不同、不變性答案相同；根/模板/組合切分；獨立計算 tokenizer 與 labels</td><td>待執行</td></tr><tr><td>資料發布</td><td>新候選 branch、完整 manifest 與匿名讀回；不把能力未知寫成通過</td><td>待執行</td></tr><tr><td>A/B、1M、RL/OPD</td><td>固定合法 base、工程 parity 與封存評測後才可啟動</td><td>NOT_RUN</td></tr></table>
+<p>對照 A/B 固定 parent、tokenizer、模板、一般資料、optimizer 與 supervised-token 預算；A 普通示範，B 語義對照與撤提示。50/50 暴露比例、2M/8M 觀察點均為待驗證提案。資料不足時不大量重播湊預算。</p>
+<p>原始任務、改寫、長短視圖不算獨立能力；根任務 instance 與 semantic family 分開報告。封存 TEST 與 private oracle 不發布、不供 teacher 生成 TRAIN。現有遠端 516 題未取得，污染排除範圍如實記錄。</p>
+<p>本機初查：8 × H200 可見且空閒，無 Slurm；磁碟約 107 GB 可用。以串流和 sidecar 處理來源庫，新增本機占用限 15 GiB，保留至少 50 GiB 空間。沒有啟動模型訓練。</p>
+<h2>變更紀錄</h2><p>初始登錄；後續修正追加於此，不覆寫已產生的失敗紀錄或預註冊判準。</p>
+</html>

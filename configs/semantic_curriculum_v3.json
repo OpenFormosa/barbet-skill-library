@@ -1,0 +1,38 @@
+{
+  "schema_version": "barbet-semantic-curriculum-v3",
+  "status": "IMPLEMENTATION_IN_PROGRESS_NOT_TRAINED",
+  "dataset": "OpenFormosa/barbet-long-context-sft",
+  "parent_dataset_revision": "b88f4ff7171bb6fb8c1b775ae21de814ea2123fb",
+  "historical_skill_revision": "f65d8fa5b083cb52489796c159c2d9ba955b78de",
+  "implementation_parent_revision": "ab3c886e4fd594b71c5db7a7d015999f5cca9396",
+  "publication_branch": "semantic-curriculum-v3-20261104",
+  "preserve_existing_release": true,
+  "tokenizer_sha256": "f84754e42cc4b08d5573a6b7306635e86ed04fff68ee707662d76d7044917176",
+  "canonical_target_selection_model_revision": "67131067ff1825179d5e38e91d499159669e9c66",
+  "target_selection": "minimum frozen v26 conditional answer PPL among independently eligible alternatives for the same full input; deterministic singletons explicitly unscored",
+  "model_training_parent": null,
+  "model_training_parent_blocked_reason": "Must verify a native1M base release and weights; cached legacy 28-layer weights cannot be substituted.",
+  "scope": ["versioned_inventory", "all_active_rows_source_curriculum_index", "public_private_boundary", "semantic_executors", "evaluation_contracts", "2000_train_root_factory_pilot", "candidate_dataset_publication"],
+  "pilot": {
+    "train_root_target": 2000,
+    "dev_root_target": 200,
+    "calibration_root_target": 200,
+    "sealed_test_root_target": 200,
+    "root_instances_are_not_semantic_families": true,
+    "variants_per_root": [2, 4],
+    "supervised_exposure_mix": {"general": 0.5, "semantic": 0.5},
+    "mix_status": "PROPOSED_NOT_EFFICACY_VALIDATED",
+    "supervised_token_checkpoints": [2000000, 8000000],
+    "checkpoints_status": "PROPOSED_NOT_AUTHORIZATION_TO_REPLAY_INSUFFICIENT_DATA",
+    "capability_evaluation": "NOT_RUN"
+  },
+  "publication_contract": {
+    "active_v2_rows": "immutable source bank with new per-row curriculum metadata; no blanket semantic acceptance",
+    "new_learner_views": "separate experimental configuration with exact Barbet labels and receipts",
+    "private_oracles_and_sealed_test": "local_only",
+    "learning_transfer_retention": "NOT_RUN until a separately gated training comparison",
+    "one_million_token_training": "NOT_RUN; short pilot is not native1M certification"
+  },
+  "resources": {"max_training_nodes": 1, "max_training_gpus": 8, "max_teacher_requests_in_flight": 2, "max_additional_local_bytes": 16106127360, "minimum_free_bytes": 53687091200, "paid_compute": false},
+  "gates": ["source_and_model_identity", "private_visibility", "executor_semantics", "counterfactual_discrimination", "split_integrity", "target_correctness", "render_and_mask_identity", "public_readback", "learning_NOT_RUN", "transfer_NOT_RUN", "retention_NOT_RUN"]
+}
