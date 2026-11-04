@@ -9,7 +9,7 @@ from barbet_pipeline.common import read_json, save_new, sha_file
 from barbet_pipeline.full_corpus import STATE, REPO as CODE
 from barbet_pipeline.full_publication import BRANCH, MAIN, REPO
 from barbet_pipeline.full_release import collect_complete_release
-from barbet_pipeline.publication import verify_remote
+from barbet_pipeline.anonymous_readback import verify_remote
 
 
 def field(value, key):

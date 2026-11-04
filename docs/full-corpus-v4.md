@@ -72,3 +72,9 @@ Qwen tokenizer 只作 portable transport 檢查；Barbet 訓練仍使用 Pangoli
 現有七類語義對照、invariance 與撤提示資料保留為獨立 config；不把模板複製成百萬新任務。v4 已包含 SQuAD parents，不能再拼接舊自然閱讀 config 重複計數。私有 calibration、TEST、oracle 沒有公開。
 
 沒有新的訓練、可學習性、未見組合遷移或同 checkpoint 保留成績；沒有新 1M 課程或 MiniCPM／Qwen 能力等價宣稱。這不影響全量資料處理必須完成，但必須保留資料工程完成與模型能力成功之間的證據界線。
+
+## 匿名傳輸續接
+
+全量來源的前 576 個分片完成時，原 urllib 回讀連線缺少總傳輸時限，部分下載長時間停滯。實際 37,469,408-byte 檔案的獨立 curl 控制於 2.87 秒完成且 SHA-256 相同。停止本任務的閒置 coordinator 與 128 個 worker，保存 576 份來源 receipt、49 組成功回讀與所有既有遠端 commits，再由 `run_full_corpus_v4_bounded.py` 續接。
+
+新的 `anonymous_readback` 逐次使用全新暫存檔，限制連線、低速與總時限，遵守 Retry-After，不把部分下載接入下一次 hash。8 個正負控制通過。實際資料轉換、source acceptance、匿名完整 byte hash 門檻都未改動。舊程式與失敗 log 保留，新 transport amendment 固定新程式 SHA。
