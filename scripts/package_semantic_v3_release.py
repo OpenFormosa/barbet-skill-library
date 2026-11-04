@@ -11,9 +11,10 @@ import yaml
 from barbet_pipeline.common import read_json,save_new,sha_file
 
 
-def package(state,repo):
+def package(state,repo,package_name='release-package'):
     state,repo=Path(state),Path(repo)
-    out=state/'release-package'
+    if Path(package_name).name!=package_name:raise ValueError('Package name must be a single directory component')
+    out=state/package_name
     if out.exists():raise FileExistsError(out)
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip()
     if subprocess.check_output(['git','status','--porcelain'],cwd=repo,text=True).strip():
@@ -66,7 +67,7 @@ def package(state,repo):
         configs.append(entry)
     configs.append({'config_name':'source_curriculum_index_v3','data_files':[{'split':'corpus','path':'semantic-v3/source-index/*.parquet'}]})
     front={'language':['zh','en'],'license':'other','license_name':'per-source-licenses-preserved',
-        'license_link':'README.md#licensing','task_categories':['text-generation'],
+        'license_link':'https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/blob/semantic-curriculum-v3-20261104/README.md#licensing','task_categories':['text-generation'],
         'tags':['barbet','semantic-curriculum','tool-use','skill','experimental'],'configs':configs}
     text='''# Barbet long-context SFT — semantic curriculum v3 candidate
 
