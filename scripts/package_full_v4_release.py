@@ -55,7 +55,7 @@ def main():
                  'context-probe-plan', 'context-probe-scores', 'context-probe-summary', 'context-probe-controls',
                  'provenance-index', 'provenance-index-restart', 'complete-summary', 'curriculum-policy',
                  'measurement-files', 'launch', 'workers-exited', 'batching-profile', 'aggregate-preflight-restart',
-                 'incomplete-release-rejection']:
+                 'incomplete-release-rejection', 'runtime-environment']:
         write('gpu-' + name + '.json', read_json(gpu / (name + '.json')))
     write('gpu-score-receipts.json', [read_json(p) for p in sorted((gpu / 'score-receipts').glob('*.json'))])
     write('gpu-aggregation-receipts.json', [read_json(p) for p in sorted((gpu / 'aggregation-receipts').glob('*.json'))])
@@ -146,6 +146,8 @@ All **{gpu_summary['totals']['rows']:,} exported rows** were scored on the actua
 Global supervised-token-weighted NLL is **{gpu_summary['totals']['token_weighted_nll']:.6f}**. Teacher-forced token prediction is not free-generation task success. Source verification statuses are unchanged by model scores. The gradient projection borrows from [LESSER](https://arxiv.org/abs/2610.03702); it measures the readout copy, not the full tied-weight or model gradient. No training benefit is inferred from cosine similarity.
 
 New NLL covers every accepted assistant target position in each exported row. It is not assumed directly interchangeable with historical candidate-selection PPL unless their loss scopes are identical. High prototype similarity can also reflect shared output format; it is not a semantic correctness test or an automatic selection rule.
+
+The [actual GPU runtime environment](full-v4/metadata/gpu-runtime-environment.json) pins installed library versions and wheel metadata, CUDA, the NVIDIA driver and hardware while all eight workers were live. Native model code, weight and tokenizer hashes are bound by the full scoring plan.
 
 An additional 15,430 candidate scores cover all 2,000 authored TRAIN roots, with independently verified public-prefix construction. Of discriminating first-action pairs, comparison is 0/287 and ordering 0/286 for preferring the correct answer in **both** conditions, despite low average NLL. These are conditional candidate preferences on TRAIN, not a held-out generation benchmark. Keep both valid semantic conditions; do not select only the easier one. Numerical, length-normalization and missing-evidence caveats are in the [GPU report](full-v4/gpu-report.html), [complete measurements](full-v4/metadata/gpu-complete-summary.json) and [measured curriculum policy](full-v4/metadata/gpu-curriculum-policy.json).
 
