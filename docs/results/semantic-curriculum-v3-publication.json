@@ -1,0 +1,41 @@
+{
+  "status": "PUBLISHED_CANDIDATE_NOT_TRAINED",
+  "repo": "OpenFormosa/barbet-long-context-sft",
+  "branch": "semantic-curriculum-v3-20261104",
+  "commit": "4b38655b336aa2d0c01f6f0047701e7eeec23ed6",
+  "url": "https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/tree/4b38655b336aa2d0c01f6f0047701e7eeec23ed6",
+  "manifest_url": "https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/blob/4b38655b336aa2d0c01f6f0047701e7eeec23ed6/semantic-v3/release-manifest.json",
+  "publication_complete_url": "https://huggingface.co/datasets/OpenFormosa/barbet-long-context-sft/blob/4b38655b336aa2d0c01f6f0047701e7eeec23ed6/semantic-v3/publication-complete.json",
+  "implementation_commit": "adefbe26c5196369dd43062186438ac5932c8626",
+  "main_unchanged_at": "b88f4ff7171bb6fb8c1b775ae21de814ea2123fb",
+  "verified": [
+    {
+      "path": "semantic-v3/publication-complete.json",
+      "sha256": "1dee2233bd6a3d281a4588455409d95ebee2cac3f294246ef2d361496e458119",
+      "bytes": 13162,
+      "anonymous": true,
+      "transport_attempts": 1
+    },
+    {
+      "path": "semantic-v3/release-manifest.json",
+      "sha256": "a3d228dc27f13bbd1ff1dce454b088e5ae20b67f9b37609ea5e27063971779e6",
+      "bytes": 406424,
+      "anonymous": true,
+      "transport_attempts": 1
+    }
+  ],
+  "staging_marker_removed": true,
+  "public_learner_rows": 121040,
+  "training_ready": false,
+  "new_training_runs": 0,
+  "source_answer_cardinality_check": {
+    "source_sha256": "f6da32ffb482ff463ad056477740d1bb284b96a45db3a08bee6a225ca6abf291",
+    "unique_source_answer_counts": {
+      "1": 86821,
+      "0": 43498
+    },
+    "scope": "all raw rows in pinned source; active admitted subset cannot introduce additional answer alternatives"
+  },
+  "code_branch": "feat/semantic-curriculum-v3",
+  "note": "Pinned HF implementation commit precedes this documentation-only publication receipt; no data or implementation changed afterward."
+}
