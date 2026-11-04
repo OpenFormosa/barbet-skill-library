@@ -11,11 +11,20 @@ from barbet_pipeline.full_publication import BRANCH, MAIN, BASE
 from barbet_pipeline.full_release import collect_complete_release, configuration_specs, exposure_policy
 from barbet_pipeline.gpu_release import collect_complete_gpu_release
 from barbet_pipeline.gpu_report import gpu_report_html
+from barbet_pipeline.exposure_evidence import summarize_training_exposure
 
 
 def main():
     summary, statistics, data = collect_complete_release(STATE)
     gpu_summary, gpu_files = collect_complete_gpu_release(STATE, data)
+    training_exposure = read_json(STATE / 'training-exposure-evidence.json')
+    if training_exposure['statistics_sha256'] != sha_file(STATE / 'statistics-summary.json'):
+        raise ValueError('Training exposure evidence does not match the full statistics')
+    if training_exposure['implementation_sha256'] != sha_file(REPO / 'barbet_pipeline/exposure_evidence.py'):
+        raise ValueError('Training exposure accounting implementation changed')
+    expected_exposure = summarize_training_exposure(statistics)
+    if any(training_exposure[k] != v for k, v in expected_exposure.items()):
+        raise ValueError('Training exposure evidence differs from recomputed full counts')
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=REPO, text=True).strip():
         raise ValueError('Commit the implementation before packaging')
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=REPO, text=True).strip()
@@ -40,6 +49,7 @@ def main():
                  'source-visibility-tie-amendment', 'actual-retrieval-tie-control',
                  'source-visibility-cutoff-amendment', 'actual-retrieval-cutoff-control',
                  'graph-visibility-summary','actual-graph-visibility-controls','actual-changes-summary',
+                 'training-exposure-evidence',
                  'bounded-readback-interruption','bounded-readback-amendment','bounded-readback-control',
                  'ranged-readback-interruption','ranged-readback-amendment','ranged-readback-control']:
         write(name + '.json', read_json(STATE / (name + '.json')))
@@ -69,7 +79,8 @@ def main():
         write(name, read_json(REPO / 'configs' / name))
     for name in ['unit-tests-complete-v5.log', 'request-adapter-tests.log', 'visibility-and-release-tests.log',
                  'source-visibility-v3-controls.log','final-exposure-policy-tests.log','graph-visibility-tests.log',
-                 'final-accounting-tests.log','anchored-config-tests.log','bounded-readback-tests.log','ranged-readback-tests.log']:
+                 'final-accounting-tests.log','anchored-config-tests.log','bounded-readback-tests.log','ranged-readback-tests.log',
+                 'exposure-evidence-tests.log']:
         path = STATE / name
         if not path.exists(): raise FileNotFoundError(path)
         add(path, 'full-v4/metadata/' + name)
@@ -161,6 +172,8 @@ Tokenized labels are **unshifted**, with `-100` on system/user/skills/documents/
 
 The complete export has {c['input_tokens']:,} Pangolin input tokens and {c['supervised_tokens']:,} supervised tokens. Read the [measured exposure policy](full-v4/metadata/exposure-policy.json) before designing a mixture. Most independently verified rows are graph operations; uniform sampling would preserve that imbalance. Source-gold fidelity, low PPL and a large row count do not establish teaching value. Reference-only data is not a substitute for independently verified general math, coding and natural-instruction coverage.
 
+In **TRAIN**, `reference_only` accounts for **{training_exposure['reference_only_supervised_fraction']:.2%} of supervised tokens**. This is a verification gap, not proof that all those answers are wrong. Finite graphs account for **{training_exposure['finite_graph_supervised_fraction_all_train']:.2%} of all TRAIN supervised tokens**, but **{training_exposure['finite_graph_supervised_fraction_of_verified_plus_source_reference']:.2%} within the combined `verified` + `source_reference` supervision**. Thus the full pool and the scoped subset have different problems: most total supervision lacks an independent semantic check, while the scoped subset has little non-graph supervision. Selecting only the scoped subset does not by itself create a balanced general course. [Exact TRAIN token accounting](full-v4/metadata/training-exposure-evidence.json) preserves source, scope and inherited domain labels separately; validation/DEV/TEST results were not used to select TRAIN.
+
 The inherited `semantic_v3_records` / `semantic_v3_tokenized` configs retain 6,286 TRAIN views / 2,000 roots and 629 DEV views / 200 roots with counterfactuals, invariance and faded binding. They are separately identified, not multiplied into millions of nominally independent tasks. Private calibration/TEST and private oracles remain unpublished. Do not append the inherited v3 natural-reading config to v4; those source parents are already represented.
 
 This export is mixed length up to 128K, **not a completed 1M curriculum**. There is no new CPT/SFT/RL, no trained-model improvement, no proof of learnability, new-composition transfer or retention, and no MiniCPM/Qwen capability equivalence. Training-parent identity, trainer numerical parity and model evaluations remain separate evidence requirements. Dataset processing itself is complete.
@@ -190,6 +203,8 @@ All newly published data bytes were anonymously downloaded and SHA-256 checked b
     # The corpus report and GPU appendix have separate evidence scopes.
     report = report.replace('沒有新模型分數', '沒有新模型訓練增益')
     report = report.replace('</body>', '') if '</body>' in report else report
+    exposure_html = f'''<h2>TRAIN 的監督量：來源筆數和有效課程是不同問題</h2><p>TRAIN 共 {training_exposure['totals']['rows']:,} 筆、{training_exposure['totals']['supervised_tokens']:,} supervised tokens。其中 <strong>{training_exposure['reference_only_supervised_fraction']:.2%} 的監督 tokens 屬 reference_only</strong>，尚無獨立語義驗證；這不表示全部答案錯誤。</p><p>有限圖題占全部 TRAIN 監督量 {training_exposure['finite_graph_supervised_fraction_all_train']:.2%}，但在 verified 加 source_reference 的監督量中占 <strong>{training_exposure['finite_graph_supervised_fraction_of_verified_plus_source_reference']:.2%}</strong>。全量池的問題是多數監督尚未獨立驗證；有明確驗證或參照的子集則缺少足量非圖題監督。直接改用這個子集，也不能宣稱已建立平衡通用課程。<a href="metadata/training-exposure-evidence.json">完整來源、品質範圍與 TRAIN token 對帳</a>。</p>'''
+    report = report.replace('</html>', exposure_html + '</html>')
     report = report.replace('</html>', '<p><a href="gpu-report.html">全量 GPU 評分、語義弱項與文獻報告</a>：全部新版資料均已用凍結 v26 測量；這不是訓練後能力提升的證明。</p></html>')
     path.write_text(report)
     metadata[-1].update(bytes=path.stat().st_size, sha256=sha_file(path))
