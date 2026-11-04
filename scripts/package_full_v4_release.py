@@ -54,12 +54,14 @@ def main():
     for name in ['plan', 'full-score-plan', 'numerical-controls', 'anchors', 'anchor-scores',
                  'context-probe-plan', 'context-probe-scores', 'context-probe-summary', 'context-probe-controls',
                  'provenance-index', 'provenance-index-restart', 'complete-summary', 'curriculum-policy',
-                 'measurement-files', 'launch', 'workers-exited']:
+                 'measurement-files', 'launch', 'workers-exited', 'batching-profile', 'aggregate-preflight-restart',
+                 'incomplete-release-rejection']:
         write('gpu-' + name + '.json', read_json(gpu / (name + '.json')))
     write('gpu-score-receipts.json', [read_json(p) for p in sorted((gpu / 'score-receipts').glob('*.json'))])
     write('gpu-aggregation-receipts.json', [read_json(p) for p in sorted((gpu / 'aggregation-receipts').glob('*.json'))])
     write('gpu-worker-completion.json', [read_json(gpu / 'workers' / (str(i) + '.json')) for i in range(8)])
-    for name in ['numerical-controls.log', 'context-probe-controls-rerun.log', 'release-tests.log']:
+    for name in ['numerical-controls.log', 'context-probe-controls-rerun.log', 'release-tests.log',
+                 'release-integration-tests-v2.log', 'batching-profile.log']:
         add(gpu / name, 'full-v4/metadata/gpu-' + name)
     for name in ['semantic_v3_sources.lock.json', 'semantic_v3_environment.lock.json',
                  'semantic_v3_model_manifest.json', 'taiwan-civic-policy-v1.json',
@@ -142,6 +144,8 @@ data = load_dataset(
 All **{gpu_summary['totals']['rows']:,} exported rows** were scored on the actual frozen `voidful/barbet-skill@67131067ff1825179d5e38e91d499159669e9c66`, using at most eight local H200 GPUs and no training updates or truncation. The `full_v4_gpu_measurements` config contains per-record assistant NLL, teacher-forced top-1 counts, a detached-readout gradient sketch norm, seven TRAIN semantic-prototype cosines and exact public provenance. Join by `record_id`; measurement rows are not additional training examples. All IDs match the full export exactly once.
 
 Global supervised-token-weighted NLL is **{gpu_summary['totals']['token_weighted_nll']:.6f}**. Teacher-forced token prediction is not free-generation task success. Source verification statuses are unchanged by model scores. The gradient projection borrows from [LESSER](https://arxiv.org/abs/2610.03702); it measures the readout copy, not the full tied-weight or model gradient. No training benefit is inferred from cosine similarity.
+
+New NLL covers every accepted assistant target position in each exported row. It is not assumed directly interchangeable with historical candidate-selection PPL unless their loss scopes are identical. High prototype similarity can also reflect shared output format; it is not a semantic correctness test or an automatic selection rule.
 
 An additional 15,430 candidate scores cover all 2,000 authored TRAIN roots, with independently verified public-prefix construction. Of discriminating first-action pairs, comparison is 0/287 and ordering 0/286 for preferring the correct answer in **both** conditions, despite low average NLL. These are conditional candidate preferences on TRAIN, not a held-out generation benchmark. Keep both valid semantic conditions; do not select only the easier one. Numerical, length-normalization and missing-evidence caveats are in the [GPU report](full-v4/gpu-report.html), [complete measurements](full-v4/metadata/gpu-complete-summary.json) and [measured curriculum policy](full-v4/metadata/gpu-curriculum-policy.json).
 
