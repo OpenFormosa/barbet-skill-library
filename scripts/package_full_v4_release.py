@@ -51,7 +51,7 @@ def main():
         write(name, read_json(REPO / 'configs' / name))
     for name in ['unit-tests-complete-v5.log', 'request-adapter-tests.log', 'visibility-and-release-tests.log',
                  'source-visibility-v3-controls.log','final-exposure-policy-tests.log','graph-visibility-tests.log',
-                 'final-accounting-tests.log']:
+                 'final-accounting-tests.log','anchored-config-tests.log']:
         path = STATE / name
         if not path.exists(): raise FileNotFoundError(path)
         add(path, 'full-v4/metadata/' + name)

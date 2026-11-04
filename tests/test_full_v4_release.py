@@ -62,7 +62,9 @@ def test_reference_config_cannot_enter_verified_config(tmp_path):
     files=fixture_release(tmp_path)
     configs=configuration_specs(files)
     verified=next(x for x in configs if x['config_name']=='full_v4_verified_records')
-    assert all('/verified/' in p for s in verified['data_files'] for p in s['path'])
+    import fnmatch
+    matched={f['remote'] for f in files if any(fnmatch.fnmatchcase(f['remote'],s['path']) for s in verified['data_files'])}
+    assert matched=={'full-v4/verified/records/train-one.parquet'}
     default=next(x for x in configs if x.get('default'))
     assert default['config_name']=='full_v4_dispositions'
     assert default['data_files'][0]['split']=='corpus'

@@ -139,7 +139,7 @@ def collect_complete_release(state):
 
 
 def configuration_specs(files):
-    """Use exact paths; reference-only and inventory cannot enter TRAIN by glob."""
+    """Use anchored quality/split globs; the release manifest fixes exact members."""
     configs = []
     for status in ['verified', 'source_reference', 'reference_only']:
         for kind in ['records', 'tokenized']:
@@ -148,12 +148,11 @@ def configuration_specs(files):
                 paths = sorted(f['remote'] for f in files
                                if f['remote'].startswith(f'full-v4/{status}/{kind}/{split}-'))
                 if paths:
-                    entries.append({'split': split, 'path': paths})
+                    entries.append({'split': split, 'path': f'full-v4/{status}/{kind}/{split}-*.parquet'})
             if entries:
                 configs.append({'config_name': f'full_v4_{status}_{kind}', 'data_files': entries})
     configs.append({'config_name': 'full_v4_dispositions', 'default': True, 'data_files': [
-        {'split': 'corpus', 'path': sorted(f['remote'] for f in files
-                                          if f['remote'].startswith('full-v4/dispositions/'))}]})
+        {'split': 'corpus', 'path': 'full-v4/dispositions/*.parquet'}]})
     return configs
 
 
