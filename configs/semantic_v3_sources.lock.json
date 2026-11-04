@@ -1,0 +1,23 @@
+{
+  "dataset": {
+    "repo": "OpenFormosa/barbet-long-context-sft",
+    "revision": "b88f4ff7171bb6fb8c1b775ae21de814ea2123fb"
+  },
+  "tokenizer_sha256": "f84754e42cc4b08d5573a6b7306635e86ed04fff68ee707662d76d7044917176",
+  "frozen_v26_revision": "67131067ff1825179d5e38e91d499159669e9c66",
+  "source_lock_sha256": "62762c45f154e68f6abfa87e66a3145082ce327322c9ef94913c3659bbfd32d8",
+  "prior_hold_plans": {
+    "taiwan-civic-v1": "a148b8353b4ac513cc74a0fb9efd82473e44e8bfe1f247fbdbb30f78c6f4b805",
+    "value-alignment-v1": "96d5b26da53e0d3cc39371dd18087ab866e0ae1c2dd239366ec17e0b7446d1a7"
+  },
+  "barbet_readiness_plan_sha256": "9367e6f77c9932d0ed736a264f184ef4d149519b9f16b8c45494620b73947238",
+  "values_policy_sha256": "bffb8ac952cca14e9e98de6684f6af853754e09cf320a44e2902762471cf36da",
+  "teacher": {
+    "repo_id": "Qwen/Qwen3.8-Flash-Next-FP8",
+    "revision": "236dfdf285828023ca3bcd3f37366c58a3469b13",
+    "weight_bytes": 185523317458,
+    "status": "downloaded",
+    "authorization": "user authorized quantization to reduce memory"
+  },
+  "local_or_remote_516_outputs": "NOT_AVAILABLE; no claimed complete remote decontamination audit"
+}

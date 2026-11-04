@@ -1,0 +1,13 @@
+{
+  "python": "3.12.3",
+  "packages": {
+    "pyarrow": "25.0.1",
+    "tokenizers": "0.22.2",
+    "jinja2": "3.1.6",
+    "jsonschema": "4.26.0",
+    "huggingface-hub": "1.33.0"
+  },
+  "slurm_available": false,
+  "gpu": "8 x NVIDIA H200 NVL",
+  "training_jobs_started": 0
+}

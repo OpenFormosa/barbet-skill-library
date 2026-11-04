@@ -1,6 +1,6 @@
 ---
 name: "literal-typed-tool-arguments"
-version: "1"
+version: "2"
 scope: "agent"
 description: "依據任務需求與工具註冊表，精確構造符合JSON型別、枚舉值及指定順序的工具參數。嚴格區分需逐字傳遞的Payload與一般自由文字，確保選填欄位依明確要求處理，並整合單位換算邏輯。"
 authority_basis: "authored_task_contract"
@@ -20,7 +20,7 @@ authority_basis: "authored_task_contract"
 
 ## Procedure
 
-1. 解析註冊表，標記必填參數、型別約束及枚舉選項。2. 從任務中提取對應值，若為指定需逐字傳遞的Payload，完全保留原始字串；否則依語義轉換為正確JSON型別。3. 檢查選填參數：僅當任務明確要求時寫入，否則省略，嚴禁複製預設值。4. 若涉及單位差異，調用unit-conversion程序取得換算後數值。5. 組裝參數物件，確保無多餘欄位；JSON物件key順序本身無語義，僅任務明定的呼叫陣列或參數陣列有順序要求，不捏造註冊表欄位順序規範。
+1. 依當下工具 schema 找出必要欄位，從可見資料逐一綁定實體、欄位與值。2. 區分來源與目的地、名稱與 ID，不能只因文字相近就替換。3. 嚴格保留 null、false、數值 0、字串 "0"、含前導零的 ID；未提供欄位與 null 不同。4. 可用 value_ref 時選定可見 table_id、row_id、field，由工具逐字搬移；工具不替模型選擇來源。5. 只有契約要求時才轉型或換算，選填欄位只依明示要求提供。6. 驗證工具結果是否完成原請求，最後依使用者格式與語言回答。
 
 ## Output Contract
 
@@ -32,4 +32,4 @@ authority_basis: "authored_task_contract"
 
 ## Validation
 
-查JSON可解析、必填、型別、枚舉、無多餘欄位、選填僅依任務要求、指定literal完整、單位。僅檢查任務指定的有序陣列，不檢查JSON物件keys順序。
+同時核對 schema、實體與欄位語義、型別及單位。JSON 合法但綁錯來源或目的地仍不合格。

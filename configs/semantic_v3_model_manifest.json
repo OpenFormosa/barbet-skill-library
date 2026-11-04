@@ -1,0 +1,72 @@
+{
+  "model_id": "OpenFormosa/barbet-1b-base",
+  "revision": "004ef70881dcb87f1b423951bd418f1748db8b13",
+  "files": {
+    "model.safetensors": {
+      "sha256": "ea16e76ea8539ee9ad307ef4e202a94a2f86a96ccdbf22b2c34b95be0523895d",
+      "bytes": 2237642240
+    },
+    "config.json": {
+      "sha256": "2b7b9f1cdfc39805084dcf8e668390c4e2aec390054957b227c31f9bf0b6e983",
+      "bytes": 1484
+    },
+    "tokenizer.json": {
+      "sha256": "f84754e42cc4b08d5573a6b7306635e86ed04fff68ee707662d76d7044917176",
+      "bytes": 9356673
+    },
+    "chat_template.jinja": {
+      "sha256": "479cc1312a0870e3e20ffe97f834ba64b4237b28ac326983ffddbb37f14453df",
+      "bytes": 347
+    },
+    "modeling_barbet.py": {
+      "sha256": "68101aa44ca98009e2ec1d9bb33c9110e77c76d1bd9d57ef6ddbe0a11e18d541",
+      "bytes": 70035
+    },
+    "configuration_barbet.py": {
+      "sha256": "fdd956158d9f7c96bf3b5a90f95ddc4470a074032be99d32536964a0b6a5c042",
+      "bytes": 13246
+    },
+    "load_barbet.py": {
+      "sha256": "803661d0387f98619222859e4f1120df212d19272451adf0229d9396b25197e2",
+      "bytes": 3795
+    },
+    "megatron_long_context.py": {
+      "sha256": "a240096200718588df4d4307d2a2013eb7bffd8b142b1aae97cff1815056851c",
+      "bytes": 38993
+    },
+    "release_manifest.json": {
+      "sha256": "ea71c4210a6acb28ac4d53d3bc22dc556f9ec1c09a0d85edc6956883938f8986",
+      "bytes": 6187
+    }
+  },
+  "dtype_element_census": {
+    "BF16": 1118798760,
+    "F32": 336
+  },
+  "release_declared_stage": "supervised_fine_tuning",
+  "release_declared_parent": "4dbb35216a32de59570a3f0d164804f25c82009d",
+  "training_parent": null,
+  "training_parent_status": "NOT_SELECTED",
+  "older_pre_sft": {
+    "revision": "4dbb35216a32de59570a3f0d164804f25c82009d",
+    "config_verified": true,
+    "manifest_declares": "attention-correction iter15248 after surface-binding adaptation",
+    "original_pretraining_lineage": "NOT_VERIFIED",
+    "weights_downloaded": false
+  },
+  "short_backend_smoke": {
+    "actual_prompt_lengths": [
+      14,
+      290
+    ],
+    "generation_tokens_each": 12,
+    "both_reached_generation_limit": true,
+    "three_cache_steps_same_argmax": true,
+    "max_abs_logits": [
+      0.0,
+      0.15625,
+      0.21875
+    ],
+    "capability_score": null
+  }
+}

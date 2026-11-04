@@ -1,6 +1,6 @@
 ---
 name: "grounded-evidence-answer"
-version: "4"
+version: "5"
 scope: "general"
 description: "從指定文件中提取證據以回答問題，嚴格遵循範圍、版本與實體限制，並基於來源屬性仲裁矛盾或缺失資訊。"
 authority_basis: "authored_task_contract"
@@ -32,4 +32,4 @@ authority_basis: "authored_task_contract"
 
 ## Validation
 
-逐項確認答案有同一實體、屬性、時間與極性的來源支持，錯誤前提有修正或保留未知，沒有漏掉否定與條件；引用不是只含相同關鍵字。確認未引入外部知識，來源衝突依屬性處理，來源缺失與不可讀有區分；文字吻合不等於獨立事實查核。
+核對每個結論是否受到目前可見且適用版本的證據支持。來源不足、明確否定與來源衝突要分開；舊規則不因出現較早就有優先權。取得新證據後可恢復回答。引用存在不代表解讀正確。

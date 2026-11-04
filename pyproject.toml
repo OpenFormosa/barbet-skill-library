@@ -24,7 +24,7 @@ barbet-infer = "barbet_inference.cli:main"
 Repository = "https://github.com/OpenFormosa/barbet-skill-library"
 
 [tool.setuptools]
-packages = ["barbet_inference", "barbet_inference.skill_data", "testtime"]
+packages = ["barbet_inference", "barbet_inference.skill_data", "barbet_pipeline", "testtime"]
 package-dir = {"barbet_inference.skill_data" = "skills"}
 
 [tool.setuptools.package-data]

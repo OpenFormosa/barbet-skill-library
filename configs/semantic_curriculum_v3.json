@@ -11,18 +11,35 @@
   "canonical_target_selection_model_revision": "67131067ff1825179d5e38e91d499159669e9c66",
   "target_selection": "minimum frozen v26 conditional answer PPL among independently eligible alternatives for the same full input; deterministic singletons explicitly unscored",
   "model_training_parent": null,
-  "model_training_parent_blocked_reason": "Must verify a native1M base release and weights; cached legacy 28-layer weights cannot be substituted.",
-  "scope": ["versioned_inventory", "all_active_rows_source_curriculum_index", "public_private_boundary", "semantic_executors", "evaluation_contracts", "2000_train_root_factory_pilot", "candidate_dataset_publication"],
+  "model_training_parent_blocked_reason": "Current HF base-named release is declared supervised_fine_tuning. Pre-SFT 4dbb352 is already attention/surface-binding adapted; original pretraining lineage and selected training parent remain unverified.",
+  "scope": [
+    "versioned_inventory",
+    "all_active_rows_source_curriculum_index",
+    "public_private_boundary",
+    "semantic_executors",
+    "evaluation_contracts",
+    "2000_train_root_factory_pilot",
+    "candidate_dataset_publication"
+  ],
   "pilot": {
     "train_root_target": 2000,
     "dev_root_target": 200,
     "calibration_root_target": 200,
     "sealed_test_root_target": 200,
     "root_instances_are_not_semantic_families": true,
-    "variants_per_root": [2, 4],
-    "supervised_exposure_mix": {"general": 0.5, "semantic": 0.5},
+    "variants_per_root": [
+      2,
+      4
+    ],
+    "supervised_exposure_mix": {
+      "general": 0.5,
+      "semantic": 0.5
+    },
     "mix_status": "PROPOSED_NOT_EFFICACY_VALIDATED",
-    "supervised_token_checkpoints": [2000000, 8000000],
+    "supervised_token_checkpoints": [
+      2000000,
+      8000000
+    ],
     "checkpoints_status": "PROPOSED_NOT_AUTHORIZATION_TO_REPLAY_INSUFFICIENT_DATA",
     "capability_evaluation": "NOT_RUN"
   },
@@ -33,6 +50,26 @@
     "learning_transfer_retention": "NOT_RUN until a separately gated training comparison",
     "one_million_token_training": "NOT_RUN; short pilot is not native1M certification"
   },
-  "resources": {"max_training_nodes": 1, "max_training_gpus": 8, "max_teacher_requests_in_flight": 2, "max_additional_local_bytes": 16106127360, "minimum_free_bytes": 53687091200, "paid_compute": false},
-  "gates": ["source_and_model_identity", "private_visibility", "executor_semantics", "counterfactual_discrimination", "split_integrity", "target_correctness", "render_and_mask_identity", "public_readback", "learning_NOT_RUN", "transfer_NOT_RUN", "retention_NOT_RUN"]
+  "resources": {
+    "max_training_nodes": 1,
+    "max_training_gpus": 8,
+    "max_teacher_requests_in_flight": 2,
+    "max_additional_local_bytes": 16106127360,
+    "minimum_free_bytes": 53687091200,
+    "paid_compute": false
+  },
+  "gates": [
+    "source_and_model_identity",
+    "private_visibility",
+    "executor_semantics",
+    "counterfactual_discrimination",
+    "split_integrity",
+    "target_correctness",
+    "render_and_mask_identity",
+    "public_readback",
+    "learning_NOT_RUN",
+    "transfer_NOT_RUN",
+    "retention_NOT_RUN"
+  ],
+  "additional_reprocessing": "114125 admitted SQuAD tasks exported as source-only natural answers; 1 over-budget view held, no truncation"
 }

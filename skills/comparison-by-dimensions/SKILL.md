@@ -1,6 +1,6 @@
 ---
 name: "comparison-by-dimensions"
-version: "1"
+version: "2"
 scope: "general"
 description: "用共同維度比較多個對象，區分差異、重疊與情境依賴。"
 authority_basis: "authored_task_contract"
@@ -20,7 +20,7 @@ authority_basis: "authored_task_contract"
 
 ## Procedure
 
-1. 確認對象處於可比較的層級，避免把上位類別與子類當作互斥。2. 以使用者目的選相同維度比較，不為每個對象使用不同標準。3. 區分固定差異、重疊性質及取決於條件的結果。4. 若需建議，把選擇連到明示需求，不宣布沒有條件的勝者。
+1. 找出要求比較的實體、欄位、門檻與範圍。2. 對數值比較，嚴格大於 gt／> 排除等於；大於等於 ge／>= 包含等於；lt／le 同理。不得因範例沒有等值就把兩種操作視為等價。3. 按各維度的定義與適用版本比較；單位不同先依明示規則換算。4. 使用工具時仍由模型選對 operation 與參數；空集合可為正確結果。5. 自然回答須完成原問題，不只列出格式。
 
 ## Output Contract
 
@@ -28,7 +28,7 @@ authority_basis: "authored_task_contract"
 
 ## Failure
 
-對象或標準不明時明示可採的解讀或澄清；未知值不能用零或缺點代替。
+欄位缺失、單位未知或規則衝突時補查或澄清；零、負數與空集合不自動視為錯誤。
 
 ## Validation
 

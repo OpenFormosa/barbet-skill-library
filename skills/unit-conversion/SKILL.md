@@ -1,6 +1,6 @@
 ---
 name: "unit-conversion"
-version: "2"
+version: "3"
 scope: "general"
 description: "執行物理量或貨幣單位的轉換，處理線性與非線性（含偏移量）關係，確保量綱一致性與精度，並在資訊不足時澄清。"
 authority_basis: "authored_task_contract"
@@ -32,4 +32,4 @@ authority_basis: "authored_task_contract"
 
 ## Validation
 
-檢查輸出量綱正確性；驗證精度符合要求；確認換算係數/匯率來源為使用者指定或公認標準；確保偏移量計算邏輯正確；無遺漏單位標記。
+獨立核對來源實體、數值欄位、原單位、目標單位與維度。不得由數值大小猜單位；換算後保留必要精度與單位。可用 Decimal 工具計算，成功回執仍需對照原請求。

@@ -1,5 +1,5 @@
 {
-  "catalog_sha256": "a96b3bacf3d32338cb719756863fdb76449f1ee8a9d26cd8a78dd9dff0846d1e",
+  "catalog_sha256": "1aaafca7187c6ffe4a0f282a8ae78d021e6fa29b4133c793cc08d46264d3af28",
   "schema_version": "1",
   "scope_counts": {
     "agent": 7,
@@ -50,12 +50,12 @@
     },
     {
       "json_path": "skills/clarify-missing-inputs/skill.json",
-      "json_sha256": "30bc808343a27da95d3c32d6c9e918dc6e3a6f3efd3a9166c4c0387b6f9ec264",
+      "json_sha256": "241770d651c771012c70514a1d17f26bf3dfb7d5b8146951cb7f81f6894ec476",
       "markdown_path": "skills/clarify-missing-inputs/SKILL.md",
-      "markdown_sha256": "c9eda1235987028effffca69eaeea2800d9b0f5b0ecfc10511fad2d4ab55cf28",
+      "markdown_sha256": "999bbab901ef5fea26ff0e374279ffce95e944d89114ff47ec8aef6b5b2f8cbb",
       "name": "clarify-missing-inputs",
       "scope": "general",
-      "version": "2"
+      "version": "3"
     },
     {
       "json_path": "skills/classification-with-criteria/skill.json",
@@ -95,12 +95,12 @@
     },
     {
       "json_path": "skills/comparison-by-dimensions/skill.json",
-      "json_sha256": "60044228b5170a46ba22c75f59226babc1f6d4fd7ee3a2a1c29444b01044bcd0",
+      "json_sha256": "b9162b2ded2c24f896e48eae368f8584e527d1266548a92c3d227e0f213cf216",
       "markdown_path": "skills/comparison-by-dimensions/SKILL.md",
-      "markdown_sha256": "9bd1561b15077ce6ac860adc59693f32bbe21bda767c9286185cc5aaaec14abf",
+      "markdown_sha256": "1fdad1bc8c5c7e0b7a78fda680a36988cea94c7c09d25651830a9d3a1b527fd0",
       "name": "comparison-by-dimensions",
       "scope": "general",
-      "version": "1"
+      "version": "2"
     },
     {
       "json_path": "skills/concept-explanation/skill.json",
@@ -212,12 +212,12 @@
     },
     {
       "json_path": "skills/external-state-grounding/skill.json",
-      "json_sha256": "1dd667c265ee5a9a9d02a30c5817736fe852436637339afb49ba8264aedebdff",
+      "json_sha256": "d4c226ed5baf23b0835b8423993dff817f278f417e6bca8d8617d13aab50e321",
       "markdown_path": "skills/external-state-grounding/SKILL.md",
-      "markdown_sha256": "6b3f4fff485ca3bb3cdd780df45ba518cb33682fffaf47173ccb118131e470bc",
+      "markdown_sha256": "075f82c2712289549672473fe9692bc6542819f20e27dbd55ad9954746e4ae28",
       "name": "external-state-grounding",
       "scope": "agent",
-      "version": "1"
+      "version": "2"
     },
     {
       "json_path": "skills/factual-question-resolution/skill.json",
@@ -239,12 +239,12 @@
     },
     {
       "json_path": "skills/grounded-evidence-answer/skill.json",
-      "json_sha256": "582fbf1ec951d4730ab22d3d296b8db6c04168c5938e57efc83592171bbd1c2e",
+      "json_sha256": "8b87ef3a8d8039bf26500136fdf84a32f8f494840b75a7b238375cb08ea1e6e3",
       "markdown_path": "skills/grounded-evidence-answer/SKILL.md",
-      "markdown_sha256": "01bbc891195acaa053b1c07430a25e6f999191c3ec9727877073dc99ff89106b",
+      "markdown_sha256": "29b0f5a60d371679ab705891577e9ba7522f027149f5348777df128f31b3c3d2",
       "name": "grounded-evidence-answer",
       "scope": "general",
-      "version": "4"
+      "version": "5"
     },
     {
       "json_path": "skills/historical-snapshot-scope/skill.json",
@@ -302,12 +302,12 @@
     },
     {
       "json_path": "skills/literal-typed-tool-arguments/skill.json",
-      "json_sha256": "9b8d7f6e1bb752d943c730bce472e4de442d42b45f7e5e832b834608177790b4",
+      "json_sha256": "5fb4636c30389e015876b1900b6ae7f2e6e4a98961459faf3e4739f5dd6fdf2b",
       "markdown_path": "skills/literal-typed-tool-arguments/SKILL.md",
-      "markdown_sha256": "d3406f986fa3e28b6d69b47aa9b12e28535076fe5d8c73f50de9bb9393f94fb2",
+      "markdown_sha256": "a33bc81d8faca7439764006a1cea99c9bc3c5cb59f47234a66818e1e1c2fde6e",
       "name": "literal-typed-tool-arguments",
       "scope": "agent",
-      "version": "1"
+      "version": "2"
     },
     {
       "json_path": "skills/mean-normalization/skill.json",
@@ -383,12 +383,12 @@
     },
     {
       "json_path": "skills/ordered-top-k/skill.json",
-      "json_sha256": "ce36c332778cf2847947f3d308281b4927ee86cca53fc4db46efdcbdf1ef5fa7",
+      "json_sha256": "68bc1a8e6b3a278851a58e6860f9375f3e43152448eb855c7d49d8116d889e5a",
       "markdown_path": "skills/ordered-top-k/SKILL.md",
-      "markdown_sha256": "f1f5ef4a45705e7dcbd47a251cb3b3ec59efde3e9954ca95ce40dfa00868c25d",
+      "markdown_sha256": "8e0093a6fd4ad91cf48460c56a251b24e583b3df2efadbd0b32237d6e5852adb",
       "name": "ordered-top-k",
       "scope": "math",
-      "version": "1"
+      "version": "2"
     },
     {
       "json_path": "skills/passage-fact-binding/skill.json",
@@ -554,12 +554,12 @@
     },
     {
       "json_path": "skills/unit-conversion/skill.json",
-      "json_sha256": "4f50085a7fedc7d5583e95b889f2a82570180110f6fc5ae45251cb6cb9ae4b25",
+      "json_sha256": "8c64d83d7bc6aca1676486b72aad20e53e96cdcd1797dc02468ba972891fbf75",
       "markdown_path": "skills/unit-conversion/SKILL.md",
-      "markdown_sha256": "fba011fc34a7e19096ceddb3736c28ea0d33b6cce7bd3596ad8bf2ba707362c0",
+      "markdown_sha256": "192a990be7bb247d364f84eebc733889c98a3fcab60f698e72016a7c9399abf4",
       "name": "unit-conversion",
       "scope": "general",
-      "version": "2"
+      "version": "3"
     },
     {
       "json_path": "skills/unsupported-question-calibration/skill.json",

@@ -1,6 +1,6 @@
 ---
 name: "external-state-grounding"
-version: "1"
+version: "2"
 scope: "agent"
 description: "區分需要外部狀態的查詢或操作與可直接提供的說明，避免虛構即時資訊及執行結果。"
 authority_basis: "authored_task_contract"
@@ -8,11 +8,11 @@ authority_basis: "authored_task_contract"
 
 ## Use When
 
-請求涉及即時數值、外部帳號或資產、遠端查找，或需要實際改變外部狀態。
+請求涉及即時數值、外部帳號或資產、遠端查找、實際改變外部狀態，或查核明確標示的版本化模擬器狀態。
 
 ## Do Not Use When
 
-純假設演練、已提供完整資料的離線計算、或不依賴外部狀態的一般概念解釋。
+不需查核狀態的一般概念解釋、已提供完整資料的離線計算；模擬器回執不能冒充真實外部執行。
 
 ## Inputs
 
@@ -20,7 +20,7 @@ authority_basis: "authored_task_contract"
 
 ## Procedure
 
-1. 找出需要查證的時間點、實體及狀態，區分「說明怎麼做」與「替我執行」。2. 查可見前文是否已有足夠且時效合適的依據；過去敘述不能冒充新查詢。3. 有適用且獲授權的工具時遵守其契約；沒有時依原格式說明限制或提供可操作步驟，不捏造回傳。4. 對可回答的穩定背景與尚未查證的現況分別表述。
+1. 確認任務、operation ID、目前可見版本與時間。2. 區分 submitted、running、partial、failed、cancelled、completed；只有已完成且符合任務成功條件才可宣稱完成。3. 讀取工具回執，將查詢成功與工作完成分開。4. 相同 operation ID 不重複提交；重試前確認故障類型與當前狀態。5. 取消後晚到的結果不自動恢復或完成工作。6. 來源不可取得就說明已知狀態與未知部分，不編造結果。
 
 ## Output Contract
 
