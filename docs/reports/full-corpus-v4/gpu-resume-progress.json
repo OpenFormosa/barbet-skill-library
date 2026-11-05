@@ -1,0 +1,52 @@
+{
+  "status": "RESUMED_IN_PROGRESS_NOT_RELEASE_COMPLETE",
+  "as_of_utc": "2026-11-05T03:16:46.505604+00:00",
+  "completed_files": 1488,
+  "completed_rows": 9467685,
+  "total_files": 1643,
+  "total_rows": 10018961,
+  "joined_files": 1488,
+  "investigation": {
+    "status": "INVESTIGATED_NETWORK_FAILURE_RESUME_NOT_COMPLETION",
+    "started_at_utc": "2026-11-05T03:12:29.918527+00:00",
+    "reason": "Rank 0 exhausted bounded anonymous curl retries with exit 7 before scoring its next file.",
+    "rank": 0,
+    "existing_scored_files": 1488,
+    "existing_scored_rows": 9467685,
+    "missing_files": 155,
+    "missing_rows": 551276,
+    "plan_sha256": "77f10a986c4e2556da7f0352dcc44a2ba3c27a79a6183b9dfc752fd391b983f6",
+    "runner_sha256": "02e17d0002b96bd142294a10499ae0818fb8cb48dac421959ad1412f7b9b05d6",
+    "scorer_sha256": "adbef0a8db1c4fd5ac04ba558c28430ce23909b1454c15a3c2edae31bd250e04",
+    "resume_implementation_sha256": "8ebd42e153dfbb3c9d83cf9f924a23609bef7f914fb7883a64cb7460e071a922",
+    "prior_exit_sha256": "aa3b32a80fd35027e7fa7d5b4be10967d90dbb9eb24444e84c9c91c27f304f55",
+    "original_worker_log_sha256": "c080e0d16d89f9938be26fedff844cf12a8f78a830d45f93c07d2aaf4f63cc15",
+    "recovered_input_receipt_sha256": "c54766c69ffa6175f50c57a2e9cced6d540e711245678d9ea9890a7bed137bec",
+    "successful_scores_hash_verified_before_resume": true,
+    "changed_model_or_scorer_or_assignments": false,
+    "training_updates": 0
+  },
+  "launch": {
+    "pid": 2960180,
+    "rank": 0,
+    "started_at_utc": "2026-11-05T03:12:29.918527+00:00",
+    "plan_sha256": "77f10a986c4e2556da7f0352dcc44a2ba3c27a79a6183b9dfc752fd391b983f6",
+    "training_updates": 0
+  },
+  "network_preflight": {
+    "status": "network_preflight_passed",
+    "input_path": "full-v4/verified/tokenized/train-98117001738e302cfbd4bc1fb89c3aaf8fae58ba981d0626f12e7a9184136429.parquet",
+    "input_revision": "70a0bee718940430276a738bb51a7e7ccee4efbf",
+    "bytes": 14525819,
+    "sha256": "6d55753d7be7e6ebfad88a1cb2cf7180ebf6521dfde4baa679956e8786d5f850",
+    "expected_sha256": "6d55753d7be7e6ebfad88a1cb2cf7180ebf6521dfde4baa679956e8786d5f850",
+    "seconds": 3.3296515941619873,
+    "download_implementation_sha256": "02e17d0002b96bd142294a10499ae0818fb8cb48dac421959ad1412f7b9b05d6",
+    "no_scoring_or_target_change": true
+  },
+  "recovery_validation_tests": {
+    "command": "python -m pytest tests/test_resume_evidence.py -q",
+    "actual_result": "4 passed in 0.02s",
+    "scope": "History hash, missing completion, nonzero exit, different process controls; no model capability result."
+  }
+}
