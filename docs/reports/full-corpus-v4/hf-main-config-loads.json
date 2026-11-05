@@ -1,0 +1,122 @@
+{
+  "revision": "main",
+  "all_configs_and_splits_loaded": true,
+  "controls": [
+    {
+      "configuration": "full_v4_verified_records",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_verified_records",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_verified_tokenized",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_verified_tokenized",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_source_reference_records",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_source_reference_records",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_source_reference_tokenized",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_source_reference_tokenized",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_reference_only_records",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_reference_only_records",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_reference_only_tokenized",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_reference_only_tokenized",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_dispositions",
+      "split": "corpus",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_gpu_measurements",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "full_v4_gpu_measurements",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "semantic_v3_records",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "semantic_v3_records",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "semantic_v3_tokenized",
+      "split": "train",
+      "first_row_loaded": true,
+      "anonymous": true
+    },
+    {
+      "configuration": "semantic_v3_tokenized",
+      "split": "validation",
+      "first_row_loaded": true,
+      "anonymous": true
+    }
+  ],
+  "first_record_tokenized_identities_match": true,
+  "scope": "config/schema/inference adapter integration controls only; every source row and saved token array was verified by the processing workers"
+}

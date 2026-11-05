@@ -1,0 +1,27 @@
+{
+  "status": "V4_MAIN_AND_COMPLETE_README_PUBLISHED",
+  "finished_at_utc": "2026-11-05T05:17:47.610926+00:00",
+  "main_revision": "a5a7ba51e3d8b857668501ec67ca5d63a30728b5",
+  "v4_source_revision": "7103d1b1bc1fb4cda1298c084a66bda542d61151",
+  "old_main_revision": "b88f4ff7171bb6fb8c1b775ae21de814ea2123fb",
+  "old_main_backup_branch": "archive/main-before-v4-20261105",
+  "readme_sha256": "09303578f8036c82b8fb34b1e5853053e801b829453f38d44359b908e45510d5",
+  "readme_bytes": 39541,
+  "data_and_measurement_paths_changed": 0,
+  "exact_changed_paths": [
+    "README.md",
+    "full-v4/main-promotion-20261105.json"
+  ],
+  "candidate_config_split_controls": 19,
+  "main_config_split_controls": 19,
+  "main_readme_anonymous_readback": {
+    "path": "README.md",
+    "sha256": "09303578f8036c82b8fb34b1e5853053e801b829453f38d44359b908e45510d5",
+    "bytes": 39541,
+    "anonymous": true,
+    "transport_attempts": 1,
+    "transport": "curl-ranges-v2",
+    "all_bytes_hashed_in_original_order": true
+  },
+  "source_v4_branch_preserved": true
+}
