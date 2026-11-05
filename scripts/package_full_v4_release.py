@@ -12,13 +12,13 @@ from barbet_pipeline.full_release import collect_complete_release, configuration
 from barbet_pipeline.gpu_release import collect_complete_gpu_release
 from barbet_pipeline.gpu_report import gpu_report_html
 from barbet_pipeline.exposure_evidence import summarize_training_exposure
-from barbet_pipeline.resume_evidence import collect_network_resume_evidence
+from barbet_pipeline.parallel_recovery_evidence import collect_recovery_history
 
 
 def main():
     summary, statistics, data = collect_complete_release(STATE)
     gpu_summary, gpu_files = collect_complete_gpu_release(STATE, data)
-    network_resume = collect_network_resume_evidence(STATE / 'gpu-quality')
+    network_resume, parallel_recovery = collect_recovery_history(STATE / 'gpu-quality', REPO)
     training_exposure = read_json(STATE / 'training-exposure-evidence.json')
     if training_exposure['statistics_sha256'] != sha_file(STATE / 'statistics-summary.json'):
         raise ValueError('Training exposure evidence does not match the full statistics')
@@ -76,6 +76,12 @@ def main():
         write('gpu-network-resume-history.json', network_resume)
         add(gpu / 'worker-0.log', 'full-v4/metadata/gpu-original-worker-0.log')
         add(gpu / 'resume-network-20261105/worker-0.log', 'full-v4/metadata/gpu-resumed-worker-0.log')
+    if parallel_recovery is not None:
+        write('gpu-parallel-recovery-history.json', parallel_recovery)
+        add(gpu / 'parallel-recovery-controls-20261105.log', 'full-v4/metadata/gpu-parallel-recovery-controls.log')
+        for slot in range(8):
+            add(gpu / 'parallel-recovery-20261105' / f'worker-{slot}.log',
+                'full-v4/metadata/gpu-parallel-recovery-worker-' + str(slot) + '.log')
     for name in ['numerical-controls.log', 'context-probe-controls-rerun.log', 'release-tests.log',
                  'release-integration-tests-v2.log', 'batching-profile.log']:
         add(gpu / name, 'full-v4/metadata/gpu-' + name)
@@ -219,6 +225,10 @@ All newly published data bytes were anonymously downloaded and SHA-256 checked b
         history = network_resume['investigation']
         resume_html = f'''<h2>下載失敗與續跑紀錄</h2><p>第一輪 rank 0 下載分片時遇到 curl exit 7，其他七個 worker 成功完成。當時已完成 {history['existing_scored_rows']:,} 筆、{history['existing_scored_files']:,} 個分片。原始失敗收據與日誌保留；逐檔驗證既有評分 SHA-256，再以相同權重、評分程式與原始分配補完 {history['missing_rows']:,} 筆、{history['missing_files']:,} 個分片。只有實際續跑程序成功退出後，才建立最終完成收據。<a href="metadata/gpu-network-resume-history.json">完整續跑證據</a>。</p>'''
         gpu_html = gpu_html.replace('</html>', resume_html + '</html>')
+    if parallel_recovery is not None:
+        history = parallel_recovery['completion']
+        parallel_html = f'''<h2>八張 GPU 平行補完</h2><p>單張 GPU 的網路續跑曾被明確記錄的 SIGTERM（退出碼 -15）中斷，以使用其餘七張閒置 GPU；這次受控切換並非原始下載失敗。切換時已完成 {history['retained_rows']:,} 筆、{history['retained_files']:,} 個分片，其收據與輸出保持不變。只把剩餘 {history['new_rows']:,} 筆、{history['new_files']:,} 個分片重新分配到八張本機 GPU；每個分片仍使用原始完全相同的批次與評分計算。32 筆實際 v26 數值控制的 NLL 差異為零，梯度方向與 token 命中對照通過。八個實際補跑程序全部成功退出後，才確認原邏輯 rank 0 的工作完成；原始失敗和受控中斷都保留。<a href="metadata/gpu-parallel-recovery-history.json">分配計畫、實際退出碼與完整證據</a>。</p>'''
+        gpu_html = gpu_html.replace('</html>', parallel_html + '</html>')
     path = output / 'gpu-report.html'; path.write_text(gpu_html); add(path, 'full-v4/gpu-report.html')
     all_items=data+metadata
     manifest={'schema_version':'barbet-full-release-v4','status':'FULL_CORPUS_DATA_PROCESSED_NOT_MODEL_TRAINING',
