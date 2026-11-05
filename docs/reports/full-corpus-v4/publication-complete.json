@@ -1,0 +1,21 @@
+{
+  "status": "FULL_CORPUS_PROCESSING_AND_PUBLICATION_COMPLETE",
+  "verified_data_revision": "433d421bb3734a06e332e9857804d0a57da923a6",
+  "source_active_rows": 10018967,
+  "source_shards": 1504,
+  "exported_rows": 10018961,
+  "quarantined_rows": 6,
+  "all_new_data_anonymously_byte_verified": true,
+  "all_final_tree_paths_and_identities_verified": true,
+  "all_configurations_and_splits_anonymously_load": true,
+  "implementation_commit": "3aabda94f26389d4f356701f48b0efa825a8fe12",
+  "manifest_sha256": "9250e2565ce6d9de7eb0e998c2cc00826b36216b0e1cef75f34d6363893b5111",
+  "preserved_main": "b88f4ff7171bb6fb8c1b775ae21de814ea2123fb",
+  "private_oracles_and_heldout_not_published": true,
+  "training_ready": false,
+  "model_training": "NOT_RUN",
+  "gpu_measured_rows": 10018961,
+  "all_exported_ids_gpu_scored_exactly_once": true,
+  "gpu_scoring_is_not_learning_transfer_retention_validation": true,
+  "source_processing_complete_is_not_model_capability_success": true
+}
