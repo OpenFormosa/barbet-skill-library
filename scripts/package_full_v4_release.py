@@ -223,7 +223,7 @@ All newly published data bytes were anonymously downloaded and SHA-256 checked b
     gpu_html = gpu_report_html(gpu_summary, read_json(gpu / 'context-probe-summary.json'), read_json(gpu / 'numerical-controls.json'))
     if network_resume is not None:
         history = network_resume['investigation']
-        resume_html = f'''<h2>下載失敗與續跑紀錄</h2><p>第一輪 rank 0 下載分片時遇到 curl exit 7，其他七個 worker 成功完成。當時已完成 {history['existing_scored_rows']:,} 筆、{history['existing_scored_files']:,} 個分片。原始失敗收據與日誌保留；逐檔驗證既有評分 SHA-256，再以相同權重、評分程式與原始分配補完 {history['missing_rows']:,} 筆、{history['missing_files']:,} 個分片。只有實際續跑程序成功退出後，才建立最終完成收據。<a href="metadata/gpu-network-resume-history.json">完整續跑證據</a>。</p>'''
+        resume_html = f'''<h2>下載失敗與續跑紀錄</h2><p>第一輪 rank 0 下載分片時遇到 curl exit 7，其他七個 worker 成功完成。當時已完成 {history['existing_scored_rows']:,} 筆、{history['existing_scored_files']:,} 個分片。原始失敗收據與日誌保留；逐檔驗證既有評分 SHA-256，再以相同權重與評分程式恢復當時尚缺的 {history['missing_rows']:,} 筆、{history['missing_files']:,} 個分片。這段嘗試的實際退出狀態保存在收據中，後續平行補跑另有完整紀錄。最終完成收據須等所有資料與實際執行程序的驗收通過。<a href="metadata/gpu-network-resume-history.json">完整續跑證據</a>。</p>'''
         gpu_html = gpu_html.replace('</html>', resume_html + '</html>')
     if parallel_recovery is not None:
         history = parallel_recovery['completion']
