@@ -12,11 +12,13 @@ from barbet_pipeline.full_release import collect_complete_release, configuration
 from barbet_pipeline.gpu_release import collect_complete_gpu_release
 from barbet_pipeline.gpu_report import gpu_report_html
 from barbet_pipeline.exposure_evidence import summarize_training_exposure
+from barbet_pipeline.resume_evidence import collect_network_resume_evidence
 
 
 def main():
     summary, statistics, data = collect_complete_release(STATE)
     gpu_summary, gpu_files = collect_complete_gpu_release(STATE, data)
+    network_resume = collect_network_resume_evidence(STATE / 'gpu-quality')
     training_exposure = read_json(STATE / 'training-exposure-evidence.json')
     if training_exposure['statistics_sha256'] != sha_file(STATE / 'statistics-summary.json'):
         raise ValueError('Training exposure evidence does not match the full statistics')
@@ -70,6 +72,10 @@ def main():
     write('gpu-score-receipts.json', [read_json(p) for p in sorted((gpu / 'score-receipts').glob('*.json'))])
     write('gpu-aggregation-receipts.json', [read_json(p) for p in sorted((gpu / 'aggregation-receipts').glob('*.json'))])
     write('gpu-worker-completion.json', [read_json(gpu / 'workers' / (str(i) + '.json')) for i in range(8)])
+    if network_resume is not None:
+        write('gpu-network-resume-history.json', network_resume)
+        add(gpu / 'worker-0.log', 'full-v4/metadata/gpu-original-worker-0.log')
+        add(gpu / 'resume-network-20261105/worker-0.log', 'full-v4/metadata/gpu-resumed-worker-0.log')
     for name in ['numerical-controls.log', 'context-probe-controls-rerun.log', 'release-tests.log',
                  'release-integration-tests-v2.log', 'batching-profile.log']:
         add(gpu / name, 'full-v4/metadata/gpu-' + name)
@@ -209,6 +215,10 @@ All newly published data bytes were anonymously downloaded and SHA-256 checked b
     path.write_text(report)
     metadata[-1].update(bytes=path.stat().st_size, sha256=sha_file(path))
     gpu_html = gpu_report_html(gpu_summary, read_json(gpu / 'context-probe-summary.json'), read_json(gpu / 'numerical-controls.json'))
+    if network_resume is not None:
+        history = network_resume['investigation']
+        resume_html = f'''<h2>下載失敗與續跑紀錄</h2><p>第一輪 rank 0 下載分片時遇到 curl exit 7，其他七個 worker 成功完成。當時已完成 {history['existing_scored_rows']:,} 筆、{history['existing_scored_files']:,} 個分片。原始失敗收據與日誌保留；逐檔驗證既有評分 SHA-256，再以相同權重、評分程式與原始分配補完 {history['missing_rows']:,} 筆、{history['missing_files']:,} 個分片。只有實際續跑程序成功退出後，才建立最終完成收據。<a href="metadata/gpu-network-resume-history.json">完整續跑證據</a>。</p>'''
+        gpu_html = gpu_html.replace('</html>', resume_html + '</html>')
     path = output / 'gpu-report.html'; path.write_text(gpu_html); add(path, 'full-v4/gpu-report.html')
     all_items=data+metadata
     manifest={'schema_version':'barbet-full-release-v4','status':'FULL_CORPUS_DATA_PROCESSED_NOT_MODEL_TRAINING',
